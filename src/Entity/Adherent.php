@@ -49,7 +49,7 @@ class Adherent implements UserInterface
     private $dateNaissance;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable="true")
      */
     private $dateInscription;
 
