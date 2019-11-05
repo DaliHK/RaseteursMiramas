@@ -30,7 +30,7 @@ class AdherentController extends AbstractController
             $hash = $encoder->encodePassword($adherent, $adherent->getPassword()); 
 
             $adherent->setPassword($hash);   
-          //  $adherent->addRole("ROLE_ADMIN");
+            $adherent->addRole("ROLE_ADMIN");
             $manager->persist($adherent);
             $manager->flush();
 

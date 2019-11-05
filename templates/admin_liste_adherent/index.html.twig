@@ -1,20 +1,67 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Hello AdminListeAdherentController!{% endblock %}
+{% block title %}Liste des Adhérents{% endblock %}
+
+
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+                    <!-- We'll fill this with dummy content -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+                            <div class="container">
+            
+                                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Menu</span> 
+                                </button>
+                                 <h3 class="ml-5">titre page</h3>
+                            </div>
+                    </nav>
+                    {% endblock %}
+    
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<form class="form-inline mt-5">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                              </form>
+                
+                        <table class="table table-hover mt-5">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nom</th>
+                                    <th scope="col">Prénom</th>
+                                    <th scope="col">date de naissance</th>
+                                    <th scope="col">Télèphone</th>
+                                     <th scope="col">Numéro urgence</th>
+                                     <th scope="col">date inscription</th>
+                                    <th scope="col">Numéro licence</th>
+                                    <th scope="col">Statut dossier</th>
+                                    <th scope="col">Action</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>  {% for adherent in adherents %}
+                                  <tr>
+                                    <th scope="row">{{ adherent.id }}</th>
+                                   
+                                    <td> {{ adherent.nom }}</td>
+                                    <td> {{ adherent.prenom }}</td>
+                                    <td> {{ adherent.dateNaissance | date('d/m/Y') }}</td>
+                                    <td> {{ adherent.telephone }}</td>
+                                    <td> {{ adherent.numeroUrgence }}</td>
+                                    <td> {{ adherent.dateInscription }}</td>
+                                    <td> {{ adherent.numLicence }}</td>
+                                     <td> {{ adherent.statut}}</td>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/zaima/Documents/projetEcoleRaseteur/src/Controller/AdminListeAdherentController.php'|file_link(0) }}">src/Controller/AdminListeAdherentController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/zaima/Documents/projetEcoleRaseteur/templates/admin_liste_adherent/index.html.twig'|file_link(0) }}">templates/admin_liste_adherent/index.html.twig</a></code></li>
-    </ul>
-</div>
+                            
+                                    <td><button type="button" class="btn btn-primary btn-sm">Voir</button>
+                                        <button type="button" class="btn btn-secondary btn-sm">Supprimer</button>
+                                    </td>
+                                  </tr>
+                             {% endfor %}      
+                                            
+                                </tbody>
+                              </table>
+
 {% endblock %}
