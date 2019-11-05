@@ -2,19 +2,20 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\AdherentRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class WebsiteController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/adherent", name="page_adherent")
      */
     
     public function index()
+
     {
-        return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('website/index.html.twig');
+         
     }
 }
