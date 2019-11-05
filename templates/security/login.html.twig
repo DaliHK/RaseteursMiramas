@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login!{% endblock %}
+
+{% block body %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+
+<form action="{{ path('login_adherent') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required name="_username" value="{{ last_username }}"/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" required name="_password"/>
+
+    <button type="submit">login</button>
+
+<br> <br>
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <input type="checkbox" id="remember_me" name="_remember_me" checked/>
+    <label for="remember_me">Keep me logged in</label>
+
+</form>
+
+{% endblock %}
