@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\DossierInscription;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**

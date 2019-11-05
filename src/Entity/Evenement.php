@@ -22,7 +22,7 @@ class Evenement
     private $dateDebut;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date", length=255)
      */
     private $dateFin;
 
