@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<H1>Modification</H1>
+
+{{form_start(formArticle)}}
+{{form_row(formArticle.nom,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.prenom,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.email,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.telephone,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.adresse,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.cp,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.ville,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.numero_urgence,{'attr':{'placeholder':""}})}}
+{{form_row(formArticle.cp,{'attr':{'placeholder':""}})}}
+<button type="submit" class='btn btn-success'>Modification</button>
+{{form_end(formArticle)}}
+
+{% endblock %}
