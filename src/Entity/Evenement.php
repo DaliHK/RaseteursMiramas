@@ -27,7 +27,7 @@ class Evenement
     private $dateFin;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="integer")
      */
     private $nombreParticipantMax;
 
