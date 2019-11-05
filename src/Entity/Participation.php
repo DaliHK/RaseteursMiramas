@@ -17,7 +17,7 @@ class Participation
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\adherent", inversedBy="participation", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Adherent", inversedBy="participation", cascade={"persist", "remove"})
      */
     private $idAdherent;
 
