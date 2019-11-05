@@ -2,12 +2,18 @@
 
 namespace App\Entity;
 
+use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\DossierInscription;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
+ * Adherent
+ * 
  * @ORM\Entity(repositoryClass="App\Repository\AdherentRepository")
+ * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
  */
 class Adherent implements UserInterface
 {
@@ -24,15 +30,22 @@ class Adherent implements UserInterface
     private $username;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="array")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
+     * @Assert\EqualTo(propertyPath="confirm_password", message="Vous n'avez pas tapé le même mot de passe")
      */
     private $password;
+
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe")
+     */
+    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -45,7 +58,7 @@ class Adherent implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(name="dateNaissance", type="datetime")
      */
     private $dateNaissance;
 
@@ -55,8 +68,10 @@ class Adherent implements UserInterface
     private $dateInscription;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    * @var string
+    *
+    * @ORM\Column(type="string", length=180, nullable=false)
+    */
     private $email;
 
     /**
@@ -148,9 +163,14 @@ class Adherent implements UserInterface
         return array_unique($roles);
     }
 
+    function addRole($role)
+    {
+        $this->roles[] = $role;
+    }
+
     public function setRoles(array $roles): self
     {
-        $this->roles = $roles;
+        $this->roles[] = $roles;
 
         return $this;
     }
@@ -185,6 +205,32 @@ class Adherent implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @param $serialized
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
     }
 
     public function getNom(): ?string
