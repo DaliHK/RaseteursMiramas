@@ -7,10 +7,12 @@
             {% endblock %}
         </title>
         <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link
-        rel="stylesheet" href="/css/customStyle.css">
+        <link rel="stylesheet" href="/css/customStyle.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
         </head>
         <body id="top">
             ​
@@ -22,9 +24,9 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav mr-auto">
                         ​
-                        <img src="img/logo.png" style="max-width:200px; height:auto;" alt="Logo de l'école">
+                        <a href="{{ path('home') }}"><img src="img/logo.png" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>
                         ​
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ​
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ​
                         <li class="nav-item active">
                             <a class="nav-link" href="#">
                                 L'école
@@ -32,7 +34,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Evenements</a>
+                            <a class="nav-link" href="{{ path('evenements') }}">Evenements</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
@@ -40,11 +42,11 @@
                         <li class="nav-item">
                             <!--S'il est loggé en tant qu'adherent, apparition de espace adherent -->
                             <!--S'il est loggé en tant qu'admin, apparition de espace admin -->
-                                <a class="nav-link" href="#"> S'inscrire</a>
+                                <a class="nav-link" href="{{ path('inscription') }}"> S'inscrire</a>
                         </li>
                         ​
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Se connecter</a>
+                            <a class="nav-link" href="{{ path('login_adherent') }}">Se connecter</a>
                         </li>
                     </ul>
                     ​
