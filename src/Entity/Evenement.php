@@ -39,7 +39,7 @@ class Evenement
     private $niveauRequis;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $descriptionEvenement;
 
@@ -116,12 +116,12 @@ class Evenement
         return $this;
     }
 
-    public function getDescriptionEvenement(): ?string
+    public function getDescriptionEvenement(): ?text
     {
         return $this->descriptionEvenement;
     }
 
-    public function setDescriptionEvenement(string $descriptionEvenement): self
+    public function setDescriptionEvenement(text $descriptionEvenement): self
     {
         $this->descriptionEvenement = $descriptionEvenement;
 
