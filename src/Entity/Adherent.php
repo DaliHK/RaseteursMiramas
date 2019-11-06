@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\DossierInscription;
@@ -129,9 +131,14 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Participation", mappedBy="idAdherent", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", inversedBy="adherents")
      */
-    private $participation;
+    private $evenement;
+
+    public function __construct()
+    {
+        $this->evenement = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -422,21 +429,30 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getParticipation(): ?Participation
+    /**
+     * @return Collection|Evenement[]
+     */
+    public function getEvenement(): Collection
     {
-        return $this->participation;
+        return $this->evenement;
     }
 
-    public function setParticipation(?Participation $participation): self
+    public function addEvenement(Evenement $evenement): self
     {
-        $this->participation = $participation;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdAdherent = null === $participation ? null : $this;
-        if ($participation->getIdAdherent() !== $newIdAdherent) {
-            $participation->setIdAdherent($newIdAdherent);
+        if (!$this->evenement->contains($evenement)) {
+            $this->evenement[] = $evenement;
         }
 
         return $this;
     }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        if ($this->evenement->contains($evenement)) {
+            $this->evenement->removeElement($evenement);
+        }
+
+        return $this;
+    }
+
 }
