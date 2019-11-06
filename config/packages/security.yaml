@@ -21,6 +21,7 @@ security:
                 check_path: login_adherent
                 csrf_parameter: _csrf_security_token
                 csrf_token_id: a_private_string
+                provider: app_user_provider
             guard:
                 authenticators:
                     - App\Security\AdherentAuthenticator
@@ -45,6 +46,5 @@ security:
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/adherent$, roles: ROLE_USER }
-         - { path: ^/profile, roles: ROLE_USER }
-    #    - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    #    - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
