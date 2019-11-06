@@ -4,17 +4,20 @@
 
 <H1>Modification</H1>
 
-{{form_start(formArticle)}}
-{{form_row(formArticle.nom,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.prenom,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.email,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.telephone,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.adresse,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.cp,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.ville,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.numero_urgence,{'attr':{'placeholder':""}})}}
-{{form_row(formArticle.cp,{'attr':{'placeholder':""}})}}
-<button type="submit" class='btn btn-success'>Modification</button>
-{{form_end(formArticle)}}
+{{form_start(adherent)}}
+
+{{form_row(adherent.nom,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.prenom,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.email,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.telephone,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.adresse,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.cp,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.ville,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.numeroUrgence,{'attr':{'placeholder':""}})}}
+{{form_row(adherent.password,{'attr':{'placeholder':""}})}}
+<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+ <button type="submit" class='btn btn-success'>Modification</button>
+
+{{form_end(adherent)}}
 
 {% endblock %}

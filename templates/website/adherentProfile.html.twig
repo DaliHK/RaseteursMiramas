@@ -16,43 +16,43 @@
         <!-- Information personnelle de l'adhérent -->
         <div class="row offset-3">
             <div class="col">
-                <h4>Nom:variable</h4>
+                <h4>Nom: {{user.nom}}</h4>
             </div>
             <div class="col">
-                <h4>Prenom:variable</h4>
-            </div>
-        </div>
-        <div class="row offset-3">
-            <div class="col">
-                <h4>Telephon:variable</h4>
-            </div>
-            <div class="col">
-                <h4>Age:variable</h4>
+                <h4>Prenom: {{user.prenom}}</h4>
             </div>
         </div>
         <div class="row offset-3">
             <div class="col">
-                <h4>Mot de passe:variable</h4>
+                <h4>Telephon: {{user.telephone}}</h4>
             </div>
             <div class="col">
-                <h4>E-mail:variable</h4>
+                <h4>Age:</h4>
+            </div>
+        </div>
+        <div class="row offset-3">
+            <div class="col">
+                <h4>Mot de passe: votre mot de passe</h4>
+            </div>
+            <div class="col">
+                <h4>E-mail: {{user.email}}</h4>
             </div>
         </div>
         <div class="collapse" id="collapseExample">
             <div class="row offset-3">
                 <div class="col">
-                    <h4>Adresse:variable</h4>
+                    <h4>Adresse: {{user.adresse}}</h4>
                 </div>
                 <div class="col">
-                    <h4>Ville:variable</h4>
+                    <h4>Ville: {{user.ville}}</h4>
                 </div>
             </div>
             <div class="row offset-3">
                 <div class="col">
-                    <h4>Code Postal:variable</h4>
+                    <h4>Code Postal: {{user.cp}}</h4>
                 </div>
                 <div class="col">
-                    <h4>Tel d'urgence:variable</h4>
+                    <h4>Tel d'urgence: {{user.numeroUrgence}}</h4>
                 </div>
             </div>
         </div>
@@ -121,7 +121,7 @@
             </div>
         </div>
     
-    
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
     
     </div>
 
