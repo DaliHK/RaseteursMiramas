@@ -44,16 +44,17 @@ class WebsiteController extends AbstractController
     public function adherentEditProfile(Request $request, UserInterface $userProfile)
     {
         //affiche le formulaire deja enregistré de l'user pour qu'il puisse le consulter ou modifier
-        $form = $this->createForm(EditAdherentType::class, $userProfile);
+        $form = $this->createForm(EditAdherentType::class,$userProfile);
         //j'envoie les informations modifié à la base de données 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($userProfile);
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userProfile);
             $entityManager->flush();
-            return $this->redirectToRoute("{{path('adherent_profile')}}");
+            return $this->redirectToRoute('adherent_profile');
         }
+
         return $this->render('/website/adherentEditProfile.html.twig', [
             'user' => $userProfile,
             'adherent' => $form->createView()

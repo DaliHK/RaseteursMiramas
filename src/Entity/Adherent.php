@@ -207,31 +207,31 @@ class Adherent implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /** @see \Serializable::serialize() */
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
-        ));
-    }
+    /**
+    * @see \Serializable::serialize()
+    */
+public function serialize()
+{
+    return serialize([
+        $this->id,
+        $this->username,
+        $this->password,
+    ]);
+}
 
-    /** @param $serialized
-     * @see \Serializable::unserialize()
-     */
-    public function unserialize($serialized)
-    {
-        list(
-            $this->id,
-            $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
-        ) = unserialize($serialized);
-    }
+    /**
+    * @see \Serializable::unserialize()
+    *
+    * @param string $serialized
+    */
+public function unserialize($serialized)
+{
+    list(
+        $this->id,
+        $this->username,
+        $this->password) = unserialize($serialized, ['allowed_classes' => false]);
+       
+}
 
     public function getNom(): ?string
     {
