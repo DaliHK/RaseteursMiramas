@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,9 +54,14 @@ class Evenement
     private $titre;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Participation", mappedBy="idEvenement", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", mappedBy="evenement")
      */
-    private $participation;
+    private $adherents;
+
+    public function __construct()
+    {
+        $this->adherents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -145,21 +152,32 @@ class Evenement
         return $this;
     }
 
-    public function getParticipation(): ?Participation
+    /**
+     * @return Collection|Adherent[]
+     */
+    public function getAdherents(): Collection
     {
-        return $this->participation;
+        return $this->adherents;
     }
 
-    public function setParticipation(?Participation $participation): self
+    public function addAdherent(Adherent $adherent): self
     {
-        $this->participation = $participation;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdEvenement = null === $participation ? null : $this;
-        if ($participation->getIdEvenement() !== $newIdEvenement) {
-            $participation->setIdEvenement($newIdEvenement);
+        if (!$this->adherents->contains($adherent)) {
+            $this->adherents[] = $adherent;
+            $adherent->addEvenement($this);
         }
 
         return $this;
     }
+
+    public function removeAdherent(Adherent $adherent): self
+    {
+        if ($this->adherents->contains($adherent)) {
+            $this->adherents->removeElement($adherent);
+            $adherent->removeEvenement($this);
+        }
+
+        return $this;
+    }
+    
 }
