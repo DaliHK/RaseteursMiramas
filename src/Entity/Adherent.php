@@ -9,13 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\DossierInscription;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Adherent
  * 
  * @ORM\Entity(repositoryClass="App\Repository\AdherentRepository")
  * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
+ * @UniqueEntity(
+ * fields={"username"},
+ * message="Username est déjà utilisé"
+ * )
  */
 class Adherent implements UserInterface
 {
