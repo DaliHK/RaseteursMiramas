@@ -32,7 +32,6 @@ class WebsiteController extends AbstractController
        
         $events = $repo->findAll();
 
-
         return $this->render('event/events.html.twig', [
             'events' => $events
             
@@ -66,8 +65,7 @@ class WebsiteController extends AbstractController
     public function participerEvenement($id, EvenementRepository $repo, UserInterface $user)
     {
         
-        $evenement = $repo->find($id);
-        $evenement->addAdherent($user);
+        
 
          $this->addFlash('success','Votre inscription à l\'événement a bien été prise en compte');
             return $this->redirectToRoute('evenements');

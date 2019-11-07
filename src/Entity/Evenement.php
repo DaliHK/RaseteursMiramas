@@ -39,7 +39,7 @@ class Evenement
     private $niveauRequis;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $descriptionEvenement;
 
@@ -54,13 +54,19 @@ class Evenement
     private $titre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="evenements")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", mappedBy="evenement")
      */
-    private $adherent;
+    private $adherents;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_evenement")
+     */
+    private $participations;
 
     public function __construct()
     {
-        $this->adherent = new ArrayCollection();
+        $this->adherents = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,12 +122,12 @@ class Evenement
         return $this;
     }
 
-    public function getDescriptionEvenement(): ?string
+    public function getDescriptionEvenement(): ?text
     {
         return $this->descriptionEvenement;
     }
 
-    public function setDescriptionEvenement(string $descriptionEvenement): self
+    public function setDescriptionEvenement(text $descriptionEvenement): self
     {
         $this->descriptionEvenement = $descriptionEvenement;
 
@@ -155,15 +161,16 @@ class Evenement
     /**
      * @return Collection|Adherent[]
      */
-    public function getAdherent(): Collection
+    public function getAdherents(): Collection
     {
-        return $this->adherent;
+        return $this->adherents;
     }
 
     public function addAdherent(Adherent $adherent): self
     {
-        if (!$this->adherent->contains($adherent)) {
-            $this->adherent[] = $adherent;
+        if (!$this->adherents->contains($adherent)) {
+            $this->adherents[] = $adherent;
+            $adherent->addEvenement($this);
         }
 
         return $this;
@@ -171,10 +178,43 @@ class Evenement
 
     public function removeAdherent(Adherent $adherent): self
     {
-        if ($this->adherent->contains($adherent)) {
-            $this->adherent->removeElement($adherent);
+        if ($this->adherents->contains($adherent)) {
+            $this->adherents->removeElement($adherent);
+            $adherent->removeEvenement($this);
         }
 
         return $this;
     }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setIdEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getIdEvenement() === $this) {
+                $participation->setIdEvenement(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }
