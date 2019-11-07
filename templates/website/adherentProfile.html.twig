@@ -7,7 +7,7 @@
     <div class="container">
     
         <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-5 bg-warning rounded p-center">
+            <div class="shadow mt-1 p-3 mb-3 bg-warning rounded p-center">
                 <div>
                     <h4>Information Personnelle</h4>
                 </div>
@@ -70,49 +70,39 @@
         <hr>
         <!--Evénement Inscrit-->
         <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-5 bg-warning rounded p-center">
+            <div class="shadow mt-1 p-3 mb-3 bg-warning rounded p-center">
                 <div>
                     <h4>Evenement Inscrit</h4>
                 </div>
             </div>
         </div>
-    
+        <pre>
+            
+        </pre>
+       
+        {% for evenement in user.evenement %}
+        
         <div class="row justify-content-center">
             <div class="shadow mt-2 p-3 mb-1 bg-white rounded p-center">
                 <div class="row">
                     <div class="col">
-                        <h5>Nom:Marchezfaeda</h5>
+                        <h5>Nom:{{evenement.id}}</h5>
                     </div>
                     <div class="col">
-                        <h5>Evenement:Marchezfaeda</h5>
+                        <h5>Categories:</h5>
                     </div>
                     <div class="col">
-                        <h5>Date:variableazd</h5>
+                        <h5>Date:{{evenement.dateDebut | date}}</h5>
                     </div>
                     <div class="col">
-                        <button class="btn btn-Danger">Supprimer</button>
+                        <a href="{{ path('supression_evenement_inscrit',
+                            {'id': user.id}) }}">Supprimer</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-1 bg-white rounded p-center">
-                <div class="row">
-                    <div class="col">
-                        <h5>Nom:Marchezfaeda</h5>
-                    </div>
-                    <div class="col">
-                        <h5>Evenement:Marchezfaeda</h5>
-                    </div>
-                    <div class="col">
-                        <h5>Date:variableazd</h5>
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-Danger">Supprimer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+
         <hr>
         <div class="row justify-content-center">
             <div class="shadow mt-1 p-3 mb-5 bg-warning rounded p-center">
