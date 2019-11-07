@@ -39,11 +39,6 @@ class Evenement
     private $niveauRequis;
 
     /**
-     * @ORM\Column(type="text", length=255)
-     */
-    private $descriptionEvenement;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $categorie;
@@ -54,14 +49,14 @@ class Evenement
     private $titre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", mappedBy="evenement")
-     */
-    private $adherents;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_evenement")
      */
     private $participations;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
 
     public function __construct()
     {
@@ -122,24 +117,12 @@ class Evenement
         return $this;
     }
 
-    public function getDescriptionEvenement(): ?text
-    {
-        return $this->descriptionEvenement;
-    }
-
-    public function setDescriptionEvenement(text $descriptionEvenement): self
-    {
-        $this->descriptionEvenement = $descriptionEvenement;
-
-        return $this;
-    }
-
     public function getCategorie(): ?string
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?string $categorie): self
+    public function setCategorie(string $categorie): self
     {
         $this->categorie = $categorie;
 
@@ -213,6 +196,18 @@ class Evenement
                 $participation->setIdEvenement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

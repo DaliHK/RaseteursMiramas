@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Entity\Participation;
+use App\Form\InscriptionType;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -30,10 +33,10 @@ class WebsiteController extends AbstractController
     public function listeEvenements(EvenementRepository $repo)
     {
        
-        $events = $repo->findAll();
+        $evenements = $repo->findAll();
 
         return $this->render('event/events.html.twig', [
-            'events' => $events
+            'evenements' => $evenements
             
         ]);
     }
@@ -44,31 +47,28 @@ class WebsiteController extends AbstractController
      * 
      * @return Response
      */
-    public function detailEvenements($id, EvenementRepository $repo)
+    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user)
     {
-    
-        $event = $repo->find($id);
+        $participation = new Participation();
 
-        return $this->render('event/detailEvenements.html.twig', [
-            'event' => $event,
-            'id' => $id
-                ]);
-    }
+        $form = $this->createForm(InscriptionType::class, $participation);
+        $form->handleRequest($request);
+        $evenement = $repo->find($id);
+        $manager = $this->getDoctrine()->getManager();
 
-    /**
-     * Permet d'afficher un seul événement
-     * @Route("/evenements/inscription/{id}", name="participer")
-     * 
-     * @return Response
-     */
-
-    public function participerEvenement($id, EvenementRepository $repo, UserInterface $user)
-    {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $participation->setIdAdherent($user);
+            $participation->setIdEvenement($evenement);
+            $manager->persist($participation);
+            $manager->flush();
+        }
         
-        
-
          $this->addFlash('success','Votre inscription à l\'événement a bien été prise en compte');
-            return $this->redirectToRoute('evenements');
-
+            return $this->render('event/detailEvenements.html.twig', [
+                'form' => $form->createView(),
+                'evenement' => $evenement,
+                'id' => $id
+            ]);
     }
+
 }

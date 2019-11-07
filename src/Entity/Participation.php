@@ -19,12 +19,12 @@ class Participation
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Adherent", inversedBy="participations")
      */
-    private $id_adherent;
+    private $adherent;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Evenement", inversedBy="participations")
      */
-    private $id_evenement;
+    private $evenement;
 
     public function getId(): ?int
     {
@@ -33,24 +33,24 @@ class Participation
 
     public function getIdAdherent(): ?Adherent
     {
-        return $this->id_adherent;
+        return $this->adherent;
     }
 
-    public function setIdAdherent(?Adherent $id_adherent): self
+    public function setIdAdherent(?Adherent $adherent): self
     {
-        $this->id_adherent = $id_adherent;
+        $this->adherent = $adherent;
 
         return $this;
     }
 
     public function getIdEvenement(): ?Evenement
     {
-        return $this->id_evenement;
+        return $this->evenement;
     }
 
-    public function setIdEvenement(?Evenement $id_evenement): self
+    public function setIdEvenement(?Evenement $evenement): self
     {
-        $this->id_evenement = $id_evenement;
+        $this->evenement = $evenement;
 
         return $this;
     }

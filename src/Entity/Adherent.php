@@ -131,11 +131,6 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", inversedBy="adherents")
-     */
-    private $evenement;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_adherent")
      */
     private $participations;
