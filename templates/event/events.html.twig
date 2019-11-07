@@ -12,17 +12,27 @@
                 <div class="col-md-4">
                     <div class="card bg-light mb-3">
                         <div class="card-header text-center">
-                            {{ event.titre }}
+                            <h4 class="card-title">
+
+                                {{ event.titre }}
+                            </h4>
+                            <small>
+                                Le
+                                {{ event.dateDebut |date("d/m/Y") }}</small>
+
                         </div>
 
                         <img src="http://placehold.it/400x300" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
 
                         <div class="card-body">
-                            <h4 class="card-title">{{ event.titre }}</h4>
+
                             <p class="card-text">
+
                                 {{ event.descriptionEvenement }}
+
                             </p>
-                            <a href="" class="btn btn-primary">En savoir plus</a>
+
+                            <a href="{{ path('detailevenement', {'id' : event.id }) }}" class="btn btn-primary">En savoir plus</a>
                         </div>
                     </div>
                 </div>

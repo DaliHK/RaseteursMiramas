@@ -9,13 +9,17 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\DossierInscription;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Adherent
  * 
  * @ORM\Entity(repositoryClass="App\Repository\AdherentRepository")
  * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
+ * @UniqueEntity(
+ * fields={"username"},
+ * message="Username est déjà utilisé"
+ * )
  */
 class Adherent implements UserInterface
 {
@@ -127,19 +131,13 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", inversedBy="adherents")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", mappedBy="adherent")
      */
-    private $evenement;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_adherent")
-     */
-    private $participations;
+    private $evenements;
 
     public function __construct()
     {
-        $this->evenement = new ArrayCollection();
-        $this->participations = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -458,34 +456,30 @@ class Adherent implements UserInterface
     }
 
     /**
-     * @return Collection|Participation[]
+     * @return Collection|Evenement[]
      */
-    public function getParticipations(): Collection
+    public function getEvenements(): Collection
     {
-        return $this->participations;
+        return $this->evenements;
     }
 
-    public function addParticipation(Participation $participation): self
+    public function addEvenement(Evenement $evenement): self
     {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setIdAdherent($this);
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements[] = $evenement;
+            $evenement->addAdherent($this);
         }
 
         return $this;
     }
 
-    public function removeParticipation(Participation $participation): self
+    public function removeEvenement(Evenement $evenement): self
     {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            // set the owning side to null (unless already changed)
-            if ($participation->getIdAdherent() === $this) {
-                $participation->setIdAdherent(null);
-            }
+        if ($this->evenements->contains($evenement)) {
+            $this->evenements->removeElement($evenement);
+            $evenement->removeAdherent($this);
         }
 
         return $this;
     }
-
 }
