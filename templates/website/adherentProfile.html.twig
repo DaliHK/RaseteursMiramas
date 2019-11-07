@@ -79,7 +79,7 @@
         <pre>
             
         </pre>
-       
+        {# {{dump(evenementId.owner.id)}} #}
         {% for evenement in user.evenement %}
         
         <div class="row justify-content-center">
@@ -92,11 +92,11 @@
                         <h5>Categories:</h5>
                     </div>
                     <div class="col">
-                        <h5>Date:{{evenement.dateDebut | date}}</h5>
+                        <h5>Date:{{ evenement.dateDebut | date}}</h5>
                     </div>
                     <div class="col">
                         <a href="{{ path('supression_evenement_inscrit',
-                            {'id': user.id}) }}">Supprimer</a>
+                            {'id': evenementId.owner.id})}}">Supprimer</a>
                     </div>
                 </div>
             </div>

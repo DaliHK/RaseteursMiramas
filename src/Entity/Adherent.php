@@ -127,7 +127,7 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", inversedBy="adherents")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", inversedBy="adherents",cascade={"persist", "remove"})
      */
     private $evenement;
 

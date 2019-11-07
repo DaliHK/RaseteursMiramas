@@ -32,11 +32,13 @@ class WebsiteController extends AbstractController
 
     public function adherentProfile(UserInterface $userProfile ,AdherentRepository $adherent){
 
-        dump($adherent);
-        die;  
+          /* dump($userProfile->getEvenement()->getOwner());
+        die;  */  
+
         return $this -> render('/website/adherentProfile.html.twig',[
             
-            'user'=> $userProfile
+            'user'=> $userProfile,
+            'evenementId'=>$userProfile->getEvenement()
            
         ]);
     }
@@ -80,17 +82,17 @@ class WebsiteController extends AbstractController
      * @Route("adherent/profile/{id}", name="supression_evenement_inscrit")
      */
 
-    public function FunctionName(UserInterface $userProfile)
+    public function supressionEvenementInscrit( UserInterface $userProfile)
+
     {
-     
-        $id = $userProfile->getEvenement()->getOwner();
+        
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($id); 
+        $entityManager->remove($userProfile);
         $entityManager->flush();
 
-        return $this->render('adherent_profile');
-
-           
+    
+        return $this->redirectToRoute('adherent_profile');;
+        
     }
 
 }
