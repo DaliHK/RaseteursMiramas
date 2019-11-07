@@ -22,16 +22,18 @@ security:
                 csrf_parameter: _csrf_security_token
                 csrf_token_id: a_private_string
                 provider: app_user_provider
+            logout:
+                path: /logout
+                target: home
             guard:
                 authenticators:
                     - App\Security\AdherentAuthenticator
+                entry_point: App\Security\AdherentAuthenticator
             remember_me:
                 secret:   '%kernel.secret%'
                 lifetime: 604800 # 1 week in seconds
                 token_provider: 'Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider'
                 path:     /
-            logout:
-                path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
 

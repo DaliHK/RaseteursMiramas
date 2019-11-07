@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * Adherent
  * 
@@ -18,7 +19,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
  * @UniqueEntity(
  * fields={"username"},
- * message="Username est déjà utilisé"
+ * message="Username est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ * fields={"email"},
+ * message="Email est déjà utilisé."
  * )
  */
 class Adherent implements UserInterface
@@ -76,7 +81,7 @@ class Adherent implements UserInterface
     /**
     * @var string
     *
-    * @ORM\Column(type="string", length=180, nullable=false)
+    * @ORM\Column(type="string", length=180, nullable=false, unique=true)
     */
     private $email;
 
