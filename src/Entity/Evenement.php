@@ -39,7 +39,7 @@ class Evenement
     private $niveauRequis;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $descriptionEvenement;
 
@@ -54,15 +54,14 @@ class Evenement
     private $titre;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", mappedBy="evenement")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Adherent", inversedBy="evenements")
      */
-    private $adherents;
+    private $adherent;
 
     public function __construct()
     {
-        $this->adherents = new ArrayCollection();
+        $this->adherent = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -81,7 +80,7 @@ class Evenement
         return $this;
     }
 
-    public function getDateFin(\DateTimeInterface $dateFin): self
+    public function getDateFin(): ?\DateTimeInterface
     {
         return $this->dateFin;
     }
@@ -117,12 +116,12 @@ class Evenement
         return $this;
     }
 
-    public function getDescriptionEvenement(): ?string
+    public function getDescriptionEvenement(): ?text
     {
         return $this->descriptionEvenement;
     }
 
-    public function setDescriptionEvenement(string $descriptionEvenement): self
+    public function setDescriptionEvenement(text $descriptionEvenement): self
     {
         $this->descriptionEvenement = $descriptionEvenement;
 
@@ -156,16 +155,15 @@ class Evenement
     /**
      * @return Collection|Adherent[]
      */
-    public function getAdherents(): Collection
+    public function getAdherent(): Collection
     {
-        return $this->adherents;
+        return $this->adherent;
     }
 
     public function addAdherent(Adherent $adherent): self
     {
-        if (!$this->adherents->contains($adherent)) {
-            $this->adherents[] = $adherent;
-            $adherent->addEvenement($this);
+        if (!$this->adherent->contains($adherent)) {
+            $this->adherent[] = $adherent;
         }
 
         return $this;
@@ -173,12 +171,11 @@ class Evenement
 
     public function removeAdherent(Adherent $adherent): self
     {
-        if ($this->adherents->contains($adherent)) {
-            $this->adherents->removeElement($adherent);
-            $adherent->removeEvenement($this);
+        if ($this->adherent->contains($adherent)) {
+            $this->adherent->removeElement($adherent);
         }
 
         return $this;
     }
-
+    
 }

@@ -23,6 +23,7 @@ security:
                 check_path: login_adherent
                 csrf_parameter: _csrf_security_token
                 csrf_token_id: a_private_string
+                provider: app_user_provider
             guard:
                 authenticators:
                     - App\Security\AdherentAuthenticator
