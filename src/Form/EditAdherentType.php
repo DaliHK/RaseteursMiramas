@@ -29,12 +29,14 @@ class EditAdherentType extends AbstractType
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence',NumberType::class)
+
             /* ->add('statut')
             ->add('cotisationAsso')
             ->add('cotisationLicence')
             ->add('numLicence')
             ->add('dossierInscription')
             ->add('participation') */
+            ->add('')
         ;
     }
 
