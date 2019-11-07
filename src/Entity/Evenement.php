@@ -152,24 +152,6 @@ class Evenement
         return $this;
     }
 
-    public function getParticipation(): ?Participation
-    {
-        return $this->participation;
-    }
-
-    public function setParticipation(?Participation $participation): self
-    {
-        $this->participation = $participation;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdEvenement = null === $participation ? null : $this;
-        if ($participation->getIdEvenement() !== $newIdEvenement) {
-            $participation->setIdEvenement($newIdEvenement);
-        }
-
-        return $this;
-    }
-
     /**
      * @return Collection|Adherent[]
      */
