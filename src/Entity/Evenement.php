@@ -58,9 +58,15 @@ class Evenement
      */
     private $adherents;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_evenement")
+     */
+    private $participations;
+
     public function __construct()
     {
         $this->adherents = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,6 +181,37 @@ class Evenement
         if ($this->adherents->contains($adherent)) {
             $this->adherents->removeElement($adherent);
             $adherent->removeEvenement($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setIdEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getIdEvenement() === $this) {
+                $participation->setIdEvenement(null);
+            }
         }
 
         return $this;
