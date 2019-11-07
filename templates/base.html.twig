@@ -27,7 +27,7 @@
                     ​
                     <a href="{{ path('home') }}"><img src="img/logo.png" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>
                     ​
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ​
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ​
                     <li class="nav-item active">
                         <a class="nav-link" href="#">
                             L'école
@@ -63,6 +63,12 @@
     <footer class="container-fluid bg-4 text-center pt-4 pl-4">
 
         ​
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
         <div class="row">
             ​
             <!-- Grid column -->

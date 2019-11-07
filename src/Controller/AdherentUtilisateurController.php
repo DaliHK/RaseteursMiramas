@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 
-class AdherentController extends AbstractController
+class AdherentUtilisateurController extends AbstractController
 {
     /**
      * @Route("/inscription", name="inscription")
