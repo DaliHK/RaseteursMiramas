@@ -33,12 +33,20 @@
                                 <h3>Menu Administration</h3>
                             </div>
                             <ul class="list-unstyled components">
-                             
-                                <li>
+                             <li>
                                     <a href="#">Accueil</a>          
                                 </li>
                                 <li>
-                                    <a href="#">Adhérents</a>
+                                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Adhérents</a>
+                                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                                        <li>
+                                             <a href="{{ path('admin_liste_adherent')}}">Liste adhérents</a>
+                                         </li>
+                                        <li>
+                                            <a href="{{ path('admin_dossier_adherent')}}">Dossier par adhérent</a>
+                                        </li>
+                   
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#" >Gestion Documents</a> 
@@ -52,25 +60,15 @@
                                 <li>
                                     <a href="#">Gestion contact</a>
                                 </li>
+                                
+                                
                             </ul>
                 </nav>
                 {% endblock %}
                 <!-- Page Content -->
                 <div id="content" class="container-fluid">
                     {% block body %} 
-                    {% block content %}
-                    <!-- We'll fill this with dummy content -->
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
-                            <div class="container">
-            
-                                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                                    <i class="fas fa-align-left"></i>
-                                    <span>Menu</span> 
-                                </button>
-                                 <h3 class="ml-5">titre page</h3>
-                            </div>
-                    </nav>
-                    {% endblock %}
+                    
                         
                 </div>
                 <!--  ici page -->

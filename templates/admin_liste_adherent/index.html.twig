@@ -14,54 +14,55 @@
                                     <i class="fas fa-align-left"></i>
                                     <span>Menu</span> 
                                 </button>
-                                 <h3 class="ml-5">titre page</h3>
+                                 <h3 class="ml-5">Liste des adhérents</h3>
                             </div>
                     </nav>
                     {% endblock %}
     
 
-<form class="form-inline mt-5">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                              </form>
-                
-                        <table class="table table-hover mt-5">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nom</th>
-                                    <th scope="col">Prénom</th>
-                                    <th scope="col">date de naissance</th>
-                                    <th scope="col">Télèphone</th>
-                                     <th scope="col">Numéro urgence</th>
-                                     <th scope="col">date inscription</th>
-                                    <th scope="col">Numéro licence</th>
-                                    <th scope="col">Statut dossier</th>
-                                    <th scope="col">Action</th>
-                                    
-                                  </tr>
-                                </thead>
-                                <tbody>  {% for adherent in adherents %}
-                                  <tr>
-                                    <th scope="row">{{ adherent.id }}</th>
-                                   
-                                    <td> {{ adherent.nom }}</td>
-                                    <td> {{ adherent.prenom }}</td>
-                                    <td> {{ adherent.dateNaissance | date('d/m/Y') }}</td>
-                                    <td> {{ adherent.telephone }}</td>
-                                    <td> {{ adherent.numeroUrgence }}</td>
-                                    <td> {{ adherent.dateInscription }}</td>
-                                    <td> {{ adherent.numLicence }}</td>
-                                     <td> {{ adherent.statut}}</td>
+                        <div class="container-fluid">
+                            <div class="form_row inline">
+                                {{ form_start(form) }}
+                                <div class="col-3">
+                                {{ form_row(form.nom) }}
+                               </div>
+                               {{ form_end(form) }}
+                            </div>      
+                        </div>     
+                    <table class="table table-hover mt-5">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Prénom</th>
+                                <th scope="col">date de naissance</th>
+                                <th scope="col">Télèphone</th>
+                                <th scope="col">Numéro urgence</th>
+                                <th scope="col">date inscription</th>
+                                <th scope="col">Numéro licence</th>
+                                <th scope="col">Statut dossier</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>  
+                            {% for adherent in adherents %}
+                                <tr>
+                                <th scope="row">{{ adherent.id }}</th>
+                                <td> {{ adherent.nom }}</td>
+                                <td> {{ adherent.prenom }}</td>
+                                <td> {{ adherent.dateNaissance | date('d/m/Y') }}</td>
+                                <td> {{ adherent.telephone }}</td>
+                                <td> {{ adherent.numeroUrgence }}</td>
+                                <td> {{ adherent.dateInscription }}</td>
+                                <td> {{ adherent.numLicence }}</td>
+                                <td> {{ adherent.statut}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm">Voir</button>
+                                    <button type="button" class="btn btn-secondary btn-sm">Supprimer</button>
+                                </td>
+                                </tr>
+                            {% endfor %}      
+                        </tbody>
+                        </table>
 
-                            
-                                    <td><button type="button" class="btn btn-primary btn-sm">Voir</button>
-                                        <button type="button" class="btn btn-secondary btn-sm">Supprimer</button>
-                                    </td>
-                                  </tr>
-                             {% endfor %}      
-                                            
-                                </tbody>
-                              </table>
-
-{% endblock %}
+                        {% endblock %}

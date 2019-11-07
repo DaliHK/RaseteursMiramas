@@ -23,7 +23,6 @@ class AdherentController extends AbstractController
     {
         $adherent = new Adherent();
         $form = $this->createForm(RegistrationType::class, $adherent);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){ 
