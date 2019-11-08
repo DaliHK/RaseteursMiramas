@@ -19,10 +19,10 @@ class AdherentRepository extends ServiceEntityRepository
         parent::__construct($registry, Adherent::class);
     }
 
-    // /**
-    //  * @return Adherent[] Returns an array of Adherent objects
-    //  */
-    /*
+    /**
+     * @return Adherent[] Returns an array of Adherent objects
+     *
+     */
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('a')
@@ -32,11 +32,10 @@ class AdherentRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
+            ->findOneBy()
         ;
-    }
-    */
+    }  
 
-    /*
     public function findOneBySomeField($value): ?Adherent
     {
         return $this->createQueryBuilder('a')
@@ -46,5 +45,4 @@ class AdherentRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }

@@ -136,13 +136,14 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", inversedBy="adherents")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_adherent")
      */
-    private $evenement;
+    private $participations;
 
     public function __construct()
     {
         $this->evenement = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -460,4 +461,36 @@ class Adherent implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
+
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setIdAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getIdAdherent() === $this) {
+                $participation->setIdAdherent(null);
+            }
+        }
+
+        return $this;
+    }
 }
+
+
