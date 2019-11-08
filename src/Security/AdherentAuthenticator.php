@@ -101,7 +101,6 @@ class AdherentAuthenticator extends AbstractFormLoginAuthenticator
     {
     }
 
-
     public function supportsRememberMe()
     {
         return true;
