@@ -22,7 +22,7 @@ class SourcePhotoRepository extends ServiceEntityRepository
     // /**
     //  * @return SourcePhoto[] Returns an array of SourcePhoto objects
     //  */
-    /*
+    
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('s')
@@ -34,9 +34,7 @@ class SourcePhotoRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
-
-    /*
+    
     public function findOneBySomeField($value): ?SourcePhoto
     {
         return $this->createQueryBuilder('s')
@@ -46,5 +44,5 @@ class SourcePhotoRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

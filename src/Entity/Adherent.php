@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * Adherent
  * 
@@ -18,7 +19,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
  * @UniqueEntity(
  * fields={"username"},
- * message="Username est déjà utilisé"
+ * message="Username est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ * fields={"email"},
+ * message="Email est déjà utilisé."
  * )
  */
 class Adherent implements UserInterface
@@ -76,7 +81,7 @@ class Adherent implements UserInterface
     /**
     * @var string
     *
-    * @ORM\Column(type="string", length=180, nullable=false)
+    * @ORM\Column(type="string", length=180, nullable=false, unique=true)
     */
     private $email;
 
@@ -106,7 +111,7 @@ class Adherent implements UserInterface
     private $numeroUrgence;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean", length=255, nullable=true)
      */
     private $statut;
 
@@ -131,14 +136,25 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_adherent")
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvenement", mappedBy="adherent")
      */
-    private $participations;
+    private $participationEvenements;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $niveau;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $NomUrgence;
 
     public function __construct()
     {
         $this->evenement = new ArrayCollection();
         $this->participations = new ArrayCollection();
+        $this->participationEvenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -365,12 +381,12 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut(): ?boolean
     {
         return $this->statut;
     }
 
-    public function setStatut(string $statut): self
+    public function setStatut(boolean $statut): self
     {
         $this->statut = $statut;
 
@@ -483,6 +499,61 @@ class Adherent implements UserInterface
                 $participation->setIdAdherent(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationEvenement[]
+     */
+    public function getParticipationEvenements(): Collection
+    {
+        return $this->participationEvenements;
+    }
+
+    public function addParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if (!$this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements[] = $participationEvenement;
+            $participationEvenement->setAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if ($this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements->removeElement($participationEvenement);
+            // set the owning side to null (unless already changed)
+            if ($participationEvenement->getAdherent() === $this) {
+                $participationEvenement->setAdherent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNiveau(): ?bool
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?bool $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getNomUrgence(): ?string
+    {
+        return $this->NomUrgence;
+    }
+
+    public function setNomUrgence(?string $NomUrgence): self
+    {
+        $this->NomUrgence = $NomUrgence;
 
         return $this;
     }

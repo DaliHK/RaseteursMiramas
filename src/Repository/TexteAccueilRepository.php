@@ -22,7 +22,7 @@ class TexteAccueilRepository extends ServiceEntityRepository
     // /**
     //  * @return TexteAccueil[] Returns an array of TexteAccueil objects
     //  */
-    /*
+    
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('t')
@@ -34,9 +34,7 @@ class TexteAccueilRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
-
-    /*
+    
     public function findOneBySomeField($value): ?TexteAccueil
     {
         return $this->createQueryBuilder('t')
@@ -46,5 +44,5 @@ class TexteAccueilRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

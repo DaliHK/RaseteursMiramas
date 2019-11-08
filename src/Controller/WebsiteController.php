@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
-use App\Entity\Participation;
 use App\Form\InscriptionType;
+use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ParticipationEvenementRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -47,9 +48,10 @@ class WebsiteController extends AbstractController
      * 
      * @return Response
      */
-    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user)
+    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user, AdherentRepository $adherent)
     {
-        $participation = new Participation();
+        $participation = new ParticipationEvenement();
+        $evenement = $repo->findAll();
 
         $form = $this->createForm(InscriptionType::class, $participation);
         $form->handleRequest($request);
@@ -57,8 +59,8 @@ class WebsiteController extends AbstractController
         $manager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $participation->setIdAdherent($user);
-            $participation->setIdEvenement($evenement);
+            $participation->setAdherent($user);
+            $participation->setEvenement($evenement);
             $manager->persist($participation);
             $manager->flush();
         }
@@ -69,6 +71,20 @@ class WebsiteController extends AbstractController
                 'evenement' => $evenement,
                 'id' => $id
             ]);
+    }
+
+    /**
+     * @Route("/evenements/delete/inscription/{id}", name="recruiter_offer_delete")
+     * @param $id
+     * @return RedirectResponse
+     */
+    
+     public function deleteInscription(ParticipationEvenementRepository $repo)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $participation = $em->getRepository(ParticipationEvenement::class)->find($id);
+        $em->remove($participation);
+        $em->flush();
     }
 
 }

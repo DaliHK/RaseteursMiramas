@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Participation;
+use App\Entity\ParticipationEvenement;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,7 +21,7 @@ class InscriptionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Participation::class,
+            'data_class' => ParticipationEvenement::class,
         ]);
     }
 }
