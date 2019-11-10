@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
+
 /**
  * Adherent
  * 
@@ -18,7 +19,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
  * @UniqueEntity(
  * fields={"username"},
- * message="Username est déjà utilisé"
+ * message="Username est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ * fields={"email"},
+ * message="Email est déjà utilisé."
  * )
  */
 class Adherent implements UserInterface
@@ -76,7 +81,7 @@ class Adherent implements UserInterface
     /**
     * @var string
     *
-    * @ORM\Column(type="string", length=180, nullable=false)
+    * @ORM\Column(type="string", length=180, nullable=false, unique=true)
     */
     private $email;
 
@@ -131,13 +136,14 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Evenement", mappedBy="adherent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_adherent")
      */
-    private $evenements;
+    private $participations;
 
     public function __construct()
     {
-        $this->evenements = new ArrayCollection();
+        $this->evenement = new ArrayCollection();
+        $this->participations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -218,31 +224,31 @@ class Adherent implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-    * @see \Serializable::serialize()
-    */
-public function serialize()
-{
-    return serialize([
-        $this->id,
-        $this->username,
-        $this->password,
-    ]);
-}
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
 
-    /**
-    * @see \Serializable::unserialize()
-    *
-    * @param string $serialized
-    */
-public function unserialize($serialized)
-{
-    list(
-        $this->id,
-        $this->username,
-        $this->password) = unserialize($serialized, ['allowed_classes' => false]);
-       
-}
+    /** @param $serialized
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
 
     public function getNom(): ?string
     {
@@ -429,20 +435,18 @@ public function unserialize($serialized)
         return $this;
     }
 
-
     /**
      * @return Collection|Evenement[]
      */
-    public function getEvenements(): Collection
+    public function getEvenement(): Collection
     {
-        return $this->evenements;
+        return $this->evenement;
     }
 
     public function addEvenement(Evenement $evenement): self
     {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements[] = $evenement;
-            $evenement->addAdherent($this);
+        if (!$this->evenement->contains($evenement)) {
+            $this->evenement[] = $evenement;
         }
 
         return $this;
@@ -450,16 +454,43 @@ public function unserialize($serialized)
 
     public function removeEvenement(Evenement $evenement): self
     {
-        if ($this->evenements->contains($evenement)) {
-            $this->evenements->removeElement($evenement);
-            $evenement->removeAdherent($this);
+        if ($this->evenement->contains($evenement)) {
+            $this->evenement->removeElement($evenement);
         }
 
         return $this;
     }
 
-    
+    /**
+     * @return Collection|Participation[]
+     */
+    public function getParticipations(): Collection
+    {
+        return $this->participations;
+    }
 
-       
-    
+    public function addParticipation(Participation $participation): self
+    {
+        if (!$this->participations->contains($participation)) {
+            $this->participations[] = $participation;
+            $participation->setIdAdherent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipation(Participation $participation): self
+    {
+        if ($this->participations->contains($participation)) {
+            $this->participations->removeElement($participation);
+            // set the owning side to null (unless already changed)
+            if ($participation->getIdAdherent() === $this) {
+                $participation->setIdAdherent(null);
+            }
+        }
+
+        return $this;
+    }
 }
+
+

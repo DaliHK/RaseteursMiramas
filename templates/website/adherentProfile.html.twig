@@ -79,28 +79,29 @@
         <pre>
             
         </pre>
-        {# {{dump(evenementId.owner.id)}} #}
-        {% for evenement in user.evenement %}
+         
+        {% for evenements in evenement.participations %}
         
         <div class="row justify-content-center">
             <div class="shadow mt-2 p-3 mb-1 bg-white rounded p-center">
                 <div class="row">
                     <div class="col">
-                        <h5>Nom:{{evenement.id}}</h5>
+                        <h5>Nom:</h5>
                     </div>
                     <div class="col">
                         <h5>Categories:</h5>
                     </div>
                     <div class="col">
-                        <h5>Date:{{ evenement.dateDebut | date}}</h5>
+                        <h5>Date:</h5>
                     </div>
                     <div class="col">
                         <a href="{{ path('supression_evenement_inscrit',
-                            {'id': evenementId.owner.id})}}">Supprimer</a>
+                                    {'id': "3"})}}">Supprimer</a>
                     </div>
                 </div>
             </div>
         </div>
+
         {% endfor %}
 
         <hr>
@@ -111,9 +112,23 @@
                 </div>
             </div>
         </div>
-    
-   
-    
+<div class="row justify-content-center">
+{{ form_start(form) }}
+
+{{ form_row(form.photoIdentite)}}
+{{ form_row(form.CertificatMedical)}}
+{{ form_row(form.DroitImage)}}
+{{ form_row(form.droitTransport)}}
+{{ form_row(form.droitPratique)}}
+{{ form_row(form.droitEntrainement)}}
+{{ form_row(form.renseignementsMedicaux)}}
+{{ form_row(form.renseignementsgeneraux)}}
+
+<div class=" row justify-content-center">
+<button type="submit" class='btn btn-success'>Envoyer</button>
+</div>
+{{ form_end(form) }}
+</div>
     </div>
 
 {% endblock %}

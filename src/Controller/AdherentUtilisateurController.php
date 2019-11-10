@@ -40,7 +40,7 @@ class AdherentUtilisateurController extends AbstractController
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
              return $this->redirectToRoute('login_adherent');
         }
-        return $this->render('adherent/adherentregistration.html.twig', [
+        return $this->render('adherentUtilisateur/adherentregistration.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -79,12 +79,12 @@ class DossierInscription
         return $this;
     }
 
-    public function getPhotoIdentite(): ?string
+    public function getPhotoIdentite()
     {
         return $this->photoIdentite;
     }
 
-    public function setPhotoIdentite(string $photoIdentite): self
+    public function setPhotoIdentite( $photoIdentite)
     {
         $this->photoIdentite = $photoIdentite;
 
