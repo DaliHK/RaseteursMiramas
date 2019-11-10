@@ -4,15 +4,18 @@
 
 
 	<div class="container">
-		<div class="row">
+		<div class="row justify-content-center">
 			<div class="col-md-7">
+                <div class="card mb-4">
+                <div class="card-body">
+
                 <h3 class="card-title text-center"> Créer votre compte </h3>
 
                     {{ form_start(form) }}
 
                     {{ form_row(form.nom) }}
                     {{ form_row(form.prenom) }}
-                    {{ form_row(form.dateNaissance, { 'attr': {'placeholder': 'Année/Mois/Jour'}}) }}
+                    {{ form_row(form.dateNaissance, { 'attr': {'placeholder': 'Année-Mois-Jour'}}) }}
                     {{ form_row(form.adresse) }}
                     {{ form_row(form.cp) }}
                     {{ form_row(form.ville) }}
@@ -27,20 +30,19 @@
     </div>
         </div>
             </div>
-    
+                </div>
+                </div>
 {% endblock %}
 
 {% block javascripts %}
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-
     <script>
     $(document).ready(function() {
         $('.js-datepicker').datepicker({
-       dateFormat: 'yyyy/mm/dd'         
-       });
+        format: "yyyy/mm/dd"
+    });
     });
     </script>
-    
   
 {% endblock %}

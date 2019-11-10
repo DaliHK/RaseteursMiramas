@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Adherent;
 use App\Form\RegistrationType;
+use App\Form\ResetPasswordType;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -16,7 +19,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 
-class AdherentController extends AbstractController
+class AdherentUtilisateurController extends AbstractController
 {
     /**
      * @Route("/inscription", name="inscription")
@@ -40,7 +43,7 @@ class AdherentController extends AbstractController
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
              return $this->redirectToRoute('login_adherent');
         }
-        return $this->render('adherent/adherentregistration.html.twig', [
+        return $this->render('adherentUtilisateur/adherentregistration.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -65,10 +68,11 @@ class AdherentController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/logout", name="app_logout", methods={"GET"})
      */
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
+
 }
