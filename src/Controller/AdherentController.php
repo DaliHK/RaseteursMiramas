@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Adherent;
@@ -19,30 +18,38 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdherentController extends AbstractController
 {
     /**
-     * @Route("/", name="adherent_index", methods={"GET"})
+     * @Route("/", name="adherent_index", methods={"GET","POST"})
      */
-    public function index(AdherentRepository $adherentRepository): Response
+    public function index(AdherentRepository $adherentRepository, AdherentRepository $repo, Request $request): Response
     {    
-    //     $form=$this->createFormBuilder($recherche)
-    //     ->add('nom', SearchType::class,[
-    //         'required'=> false,
-    //         'label'=> false,
-    //         'attr'=>[
-    //             'placeholder'=> 'Nom'
-    //         ]
-    //     ])
-    //     ->add('rechercher', SubmitType::class)
-    //     ->getForm()
-    // ;
-    // return $this->render('adherent/index.html.twig', [
-    //         'form'=> $form->createView()
-    // ]);
-       
-        return $this->render('adherent/index.html.twig', [
-            'adherents' => $adherentRepository->findAll(),
-        ]);
+        $form=$this->createFormBuilder()
+        ->add('nom', SearchType::class,[
+           'required'=> false,
+           'label'=> false,
+            'attr'=>[
+                'placeholder'=> 'Nom'
+           ]
+         ])
+         ->add('rechercher', SubmitType::class)
+       ->getForm()
+    ;
+    $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $adherentRepository=$repo->findByNameField($form->getData()['nom']);
+            //dump($adherentRepository);die;
+            return $this->render('adherent/index.html.twig', [
+                'adherents' => $adherentRepository,
+                'form'=> $form->createView()
+            ]);
+    
+        
     }
-
+    
+    return $this->render('adherent/index.html.twig', [
+        'adherents' => $adherentRepository->findAll(),
+        'form'=> $form->createView()
+    ]);
+    }
     /**
      * @Route("/new", name="adherent_new", methods={"GET","POST"})
      */
