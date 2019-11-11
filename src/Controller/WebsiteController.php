@@ -52,10 +52,9 @@ class WebsiteController extends AbstractController
     public function adherentProfile(UserInterface $userProfile ,AdherentRepository $adherent,Request $request, EvenementRepository $evenement){
 
        
-       
-         dump($evenement->findAll());
-        die;   
+       //Calculer l'age du user 
         
+
         //Upload du dossier d'inscription 
 
         $newFileRegistration = new DossierInscription();

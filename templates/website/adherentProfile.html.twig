@@ -4,226 +4,257 @@
 
 {% block body %}
 
-{% if user.statut == true %}
-    <div class="container">
+{% if user.statut == false %}
 
+    {# Photo du user #}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% if user.dossierInscription.photoIdentite == ""  %}
+                <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
+                {% else %}
+                <img src="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
+                {% endif %}
+                <div class=" mt-1">
+                    <h6>Nom:{{user.nom}}</h6>
+                    <h6>Prenom: {{user.prenom}}</h6>
+                    <h6>Statut: Adherent </h6>
+                </div>
+            </div>
+        </div>
+
+        {# Information personnelle #}
         <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-3 bg-warning rounded p-center">
+            <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
                 <div>
                     <h4>Information Personnelle</h4>
                 </div>
             </div>
         </div>
-    
-        <!-- Information personnelle de l'adhérent -->
-        <div class="row offset-3">
+        <div class="row offset-2">
             <div class="col">
-                <h4>Nom: {{user.nom}}</h4>
+                <h6>Telephon:{{user.telephone}}</h6>
             </div>
             <div class="col">
-                <h4>Prenom: {{user.prenom}}</h4>
+                <h6>Age:</h6>
             </div>
         </div>
-        <div class="row offset-3">
+        <div class="row offset-2">
             <div class="col">
-                <h4>Telephon: {{user.telephone}}</h4>
+                <h6>Mot de passe: votre mot de passe</h6>
             </div>
             <div class="col">
-                <h4>Age:</h4>
+                <h6>E-mail: {{user.email}}</h6>
             </div>
         </div>
-        <div class="row offset-3">
+        <div class="row offset-2">
             <div class="col">
-                <h4>Mot de passe: votre mot de passe</h4>
+                <h6>Adresse: {{user.adresse}}</h6>
             </div>
             <div class="col">
-                <h4>E-mail: {{user.email}}</h4>
+                <h6>Ville: {{user.ville}}</h6>
             </div>
         </div>
-        <div class="collapse" id="collapseExample">
-            <div class="row offset-3">
-                <div class="col">
-                    <h4>Adresse: {{user.adresse}}</h4>
-                </div>
-                <div class="col">
-                    <h4>Ville: {{user.ville}}</h4>
-                </div>
+        <div class="row offset-2">
+            <div class="col">
+                <h6>Code Postal: {{user.cp}}</h6>
             </div>
-            <div class="row offset-3">
-                <div class="col">
-                    <h4>Code Postal: {{user.cp}}</h4>
-                </div>
-                <div class="col">
-                    <h4>Tel d'urgence: {{user.numeroUrgence}}</h4>
-                </div>
+            <div class="col">
+                <h6>Tel d'urgence: {{user.numeroUrgence}}</h6>
             </div>
         </div>
-        <!-- Collapse pour afficher plus d'information -->
-        <div class="row text-center">
-            <div class="col justify-content-center">
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    Plus d'information
-                </button>
-                <!--Button pour modifier les informations -->
-                <a class="btn btn-primary" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
-            </div>
+       
+      <!--Button pour modifier les informations -->
+        <div class="row justify-content-center">
+            <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
         </div>
         <hr>
+
         <!--Evénement Inscrit-->
         <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-3 bg-warning rounded p-center">
+            <div class="shadow mt-1 p-3 mb-3 bg-white rounded p-center">
                 <div>
-                    <h4>Evenement Inscrit</h4>
+                    <h5>Evenement Inscrit</h5>
                 </div>
             </div>
         </div>
-        <pre>
-            
-        </pre>
-
-        <div class="row justify-content-center">
-            <div class="shadow mt-2 p-3 mb-1 bg-white rounded p-center">
-                <div class="row">
-                    <div class="col">
-                        <h5>Nom</h5>
+        <div class="row offset-2">
+            <div class="col-4">
+                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-header">Header</div>
+                        <div class="card-body">
+                            <div class="col">
+                                <h5>Nom</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Categories:</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Date:</h5>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <h5>Categories:</h5>
-                    </div>
-                    <div class="col">
-                        <h5>Date:</h5>
-                    </div>
-                    <div class="col">
-                      
+                </div>
+                <div class="col-4">
+                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                            <div class="col">
+                                <h5>Nom</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Categories:</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Date:</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
         <hr>
         <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-5 bg-warning rounded p-center">
+            <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
                 <div>
-                    <h4>Mes documents</h4>
+                    <h5>Mes documents</h5>
                 </div>
             </div>
         </div>
-    
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}">
-         Photo D'identité (PDF)</a>
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a>
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitImage) }}"> DroitImage(PDF)</a>
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a>
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a>
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a>
-        <a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsGeneraux) }}"> RenseignementsGeneraux(PDF)</a>
-        
-
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}">
+                    Photo D'identité (PDF)</a></h5>
+            </div>
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
+            </div>
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
+            </div>
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
+            </div>
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
+            </div>
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
+            </div>
+            <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsGeneraux) }}</"> RenseignementsGeneraux(PDF)</a></h5>
+            </div>
         </div>
-
-        {# Affichage d'un du profile pre Inscrit #}``
-
 {% else %}
+        {# Photo du user #}
         <div class="container">
-
+            <div class="row">
+                <div class="col">
+                    {% if user.dossierInscription.photoIdentite == ""  %}
+                    <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
+                    {% else %}
+                    <img src="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
+                    {% endif %}
+                    <div class=" mt-1">
+                        <h6>Nom:{{user.nom}}</h6>
+                        <h6>Prenom: {{user.prenom}}</h6>
+                        <h6>Statut: Adherent </h6>
+                    </div>
+                </div>
+            </div>
+        
+            {# Information personnelle #}
             <div class="row justify-content-center">
-                <div class="shadow mt-1 p-3 mb-3 bg-warning rounded p-center">
+                <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
                     <div>
                         <h4>Information Personnelle</h4>
                     </div>
                 </div>
             </div>
-
-            <!-- Information personnelle de l'adhérent -->
-            <div class="row offset-3">
+            <div class="row offset-2">
                 <div class="col">
-                    <h4>Nom: {{user.nom}}</h4>
+                    <h6>Telephon:{{user.telephone}}</h6>
                 </div>
                 <div class="col">
-                    <h4>Prenom: {{user.prenom}}</h4>
+                    <h6>Age:</h6>
                 </div>
             </div>
-            <div class="row offset-3">
+            <div class="row offset-2">
                 <div class="col">
-                    <h4>Telephon: {{user.telephone}}</h4>
+                    <h6>Mot de passe: votre mot de passe</h6>
                 </div>
                 <div class="col">
-                    <h4>Age:</h4>
+                    <h6>E-mail: {{user.email}}</h6>
                 </div>
             </div>
-            <div class="row offset-3">
+            <div class="row offset-2">
                 <div class="col">
-                    <h4>Mot de passe: votre mot de passe</h4>
+                    <h6>Adresse: {{user.adresse}}</h6>
                 </div>
                 <div class="col">
-                    <h4>E-mail: {{user.email}}</h4>
+                    <h6>Ville: {{user.ville}}</h6>
                 </div>
             </div>
-            <div class="collapse" id="collapseExample">
-                <div class="row offset-3">
-                    <div class="col">
-                        <h4>Adresse: {{user.adresse}}</h4>
-                    </div>
-                    <div class="col">
-                        <h4>Ville: {{user.ville}}</h4>
-                    </div>
+            <div class="row offset-2">
+                <div class="col">
+                    <h6>Code Postal: {{user.cp}}</h6>
                 </div>
-                <div class="row offset-3">
-                    <div class="col">
-                        <h4>Code Postal: {{user.cp}}</h4>
-                    </div>
-                    <div class="col">
-                        <h4>Tel d'urgence: {{user.numeroUrgence}}</h4>
-                    </div>
+                <div class="col">
+                    <h6>Tel d'urgence: {{user.numeroUrgence}}</h6>
                 </div>
             </div>
-            <!-- Collapse pour afficher plus d'information -->
-            <div class="row text-center">
-                <div class="col justify-content-center">
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Plus d'information
-                    </button>
-                    <!--Button pour modifier les informations -->
-                    <a class="btn btn-primary" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
-                </div>
+        
+            <!--Button pour modifier les informations -->
+            <div class="row justify-content-center">
+                <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
             </div>
             <hr>
+        
             <!--Evénement Inscrit-->
             <div class="row justify-content-center">
-                <div class="shadow mt-1 p-3 mb-3 bg-warning rounded p-center">
+                <div class="shadow mt-1 p-3 mb-3 bg-white rounded p-center">
                     <div>
-                        <h4>Evenement Inscrit</h4>
+                        <h5>Evenement Inscrit</h5>
                     </div>
                 </div>
             </div>
-            <pre>
-
-                </pre>
-
-            <div class="row justify-content-center">
-                <div class="shadow mt-2 p-3 mb-1 bg-white rounded p-center">
-                    <div class="row">
-                        <div class="col">
-                            <h5>Nom</h5>
+            <div class="row offset-2">
+                <div class="col-4">
+                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                            <div class="col">
+                                <h5>Nom</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Categories:</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Date:</h5>
+                            </div>
                         </div>
-                        <div class="col">
-                            <h5>Categories:</h5>
-                        </div>
-                        <div class="col">
-                            <h5>Date:</h5>
-                        </div>
-                        <div class="col">
-
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                            <div class="col">
+                                <h5>Nom</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Categories:</h5>
+                            </div>
+                            <div class="col">
+                                <h5>Date:</h5>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
             <hr>
             <div class="row justify-content-center">
-                <div class="shadow mt-1 p-3 mb-5 bg-warning rounded p-center">
+                <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
                     <div>
-                        <h4>Mes documents</h4>
+                        <h5>Mes documents</h5>
                     </div>
                 </div>
             </div>
@@ -244,12 +275,7 @@
                 </div>
                 {{ form_end(form) }}
             </div>
-
-            <a href="{{ asset('uploads/inscriptions/' ~ fileRegistration.adherent) }}">View brochure (PDF)</a>
-
         </div>
     
 {% endif %}
-
-
 {% endblock %}
