@@ -4,38 +4,45 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1 class="my-3">Voici les événements</h1>
+	<div class="container">
+		<h1 class="my-3">Voici les événements</h1>
 
-        <div class="row">
-            {% for evenement in evenements %}
-                <div class="col-md-4">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header text-center">
-                            <h4 class="card-title">
+		<div class="row">
+			{% for evenement in evenements %}
+				<div class="col-md-4">
+					<div class="card bg-light mb-3">
+						<div class="card-header text-center">
+							<h4 class="card-title">
 
-                                {{ evenement.titre }}
-                            </h4>
-                            <small>
-                                Le
-                                {{ evenement.dateDebut |date("d/m/Y") }}</small>
+								{{ evenement.titre }}
+							</h4>
+							<small>
+								Le
+								{{ evenement.dateDebut |date("d/m/Y") }}</small>
 
-                        </div>
+						</div>
 
-                        <img src="http://placehold.it/400x300" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
+						<img src="http://placehold.it/400x300" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
 
-                        <div class="card-body">
+						<div class="card-body">
 
-                            <p class="card-text"></p>
+							<p class="card-text"></p>
 
-                            {{ evenement.Description }}
+							{{ evenement.Description }}
 
-                            <a href="{{ path('detailevenement', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+							{% if is_granted('ROLE_USER') %}
+
+								<a href="{{ path('detailevenement', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
+							{% else %}
+								<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
+
+							{% endif %}
+
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 
 {% endblock %}
