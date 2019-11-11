@@ -37,7 +37,7 @@ class EditAdherentType extends AbstractType
             ->add('numLicence')
             ->add('dossierInscription')
             ->add('participation') */
-            ->add('supprimer',SubmitType::class)
+           
         ;
     }
 

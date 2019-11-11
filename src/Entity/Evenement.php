@@ -49,19 +49,20 @@ class Evenement
     private $titre;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participation", mappedBy="id_evenement")
-     */
-    private $participations;
-
-    /**
      * @ORM\Column(type="text")
      */
     private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvenement", mappedBy="evenement")
+     */
+    private $participationEvenements;
 
     public function __construct()
     {
         $this->adherents = new ArrayCollection();
         $this->participations = new ArrayCollection();
+        $this->participationEvenements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,37 +170,6 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection|Participation[]
-     */
-    public function getParticipations(): Collection
-    {
-        return $this->participations;
-    }
-
-    public function addParticipation(Participation $participation): self
-    {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setIdEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipation(Participation $participation): self
-    {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            // set the owning side to null (unless already changed)
-            if ($participation->getIdEvenement() === $this) {
-                $participation->setIdEvenement(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -208,6 +178,37 @@ class Evenement
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationEvenement[]
+     */
+    public function getParticipationEvenements(): Collection
+    {
+        return $this->participationEvenements;
+    }
+
+    public function addParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if (!$this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements[] = $participationEvenement;
+            $participationEvenement->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if ($this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements->removeElement($participationEvenement);
+            // set the owning side to null (unless already changed)
+            if ($participationEvenement->getEvenement() === $this) {
+                $participationEvenement->setEvenement(null);
+            }
+        }
 
         return $this;
     }

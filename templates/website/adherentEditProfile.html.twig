@@ -17,7 +17,6 @@
 {{form_row(adherent.password,{'attr':{'placeholder':""}})}}
 {{form_row(adherent.confirm_password,{'attr':{'placeholder':""}})}}
 
-<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
  <button type="submit" class='btn btn-success'>Modification</button>
 
 {{form_end(adherent)}}
