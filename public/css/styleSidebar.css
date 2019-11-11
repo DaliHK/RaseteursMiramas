@@ -2,7 +2,9 @@
     DEMO STYLE
 */
 
-
+span{
+    font-weight: bold;
+}
 
 a,
 a:hover,

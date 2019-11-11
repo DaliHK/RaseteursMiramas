@@ -15,7 +15,7 @@ class AdminListeAdherentController extends AbstractController
 
 
     /**
-     * @Route("/admin/liste_adherent", name="admin_liste_adherent")
+     * @Route("/admin/liste", name="admin_liste")
      */
     public function index(AdherentRepository $repo, Request $request )
     {

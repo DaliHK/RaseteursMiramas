@@ -3,68 +3,110 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
-use App\Form\RegistrationType;
+use App\Form\AdherentType;
+use App\Repository\AdherentRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-
+/**
+ * @Route("/admin")
+ */
 class AdherentController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="inscription")
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @Route("/", name="adherent_index", methods={"GET"})
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function index(AdherentRepository $adherentRepository): Response
+    {    
+    //     $form=$this->createFormBuilder($recherche)
+    //     ->add('nom', SearchType::class,[
+    //         'required'=> false,
+    //         'label'=> false,
+    //         'attr'=>[
+    //             'placeholder'=> 'Nom'
+    //         ]
+    //     ])
+    //     ->add('rechercher', SubmitType::class)
+    //     ->getForm()
+    // ;
+    // return $this->render('adherent/index.html.twig', [
+    //         'form'=> $form->createView()
+    // ]);
+       
+        return $this->render('adherent/index.html.twig', [
+            'adherents' => $adherentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="adherent_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
     {
         $adherent = new Adherent();
-        $form = $this->createForm(RegistrationType::class, $adherent);
+        $form = $this->createForm(AdherentType::class, $adherent);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){ 
-            $hash = $encoder->encodePassword($adherent, $adherent->getPassword()); 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($adherent);
+            $entityManager->flush();
 
-            $adherent->setPassword($hash);   
-            $adherent->addRole("ROLE_ADMIN");
-            $manager->persist($adherent);
-            $manager->flush();
-
-            $this->addFlash('success', 'Votre compte à bien été enregistré.');
-             return $this->redirectToRoute('login_adherent');
+            return $this->redirectToRoute('adherent_index');
         }
-        return $this->render('adherent/adherentregistration.html.twig', [
+
+        return $this->render('adherent/new.html.twig', [
+            'adherent' => $adherent,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/login", name="login_adherent")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return Response
+     * @Route("/dossier{id}", name="adherent_show", methods={"GET"})
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function show(Adherent $adherent): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('adherent/show.html.twig', [
+            'adherent' => $adherent,
+        ]);
     }
 
     /**
-     * @Route("/logout", name="app_logout")
+     * @Route("/dossier{id}/edit", name="adherent_edit", methods={"GET","POST"})
      */
-    public function logout()
+    public function edit(Request $request, Adherent $adherent): Response
     {
-        throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+        $form = $this->createForm(AdherentType::class, $adherent);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('adherent_index');
+        }
+
+        return $this->render('adherent/edit.html.twig', [
+            'adherent' => $adherent,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/dossier{id}", name="adherent_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Adherent $adherent): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$adherent->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($adherent);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('adherent_index');
     }
 }

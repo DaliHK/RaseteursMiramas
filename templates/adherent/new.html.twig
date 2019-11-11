@@ -1,8 +1,6 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Dossier Adhérent "nom prenom" {% endblock %}
-
-
+{% block title %}New Adherent{% endblock %}
 
 {% block body %}
 {% block content %}
@@ -17,9 +15,10 @@
                                  <h3 class="ml-5">Liste des adhérents</h3>
                             </div>
                     </nav>
-                    {% endblock %}
+{% endblock %}
+    
 
-                     <!-- ici dossier-->hello
+    {{ include('adherent/_form.html.twig') }}
 
-
-                        {% endblock %}
+    <a href="{{ path('adherent_index') }} class="btn btn-primary"">back to list</a>
+{% endblock %}
