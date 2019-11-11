@@ -3,14 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
+use App\Form\InscriptionType;
 use App\Form\RegistrationType;
 use App\Form\ResetPasswordType;
 use Symfony\Component\Form\FormError;
+use App\Entity\ParticipationEvenement;
+use App\Repository\AdherentRepository;
+use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ParticipationEvenementRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +28,7 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 class AdherentUtilisateurController extends AbstractController
 {
     /**
-     * @Route("/inscription", name="inscription")
+     * @Route("/adherent/inscription", name="inscription")
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
@@ -43,13 +49,13 @@ class AdherentUtilisateurController extends AbstractController
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
              return $this->redirectToRoute('login_adherent');
         }
-        return $this->render('adherent/adherentregistration.html.twig', [
+        return $this->render('adherentUtilisateur/adherentregistration.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/login", name="login_adherent")
+     * @Route("/adherent/login", name="login_adherent")
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
@@ -68,7 +74,54 @@ class AdherentUtilisateurController extends AbstractController
     }
 
     /**
-     * @Route("/logout", name="app_logout", methods={"GET"})
+     * Permet d'afficher un seul événement
+     * @Route("/adherent/evenements/{id}", name="detailevenement")
+     * 
+     * @return Response
+     */
+    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user, AdherentRepository $adherent)
+    {
+
+        $participation = new ParticipationEvenement();
+        $evenement = $repo->findAll();
+
+        $form = $this->createForm(InscriptionType::class, $participation);
+        $form->handleRequest($request);
+        $evenement = $repo->find($id);
+        $manager = $this->getDoctrine()->getManager();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $participation->setAdherent($user);
+            $participation->setEvenement($evenement);
+            $manager->persist($participation);
+            $manager->flush();
+        }
+        
+         $this->addFlash('success','Votre inscription à l\'événement a bien été prise en compte');
+            return $this->render('event/detailEvenements.html.twig', [
+                'form' => $form->createView(),
+                'evenement' => $evenement,
+                'id' => $id
+            ]);
+    }
+
+    /**
+     * @Route("/adherent/evenements/delete/inscription/{id}", name="recruiter_offer_delete")
+     * @param $id
+     * @return RedirectResponse
+     */
+    
+     public function deleteInscription(ParticipationEvenementRepository $repo)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $participation = $em->getRepository(ParticipationEvenement::class)->find($id);
+        $em->remove($participation);
+        $em->flush();
+    }
+
+
+    /**
+     * @Route("/logout", name="logout", methods={"GET"})
      */
     public function logout()
     {

@@ -28,7 +28,7 @@ class WebsiteController extends AbstractController
     }
 
     /**
-     * @Route("/evenements", name="evenements")
+     * @Route("/visiteur/evenements", name="evenements")
      */
     
     public function listeEvenements(EvenementRepository $repo)
@@ -41,50 +41,22 @@ class WebsiteController extends AbstractController
             
         ]);
     }
-
-     /**
+/**
      * Permet d'afficher un seul événement
-     * @Route("/evenements/{id}", name="detailevenement")
+     * @Route("/visiteur/evenements/{id}", name="detailevenementvisiteur")
      * 
      * @return Response
      */
-    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user, AdherentRepository $adherent)
+    public function detailEvenements($id, EvenementRepository $repo)
     {
-        $participation = new ParticipationEvenement();
         $evenement = $repo->findAll();
-
-        $form = $this->createForm(InscriptionType::class, $participation);
-        $form->handleRequest($request);
         $evenement = $repo->find($id);
         $manager = $this->getDoctrine()->getManager();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $participation->setAdherent($user);
-            $participation->setEvenement($evenement);
-            $manager->persist($participation);
-            $manager->flush();
-        }
-        
-         $this->addFlash('success','Votre inscription à l\'événement a bien été prise en compte');
-            return $this->render('event/detailEvenements.html.twig', [
-                'form' => $form->createView(),
+            return $this->render('visiteur/visiteur_detailEvenements.html.twig', [
                 'evenement' => $evenement,
                 'id' => $id
             ]);
     }
-
-    /**
-     * @Route("/evenements/delete/inscription/{id}", name="recruiter_offer_delete")
-     * @param $id
-     * @return RedirectResponse
-     */
-    
-     public function deleteInscription(ParticipationEvenementRepository $repo)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $participation = $em->getRepository(ParticipationEvenement::class)->find($id);
-        $em->remove($participation);
-        $em->flush();
-    }
-
+     
 }
