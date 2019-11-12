@@ -33,6 +33,9 @@ class AdherentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
             ->findOneBy()
+            ->findBy()
+            ->find()
+            ->findOneByEmail()
         ;
     }  
 
