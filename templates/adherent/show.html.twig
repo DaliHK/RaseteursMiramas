@@ -1,0 +1,167 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Dossier Adhérent {% endblock %}
+
+
+
+{% block body %}
+{% block content %}
+
+                    <!-- We'll fill this with dummy content -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+                            <div class="container">
+            
+                                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Menu</span> 
+                                </button>
+                                 <h3 class="ml-5">dossier adhérent {{ adherent.nom }} {{ adherent.prenom }}</h3>
+                            </div>
+                    </nav>
+                    {% endblock %}
+   
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span>Nom: </span>{{ adherent.nom }}
+                </div>
+                <div class="col-6">
+                   <span>Prénom:</span> {{ adherent.prenom }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <span>Date de Naissance</span>: {{ adherent.dateNaissance ? adherent.dateNaissance | date('d/m/Y') }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <span>Téléphone: </span> {{ adherent.telephone }}
+                </div>
+                <div class="col-md-6">
+                    <span>  Email: </span>{{ adherent.email }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <span>Adresse: </span>{{ adherent.adresse }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <span>  Code postal: </span>{{ adherent.cp }}
+                </div>
+                <div class="col-md-6">
+                    <span>   Ville: </span>{{ adherent.ville }}
+                </div>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <div class="col">
+                <h5 class="mb-2">Contact en cas d'urgence</h5>
+                </div>
+            </div>
+            <div class="row mb-3">
+                 <div class="col">
+                    <span>Nom personne à contacter: </span>placeholder  
+                </div>
+            </div> 
+            <div class="row mb-3">
+                 <div class="col">
+                    <span> N° urgence: </span>{{ adherent.numeroUrgence }}
+                 </div> 
+            </div>     
+    </div>
+
+        <div class="col-sm-4 text-center">
+            <img src="http://placehold.it/150x200" class="mb-3">
+        </div>   
+
+        <div class="col-sm-4">
+            <div class="row mb-3">
+                <h5 class="mb-2">Etat dossier d'inscription:</h5>
+            </div> 
+            <div class="row mb-3">
+                <span>Cotisation asso: </span> {{ adherent.cotisationAsso ? 'Payée' : 'Non payée' }}
+            </div>
+            <div class="row mb-3">
+                <span>Cotisation licence: </span> {{ adherent.cotisationLicence ? 'Payée' : 'Non payée' }}
+            </div>
+            <div class="row mb-3">
+                <span>Numéro de Licence: </span> {{ adherent.numLicence }}
+            </div>
+            <div class="row mb-3">
+                <span class="bg">Date d'inscription: </span> {{ adherent.dateInscription ? adherent.dateInscription | date('d/m/Y') }}
+            </div>
+            <div class="row mb-3">
+                <button class="btn btn-lg btn-primary" disabled>Statut </button> {{ adherent.statut }}
+            </div>
+            
+        </div>
+            
+        
+</div> 
+    <hr>
+    <h3  class="text-center">Liste des documents pour inscription</h3>
+     <div class="container">
+            <div class="row mt-5">
+                <div class="col-sm-6">  
+            <div class="form-check form-check-inline mb-3">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1">bulletin inscription</label>
+            </div>
+            <div class="form-check form-check-inline mb-3">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label class="form-check-label" for="inlineCheckbox2">droit entrainement</label>
+            </div>
+            <div class="form-check form-check-inline mb-3">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                    <label class="form-check-label" for="inlineCheckbox1">droit à l'image</label>
+                </div>
+                <div class="form-check form-check-inline mb-3">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                    <label class="form-check-label" for="inlineCheckbox2">droit pratique de la course camarguaise</label>
+                </div>
+            </div>
+         
+            <div class="col-sm-6">
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                        <label class="form-check-label" for="inlineCheckbox1">bulletin transport</label>
+                    </div>
+                    <div class="form-check form-check-inline mb-3">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                        <label class="form-check-label" for="inlineCheckbox2">informations médicales</label>
+                    </div>
+                  
+                        <div class="form-check form-check-inline mb-3">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">certificat médical</label>
+                        </div>
+            </div>
+            </div>
+        </div>
+
+    <hr>
+    <div class="row"> 
+        <a href="{{ path('adherent_edit', {'id': adherent.id}) }}" class="btn btn-primary">Modifier</a>
+    </div>
+    <div class="row mb-2"> 
+        {{ include('adherent/_delete_form.html.twig') }}
+    </div>
+    <div class="row mb-2"> 
+        <a href="{{ path('adherent_index') }}" class="btn btn-primary">Retour liste Adhérents</a>
+    </div>
+
+
+    
+</div>        
+
+
+     
+   
+   
+{% endblock %}

@@ -9,6 +9,7 @@
 
 		<div class="row">
 			{% for evenement in evenements %}
+
 				<div class="col-md-4">
 					<div class="card bg-light mb-3">
 						<div class="card-header text-center">
@@ -35,7 +36,6 @@
 								<a href="{{ path('detailevenement', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
 							{% else %}
 								<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
-
 							{% endif %}
 
 						</div>

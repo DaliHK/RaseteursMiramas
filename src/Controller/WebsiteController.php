@@ -21,10 +21,12 @@ class WebsiteController extends AbstractController
     
     public function index(AdherentRepository $repo)
     {
-       
+        $evenements = $repo->findAll();
+        
         return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
+            'evenements' => $evenements
         ]);
+
     }
 
     /**

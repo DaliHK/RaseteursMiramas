@@ -35,14 +35,13 @@ class AdherentUtilisateurController extends AbstractController
     {
         $adherent = new Adherent();
         $form = $this->createForm(RegistrationType::class, $adherent);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){ 
             $hash = $encoder->encodePassword($adherent, $adherent->getPassword()); 
 
             $adherent->setPassword($hash);   
-          //  $adherent->addRole("ROLE_ADMIN");
+            $adherent->addRole("ROLE_ADMIN");
             $manager->persist($adherent);
             $manager->flush();
 
@@ -119,7 +118,6 @@ class AdherentUtilisateurController extends AbstractController
         $em->flush();
     }
 
-
     /**
      * @Route("/logout", name="logout", methods={"GET"})
      */
@@ -129,3 +127,4 @@ class AdherentUtilisateurController extends AbstractController
     }
 
 }
+

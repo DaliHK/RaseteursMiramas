@@ -26,6 +26,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * message="Email est déjà utilisé."
  * )
  */
+
 class Adherent implements UserInterface
 {
     /**
@@ -153,7 +154,6 @@ class Adherent implements UserInterface
     public function __construct()
     {
         $this->evenement = new ArrayCollection();
-        $this->participations = new ArrayCollection();
         $this->participationEvenements = new ArrayCollection();
     }
 
@@ -441,63 +441,6 @@ class Adherent implements UserInterface
         // set the owning side of the relation if necessary
         if ($dossierInscription->getAdherent() !== $this) {
             $dossierInscription->setAdherent($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Evenement[]
-     */
-    public function getEvenement(): Collection
-    {
-        return $this->evenement;
-    }
-
-    public function addEvenement(Evenement $evenement): self
-    {
-        if (!$this->evenement->contains($evenement)) {
-            $this->evenement[] = $evenement;
-        }
-
-        return $this;
-    }
-
-    public function removeEvenement(Evenement $evenement): self
-    {
-        if ($this->evenement->contains($evenement)) {
-            $this->evenement->removeElement($evenement);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Participation[]
-     */
-    public function getParticipations(): Collection
-    {
-        return $this->participations;
-    }
-
-    public function addParticipation(Participation $participation): self
-    {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setIdAdherent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipation(Participation $participation): self
-    {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            // set the owning side to null (unless already changed)
-            if ($participation->getIdAdherent() === $this) {
-                $participation->setIdAdherent(null);
-            }
         }
 
         return $this;

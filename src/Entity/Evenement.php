@@ -61,7 +61,6 @@ class Evenement
     public function __construct()
     {
         $this->adherents = new ArrayCollection();
-        $this->participations = new ArrayCollection();
         $this->participationEvenements = new ArrayCollection();
     }
 
@@ -138,34 +137,6 @@ class Evenement
     public function setTitre(string $titre): self
     {
         $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Adherent[]
-     */
-    public function getAdherents(): Collection
-    {
-        return $this->adherents;
-    }
-
-    public function addAdherent(Adherent $adherent): self
-    {
-        if (!$this->adherents->contains($adherent)) {
-            $this->adherents[] = $adherent;
-            $adherent->addEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdherent(Adherent $adherent): self
-    {
-        if ($this->adherents->contains($adherent)) {
-            $this->adherents->removeElement($adherent);
-            $adherent->removeEvenement($this);
-        }
 
         return $this;
     }
