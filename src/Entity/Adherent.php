@@ -218,6 +218,21 @@ class Adherent implements UserInterface
         return $this;
     }
 
+     /**
+     * @see UserInterface
+     */
+    public function getConfirmPassword(): string
+    {
+        return (string) $this->confirm_password;
+    }
+
+    public function setConfirmPassword(string $confirm_password): self
+    {
+        $this->confirm_password = $confirm_password;
+
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -381,12 +396,12 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getStatut(): ?boolean
+    public function getStatut()
     {
         return $this->statut;
     }
 
-    public function setStatut(boolean $statut): self
+    public function setStatut($statut)
     {
         $this->statut = $statut;
 

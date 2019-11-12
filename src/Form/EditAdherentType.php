@@ -3,19 +3,20 @@
 namespace App\Form;
 
 use App\Entity\Adherent;
+use App\Repository\AdherentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class AdherentType extends AbstractType
+class EditAdherentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('username')
             ->add('roles')
-            ->add('password')
-            ->add('confirm_password')
             ->add('nom')
             ->add('prenom')
             ->add('dateNaissance')
@@ -31,6 +32,7 @@ class AdherentType extends AbstractType
             ->add('cotisationLicence')
             ->add('numLicence')
             ->add('dossierInscription')
+            ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
         ;
     }
 

@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Adherent;
 use App\Form\AdherentType;
+use App\Form\EditAdherentType;
 use App\Repository\AdherentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,7 +50,7 @@ class AdminAdherentController extends AbstractController
         'form'=> $form->createView()
     ]);
     }
-    
+
     /**
      * @Route("/new", name="adherent_new", methods={"GET","POST"})
      */
@@ -88,12 +89,16 @@ class AdminAdherentController extends AbstractController
      */
     public function edit(Request $request, Adherent $adherent): Response
     {
-        $form = $this->createForm(AdherentType::class, $adherent);
+        $form = $this->createForm(EditAdherentType::class, $adherent);
         $form->handleRequest($request);
+        $adherentPassword = $adherent->getPassword();
+       
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            $entityManager = $this->getDoctrine()->getManager();
+             $adherent->setPassword($adherentPassword);
+            $adherent->setConfirmPassword($adherentPassword);
+            $entityManager->flush();
             return $this->redirectToRoute('adherent_index');
         }
 

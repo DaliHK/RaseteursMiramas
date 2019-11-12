@@ -110,7 +110,7 @@ class AdherentUtilisateurController extends AbstractController
      * @return RedirectResponse
      */
     
-     public function deleteInscription(ParticipationEvenementRepository $repo)
+     public function deleteInscription($id)
     {
         $em = $this->getDoctrine()->getManager();
         $participation = $em->getRepository(ParticipationEvenement::class)->find($id);
