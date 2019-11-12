@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * @Route("/admin")
  */
-class AdherentController extends AbstractController
+class AdminAdherentController extends AbstractController
 {
     /**
      * @Route("/", name="adherent_index", methods={"GET","POST"})
@@ -37,15 +37,14 @@ class AdherentController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $adherentRepository=$repo->findByNameField($form->getData()['nom']);
             //dump($adherentRepository);die;
-            return $this->render('adherent/index.html.twig', [
+            return $this->render('Adminadherent/index.html.twig', [
                 'adherents' => $adherentRepository,
                 'form'=> $form->createView()
             ]);
     
-        
     }
     
-    return $this->render('adherent/index.html.twig', [
+    return $this->render('Adminadherent/index.html.twig', [
         'adherents' => $adherentRepository->findAll(),
         'form'=> $form->createView()
     ]);
@@ -57,6 +56,7 @@ class AdherentController extends AbstractController
     {
         $adherent = new Adherent();
         $form = $this->createForm(AdherentType::class, $adherent);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -67,7 +67,7 @@ class AdherentController extends AbstractController
             return $this->redirectToRoute('adherent_index');
         }
 
-        return $this->render('adherent/new.html.twig', [
+        return $this->render('Adminadherent/new.html.twig', [
             'adherent' => $adherent,
             'form' => $form->createView(),
         ]);
@@ -78,7 +78,7 @@ class AdherentController extends AbstractController
      */
     public function show(Adherent $adherent): Response
     {
-        return $this->render('adherent/show.html.twig', [
+        return $this->render('Adminadherent/show.html.twig', [
             'adherent' => $adherent,
         ]);
     }
@@ -86,9 +86,10 @@ class AdherentController extends AbstractController
     /**
      * @Route("/dossier{id}/edit", name="adherent_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Adherent $adherent): Response
+    public function edit(Request $request, Adherent $adherent)
     {
         $form = $this->createForm(AdherentType::class, $adherent);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -96,8 +97,9 @@ class AdherentController extends AbstractController
 
             return $this->redirectToRoute('adherent_index');
         }
+        
 
-        return $this->render('adherent/edit.html.twig', [
+        return $this->render('Adminadherent/edit.html.twig', [
             'adherent' => $adherent,
             'form' => $form->createView(),
         ]);

@@ -54,10 +54,10 @@
                 <td>{{ adherent.dateInscription ? adherent.dateInscription | date('d/m/Y') }}</td>
                 <td>{{ adherent.email }}</td>
                 <td>{{ adherent.telephone }}</td>
-                <td>{{ adherent.numLicence }}</td>
+                <td>{{ adherent.numeroUrgence }}</td>
                 <td>{{ adherent.statut }}</td>
-                <td>{{ adherent.cotisationAsso ? 'Yes' : 'No' }}</td>
-                <td>{{ adherent.cotisationLicence ? 'Yes' : 'No' }}</td>
+                <td>{{ adherent.cotisationAsso ? 'payée' : 'Non payé' }}</td>
+                <td>{{ adherent.cotisationLicence ? 'Payée' : 'Non payé' }}</td>
                 <td>{{ adherent.numLicence }}</td>
                 <td>
                     <a href="{{ path('adherent_show', {'id': adherent.id}) }}" class="btn btn-primary mt-2">Voir</a>
