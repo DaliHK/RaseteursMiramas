@@ -134,7 +134,7 @@ class MotdepasseoublierController extends AbstractController
            
             $mailuser = $user->findOneByEmail($usermail); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
 
-            $hash = $encoder->encodePassword($mailuser, $mailuser->getPassword()); 
+            $hash = $encoder->encodePassword($mailuser, $adherent->getPassword()); 
         
             $mailuser->setPassword($hash);   
             $manager->merge($mailuser);
