@@ -4,7 +4,7 @@
 
 {% block body %}
 
-{% if user.statut == false %}
+{% if user.statut == true %}
 
     {# Photo du user #}
     <div class="container">
@@ -36,7 +36,7 @@
                 <h6>Telephon:{{user.telephone}}</h6>
             </div>
             <div class="col">
-                <h6>Age:</h6>
+                <h6>Date de naissance: {{user.DateNaissance | date("m/d/Y")}}</h6>
             </div>
         </div>
         <div class="row offset-2">
@@ -63,7 +63,11 @@
                 <h6>Tel d'urgence: {{user.numeroUrgence}}</h6>
             </div>
         </div>
-       
+        <div class="row offset-2">
+            <div class="col">
+                <h6>Responsable legal : {{user.nomUrgence}}</h6>
+            </div>
+        </div>
       <!--Button pour modifier les informations -->
         <div class="row justify-content-center">
             <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
@@ -72,46 +76,38 @@
 
         <!--Evénement Inscrit-->
         <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-3 bg-white rounded p-center">
+            <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
                 <div>
                     <h5>Evenement Inscrit</h5>
                 </div>
             </div>
         </div>
         <div class="row offset-2">
-            <div class="col-4">
+            {% for participations in participation %}
+            {% if participations.adherent.id == user.id %}
+            <div class="col">
                 <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                    <div class="card-header">Header</div>
+                    <div class="card-header text-center">Evenement</div>
                         <div class="card-body">
                             <div class="col">
-                                <h5>Nom</h5>
+                                <h6>Nom: {{ participations.evenement.titre }}</h6>
                             </div>
                             <div class="col">
-                                <h5>Categories:</h5>
+                                <h6>Description: {{ participations.evenement.description }}</h6>
                             </div>
                             <div class="col">
-                                <h5>Date:</h5>
+                                <h6>Date: {{ participations.evenement.dateDebut | date("m/d/Y") }}</h6>
+                            </div>
+                            <div class="col">
+                                <a href="{{ path('delete_evenement',{'id' : participations.id  })}}" class="btn btn-primary">Supprimer</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Header</div>
-                        <div class="card-body">
-                            <div class="col">
-                                <h5>Nom</h5>
-                            </div>
-                            <div class="col">
-                                <h5>Categories:</h5>
-                            </div>
-                            <div class="col">
-                                <h5>Date:</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                {% endif %}
+                {% endfor %}
+            </div> 
+            
         <hr>
         <div class="row justify-content-center">
             <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
@@ -137,10 +133,14 @@
                 <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
+            </div>
+
+            <div class=" row justify-content-center">
                 <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsGeneraux) }}</"> RenseignementsGeneraux(PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.renseignementsgeneraux) }}</"> RenseignementsGeneraux(PDF)</a></h5>
             </div>
         </div>
 {% else %}
@@ -148,7 +148,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    {% if user.dossierInscription.photoIdentite == ""  %}
+                    {% if user.dossierInscription == ""  %}
                     <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
                     {% else %}
                     <img src="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
@@ -156,7 +156,7 @@
                     <div class=" mt-1">
                         <h6>Nom:{{user.nom}}</h6>
                         <h6>Prenom: {{user.prenom}}</h6>
-                        <h6>Statut: Adherent </h6>
+                        <h6>Statut: Pre-inscription </h6>
                     </div>
                 </div>
             </div>
@@ -261,7 +261,7 @@
             <div class="row justify-content-center">
                 {{ form_start(form) }}
 
-                {{ form_row(form.photoIdentite,{'attr':{'placeholder':""}})}}
+                {{ form_row(form.photoIdentite,{'attr':{'placeholder':"image"}})}}
                 {{ form_row(form.CertificatMedical)}}
                 {{ form_row(form.DroitImage)}}
                 {{ form_row(form.droitTransport)}}

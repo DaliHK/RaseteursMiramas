@@ -23,10 +23,10 @@ class ParticipationEvenementRepository extends ServiceEntityRepository
     //  * @return ParticipationEvenement[] Returns an array of ParticipationEvenement objects
     //  */
     
-    public function findByExampleField($value)
+    public function findById($value)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.id = :val')
             ->setParameter('val', $value)
             ->orderBy('p.id', 'ASC')
             ->setMaxResults(10)

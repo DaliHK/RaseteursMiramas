@@ -142,33 +142,7 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection|Adherent[]
-     */
-    public function getAdherents(): Collection
-    {
-        return $this->adherents;
-    }
-
-    public function addAdherent(Adherent $adherent): self
-    {
-        if (!$this->adherents->contains($adherent)) {
-            $this->adherents[] = $adherent;
-            $adherent->addEvenement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdherent(Adherent $adherent): self
-    {
-        if ($this->adherents->contains($adherent)) {
-            $this->adherents->removeElement($adherent);
-            $adherent->removeEvenement($this);
-        }
-
-        return $this;
-    }
+    
 
     public function getDescription(): ?string
     {

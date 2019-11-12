@@ -445,64 +445,7 @@ class Adherent implements UserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection|Evenement[]
-     */
-    public function getEvenement(): Collection
-    {
-        return $this->evenement;
-    }
-
-    public function addEvenement(Evenement $evenement): self
-    {
-        if (!$this->evenement->contains($evenement)) {
-            $this->evenement[] = $evenement;
-        }
-
-        return $this;
-    }
-
-    public function removeEvenement(Evenement $evenement): self
-    {
-        if ($this->evenement->contains($evenement)) {
-            $this->evenement->removeElement($evenement);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Participation[]
-     */
-    public function getParticipations(): Collection
-    {
-        return $this->participations;
-    }
-
-    public function addParticipation(Participation $participation): self
-    {
-        if (!$this->participations->contains($participation)) {
-            $this->participations[] = $participation;
-            $participation->setIdAdherent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeParticipation(Participation $participation): self
-    {
-        if ($this->participations->contains($participation)) {
-            $this->participations->removeElement($participation);
-            // set the owning side to null (unless already changed)
-            if ($participation->getIdAdherent() === $this) {
-                $participation->setIdAdherent(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection|ParticipationEvenement[]
      */

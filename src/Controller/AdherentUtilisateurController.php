@@ -82,6 +82,10 @@ class AdherentUtilisateurController extends AbstractController
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
+
+
+
+    /* ------Gestion page Adherent -------*/
     /**
      * @return string
      */
@@ -91,8 +95,6 @@ class AdherentUtilisateurController extends AbstractController
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
-
-
     /**
      * Afficher les informations de l'adherent et supprimer ces evenements
      * Afficher les événements de l'adherent
@@ -101,14 +103,14 @@ class AdherentUtilisateurController extends AbstractController
      * @param UserInterface $userProfile
      */
 
-    public function adherentProfile(UserInterface $userProfile ,AdherentRepository $adherent,Request $request, EvenementRepository $evenement){
+    public function adherentProfile(UserInterface $userProfile ,AdherentRepository $adherent,Request $request, EvenementRepository $evenement,ParticipationEvenementRepository $participation ){
 
        
-       //Calculer l'age du user 
-        
+        //Recuperer les participations
+        $participations = $participation->findAll();
+
 
         //Upload du dossier d'inscription 
-
         $newFileRegistration = new DossierInscription();
         $registration = $this->createForm(DossierInscriptionType::class, $newFileRegistration);
         $registration->handleRequest($request);
@@ -124,7 +126,8 @@ class AdherentUtilisateurController extends AbstractController
             $file4 = $newFileRegistration->getDroitTransport();
             $file5 = $newFileRegistration->getDroitPratique();
             $file6 = $newFileRegistration->getRenseignementsMedicaux();
-            $file7 = $newFileRegistration->getRenseignementsGeneraux();
+            $file7 = $newFileRegistration->getrenseignementsgeneraux();
+            $file8 = $newFileRegistration->getDroitEntrainement();
 
             // Géneration de nom pour les fichiers pour éviter les doublons et sécuriser 
             $fileName1 = $this->generateUniqueFileName().'.'.$file1->guessExtension();
@@ -134,6 +137,8 @@ class AdherentUtilisateurController extends AbstractController
             $fileName5 = $this->generateUniqueFileName().'.'.$file5->guessExtension();
             $fileName6 = $this->generateUniqueFileName().'.'.$file6->guessExtension();
             $fileName7 = $this->generateUniqueFileName().'.'.$file7->guessExtension();
+            $fileName8 = $this->generateUniqueFileName().'.'.$file8->guessExtension();
+
 
         
             // Envoie les fichiés dans le dossier public, la route est dans le fichier services.yaml
@@ -167,6 +172,10 @@ class AdherentUtilisateurController extends AbstractController
                 $this->getParameter('registration_directory'),
                 $fileName7
                 );
+                $file8->move(
+                $this->getParameter('registration_directory'),
+                $fileName8
+                );
                 
                 
             } catch (FileException $e) {
@@ -180,7 +189,8 @@ class AdherentUtilisateurController extends AbstractController
             $newFileRegistration->setDroitTransport($fileName4);
             $newFileRegistration->setDroitPratique($fileName5);
             $newFileRegistration->setRenseignementsMedicaux($fileName6);
-            $newFileRegistration->setRenseignementsGeneraux($fileName7);
+            $newFileRegistration->setrenseignementsgeneraux($fileName7);
+            $newFileRegistration->setDroitEntrainement($fileName8);
 
             $newFileRegistration->setAdherent($userProfile);
 
@@ -196,14 +206,16 @@ class AdherentUtilisateurController extends AbstractController
            
             'user'=> $userProfile,
             'form' => $registration->createView(),
-            'fileRegistration'=> $newFileRegistration
+            'fileRegistration'=> $newFileRegistration,
+            'participation'=>$participations
             
             ]);
 
     
     }
+
     /**
-     * Permet de modifier les informations de l'adherent
+     * Permet de modifier les informations personnelles de l'adherent
      * @Route("adherent/profile/edit", name="adherent_edit_profile")
      * @param Request $request
      * @param UserInterface $user
@@ -240,17 +252,19 @@ class AdherentUtilisateurController extends AbstractController
 
 
     /**
-     * @Route("/evenements/delete/inscription/{id}", name="recruiter_offer_delete")
+     * Supprimer un evenement de l'adherent
+     * @Route("adherent/profile/delete/evenement/{id}", name="delete_evenement")
      * @param $id
-     * @return RedirectResponse
      */
     
-     public function deleteInscription(ParticipationEvenementRepository $repo)
+     public function deleteRegistrationEvenement($id )
     {
+
+        $participation = $this->getDoctrine()->getRepository(ParticipationEvenement::class)->find($id);
         $em = $this->getDoctrine()->getManager();
-        $participation = $em->getRepository(ParticipationEvenement::class)->find($id);
         $em->remove($participation);
         $em->flush();
+
     }
 
 
