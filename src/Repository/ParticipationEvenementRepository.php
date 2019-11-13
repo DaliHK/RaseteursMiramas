@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Participation;
+use App\Entity\ParticipationEvenement;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Participation|null find($id, $lockMode = null, $lockVersion = null)
- * @method Participation|null findOneBy(array $criteria, array $orderBy = null)
- * @method Participation[]    findAll()
- * @method Participation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ParticipationEvenement|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ParticipationEvenement|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ParticipationEvenement[]    findAll()
+ * @method ParticipationEvenement[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ParticipationRepository extends ServiceEntityRepository
+class ParticipationEvenementRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Participation::class);
+        parent::__construct($registry, ParticipationEvenement::class);
     }
 
     // /**
-    //  * @return Participation[] Returns an array of Participation objects
+    //  * @return ParticipationEvenement[] Returns an array of ParticipationEvenement objects
     //  */
-    /*
+    
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('p')
@@ -34,10 +34,10 @@ class ParticipationRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
-    /*
-    public function findOneBySomeField($value): ?Participation
+    
+    public function findOneBySomeField($value): ?ParticipationEvenement
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')
@@ -46,5 +46,5 @@ class ParticipationRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
+    
 }

@@ -2,11 +2,14 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\DossierInscription;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
@@ -14,7 +17,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * @ORM\Entity(repositoryClass="App\Repository\AdherentRepository")
  * @ORM\Table(name="adherent", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C74", columns={"username"})})
+ * @UniqueEntity(
+ * fields={"username"},
+ * message="Username est déjà utilisé."
+ * )
+ * @UniqueEntity(
+ * fields={"email"},
+ * message="Email est déjà utilisé."
+ * )
  */
+
 class Adherent implements UserInterface
 {
     /**
@@ -38,14 +50,9 @@ class Adherent implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
-     * @Assert\EqualTo(propertyPath="confirm_password", message="Vous n'avez pas tapé le même mot de passe")
      */
     private $password;
 
-    /**
-     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe")
-     */
-    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -70,7 +77,7 @@ class Adherent implements UserInterface
     /**
     * @var string
     *
-    * @ORM\Column(type="string", length=180, nullable=false)
+    * @ORM\Column(type="string", length=180, nullable=false, unique=true)
     */
     private $email;
 
@@ -100,7 +107,7 @@ class Adherent implements UserInterface
     private $numeroUrgence;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean", length=255, nullable=true)
      */
     private $statut;
 
@@ -125,9 +132,25 @@ class Adherent implements UserInterface
     private $dossierInscription;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Participation", mappedBy="idAdherent", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvenement", mappedBy="adherent")
      */
-    private $participation;
+    private $participationEvenements;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $niveau;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $NomUrgence;
+
+    public function __construct()
+    {
+        $this->evenement = new ArrayCollection();
+        $this->participationEvenements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,6 +212,8 @@ class Adherent implements UserInterface
 
         return $this;
     }
+
+     
 
     /**
      * @see UserInterface
@@ -353,12 +378,12 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut()
     {
         return $this->statut;
     }
 
-    public function setStatut(string $statut): self
+    public function setStatut($statut)
     {
         $this->statut = $statut;
 
@@ -418,21 +443,60 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getParticipation(): ?Participation
+    /**
+     * @return Collection|ParticipationEvenement[]
+     */
+    public function getParticipationEvenements(): Collection
     {
-        return $this->participation;
+        return $this->participationEvenements;
     }
 
-    public function setParticipation(?Participation $participation): self
+    public function addParticipationEvenement(ParticipationEvenement $participationEvenement): self
     {
-        $this->participation = $participation;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newIdAdherent = null === $participation ? null : $this;
-        if ($participation->getIdAdherent() !== $newIdAdherent) {
-            $participation->setIdAdherent($newIdAdherent);
+        if (!$this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements[] = $participationEvenement;
+            $participationEvenement->setAdherent($this);
         }
 
         return $this;
     }
+
+    public function removeParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if ($this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements->removeElement($participationEvenement);
+            // set the owning side to null (unless already changed)
+            if ($participationEvenement->getAdherent() === $this) {
+                $participationEvenement->setAdherent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNiveau(): ?bool
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?bool $niveau): self
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getNomUrgence(): ?string
+    {
+        return $this->NomUrgence;
+    }
+
+    public function setNomUrgence(?string $NomUrgence): self
+    {
+        $this->NomUrgence = $NomUrgence;
+
+        return $this;
+    }
 }
+
+

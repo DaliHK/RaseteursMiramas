@@ -97,7 +97,7 @@
                 <span class="bg">Date d'inscription: </span> {{ adherent.dateInscription ? adherent.dateInscription | date('d/m/Y') }}
             </div>
             <div class="row mb-3">
-                <button class="btn btn-lg btn-primary" disabled>Statut </button> {{ adherent.statut }}
+                <button class="btn btn-lg btn-primary" disabled>{{ adherent.statut ? 'inscrit' : 'pré-inscrit'}}</button> 
             </div>
             
         </div>

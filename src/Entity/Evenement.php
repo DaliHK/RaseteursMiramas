@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,11 +39,6 @@ class Evenement
     private $niveauRequis;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $descriptionEvenement;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $categorie;
@@ -52,9 +49,20 @@ class Evenement
     private $titre;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Participation", mappedBy="idEvenement", cascade={"persist", "remove"})
+     * @ORM\Column(type="text")
      */
-    private $participation;
+    private $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvenement", mappedBy="evenement")
+     */
+    private $participationEvenements;
+
+    public function __construct()
+    {
+        $this->adherents = new ArrayCollection();
+        $this->participationEvenements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -109,24 +117,12 @@ class Evenement
         return $this;
     }
 
-    public function getDescriptionEvenement(): ?string
-    {
-        return $this->descriptionEvenement;
-    }
-
-    public function setDescriptionEvenement(string $descriptionEvenement): self
-    {
-        $this->descriptionEvenement = $descriptionEvenement;
-
-        return $this;
-    }
-
     public function getCategorie(): ?string
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?string $categorie): self
+    public function setCategorie(string $categorie): self
     {
         $this->categorie = $categorie;
 
@@ -145,21 +141,47 @@ class Evenement
         return $this;
     }
 
-    public function getParticipation(): ?Participation
+    public function getDescription(): ?string
     {
-        return $this->participation;
+        return $this->description;
     }
 
-    public function setParticipation(?Participation $participation): self
+    public function setDescription(string $description): self
     {
-        $this->participation = $participation;
+        $this->description = $description;
 
-        // set (or unset) the owning side of the relation if necessary
-        $newIdEvenement = null === $participation ? null : $this;
-        if ($participation->getIdEvenement() !== $newIdEvenement) {
-            $participation->setIdEvenement($newIdEvenement);
+        return $this;
+    }
+
+    /**
+     * @return Collection|ParticipationEvenement[]
+     */
+    public function getParticipationEvenements(): Collection
+    {
+        return $this->participationEvenements;
+    }
+
+    public function addParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if (!$this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements[] = $participationEvenement;
+            $participationEvenement->setEvenement($this);
         }
 
         return $this;
     }
+
+    public function removeParticipationEvenement(ParticipationEvenement $participationEvenement): self
+    {
+        if ($this->participationEvenements->contains($participationEvenement)) {
+            $this->participationEvenements->removeElement($participationEvenement);
+            // set the owning side to null (unless already changed)
+            if ($participationEvenement->getEvenement() === $this) {
+                $participationEvenement->setEvenement(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }

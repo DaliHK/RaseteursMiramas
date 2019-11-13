@@ -1,0 +1,34 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit Adherent
+{% endblock %}
+
+{% block body %}
+	<h1></h1>
+	{% block content %}
+
+		<!-- We'll fill this with dummy content -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+			<div class="container">
+
+				<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<i class="fas fa-align-left"></i>
+					<span>Menu</span>
+
+				</button>
+				<h3 class="ml-5">
+					Modification dossier adhérent
+					{{ adherent.nom }}
+					{{ adherent.prenom }}</h3>
+			</div>
+		</nav>
+
+	{% endblock %}
+
+	{{ include('adherent/_form.html.twig', {'button_label': 'Update'}) }}
+
+	<a href="{{ path('adherent_index') }} " class="btn btn-primary">back to list</a>
+
+	{{ include('adherent/_delete_form.html.twig') }}
+
+{% endblock %}

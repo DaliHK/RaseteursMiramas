@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Evenement;
+use App\Form\InscriptionType;
+use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ParticipationEvenementRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class WebsiteController extends AbstractController
@@ -15,23 +21,44 @@ class WebsiteController extends AbstractController
     
     public function index(AdherentRepository $repo)
     {
-       
+        $evenements = $repo->findAll();
+        
         return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
+            'evenements' => $evenements
         ]);
+
     }
 
     /**
-     * @Route("/evenements", name="evenements")
+     * @Route("/visiteur/evenements", name="evenements")
      */
     
-    public function eventsList(EvenementRepository $repo)
+    public function listeEvenements(EvenementRepository $repo)
     {
-
-        $events = $repo->findAll();
        
-        return $this->render('event/index.html.twig', [
-            'events' => $events,
+        $evenements = $repo->findAll();
+
+        return $this->render('event/events.html.twig', [
+            'evenements' => $evenements
+            
         ]);
     }
+/**
+     * Permet d'afficher un seul événement
+     * @Route("/visiteur/evenements/{id}", name="detailevenementvisiteur")
+     * 
+     * @return Response
+     */
+    public function detailEvenements($id, EvenementRepository $repo)
+    {
+        $evenement = $repo->findAll();
+        $evenement = $repo->find($id);
+        $manager = $this->getDoctrine()->getManager();
+
+            return $this->render('visiteur/visiteur_detailEvenements.html.twig', [
+                'evenement' => $evenement,
+                'id' => $id
+            ]);
+    }
+     
 }

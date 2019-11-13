@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col">
+
+                {{ evenement.titre }}
+
+                <p class="card-text">{{ evenement.Description }}</p>
+
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cumque, recusandae quibusdam non quasi voluptatum libero dicta ducimus tempore excepturi voluptas animi cupiditate obcaecati similique aliquam. Dolor ratione repudiandae ut!Facilis aperiam modi labore reiciendis iusto at ad, asperiores, nam corporis autem accusamus esse! Et harum rerum eveniet delectus dignissimos libero vitae fugiat nesciunt consequuntur atque, voluptatum odit obcaecati perferendis?
+                                                                                                                                                                                                                                                                                                                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cumque, recusandae quibusdam non quasi voluptatum libero dicta ducimus tempore excepturi voluptas animi cupiditate obcaecati similique aliquam. Dolor ratione repudiandae ut!Facilis aperiam modi labore reiciendis iusto at ad, asperiores, nam corporis autem accusamus esse! Et harum rerum eveniet delectus dignissimos libero vitae fugiat nesciunt consequuntur atque, voluptatum odit obcaecati perferendis?
+
+                {{form_start(form)}}
+                {{form_widget(form)}}
+                {{form_end(form)}}
+
+            </div>
+
+            <div class="col-sm-3 sidenav">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cumque, recusandae quibusdam non quasi voluptatum libero dicta ducimus tempore excepturi voluptas animi cupiditate obcaecati similique aliquam. Dolor ratione repudiandae ut!Facilis aperiam modi labore reiciendis iusto at ad, asperiores, nam corporis autem accusamus esse! Et harum rerum eveniet delectus dignissimos libero vitae fugiat nesciunt consequuntur atque, voluptatum odit obcaecati perferendis?
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}

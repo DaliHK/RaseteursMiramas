@@ -7,6 +7,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -18,12 +20,17 @@ class RegistrationType extends AbstractType
     {
         $builder
         ->add('nom')
-        ->add('prenom')
-        ->add('username')
+        ->add('prenom', TextType::class, ['label' => 'Prénom'])
+        ->add('username', TextType::class, ['label' => 'Pseudo'])
        // ->add('roles')
-        ->add('submit', SubmitType::class)
-        ->add('password', PasswordType::class)
-        ->add('confirm_password', PasswordType::class)
+       ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
+       ->add('password', RepeatedType::class, [
+        'type' => PasswordType::class,
+        'invalid_message' => 'Les mots de passe doivent être identiques.',
+        'options' => ['attr' => ['class' => 'password-field']],
+        'required' => true,
+        'first_options'  => ['label' => 'Mot de passe'],
+        'second_options' => ['label' => 'Confirmez votre mot de passe']])
         ->add('dateNaissance', DateType::class, [
             'widget' => 'single_text',
         
@@ -33,10 +40,10 @@ class RegistrationType extends AbstractType
             // adds a class that can be selected in JavaScript
             'attr' => ['class' => 'js-datepicker'],
         ])      
-        ->add('email')
-        ->add('telephone')
+        ->add('email', EmailType::class)
+        ->add('telephone', TextType::class, ['label' => 'Téléphone'])
         ->add('adresse')
-        ->add('cp')
+        ->add('cp', TextType::class, ['label' => 'Code Postal'])
         ->add('ville');
     }
 
