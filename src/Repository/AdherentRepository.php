@@ -26,9 +26,9 @@ class AdherentRepository extends ServiceEntityRepository
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
+            ->andWhere('a.nom LIKE :val')
+            ->setParameter('val','%' . $value . '%')
+            // ->orderBy('a.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()

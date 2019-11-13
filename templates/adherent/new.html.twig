@@ -1,0 +1,24 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}New Adherent{% endblock %}
+
+{% block body %}
+{% block content %}
+                    <!-- We'll fill this with dummy content -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+                            <div class="container">
+            
+                                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Menu</span> 
+                                </button>
+                                 <h3 class="ml-5">Liste des adhérents</h3>
+                            </div>
+                    </nav>
+{% endblock %}
+    
+
+    {{ include('adherent/_form.html.twig') }}
+
+    <a href="{{ path('adherent_index') }} "class="btn btn-primary mt-2"  >back to list</a>
+{% endblock %}
