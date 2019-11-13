@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
+use App\Entity\DossierInscription;
 use App\Form\AdherentType;
 use App\Form\EditAdherentType;
 use App\Form\AdminEditAdherentType;
@@ -20,9 +21,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AdminAdherentController extends AbstractController
 {
-
-
-
 
 
     /**
