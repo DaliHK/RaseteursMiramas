@@ -97,7 +97,6 @@ class AdminAdherentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
              $adherent->setPassword($adherentPassword);
-            $adherent->setConfirmPassword($adherentPassword);
             $entityManager->flush();
             return $this->redirectToRoute('adherent_index');
         }

@@ -19,7 +19,7 @@ class WebsiteController extends AbstractController
      * @Route("/", name="home")
      */
     
-    public function index(AdherentRepository $repo)
+    public function index(EvenementRepository $repo)
     {
         $evenements = $repo->findAll();
         

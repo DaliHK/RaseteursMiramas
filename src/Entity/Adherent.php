@@ -50,14 +50,8 @@ class Adherent implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
-     * @Assert\EqualTo(propertyPath="confirm_password", message="Vous n'avez pas tapé le même mot de passe")
      */
     private $password;
-
-    /**
-     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe")
-     */
-    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -218,21 +212,7 @@ class Adherent implements UserInterface
         return $this;
     }
 
-     /**
-     * @see UserInterface
-     */
-    public function getConfirmPassword(): string
-    {
-        return (string) $this->confirm_password;
-    }
-
-    public function setConfirmPassword(string $confirm_password): self
-    {
-        $this->confirm_password = $confirm_password;
-
-        return $this;
-    }
-
+    
     /**
      * @see UserInterface
      */
