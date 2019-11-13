@@ -129,7 +129,6 @@ class AdminAdherentController extends AbstractController
      */
     public function accueil()
     {
-        
         return $this->render('Adminadherent/accueil.html.twig');
     }
 }

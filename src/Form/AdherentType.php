@@ -29,6 +29,8 @@ class AdherentType extends AbstractType
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence')
+            ->add('nomUrgence')
+            ->add('niveau')
             ->add('statut')
             ->add('cotisationAsso')
             ->add('cotisationLicence')

@@ -7,6 +7,8 @@ use App\Repository\AdherentRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -19,7 +21,10 @@ class EditAdherentType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('dateNaissance')
-            ->add('dateInscription')
+            ->add('dateInscription', DateType::class, [
+                'required' => false,
+                'empty_data' => null
+                ])
             ->add('email')
             ->add('telephone')
             ->add('adresse')
@@ -27,6 +32,8 @@ class EditAdherentType extends AbstractType
             ->add('ville')
             ->add('numeroUrgence')
             ->add('statut')
+            ->add('nomUrgence')
+            ->add('niveau')
             ->add('cotisationAsso')
             ->add('cotisationLicence')
             ->add('numLicence')

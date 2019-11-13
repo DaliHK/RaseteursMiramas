@@ -1,22 +1,84 @@
+{% extends 'base.html.twig' %}
 
-
-{% block title %}Accueil Administrateur
+{% block title %}Liste Adherents
 {% endblock %}
 
-{% block body %}	
-		<!-- We'll fill this with dummy content -->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
-			<div class="container">
+{% block body %}
 
-				<button type="button" id="sidebarCollapse" class="btn btn-info">
-					<i class="fas fa-align-left"></i>
-					<span>Menu</span>
-				</button>
-				<h3 class="ml-5">Liste des adhérents</h3>
-			</div>
-		</nav>
-	{% endblock %}
+  <!-- debut card accueil Admin -->
+<div class="container mb-5">
+<h1 class="text-center mb-5">Interface Administration</h1>
+    <div class="row" >
+    
+        <div class="col-sm-4">
+        <div class="card border-secondary mb-3 mr-3" style="width: 18rem;">
+            <div class="card-header">Adhérents</div>
+            <div class="card-body text-secondary">
+                <a class="card-text"href="{{ path('adherent_index') }} ">liste des adhérents</a>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="card border-secondary mb-3 mr-3" style="width: 18rem;">
+            <div class="card-header">Agenda</div>
+            <div class="card-body text-secondary">
+                <p class="card-text">Gestion des évenements</p>
+                <p class="card-text">Sortie, repas, course</p>
+               
+            </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card border-secondary mb-3 mr-3" style="width: 18rem;">
+                <div class="card-header">Documents pour inscription</div>
+                <div class="card-body text-secondary">
+                    <a class="card-text" href="{{ path('adherent_index') }}">Dépôt des documents</a>
+                                   
+                </div>
+            </div>
+          
+        </div>
+</div>
+</div>
+<div class="container">
+        <div class="row">
+                <div class="col-sm-4">
+            <div class="card border-secondary mb-3 mr-3" style="width: 18rem;">
+                <div class="card-header">Photos</div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">gestion Photos carousel</p>
+                    <p class="card-text">....</p>
+                </div>
+            </div>
+                </div>
+                <div class="col-sm-4">
+            <div class="card border-secondary mb-3 mr-3" style="width: 18rem;">
+                <div class="card-header">Personnalisation</div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">detail</p>
+                    <p class="card-text">....</p>
+                </div>
+            </div>
+                </div>
+                <div class="col-sm-4">
+            <div class="card border-secondary mb-3 mr-3" style="width: 18rem;">
+                <div class="card-header">autres catégories</div>
+                <div class="card-body text-secondary">
+                    <p class="card-text">detail</p>
+                    <p class="card-text">....</p>
+                </div>
+            </div>
+                </div>
+        </div>
+    </div>
+</div>    
+
+
+
+
+
+
+{% endblock %}
 
   
        
-
