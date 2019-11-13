@@ -92,7 +92,6 @@ class AdherentAuthenticator extends AbstractFormLoginAuthenticator
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
-
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         throw new HttpException(403, "Forbidden");
