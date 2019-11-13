@@ -21,15 +21,15 @@ class RegistrationType extends AbstractType
         ->add('nom')
         ->add('prenom', TextType::class, ['label' => 'Prénom'])
         ->add('username', TextType::class, ['label' => 'Pseudo'])
-         // ->add('roles')
-        ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
-        ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les mots de passe doivent être identiques.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmez votre mot de passe']])
+       // ->add('roles')
+       ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
+       ->add('password', RepeatedType::class, [
+        'type' => PasswordType::class,
+        'invalid_message' => 'Les mots de passe doivent être identiques.',
+        'options' => ['attr' => ['class' => 'password-field']],
+        'required' => true,
+        'first_options'  => ['label' => 'Password'],
+        'second_options' => ['label' => 'Repeat Password']])       
         ->add('dateNaissance', DateType::class, [
             'widget' => 'single_text',
             // prevents rendering it as type="date", to avoid HTML5 date pickers

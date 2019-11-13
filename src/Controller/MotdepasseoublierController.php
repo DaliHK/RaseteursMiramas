@@ -91,16 +91,16 @@ class MotdepasseoublierController extends AbstractController
      */
     public function verificationMdp(Request $request, ObjectManager $manager)
     {
-        $user= $this->getDoctrine()->getRepository(Adherent::class);
+        $user1= $this->getDoctrine()->getRepository(Adherent::class);
 
-        $adherent = new Adherent(); 
+        $adherent1 = new Adherent(); 
 
-        $form = $this->createForm(MotpasseoublierType::class, $adherent);  
+        $form = $this->createForm(MotpasseoublierType::class, $adherent1);  
         $form->handleRequest($request);
 
         if($form->isSubmitted()){ 
-        $usermail = $adherent->getEmail(); //adresse mail entrée par utilisateur dans formulaire
-        $mailuser = $user->findOneByEmail($usermail); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
+        $usermail1 = $adherent1->getEmail(); //adresse mail entrée par utilisateur dans formulaire
+        $mailuser1 = $user1->findOneByEmail($usermail1); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
  
         return $this->redirectToRoute('creer_mot_passe');
         }
