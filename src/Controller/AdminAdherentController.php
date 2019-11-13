@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Adherent;
 use App\Form\AdherentType;
 use App\Form\EditAdherentType;
+use App\Form\AdminEditAdherentType;
 use App\Repository\AdherentRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,6 +20,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AdminAdherentController extends AbstractController
 {
+
+
+
+
+
     /**
      * @Route("/adherent", name="adherent_index", methods={"GET","POST"})
      */
@@ -90,7 +96,7 @@ class AdminAdherentController extends AbstractController
      */
     public function edit(Request $request, Adherent $adherent)
     {
-        $form = $this->createForm(EditAdherentType::class, $adherent);
+        $form = $this->createForm(AdminEditAdherentType::class, $adherent);
         $form->handleRequest($request);
         $adherentPassword = $adherent->getPassword();
        

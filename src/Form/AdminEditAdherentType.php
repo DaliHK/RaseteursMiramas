@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class EditAdherentType extends AbstractType
+class AdminEditAdherentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
