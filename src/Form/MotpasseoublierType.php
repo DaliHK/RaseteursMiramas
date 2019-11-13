@@ -10,12 +10,13 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class EntrermailType extends AbstractType
+class MotpasseoublierType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
         ->add('email', EmailType::class)
+        ->add('password', PasswordType::class, ['label' => 'Mot de passe'])
         ->add('submit', SubmitType::class, ['label' => 'Envoyez']);
     }
 

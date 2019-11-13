@@ -3,13 +3,16 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
+use App\Form\CreermdpType;
 use App\Form\EntrermailType;
+use App\Form\MotpasseoublierType;
 use Symfony\Component\Form\FormError;
 use App\Repository\AdherentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
@@ -74,10 +77,68 @@ class MotdepasseoublierController extends AbstractController
                 ;
                 $mailer->send($message);
                 }
-        }
+                return $this->redirectToRoute('verification_de_user');
+            }
         return $this->render('motdepasseoublier/entreradressemail.html.twig', [
             'form' => $form->createView(),
         ]);
     }
 
+    /**
+     * @Route("/verification_user", name="verification_de_user")
+     * @param AdherentRepository $repo
+     * @return Response
+     */
+    public function verificationMdp(Request $request, ObjectManager $manager)
+    {
+        $user= $this->getDoctrine()->getRepository(Adherent::class);
+
+        $adherent = new Adherent(); 
+
+        $form = $this->createForm(MotpasseoublierType::class, $adherent);  
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){ 
+        $usermail = $adherent->getEmail(); //adresse mail entrée par utilisateur dans formulaire
+        $mailuser = $user->findOneByEmail($usermail); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
+ 
+        return $this->redirectToRoute('creer_mot_passe');
+        }
+        return $this->render('motdepasseoublier/verificationmotdepasse.html.twig', [
+        'form' => $form->createView(),
+         ]);
+    }
+
+    /**
+     * @Route("/creation_mdp", name="creer_mot_passe")
+     * @param AdherentRepository $repo
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     */
+    public function creationMdp(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    {
+        $user= $this->getDoctrine()->getRepository(Adherent::class);
+
+        $adherent = new Adherent(); 
+
+        $form = $this->createForm(CreermdpType::class, $adherent);  
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()){ 
+            $usermail = $adherent->getEmail(); //adresse mail entrée par utilisateur dans formulaire
+           
+            $mailuser = $user->findOneByEmail($usermail); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
+
+            $hash = $encoder->encodePassword($mailuser, $adherent->getPassword()); 
+        
+            $mailuser->setPassword($hash);   
+            $manager->merge($mailuser);
+            $manager->flush();
+        
+        $this->addFlash('success', 'Votre mot de passe à bien été enregistré.');
+        return $this->redirectToRoute('login_adherent');
+        }
+        return $this->render('motdepasseoublier/creermotdepasse.html.twig', [
+        'form' => $form->createView(),
+         ]);
+    }
 }

@@ -22,8 +22,8 @@
                     {{ form_row(form.telephone) }}
                     {{ form_row(form.username) }}
                     {{ form_row(form.email) }}
-                    {{ form_row(form.password,  { 'attr': {'placeholder': 'Au moins 8 caracteres'}}) }}
-                    {{ form_row(form.confirm_password) }}
+                    {{ form_row(form.password.first,  { 'attr': {'placeholder': 'Au moins 8 caracteres'}}) }}
+                    {{ form_row(form.password.second) }}
                     {{ form_row(form.submit) }}
 
                     {{ form_end(form) }}

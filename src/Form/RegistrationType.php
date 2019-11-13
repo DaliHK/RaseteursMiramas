@@ -24,8 +24,13 @@ class RegistrationType extends AbstractType
         ->add('username', TextType::class, ['label' => 'Pseudo'])
        // ->add('roles')
        ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
-        ->add('password', PasswordType::class, ['label' => 'Mot de passe'])
-        ->add('confirm_password', PasswordType::class, ['label' => 'Confirmez le mot de passe'])
+       ->add('password', RepeatedType::class, [
+        'type' => PasswordType::class,
+        'invalid_message' => 'Les mots de passe doivent être identiques.',
+        'options' => ['attr' => ['class' => 'password-field']],
+        'required' => true,
+        'first_options'  => ['label' => 'Password'],
+        'second_options' => ['label' => 'Repeat Password']])       
         ->add('dateNaissance', DateType::class, [
             'widget' => 'single_text',
         
