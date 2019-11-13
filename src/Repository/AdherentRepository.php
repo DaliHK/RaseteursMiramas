@@ -32,10 +32,14 @@ class AdherentRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
+            ->findOneBy()
+            ->findBy()
+            ->find()
+            ->findOneByEmail()
         ;
     }
 
-   /*
+   
     public function findOneBySomeField($value): ?Adherent
     {
         return $this->createQueryBuilder('a')
@@ -45,5 +49,4 @@ class AdherentRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }

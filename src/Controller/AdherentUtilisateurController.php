@@ -24,7 +24,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
-
 class AdherentUtilisateurController extends AbstractController
 {
     /**
@@ -125,6 +124,5 @@ class AdherentUtilisateurController extends AbstractController
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
-
 }
 

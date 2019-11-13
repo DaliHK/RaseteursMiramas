@@ -3,10 +3,8 @@
 {% block body %}
 
 	<div class="container">
-<<<<<<< HEAD
 
 		{{ form_start(form) }}
-
 		{{ form_row(form.nom) }}
 		{{ form_row(form.prenom) }}
 		{{ form_row(form.dateNaissance, { 'attr': {'placeholder': 'Année/Mois/Jour'}}) }}
@@ -18,43 +16,12 @@
 		{{ form_row(form.email) }}
 		{{ form_row(form.password.first) }}
 		{{ form_row(form.password.second) }}
-
 		{{ form_row(form.submit) }}
 
 		{{ form_end(form) }}
 
 	</div>
 
-=======
-		<div class="row justify-content-center">
-			<div class="col-md-7">
-                <div class="card mb-4">
-                <div class="card-body">
-
-                <h3 class="card-title text-center"> Créer votre compte </h3>
-
-                    {{ form_start(form) }}
-
-                    {{ form_row(form.nom) }}
-                    {{ form_row(form.prenom) }}
-                    {{ form_row(form.dateNaissance, { 'attr': {'placeholder': 'Année-Mois-Jour'}}) }}
-                    {{ form_row(form.adresse) }}
-                    {{ form_row(form.cp) }}
-                    {{ form_row(form.ville) }}
-                    {{ form_row(form.telephone) }}
-                    {{ form_row(form.username) }}
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.password.first) }}
-                    {{ form_row(form.password.second) }}
-                    {{ form_row(form.submit) }}
-
-                    {{ form_end(form) }}
-    </div>
-        </div>
-            </div>
-                </div>
-                </div>
->>>>>>> 465e78efe9d9cd5c981a288bc09ff57f1bbd5e84
 {% endblock %}
 
 {% block javascripts %}
