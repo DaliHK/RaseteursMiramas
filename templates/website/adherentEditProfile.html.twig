@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<H1 class="text-center">Modification</H1>
+ <h5>Informations personnelles</h5>
+<div class="row mb-4 justify-content-center">
+    <div class="col">
+       
+        {{form_start(adherent)}}
+
+        {{form_row(adherent.nom,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.prenom,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.telephone,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.adresse,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.cp,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.ville,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.numeroUrgence,{'attr':{'placeholder':""}})}}
+        {{form_row(adherent.nomUrgence,{'attr':{'placeholder':""}})}}
+          <h5>Securité</h5>
+        {{form_row(adherent.email,{'attr':{'placeholder':""}})}}
+        {{ form_row(adherent.password.first) }}
+        {{ form_row(adherent.password.second) }}
+    
+        <button type="submit" class='btn btn-success mb-5'>Modification</button>
+        {{form_end(adherent)}} 
+    </div>
+</div>
+      
+<div class="row mb-4 ">
+    <div class="col">
+       
+        {{form_start(adherent)}}
+
+    
+        {{form_end(adherent)}}
+     </div>
+</div>
+
+{% endblock %}

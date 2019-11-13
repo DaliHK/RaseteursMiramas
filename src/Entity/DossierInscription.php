@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DossierInscriptionRepository")
@@ -30,6 +31,7 @@ class DossierInscription
     /**
      * @ORM\Column(type="string", length=255)
      */
+
     private $CertificatMedical;
 
     /**
@@ -79,96 +81,96 @@ class DossierInscription
         return $this;
     }
 
-    public function getPhotoIdentite(): ?string
+    public function getPhotoIdentite()
     {
         return $this->photoIdentite;
     }
 
-    public function setPhotoIdentite(string $photoIdentite): self
+    public function setPhotoIdentite( $photoIdentite)
     {
         $this->photoIdentite = $photoIdentite;
 
         return $this;
     }
 
-    public function getCertificatMedical(): ?string
+    public function getCertificatMedical()
     {
         return $this->CertificatMedical;
     }
 
-    public function setCertificatMedical(string $CertificatMedical): self
+    public function setCertificatMedical($CertificatMedical)
     {
         $this->CertificatMedical = $CertificatMedical;
 
         return $this;
     }
 
-    public function getDroitImage(): ?string
+    public function getDroitImage()
     {
         return $this->DroitImage;
     }
 
-    public function setDroitImage(string $DroitImage): self
+    public function setDroitImage($DroitImage)
     {
         $this->DroitImage = $DroitImage;
 
         return $this;
     }
 
-    public function getDroitTransport(): ?string
+    public function getDroitTransport()
     {
         return $this->droitTransport;
     }
 
-    public function setDroitTransport(string $droitTransport): self
+    public function setDroitTransport($droitTransport)
     {
         $this->droitTransport = $droitTransport;
 
         return $this;
     }
 
-    public function getDroitPratique(): ?string
+    public function getDroitPratique()
     {
         return $this->droitPratique;
     }
 
-    public function setDroitPratique(string $droitPratique): self
+    public function setDroitPratique($droitPratique)
     {
         $this->droitPratique = $droitPratique;
 
         return $this;
     }
 
-    public function getDroitEntrainement(): ?string
+    public function getDroitEntrainement()
     {
         return $this->droitEntrainement;
     }
 
-    public function setDroitEntrainement(string $droitEntrainement): self
+    public function setDroitEntrainement( $droitEntrainement)
     {
         $this->droitEntrainement = $droitEntrainement;
 
         return $this;
     }
 
-    public function getRenseignementsMedicaux(): ?string
+    public function getRenseignementsMedicaux()
     {
         return $this->renseignementsMedicaux;
     }
 
-    public function setRenseignementsMedicaux(string $renseignementsMedicaux): self
+    public function setRenseignementsMedicaux( $renseignementsMedicaux)
     {
         $this->renseignementsMedicaux = $renseignementsMedicaux;
 
         return $this;
     }
 
-    public function getRenseignementsgeneraux(): ?string
+    public function getRenseignementsgeneraux()
     {
         return $this->renseignementsgeneraux;
     }
 
-    public function setRenseignementsgeneraux(string $renseignementsgeneraux): self
+    public function setRenseignementsgeneraux($renseignementsgeneraux)
     {
         $this->renseignementsgeneraux = $renseignementsgeneraux;
 

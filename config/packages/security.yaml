@@ -5,6 +5,7 @@ security:
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        in_memory : { memory : ~ }
         # used to reload user from session & other features (e.g. switch_user)
         app_user_provider:
             entity:
@@ -15,6 +16,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
+            provider: app_user_provider
             anonymous: ~
             form_login:
                 login_path: login_adherent

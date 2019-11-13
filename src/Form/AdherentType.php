@@ -14,8 +14,13 @@ class AdherentType extends AbstractType
         $builder
             ->add('username')
             ->add('roles')
-            ->add('password')
-            ->add('confirm_password')
+            ->add('password', RepeatedType::class, [
+               'type' => PasswordType::class,
+               'invalid_message' => 'Les mots de passe doivent être identiques.',
+               'options' => ['attr' => ['class' => 'password-field']],
+               'required' => true,
+               'first_options'  => ['label' => 'Password'],
+               'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
             ->add('dateNaissance')

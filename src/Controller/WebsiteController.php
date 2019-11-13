@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
-use App\Form\InscriptionType;
+use App\Entity\Participation;
+use App\Form\EditAdherentType;
+use App\Entity\DossierInscription;
+use App\Form\DossierInscriptionType;
 use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
@@ -12,8 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ParticipationEvenementRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class WebsiteController extends AbstractController
+
 {
     /**
      * @Route("/", name="home")
@@ -32,7 +38,6 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/visiteur/evenements", name="evenements")
      */
-    
     public function listeEvenements(EvenementRepository $repo)
     {
        
@@ -43,12 +48,14 @@ class WebsiteController extends AbstractController
             
         ]);
     }
-/**
+
+    /**
      * Permet d'afficher un seul événement
      * @Route("/visiteur/evenements/{id}", name="detailevenementvisiteur")
      * 
      * @return Response
      */
+
     public function detailEvenements($id, EvenementRepository $repo)
     {
         $evenement = $repo->findAll();

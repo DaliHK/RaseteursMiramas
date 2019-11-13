@@ -297,7 +297,7 @@ class Adherent implements UserInterface
         return $this->dateInscription;
     }
 
-    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    public function setDateInscription(?\DateTimeInterface $dateInscription): self
     {
         $this->dateInscription = $dateInscription;
 
@@ -440,7 +440,7 @@ class Adherent implements UserInterface
 
         return $this;
     }
-
+    
     /**
      * @return Collection|ParticipationEvenement[]
      */
