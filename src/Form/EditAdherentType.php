@@ -6,10 +6,12 @@ use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class EditAdherentType extends AbstractType
 {
@@ -18,8 +20,13 @@ class EditAdherentType extends AbstractType
         $builder
             /* ->add('username') */
             /* ->add('roles') */
-            ->add('password', PasswordType::class)
-            ->add('confirm_password', PasswordType::class)
+           ->add('password', RepeatedType::class, [
+               'type' => PasswordType::class,
+               'invalid_message' => 'Les mots de passe doivent être identiques.',
+               'options' => ['attr' => ['class' => 'password-field']],
+               'required' => true,
+               'first_options'  => ['label' => 'Password'],
+               'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
            /*  ->add('dateNaissance')
@@ -30,6 +37,7 @@ class EditAdherentType extends AbstractType
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence',NumberType::class)
+            ->add('nomUrgence',TextType::class)
 
             /* ->add('statut')
             ->add('cotisationAsso')

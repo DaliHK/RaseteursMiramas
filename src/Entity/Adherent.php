@@ -49,14 +49,8 @@ class Adherent implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
-     * @Assert\EqualTo(propertyPath="confirm_password", message="Vous n'avez pas tapé le même mot de passe")
      */
     private $password;
-
-    /**
-     * @Assert\EqualTo(propertyPath="password", message="Vous n'avez pas tapé le même mot de passe")
-     */
-    public $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
