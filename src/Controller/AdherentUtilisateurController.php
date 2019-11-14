@@ -115,17 +115,18 @@ class AdherentUtilisateurController extends AbstractController
         $participations = $participation->findAll();
         
 
-        //Instencie la classe dossierInscription et affecte le formulaire et l'entity  dans la variable registration
+        //Instencie la classe dossierInscription pour utiliser c'est prop  et affecte  la variable registration pour crée la vue.
+
         $newFileRegistration = new DossierInscription();
         $registration = $this->createForm(DossierInscriptionType::class, $newFileRegistration);
 
         $registration->handleRequest($request);
         if ($registration->isSubmitted() && $registration->isValid()) {
 
-            // $file stores the uploaded PDF file
-            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-
+            //Pour récuperer la route du dossier public/uploads/inscription dans la variable $path 
             $path = $this->getParameter('registration_directory');
+
+            //Crée un dossier avec l'id de l'adherent connecté à l'amplacement du $path
             $fileRegistrationUser = $filesystem->mkdir($path.$userProfile->getId(),0700);
             
             // Stock les fichiés  uploader dans une variable
@@ -138,34 +139,25 @@ class AdherentUtilisateurController extends AbstractController
             $file7 = $newFileRegistration->getrenseignementsgeneraux();
             $file8 = $newFileRegistration->getDroitEntrainement();
 
-            // Géneration de nom pour les fichiers pour éviter les doublons et sécuriser 
+            // Géneration de nom unique pour les fichiers pour éviter les doublons et sécuriser 
             $arrayFile = [$file1,$file2,$file3,$file4,$file5,$file6,$file7,$file8];
             $a = 1;
             $arrayFileName = [];
 
-                for ($i=0; $i <count($arrayFile) ; $i++) { 
-
-                    $a++;
-                    //${'fileName'.($i+1)} = $this->generateUniqueFileName().'.'.$arrayFile[$i]->guessExtension();
-                    $arrayFileName[] = $this->generateUniqueFileName().'.'.$arrayFile[$i]->guessExtension();
-                }
-        
-
-            // Envoie les fichiés dans le dossier public, la route est dans la variable $path + id de l'adherent connecté.
-            try {
-
-                for ($i=0; $i < count($arrayFile) ; $i++) { 
-
-                    $arrayFile[$i]->move($path.$userProfile->getId(), 
-                        $arrayFileName[$i]
-                    );
-                }
-            } catch (FileException $e) {
-
-                // ... handle exception if something happens during file upload
-                
+            for ($i=0; $i <count($arrayFile) ; $i++) 
+            { 
+                $a++;
+                $arrayFileName[] = $this->generateUniqueFileName().'.'.$arrayFile[$i]->guessExtension();
             }
 
+            // Envoie les fichiés dans le dossier crée pour l'adherent qui à sont id comme nom
+            for ($i=0; $i < count($arrayFile) ; $i++) 
+            { 
+                $arrayFile[$i]->move($path.$userProfile->getId(), 
+                    $arrayFileName[$i]
+                );
+            }
+            
             //Envoie les noms relié au fichier dans la BDD
             $newFileRegistration->setphotoIdentite($arrayFileName['0']);
             $newFileRegistration->setCertificatMedical($arrayFileName['1']);
@@ -175,7 +167,6 @@ class AdherentUtilisateurController extends AbstractController
             $newFileRegistration->setRenseignementsMedicaux($arrayFileName['5']);
             $newFileRegistration->setrenseignementsgeneraux($arrayFileName['6']);
             $newFileRegistration->setDroitEntrainement($arrayFileName['7']);
-
             $newFileRegistration->setAdherent($userProfile);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -193,8 +184,6 @@ class AdherentUtilisateurController extends AbstractController
             'participation'=>$participations
             
             ]);
-
-    
     }
 
     /**
@@ -209,9 +198,8 @@ class AdherentUtilisateurController extends AbstractController
     public function adherentEditProfile(Request $request, UserInterface $userProfile, UserPasswordEncoderInterface $encoder)
     {
         
-        //affiche le formulaire deja enregistré de l'user pour qu'il puisse le consulter ou modifier
-        $form = $this->createForm(EditAdherentType::class,$userProfile);
-        //j'envoie les informations modifié à la base de données 
+        //Affiche le formulaire deja enregistré de l'user pour qu'il puisse le consulter ou modifier
+        $form = $this->createForm(EditAdherentType::class,$userProfile); //On utiliser le userProfile pour générer le formulaire prés remplis
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -232,8 +220,7 @@ class AdherentUtilisateurController extends AbstractController
             
         ]);
     }
-
-
+    
     /**
      * Supprimer un evenement de l'adherent
      * @Route("adherent/profile/delete/evenement/{id}", name="delete_evenement")
@@ -259,7 +246,7 @@ class AdherentUtilisateurController extends AbstractController
      public function deleteFolderRegistration($id, UserInterface $userProfile,Filesystem $fileSystem )
     {   
        
-         //Supprimer le fichier dans le dossier
+         //Supprimer le fichier dans le dossier qui a l'id du user connecté
         $path = $this->getParameter('registration_directory');
         $fs = new Filesystem(); 
         $fs->remove($path.$userProfile->getId()); 
@@ -271,12 +258,7 @@ class AdherentUtilisateurController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('adherent_profile');
-
     }
-
-
-
-
 }
 
 
