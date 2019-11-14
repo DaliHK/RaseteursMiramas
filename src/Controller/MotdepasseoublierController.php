@@ -58,9 +58,9 @@ class MotdepasseoublierController extends AbstractController
                 
                 $nouveau_mot_de_passe = Genere_Password();
 
-                $mailuser->setPassword($nouveau_mot_de_passe); //envoie et remplace nouveau mot de passe dans la BDD
-                $manager->flush();
-
+                  $mailuser->setPassword($nouveau_mot_de_passe); //envoie et remplace nouveau mot de passe dans la BDD
+                    $manager->flush();
+                    
                 $message = (new \Swift_Message('Hello Email')) 
                 ->setFrom('raseteur.test@gmail.com')
                 ->setTo($adherent->getEmail())
@@ -81,7 +81,7 @@ class MotdepasseoublierController extends AbstractController
             }
         return $this->render('motdepasseoublier/entreradressemail.html.twig', [
             'form' => $form->createView(),
-        ]);
+            ]);
     }
 
     /**
@@ -100,9 +100,16 @@ class MotdepasseoublierController extends AbstractController
 
         if($form->isSubmitted()){ 
         $usermail1 = $adherent1->getEmail(); //adresse mail entrée par utilisateur dans formulaire
+        $userpassword = $adherent1->getPassword();
         $mailuser1 = $user1->findOneByEmail($usermail1); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
- 
-        return $this->redirectToRoute('creer_mot_passe');
+        $mailuser1password = $mailuser1->getPassword();
+
+        if ($mailuser1 !== null && $mailuser1password === $userpassword) {
+            return $this->redirectToRoute('creer_mot_passe');
+           } 
+        else{
+            return $this->redirectToRoute('verification_de_user');
+        }
         }
         return $this->render('motdepasseoublier/verificationmotdepasse.html.twig', [
         'form' => $form->createView(),

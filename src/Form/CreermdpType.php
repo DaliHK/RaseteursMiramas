@@ -25,8 +25,8 @@ class CreermdpType extends AbstractType
             'invalid_message' => 'Les mots de passe doivent être identiques.',
             'options' => ['attr' => ['class' => 'password-field']],
             'required' => true,
-            'first_options'  => ['label' => 'Password'],
-            'second_options' => ['label' => 'Repeat Password']])  
+            'first_options'  => ['label' => 'Mot de passe'],
+            'second_options' => ['label' => 'Confirmer votre nouveau mot de passe']])  
         ->add('submit', SubmitType::class, ['label' => 'Envoyez']);
     }
 
