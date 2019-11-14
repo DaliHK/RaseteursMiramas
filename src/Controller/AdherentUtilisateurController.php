@@ -12,6 +12,7 @@ use Symfony\Component\Form\FormError;
 use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -266,6 +267,62 @@ class AdherentUtilisateurController extends AbstractController
         $em->flush();
 
     }
+
+    /**
+     * Supprimer le dossier d'inscription
+     * @Route("adherent/profile/delete/folderRegister/{id}", name="delete_folder_inscription")
+     * @param $id
+     */
+    
+     public function deleteFolderRegistration($id, UserInterface $userProfile )
+    {   
+        //les variable sont en FR pour correspondre au nom dans la BDD
+        //On stock les noms des fichiers à supprimier dans les variables
+        $photo = $userProfile->getDossierInscription()->getphotoIdentite();
+        $certificatMedical = $userProfile->getDossierInscription()->getphotoIdentite();
+        $droitImage = $userProfile->getDossierInscription()->getphotoIdentite();
+        $droitTransport = $userProfile->getDossierInscription()->getphotoIdentite();
+        $droitPratique = $userProfile->getDossierInscription()->getphotoIdentite();
+        $droitEntrainement = $userProfile->getDossierInscription()->getphotoIdentite();
+        $renseignementMedicaux = $userProfile->getDossierInscription()->getphotoIdentite();
+        $renseignementGenereaux = $userProfile->getDossierInscription()->getphotoIdentite();
+
+
+        //Supprimer le fichier dans le dossier
+       $files = array($photo,$certificatMedical,$droitImage,$droitTransport,$droitPratique,$droitEntrainement,$renseignementMedicaux,$renseignementGenereaux);
+       
+            $a = 1;
+            for ($i=0; $i < 7 ; $i++) { 
+
+                $a++;
+                $fs.$a= new Filesystem(); 
+                $fs.$a->remove( 
+                    $this->getParameter('registration_directory').$files[$i]
+                );
+               
+            }
+        
+            
+        
+        /* $fs->remove($this->getParameter('registration_directory').$certificatMedical);
+        $fs->remove($this->getParameter('registration_directory').$droitImage);
+        $fs->remove($this->getParameter('registration_directory').$droitTransport);
+        $fs->remove($this->getParameter('registration_directory').$droitPratique);
+        $fs->remove($this->getParameter('registration_directory').$droitEntrainement);
+        $fs->remove($this->getParameter('registration_directory').$renseignementMedicaux);
+        $fs->remove($this->getParameter('registration_directory').$renseignementGenereaux );  */
+ 
+        //Supprimer les nom des fichiés dans la BDD
+        $folderRegister = $this->getDoctrine()->getRepository(DossierInscription::class)->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($folderRegister);
+        $em->flush();
+
+        return $this->redirectToRoute('adherent_profile');
+
+    }
+
+
 
 
 }
