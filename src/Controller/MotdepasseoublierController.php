@@ -16,16 +16,22 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 
 
 class MotdepasseoublierController extends AbstractController
 {
     /**
      * @Route("/entrermail", name="entrer_mail")
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param AdherentRepository $repo
      * @return Response
      */
-    public function entrerEmail(Request $request, ObjectManager $manager, \Swift_Mailer $mailer)
+
+    public function entrerEmail(Request $request, ObjectManager $manager, \Swift_Mailer $mailer, UserPasswordEncoderInterface $encoder)
     {
 
         $user= $this->getDoctrine()->getRepository(Adherent::class);
@@ -40,7 +46,7 @@ class MotdepasseoublierController extends AbstractController
         $mailuser = $user->findOneByEmail($usermail); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
         
             if ($mailuser === null) {
-             $this->addFlash('notice', 'Email Inconnu, recommence !'); //ca ne functionne pas
+             $this->addFlash('error', 'Email Inconnu !'); //ca ne functionne pas
              return $this->redirectToRoute('entrer_mail');
             } 
             else{
@@ -58,9 +64,11 @@ class MotdepasseoublierController extends AbstractController
                 
                 $nouveau_mot_de_passe = Genere_Password();
 
-                  $mailuser->setPassword($nouveau_mot_de_passe); //envoie et remplace nouveau mot de passe dans la BDD
-                    $manager->flush();
+                $mailuser->setPassword($nouveau_mot_de_passe); //envoie et remplace nouveau mot de passe dans la BDD
+                $manager->flush();
                     
+                $url = $this->generateUrl('verification_de_user', [], UrlGeneratorInterface::ABSOLUTE_URL);
+
                 $message = (new \Swift_Message('Hello Email')) 
                 ->setFrom('raseteur.test@gmail.com')
                 ->setTo($adherent->getEmail())
@@ -69,7 +77,8 @@ class MotdepasseoublierController extends AbstractController
                         'motdepasseoublier/envoimail.html.twig',
                         ['nom' => $mailuser->getNom(), //recuperer dans BDD /adherent/utilisateur
                         'prenom' => $mailuser->getPrenom(),
-                        'mot_de_passe' => $nouveau_mot_de_passe
+                        'mot_de_passe' => $nouveau_mot_de_passe,
+                        'url'=>$url
                         ]
                     ),
                     'text/html'
@@ -96,6 +105,7 @@ class MotdepasseoublierController extends AbstractController
         $adherent1 = new Adherent(); 
 
         $form = $this->createForm(MotpasseoublierType::class, $adherent1);  
+        
         $form->handleRequest($request);
 
         if($form->isSubmitted()){ 
@@ -104,15 +114,17 @@ class MotdepasseoublierController extends AbstractController
         $mailuser1 = $user1->findOneByEmail($usermail1); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
         $mailuser1password = $mailuser1->getPassword();
 
-        if ($mailuser1 !== null && $mailuser1password === $userpassword) {
+            if ($mailuser1 !== null && $mailuser1password === $userpassword) { //si l'adressemail est bon et le mdp est la bon on renvoie sur la page creation de mdp
             return $this->redirectToRoute('creer_mot_passe');
-           } 
-        else{
-            return $this->redirectToRoute('verification_de_user');
+            } 
+                else{
+                $this->addFlash('error', 'Invalide value !');
+                return $this->redirectToRoute('verification_de_user');
+                }
         }
-        }
+       
         return $this->render('motdepasseoublier/verificationmotdepasse.html.twig', [
-        'form' => $form->createView(),
+            'form' => $form->createView(),
          ]);
     }
 

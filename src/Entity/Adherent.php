@@ -23,7 +23,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * )
  * @UniqueEntity(
  * fields={"email"},
- * message="Email est déjà utilisé."
+ * message="Email Inconnu !"
  * )
  */
 
@@ -50,8 +50,11 @@ class Adherent implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
+     * )
      */
     private $password;
+
+
 
     /**
      * @ORM\Column(type="string", length=255)
