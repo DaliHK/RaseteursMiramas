@@ -222,40 +222,42 @@
 
             <!--Upload de document ou affichage de cdes documents si il a deja uploader -->
 
-            {% if user.dossierInscription  %} {#  si id dans le dossier adherent et le même que le adherent connectée  #}
+            {% if user.dossierInscription  %} {#  si  le dossier adherent existe  #}
            
                 <h5> Votre dossier d'inscription a été bien envoyé </h6>
 
                 <h6> Les fichiers envoyé : </h6>
 
+                {# Concatenation du chemin pour afficher les documents telechargers   #}
+
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}">
+                     <h5><a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}">
                             Photo D'identité (PDF)</a></h5>
                 </div>
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
                 </div>
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
                 </div>
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
                 </div>
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
                 </div>
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
                 </div>
                 
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
                 </div>
                 <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.renseignementsgeneraux) }}</"> RenseignementsGeneraux(PDF)</a></h5>
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"> RenseignementsGeneraux(PDF)</a></h5>
                 </div>
                 
-                <a href="{{ path('delete_folder_inscription',{'id' : user.dossierInscription.id  })}}" class="btn btn-primary">Supprimer</a>
+                <a href="{{ path('delete_folder_inscription',{'id' : user.dossierInscription.id })}}" class="btn btn-primary">Supprimer</a>
                 
                 {% else %}
                 <div class="row justify-content-center">

@@ -85,9 +85,9 @@ class AdherentUtilisateurController extends AbstractController
     }
 
 
-
     /* ------Gestion page Adherent -------*/
     /**
+     * Function qui est utiliser pour upload dans la function adherentProfile
      * @return string
      */
     private function generateUniqueFileName()
@@ -96,29 +96,37 @@ class AdherentUtilisateurController extends AbstractController
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+
     /**
      * Afficher les informations de l'adherent et supprimer ces evenements
      * Afficher les événements de l'adherent
-     * Uploader dossier d'inscription
+     * Uploade le dossier d'inscription et le supprime
      * @Route("adherent/profile", name="adherent_profile")
      * @param UserInterface $userProfile
+     * @param Request $request
+     * @param ParticipationEvenementRepository $participation
+     * @param Filesystem $filesystem
      */
 
-    public function adherentProfile(UserInterface $userProfile ,AdherentRepository $adherent,Request $request, EvenementRepository $evenement,ParticipationEvenementRepository $participation ){
+    public function adherentProfile(UserInterface $userProfile ,Request $request,ParticipationEvenementRepository $participation,Filesystem $filesystem){
 
        
-        //Recuperer les participations
+        //Recupère tout les participations des événements pour l'envoyer dans la view
         $participations = $participation->findAll();
+        
 
-
-        //Upload du dossier d'inscription 
+        //Instencie la classe dossierInscription et affecte le formulaire et l'entity  dans la variable registration
         $newFileRegistration = new DossierInscription();
         $registration = $this->createForm(DossierInscriptionType::class, $newFileRegistration);
+
         $registration->handleRequest($request);
-        
         if ($registration->isSubmitted() && $registration->isValid()) {
+
             // $file stores the uploaded PDF file
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+
+            $path = $this->getParameter('registration_directory');
+            $fileRegistrationUser = $filesystem->mkdir($path.$userProfile->getId(),0700);
             
             // Stock les fichiés  uploader dans une variable
             $file1 = $newFileRegistration->getphotoIdentite();
@@ -131,71 +139,45 @@ class AdherentUtilisateurController extends AbstractController
             $file8 = $newFileRegistration->getDroitEntrainement();
 
             // Géneration de nom pour les fichiers pour éviter les doublons et sécuriser 
-            $fileName1 = $this->generateUniqueFileName().'.'.$file1->guessExtension();
-            $fileName2 = $this->generateUniqueFileName().'.'.$file2->guessExtension();
-            $fileName3 = $this->generateUniqueFileName().'.'.$file3->guessExtension();
-            $fileName4 = $this->generateUniqueFileName().'.'.$file4->guessExtension();
-            $fileName5 = $this->generateUniqueFileName().'.'.$file5->guessExtension();
-            $fileName6 = $this->generateUniqueFileName().'.'.$file6->guessExtension();
-            $fileName7 = $this->generateUniqueFileName().'.'.$file7->guessExtension();
-            $fileName8 = $this->generateUniqueFileName().'.'.$file8->guessExtension();
+            $arrayFile = [$file1,$file2,$file3,$file4,$file5,$file6,$file7,$file8];
+            $a = 1;
+            $arrayFileName = [];
 
+                for ($i=0; $i <count($arrayFile) ; $i++) { 
 
+                    $a++;
+                    //${'fileName'.($i+1)} = $this->generateUniqueFileName().'.'.$arrayFile[$i]->guessExtension();
+                    $arrayFileName[] = $this->generateUniqueFileName().'.'.$arrayFile[$i]->guessExtension();
+                }
         
-            // Envoie les fichiés dans le dossier public, la route est dans le fichier services.yaml
+
+            // Envoie les fichiés dans le dossier public, la route est dans la variable $path + id de l'adherent connecté.
             try {
 
-                $file1->move(
-                $this->getParameter('registration_directory'), 
-                $fileName1
-                );
-                $file2->move(
-                $this->getParameter('registration_directory'),
-                $fileName2
-                );
-                $file3->move(
-                $this->getParameter('registration_directory'),
-                $fileName3
-                );
-                $file4->move(
-                $this->getParameter('registration_directory'),
-                $fileName4
-                );
-                $file5->move(
-                $this->getParameter('registration_directory'),
-                $fileName5
-                );
-                $file6->move(
-                $this->getParameter('registration_directory'),
-                $fileName6
-                );
-                $file7->move(
-                $this->getParameter('registration_directory'),
-                $fileName7
-                );
-                $file8->move(
-                $this->getParameter('registration_directory'),
-                $fileName8
-                );
-                
-                
+                for ($i=0; $i < count($arrayFile) ; $i++) { 
+
+                    $arrayFile[$i]->move($path.$userProfile->getId(), 
+                        $arrayFileName[$i]
+                    );
+                }
             } catch (FileException $e) {
+
                 // ... handle exception if something happens during file upload
+                
             }
 
             //Envoie les noms relié au fichier dans la BDD
-            $newFileRegistration->setphotoIdentite($fileName1);
-            $newFileRegistration->setCertificatMedical($fileName2);
-            $newFileRegistration->setDroitImage($fileName3);
-            $newFileRegistration->setDroitTransport($fileName4);
-            $newFileRegistration->setDroitPratique($fileName5);
-            $newFileRegistration->setRenseignementsMedicaux($fileName6);
-            $newFileRegistration->setrenseignementsgeneraux($fileName7);
-            $newFileRegistration->setDroitEntrainement($fileName8);
+            $newFileRegistration->setphotoIdentite($arrayFileName['0']);
+            $newFileRegistration->setCertificatMedical($arrayFileName['1']);
+            $newFileRegistration->setDroitImage($arrayFileName['2']);
+            $newFileRegistration->setDroitTransport($arrayFileName['3']);
+            $newFileRegistration->setDroitPratique($arrayFileName['4']);
+            $newFileRegistration->setRenseignementsMedicaux($arrayFileName['5']);
+            $newFileRegistration->setrenseignementsgeneraux($arrayFileName['6']);
+            $newFileRegistration->setDroitEntrainement($arrayFileName['7']);
 
             $newFileRegistration->setAdherent($userProfile);
 
-            // ... persist the $product variable or any other work
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newFileRegistration);
             $entityManager->flush();
@@ -274,44 +256,14 @@ class AdherentUtilisateurController extends AbstractController
      * @param $id
      */
     
-     public function deleteFolderRegistration($id, UserInterface $userProfile )
+     public function deleteFolderRegistration($id, UserInterface $userProfile,Filesystem $fileSystem )
     {   
-        //les variable sont en FR pour correspondre au nom dans la BDD
-        //On stock les noms des fichiers à supprimier dans les variables
-        $photo = $userProfile->getDossierInscription()->getphotoIdentite();
-        $certificatMedical = $userProfile->getDossierInscription()->getphotoIdentite();
-        $droitImage = $userProfile->getDossierInscription()->getphotoIdentite();
-        $droitTransport = $userProfile->getDossierInscription()->getphotoIdentite();
-        $droitPratique = $userProfile->getDossierInscription()->getphotoIdentite();
-        $droitEntrainement = $userProfile->getDossierInscription()->getphotoIdentite();
-        $renseignementMedicaux = $userProfile->getDossierInscription()->getphotoIdentite();
-        $renseignementGenereaux = $userProfile->getDossierInscription()->getphotoIdentite();
-
-
-        //Supprimer le fichier dans le dossier
-       $files = array($photo,$certificatMedical,$droitImage,$droitTransport,$droitPratique,$droitEntrainement,$renseignementMedicaux,$renseignementGenereaux);
        
-            $a = 1;
-            for ($i=0; $i < 7 ; $i++) { 
-
-                $a++;
-                $fs.$a= new Filesystem(); 
-                $fs.$a->remove( 
-                    $this->getParameter('registration_directory').$files[$i]
-                );
-               
-            }
+         //Supprimer le fichier dans le dossier
+        $path = $this->getParameter('registration_directory');
+        $fs = new Filesystem(); 
+        $fs->remove($path.$userProfile->getId()); 
         
-            
-        
-        /* $fs->remove($this->getParameter('registration_directory').$certificatMedical);
-        $fs->remove($this->getParameter('registration_directory').$droitImage);
-        $fs->remove($this->getParameter('registration_directory').$droitTransport);
-        $fs->remove($this->getParameter('registration_directory').$droitPratique);
-        $fs->remove($this->getParameter('registration_directory').$droitEntrainement);
-        $fs->remove($this->getParameter('registration_directory').$renseignementMedicaux);
-        $fs->remove($this->getParameter('registration_directory').$renseignementGenereaux );  */
- 
         //Supprimer les nom des fichiés dans la BDD
         $folderRegister = $this->getDoctrine()->getRepository(DossierInscription::class)->find($id);
         $em = $this->getDoctrine()->getManager();
