@@ -68,7 +68,7 @@ class WebsiteController extends AbstractController
             ]);
     }
 
-      /**
+    /**
      * Permet d'afficher un seul événement
      * @Route("/contact", name="contact")
      * 
@@ -81,5 +81,20 @@ class WebsiteController extends AbstractController
             return $this->render('website/contact.html.twig');
 
     }
+
+    /**
+     * Permet d'afficher un seul événement
+     * @Route("/ecole", name="ecole")
+     * 
+     * @return Response
+     */
+
+    public function pageEcole()
+    {
+
+            return $this->render('website/ecole.html.twig');
+
+    }
+     
      
 }

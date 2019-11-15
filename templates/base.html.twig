@@ -3,8 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Ecole des raseteurs de la Porte de la Crau
-			{% endblock %}
+            Ecole de raseteurs porte de la Crau -
+            {% block title %}{% endblock %}
+        </title>
+
 		</title>
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
 		<link
@@ -25,14 +27,16 @@
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
 					​
-					<a href="{{ path('home') }}"><img src="img/logo.png" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>
-					                                                                                                                                                                                       ​
+					<!--<a href="{{ path('home') }}"><img src="" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>-->
+					                                                        ​
 					<li class="nav-item active">
-						<a class="nav-link" href="#">
+
+						<a class="nav-link" href="{{ path('ecole') }}">
 							L'école
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
+
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('evenements') }}">Evenements</a>
 					</li>

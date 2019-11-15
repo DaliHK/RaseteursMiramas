@@ -132,7 +132,7 @@ class AdherentUtilisateurController extends AbstractController
 
     /* ------Gestion page Adherent -------*/
     /**
-     * Function qui est utiliser pour upload dans la function adherentProfile
+     * Fonction utilisée pour l'upload dans la fonction adherentProfile
      * @return string
      */
     private function generateUniqueFileName()

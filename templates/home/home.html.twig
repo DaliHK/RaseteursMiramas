@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %} - Accueil
 {% endblock %}
 
 {% block body %}
@@ -66,7 +66,7 @@
 
 							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, optio
 							temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
-							<a href="" class="btn btn-primary">En savoir plus</a>
+							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
 						</div>
 					</div>
 				</div>
