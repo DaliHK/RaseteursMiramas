@@ -1,7 +1,5 @@
 <?php
 
-// Cette classe sert à afficher les informations éditables de l'adhérent lorsqu'il se connecte a son profil
-
 namespace App\Form;
 
 use App\Entity\Adherent;
@@ -15,13 +13,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class EditAdherentType extends AbstractType
+class AdminEditAdherentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            /* ->add('username') */
-            /* ->add('roles') */
            ->add('password', RepeatedType::class, [
                'type' => PasswordType::class,
                'invalid_message' => 'Les mots de passe doivent être identiques.',
@@ -31,8 +27,11 @@ class EditAdherentType extends AbstractType
                'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
-           /*  ->add('dateNaissance')
-            ->add('dateInscription') */
+            ->add('dateNaissance')
+            ->add('dateInscription', DateType::class, [
+               'required' => false,
+               'empty_data' => null
+               ])
             ->add('email',EmailType::class)
             ->add('telephone',NumberType::class)
             ->add('adresse')
@@ -40,6 +39,12 @@ class EditAdherentType extends AbstractType
             ->add('ville')
             ->add('numeroUrgence',NumberType::class)
             ->add('nomUrgence',TextType::class)
+            ->add('statut')
+            ->add('cotisationAsso')
+            ->add('cotisationLicence')
+            ->add('numLicence')
+            ->add('dossierInscription')
+            ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
         ;
     }
 

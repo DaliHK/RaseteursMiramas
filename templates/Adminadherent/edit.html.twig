@@ -1,0 +1,70 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Edit Adherent{% endblock %}
+
+{% block body %}
+    <h1></h1>
+    {% block content %}
+
+    <!-- We'll fill this with dummy content -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+        <div class="container">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Menu</span> 
+            </button>
+        <h3 class="ml-5"> Modification dossier adhérent {{ adherent.nom }} {{ adherent.prenom }}</h3>
+        </div>
+    </nav>
+    {% endblock %}
+   
+<div class="row">
+    <div class="col-sm-3">
+    {{form_start(form)}}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.dateNaissance)}}
+        {{ form_row(form.adresse)}}
+        {{ form_row(form.cp)}}
+        {{ form_row(form.ville)}}
+
+    </div>
+     <div class="col-sm-3">
+        {{ form_row(form.email) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.nomUrgence)}}
+        {{ form_row(form.numeroUrgence)}}
+    </div>
+     <div class="col-sm-3" >
+
+        {{ form_row(form.dateInscription)}}
+        {{ form_row(form.numLicence) }}
+         <p>Niveau<br/>non coché cycle 1 / coché cycle 2:  </p>{{ form_row(form.niveau) }}
+        
+        <p>cochez si dossier complet : </p> {{ form_row(form.statut) }} 
+        {{ form_row(form.cotisationAsso) }}
+        {{ form_row(form.cotisationLicence) }}
+        {{ form_row(form.dossierInscription)}}
+       
+    </div>
+   
+   
+</div>
+    <div class="row">
+    <div class="col-sm-3">
+     {{ form_row(form.submit)}}
+     {{form_end(form)}}
+
+     </div>
+     <div class="col-sm-3">
+    <a href="{{ path('adherent_index') }} " class="btn btn-primary">Retour</a>
+     </div>
+     <div class="col-sm-3">
+      {{ include('Adminadherent/_delete_form.html.twig') }}
+     </div>
+  
+   
+    </div>
+</div>
+
+{% endblock %}

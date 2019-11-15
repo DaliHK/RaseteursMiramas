@@ -8,6 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 class AdherentType extends AbstractType
 {
@@ -33,6 +35,8 @@ class AdherentType extends AbstractType
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence')
+            ->add('nomUrgence')
+            ->add('niveau')
             ->add('statut')
             ->add('cotisationAsso')
             ->add('cotisationLicence')

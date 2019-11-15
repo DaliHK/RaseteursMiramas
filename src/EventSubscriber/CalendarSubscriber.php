@@ -41,8 +41,8 @@ class CalendarSubscriber implements EventSubscriberInterface
         $bookings = $this->evenementRepository
             ->createQueryBuilder('booking')
             ->where('booking.beginAt BETWEEN :start and :end OR booking.endAt BETWEEN :start and :end')
-            ->setParameter('start', $start->format('Y-m-d H:i:s'))
-            ->setParameter('end', $end->format('Y-m-d H:i:s'))
+            ->setParameter('start', $start->format('d-m-Y H:i'))
+            ->setParameter('end', $end->format('d-m-Y H:i'))
             ->getQuery()
             ->getResult()
         ;

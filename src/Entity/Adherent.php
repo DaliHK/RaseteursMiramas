@@ -212,7 +212,8 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    
+     
+
     /**
      * @see UserInterface
      */
