@@ -17,9 +17,12 @@ class DossierInscription
      */
     private $id;
 
+    //Supprimer cascade et rajouter nullable=true, onDelete="SET NULL"
+    //A garder lors du merge !!!
+
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Adherent", inversedBy="dossierInscription", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\OneToOne(targetEntity="App\Entity\Adherent", inversedBy="dossierInscription")
+     * @ORM\JoinColumn(nullable=false,nullable=true, onDelete="SET NULL")
      */
     private $adherent;
 
