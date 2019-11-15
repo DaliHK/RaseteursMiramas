@@ -29,17 +29,21 @@
                     <span>Nom: </span>{{ adherent.nom }}
                 </div>
                 <div class="col-6">
-                   <span>Prénom:</span> {{ adherent.prenom }}
+                <span>Téléphone: </span> {{ adherent.telephone }}
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <span>Date de Naissance</span>: {{ adherent.dateNaissance ? adherent.dateNaissance | date('d/m/Y') }}
+                                <span>Prénom:</span> {{ adherent.prenom }}
+
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <span>Téléphone: </span> {{ adherent.telephone }}
+             
+                    <span>Date de Naissance</span>: {{ adherent.dateNaissance ? adherent.dateNaissance | date('d/m/Y') }}
+
                 </div>
                 <div class="col-md-6">
                     <span>  Email: </span>{{ adherent.email }}
@@ -77,7 +81,14 @@
     </div>
 
         <div class="col-sm-4 text-center">
-            <img src="http://placehold.it/150x200" class="mb-3">
+            
+            {% for dossierInscription in dossierInscriptions %}
+                {% if adherent.dossierInscription == ""  %}
+                <img src="http://placehold.it/150" class="mb-3" alt="avatar" width="150" height="200">
+                    {% else %}
+                    <img src="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.photoIdentite) }}" class="mb-3" alt="avatar" width="150" height="200">
+                {% endif %}
+            {% endfor %}
         </div>   
 
         <div class="col-sm-4">
@@ -94,7 +105,8 @@
                 <span>Numéro de Licence: </span>  {{ adherent.numLicence }}
             </div>
              <div class="row mb-3">
-                <span>Niveau: </span>  {{ adherent.niveau  ? 'Cycle 1' : 'Cycle 2' }}
+                <span>Niveau: </span>  {{ adherent.niveau  ? 'Cycle 2' : 'Cycle 1' }}
+              
             </div>
             <div class="row mb-3">
                 <span class="bg">Date d'inscription: </span>  {{ adherent.dateInscription ? adherent.dateInscription | date('d/m/Y') }}
@@ -106,48 +118,76 @@
         </div>
             
         
-</div> 
+    </div> 
     <hr>
     <h3  class="text-center">Liste des documents pour inscription</h3>
-     <div class="container">
-            <div class="row mt-5">
-                <div class="col-sm-6">  
-            <div class="form-check form-check-inline mb-3">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">bulletin inscription</label>
+   
+{% for dossierInscription in dossierInscriptions %}
+ 
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+      
+            <div class="row mt-3">     
+            {% if adherent.dossierInscription == ""  %}
+            <h5>Renseignements Generaux à venir</a></h5>
+                 {% else %}
+                 <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.Renseignementsgeneraux) }}">Renseignementsgeneraux(PDF)</a></h5>
+            {% endif %}
             </div>
-            <div class="form-check form-check-inline mb-3">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">droit entrainement</label>
+               
+            <div class="row mt-3">
+            {% if adherent.dossierInscription == ""  %}  
+            <h5>Renseignement Médicaux à venir</a></h5>
+                {% else %}
+            <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.RenseignementsMedicaux) }}">RenseignementsMedicaux(PDF)</a></h5>
+            {% endif %}
             </div>
-            <div class="form-check form-check-inline mb-3">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">droit à l'image</label>
-                </div>
-                <div class="form-check form-check-inline mb-3">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                    <label class="form-check-label" for="inlineCheckbox2">droit pratique de la course camarguaise</label>
-                </div>
-            </div>
-         
-            <div class="col-sm-6">
-                    <div class="form-check form-check-inline mb-3">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                        <label class="form-check-label" for="inlineCheckbox1">bulletin transport</label>
-                    </div>
-                    <div class="form-check form-check-inline mb-3">
-                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                        <label class="form-check-label" for="inlineCheckbox2">informations médicales</label>
-                    </div>
-                  
-                        <div class="form-check form-check-inline mb-3">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">certificat médical</label>
-                        </div>
-            </div>
+            <div class="row mt-3">
+            {% if adherent.dossierInscription == ""  %}
+            <h5>CertificatMedical à venir</a></h5>
+                {% else %}
+            <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.certificatMedical) }}">Certificat Médical(PDF)</a></h5>
+            {% endif %}
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="row mt-3">
+            {% if adherent.dossierInscription == ""  %}
+            <h5>Droit Image à completer</a></h5>
+              {% else %}
+              <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
+            {% endif %}
+            </div>
+            <div class="row mt-3">
+            {% if adherent.dossierInscription == ""  %}
+            <h5>DroitTransport à completer</a></h5>
+                {% else %}
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.DroitTransport) }}">DroitTransport(PDF)</a></h5>
+            {% endif %}
+            </div>
+            <div class="row mt-3">
+            {% if adherent.dossierInscription == ""  %}
+            <h5>Droit Pratique à completer</a></h5>
+            {% else %}
+            <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.DroitPratique) }}">DroitPratique(PDF)</a></h5>
 
+            {% endif %}
+            </div>
+            <div class="row mt-3">
+            {% if adherent.dossierInscription == ""  %}
+            <h5>DroitEntrainement à completer</a></h5>
+
+                {% else %}
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.DroitEntrainement) }}">DroitEntrainement(PDF)</a></h5>
+
+            {% endif %}
+            </div>
+        </div>
+    </div>   
+    </div>
+     
+{% endfor %} 
     <hr>
     <div class="row"> 
         <a href="{{ path('adherent_edit', {'id': adherent.id}) }}" class="btn btn-primary">Modifier</a>

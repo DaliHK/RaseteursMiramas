@@ -2,11 +2,11 @@
 
 namespace App\EventSubscriber;
 
-use CalendarBundle\Entity\Event;
+/* use CalendarBundle\Entity\Event;
 use CalendarBundle\CalendarEvents;
 use Doctrine\Common\EventSubscriber;
 use CalendarBundle\Event\CalendarEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface; */
 
 class CalendarSubscriber implements EventSubscriberInterface
 {

@@ -17,14 +17,25 @@ class AdherentType extends AbstractType
         $builder
             ->add('username')
             ->add('roles')
-            ->add('password')
-            ->add('confirm_password')
+            ->add('password', RepeatedType::class, [
+               'type' => PasswordType::class,
+               'invalid_message' => 'Les mots de passe doivent être identiques.',
+               'options' => ['attr' => ['class' => 'password-field']],
+               'required' => true,
+               'first_options'  => ['label' => 'Password'],
+               'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance')
-            ->add('dateInscription')
+            ->add('dateNaissance', DateType::class,[
+                'format' => 'ddMMyyyy',
+            ])
+            ->add('dateInscription', DateType::class, [
+                'format' => 'ddMMyyyy',
+                'required' => false,
+                'empty_data' => null
+                ])
             ->add('email')
-            ->add('telephone')
+            ->add('telephone',PhoneNumberType::class, array('default_region' => 'GB', 'format' => PhoneNumberFormat::NATIONAL))
             ->add('adresse')
             ->add('cp')
             ->add('ville')

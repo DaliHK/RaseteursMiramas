@@ -53,7 +53,6 @@ class Adherent implements UserInterface
      */
     private $password;
 
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -82,7 +81,11 @@ class Adherent implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     * pattern="/[0-9]{10}/"
+     * )
      */
     private $telephone;
 
@@ -213,8 +216,7 @@ class Adherent implements UserInterface
         return $this;
     }
 
-     
-
+    
     /**
      * @see UserInterface
      */
@@ -305,6 +307,7 @@ class Adherent implements UserInterface
 
         return $this;
     }
+    
 
     public function getEmail(): ?string
     {
@@ -383,7 +386,7 @@ class Adherent implements UserInterface
         return $this->statut;
     }
 
-    public function setStatut($statut)
+    public function setStatut(bool $statut): self
     {
         $this->statut = $statut;
 
@@ -425,7 +428,7 @@ class Adherent implements UserInterface
 
         return $this;
     }
-
+  
     public function getDossierInscription(): ?DossierInscription
     {
         return $this->dossierInscription;
@@ -442,7 +445,7 @@ class Adherent implements UserInterface
 
         return $this;
     }
-
+    
     /**
      * @return Collection|ParticipationEvenement[]
      */
