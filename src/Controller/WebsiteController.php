@@ -67,5 +67,19 @@ class WebsiteController extends AbstractController
                 'id' => $id
             ]);
     }
+
+      /**
+     * Permet d'afficher un seul événement
+     * @Route("/contact", name="contact")
+     * 
+     * @return Response
+     */
+
+    public function pageContact()
+    {
+
+            return $this->render('website/contact.html.twig');
+
+    }
      
 }

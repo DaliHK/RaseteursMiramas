@@ -93,7 +93,6 @@ class AdminAdherentController extends AbstractController
         $form = $this->createForm(AdminEditAdherentType::class, $adherent);
         $form->handleRequest($request);
         $adherentPassword = $adherent->getPassword();
-       
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();

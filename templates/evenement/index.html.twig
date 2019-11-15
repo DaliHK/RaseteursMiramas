@@ -1,47 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Evenement index{% endblock %}
+{% block title %}Evenement index
+{% endblock %}
 
 {% block body %}
-    <h1>Evenement index</h1>
+	<h1>Liste des événements</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>DateDebut</th>
-                <th>DateFin</th>
-                <th>NombreParticipantMax</th>
-                <th>NiveauRequis</th>
-                <th>DescriptionEvenement</th>
-                <th>Categorie</th>
-                <th>Titre</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for evenement in evenements %}
-            <tr>
-                <td>{{ evenement.id }}</td>
-                <td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
-                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
-                <td>{{ evenement.nombreParticipantMax }}</td>
-                <td>{{ evenement.niveauRequis }}</td>
-                <td>{{ evenement.descriptionEvenement }}</td>
-                <td>{{ evenement.categorie }}</td>
-                <td>{{ evenement.titre }}</td>
-                <td>
-                    <a href="{{ path('evenement_show', {'id': evenement.id}) }}">show</a>
-                    <a href="{{ path('evenement_edit', {'id': evenement.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>DateDebut</th>
+				<th>DateFin</th>
+				<th>NombreParticipantMax</th>
+				<th>NiveauRequis</th>
+				<th>Description</th>
+				<th>Categorie</th>
+				<th>Titre</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for evenement in evenements %}
+				<tr>
+					<td>{{ evenement.id }}</td>
+					<td>{{ evenement.dateDebut ? evenement.dateDebut|date('d-m-Y') : '' }}</td>
+					<td>{{ evenement.dateFin ? evenement.dateFin|date('d-m-Y') : '' }}</td>
+					<td>{{ evenement.nombreParticipantMax }}</td>
+					<td>{{ evenement.niveauRequis }}</td>
+					<td>{{ evenement.description }}</td>
+					<td>{{ evenement.categorie }}</td>
+					<td>{{ evenement.titre }}</td>
+					<td>
+						<a href="{{ path('evenement_show', {'id': evenement.id}) }}">Voir</a>
+						<a href="{{ path('evenement_edit', {'id': evenement.id}) }}">Editer</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="9">Pas d'enregistrements</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
-    <a href="{{ path('evenement_new') }}">Create new</a>
+	<a class="btn btn-primary" href="{{ path('evenement_nouveau') }}">Créer un nouvel événement</a>
 {% endblock %}

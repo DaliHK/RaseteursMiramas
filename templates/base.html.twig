@@ -26,8 +26,7 @@
 				<ul class="navbar-nav mr-auto">
 					​
 					<a href="{{ path('home') }}"><img src="img/logo.png" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>
-					​
-																																																																																					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ​
+					                                                                                                                                                                                       ​
 					<li class="nav-item active">
 						<a class="nav-link" href="#">
 							L'école
@@ -38,7 +37,7 @@
 						<a class="nav-link" href="{{ path('evenements') }}">Evenements</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
+						<a class="nav-link" href="{{ path('contact') }}">Contact</a>
 					</li>
 					<li class="nav-item">
 						<!--S'il est loggé en tant qu'adherent, apparition de espace adherent -->
@@ -49,7 +48,7 @@
 					{% if is_granted('ROLE_USER') %}
 
 						<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-							<a class="nav-link" href="#">Espace adhérent</a>
+							<a class="nav-link" href="{{ path('adherent_profile') }}">Espace adhérent</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('logout')}}">Se déconnecter</a>

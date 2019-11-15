@@ -1,50 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Evenement{% endblock %}
+{% block title %}Evenement
+{% endblock %}
 
 {% block body %}
-    <h1>Evenement</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ evenement.id }}</td>
-            </tr>
-            <tr>
-                <th>DateDebut</th>
-                <td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>DateFin</th>
-                <td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NombreParticipantMax</th>
-                <td>{{ evenement.nombreParticipantMax }}</td>
-            </tr>
-            <tr>
-                <th>NiveauRequis</th>
-                <td>{{ evenement.niveauRequis }}</td>
-            </tr>
-            <tr>
-                <th>DescriptionEvenement</th>
-                <td>{{ evenement.descriptionEvenement }}</td>
-            </tr>
-            <tr>
-                <th>Categorie</th>
-                <td>{{ evenement.categorie }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ evenement.titre }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<h1>Evenement</h1>
 
-    <a href="{{ path('evenement_index') }}">back to list</a>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ evenement.id }}</td>
+			</tr>
+			<tr>
+				<th>DateDebut</th>
+				<td>{{ evenement.dateDebut ? evenement.dateDebut|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>DateFin</th>
+				<td>{{ evenement.dateFin ? evenement.dateFin|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>NombreParticipantMax</th>
+				<td>{{ evenement.nombreParticipantMax }}</td>
+			</tr>
+			<tr>
+				<th>NiveauRequis</th>
+				<td>{{ evenement.niveauRequis }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ evenement.description }}</td>
+			</tr>
+			<tr>
+				<th>Categorie</th>
+				<td>{{ evenement.categorie }}</td>
+			</tr>
+			<tr>
+				<th>Titre</th>
+				<td>{{ evenement.titre }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('evenement_edit', {'id': evenement.id}) }}">edit</a>
+	<a href="{{ path('evenement_index') }}">Retour a la liste</a>
 
-    {{ include('evenement/_delete_form.html.twig') }}
+	<a href="{{ path('evenement_edit', {'id': evenement.id}) }}">Editer</a>
+
+	{{ include('evenement/_delete_form.html.twig') }}
 {% endblock %}

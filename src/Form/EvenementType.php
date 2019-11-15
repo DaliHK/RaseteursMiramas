@@ -16,10 +16,9 @@ class EvenementType extends AbstractType
             ->add('dateFin')
             ->add('nombreParticipantMax')
             ->add('niveauRequis')
-            ->add('descriptionEvenement')
+            ->add('description')
             ->add('categorie')
             ->add('titre')
-            ->add('participation')
         ;
     }
 

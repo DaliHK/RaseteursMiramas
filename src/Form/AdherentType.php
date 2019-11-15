@@ -6,6 +6,8 @@ use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class AdherentType extends AbstractType
 {
@@ -36,6 +38,7 @@ class AdherentType extends AbstractType
             ->add('cotisationLicence')
             ->add('numLicence')
             ->add('dossierInscription')
+            ->add('submit')
         ;
     }
 
