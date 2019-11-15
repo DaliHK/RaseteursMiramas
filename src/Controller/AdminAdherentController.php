@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Entity\Adherent;
 use App\Entity\DossierInscription;
 use App\Form\AdherentType;
-use App\Form\EditAdherentType;
+
 use App\Form\AdminEditAdherentType;
 use App\Repository\AdherentRepository;
+use App\Repository\DossierInscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +22,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AdminAdherentController extends AbstractController
 {
-
 
     /**
      * @Route("/adherent", name="adherent_index", methods={"GET","POST"})
@@ -51,6 +51,7 @@ class AdminAdherentController extends AbstractController
     
     return $this->render('Adminadherent/index.html.twig', [
         'adherents' => $adherentRepository->findAll(),
+        
         'form'=> $form->createView()
     ]);
     }
@@ -82,10 +83,13 @@ class AdminAdherentController extends AbstractController
     /**
      * @Route("/dossier{id}", name="adherent_show", methods={"GET"})
      */
-    public function show(Adherent $adherent): Response
-    {
+    public function show(Adherent $adherent, DossierInscriptionRepository $adherentId,DossierInscriptionRepository $repo): Response
+
+    {//ici gestion doosier inscription
+        $dossierInscription=$repo->findAll();
         return $this->render('Adminadherent/show.html.twig', [
             'adherent' => $adherent,
+            'dossierInscriptions'=> $dossierInscription
         ]);
     }
 
@@ -101,11 +105,10 @@ class AdminAdherentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
              $adherent->setPassword($adherentPassword);
-            
             $entityManager->flush();
+            $this->addFlash('success', 'le dossier a bien été modifié');
             return $this->redirectToRoute('adherent_index');
         }
-        
 
         return $this->render('Adminadherent/edit.html.twig', [
             'adherent' => $adherent,

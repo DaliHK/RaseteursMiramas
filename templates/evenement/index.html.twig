@@ -32,8 +32,8 @@
 					<td>{{ evenement.categorie }}</td>
 					<td>{{ evenement.titre }}</td>
 					<td>
-						<a href="{{ path('evenement_show', {'id': evenement.id}) }}">Voir</a>
-						<a href="{{ path('evenement_edit', {'id': evenement.id}) }}">Editer</a>
+						<a class="btn btn-primary" href="{{ path('evenement_show', {'id': evenement.id}) }}">Voir</a>
+						<a class="btn btn-primary" href="{{ path('evenement_edit', {'id': evenement.id}) }}">Editer</a>
 					</td>
 				</tr>
 			{% else %}

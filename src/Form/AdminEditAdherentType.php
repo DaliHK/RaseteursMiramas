@@ -8,13 +8,18 @@ use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class AdminEditAdherentType extends AbstractType
 {
@@ -24,26 +29,45 @@ class AdminEditAdherentType extends AbstractType
            
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance')
+            ->add('dateNaissance', DateType::class,[
+                'format' => 'ddMMyyyy',
+            ])
             ->add('dateInscription', DateType::class, [
+                'format' => 'ddMMyyyy',
                 'required' => false,
                 'empty_data' => null
                 ])
-            ->add('email')
-            ->add('telephone')
+            ->add('email',EmailType::class)
+            // ->add('telephone', NumberType::class, [
+            //     'attr'=> [
+            //         ''
+            //     ]
+            // ])
             ->add('adresse')
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence')
-            ->add('statut')
+            ->add('statut',ChoiceType::class, [
+                'choices'  => [
+                   
+                    'Inscrit' => true,
+                    'Pré-inscrit' => false
+                ]])
             ->add('nomUrgence')
-            ->add('niveau')
+            
+            ->add('niveau',ChoiceType::class, [
+                'choices'  => [
+                   
+                    'cycle 2' => true,
+                    'cycle 1' => false
+                ]])
             ->add('cotisationAsso')
             ->add('cotisationLicence')
             ->add('numLicence')
-            ->add('dossierInscription')
+           //->add('dossierInscription')
             //->add('participationEvenement')
             ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
+            
         ;
     }
 

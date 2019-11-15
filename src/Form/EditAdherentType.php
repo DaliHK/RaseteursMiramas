@@ -2,23 +2,31 @@
 
 namespace App\Form;
 
+
+
 use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-
-class AdherentType extends AbstractType
+class EditAdherentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('roles')
-            ->add('password', RepeatedType::class, [
+
+            /* ->add('username') */
+            /* ->add('roles') */
+           ->add('password', RepeatedType::class, [
                'type' => PasswordType::class,
                'invalid_message' => 'Les mots de passe doivent être identiques.',
                'options' => ['attr' => ['class' => 'password-field']],
@@ -27,28 +35,27 @@ class AdherentType extends AbstractType
                'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance', DateType::class,[
-                'format' => 'ddMMyyyy',
-            ])
-            ->add('dateInscription', DateType::class, [
-                'format' => 'ddMMyyyy',
+            ->add('dateNaissance', DateType::class, [
                 'required' => false,
                 'empty_data' => null
                 ])
-            ->add('email')
-            ->add('telephone',PhoneNumberType::class, array('default_region' => 'GB', 'format' => PhoneNumberFormat::NATIONAL))
+            //->add('dateInscription', DateType::class, [
+             //'required' => false,
+            //'empty_data' => null
+              //])
+            ->add('email',EmailType::class)
+            ->add('telephone',NumberType::class)
             ->add('adresse')
             ->add('cp')
             ->add('ville')
-            ->add('numeroUrgence')
-            ->add('nomUrgence')
-            ->add('niveau')
-            ->add('statut')
-            ->add('cotisationAsso')
-            ->add('cotisationLicence')
-            ->add('numLicence')
-            ->add('dossierInscription')
-            ->add('submit')
+            ->add('numeroUrgence',NumberType::class)
+            ->add('nomUrgence',TextType::class)
+            //->add('statut')
+            //->add('cotisationAsso')
+            //->add('cotisationLicence')
+            //->add('numLicence')
+            //->add('dossierInscription')
+            ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
         ;
     }
 

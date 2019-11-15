@@ -155,7 +155,6 @@ class AdherentUtilisateurController extends AbstractController
      */
 
     public function adherentProfile(UserInterface $userProfile ,Request $request,ParticipationEvenementRepository $participation,Filesystem $filesystem){
-
        
         //Recupère tout les participations des événements pour l'envoyer dans la view
         $participations = $participation->findAll();
@@ -293,7 +292,6 @@ class AdherentUtilisateurController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($folderRegister);
         $em->flush();
-
         return $this->redirectToRoute('adherent_profile');
     }
 }

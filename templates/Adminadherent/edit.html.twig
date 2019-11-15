@@ -19,7 +19,7 @@
     {% endblock %}
    
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
     {{form_start(form)}}
         {{ form_row(form.nom) }}
         {{ form_row(form.prenom) }}
@@ -29,29 +29,29 @@
         {{ form_row(form.ville)}}
 
     </div>
-     <div class="col-sm-3">
+     <div class="col-sm-4">
+       {{ form_row(form.telephone) }}
         {{ form_row(form.email) }}
-        {{ form_row(form.telephone) }}
         {{ form_row(form.nomUrgence)}}
         {{ form_row(form.numeroUrgence)}}
     </div>
-     <div class="col-sm-3" >
+     <div class="col-sm-4" >
 
         {{ form_row(form.dateInscription)}}
         {{ form_row(form.numLicence) }}
-         <p>Niveau<br/>non coché cycle 1 / coché cycle 2:  </p>{{ form_row(form.niveau) }}
-        
-        <p>cochez si dossier complet : </p> {{ form_row(form.statut) }} 
+        {{ form_row(form.niveau) }}
+        {{ form_row(form.statut) }} 
+
         {{ form_row(form.cotisationAsso) }}
         {{ form_row(form.cotisationLicence) }}
-        {{ form_row(form.dossierInscription)}}
+       
        
     </div>
    
    
 </div>
     <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
      {{ form_row(form.submit)}}
      {{form_end(form)}}
 
