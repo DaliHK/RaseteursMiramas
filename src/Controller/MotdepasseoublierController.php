@@ -92,12 +92,13 @@ class MotdepasseoublierController extends AbstractController
             'form' => $form->createView(),
             ]);
     }
-
+    
     /**
      * @Route("/verification_user", name="verification_de_user")
      * @param AdherentRepository $repo
      * @return Response
      */
+
     public function verificationMdp(Request $request, ObjectManager $manager)
     {
         $user1= $this->getDoctrine()->getRepository(Adherent::class);
@@ -112,13 +113,19 @@ class MotdepasseoublierController extends AbstractController
         $usermail1 = $adherent1->getEmail(); //adresse mail entrée par utilisateur dans formulaire
         $userpassword = $adherent1->getPassword();
         $mailuser1 = $user1->findOneByEmail($usermail1); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
-        $mailuser1password = $mailuser1->getPassword();
-
+        if ($mailuser1 !== null){
+            $mailuser1password = $mailuser1->getPassword();
+        }
             if ($mailuser1 !== null && $mailuser1password === $userpassword) { //si l'adressemail est bon et le mdp est la bon on renvoie sur la page creation de mdp
             return $this->redirectToRoute('creer_mot_passe');
             } 
+            else{
+                if ($mailuser1 === null){
+                    $this->addFlash('error', "Ce mail n'est pas enregistré");
+                }
                 else{
-                $this->addFlash('error', 'Invalide value !');
+                $this->addFlash('error', 'Ce mot de passe est invalide');
+                }
                 return $this->redirectToRoute('verification_de_user');
                 }
         }
@@ -135,25 +142,29 @@ class MotdepasseoublierController extends AbstractController
      */
     public function creationMdp(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
     {
-        $user= $this->getDoctrine()->getRepository(Adherent::class);
+        $user2= $this->getDoctrine()->getRepository(Adherent::class);
 
-        $adherent = new Adherent(); 
+        $adherent2 = new Adherent(); 
 
-        $form = $this->createForm(CreermdpType::class, $adherent);  
+        $form = $this->createForm(CreermdpType::class, $adherent2);  
         $form->handleRequest($request);
 
         if($form->isSubmitted()){ 
-            $usermail = $adherent->getEmail(); //adresse mail entrée par utilisateur dans formulaire
-           
-            $mailuser = $user->findOneByEmail($usermail); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
+            
+            $usermail2 = $adherent2->getEmail(); //adresse mail entrée par utilisateur dans formulaire
+            $mailuser2 = $user2->findOneByEmail($usermail2); //recherche dans la BDD (si ca existe renvoi tous les infos de l'utilisateur sinon ca renvoi null)
+          
+            if($mailuser2 === null) {
+                $this->addFlash('error', "Ce mail n'est pas enregistré");
+                return $this->redirectToRoute('creer_mot_passe');
+            }
 
-            $hash = $encoder->encodePassword($mailuser, $adherent->getPassword()); 
+            $hash = $encoder->encodePassword($mailuser2, $adherent2->getPassword()); 
         
-            $mailuser->setPassword($hash);   
-            $manager->merge($mailuser);
+            $mailuser2->setPassword($hash);   
+            $manager->merge($mailuser2);
             $manager->flush();
-        
-        $this->addFlash('success', 'Votre mot de passe à bien été enregistré.');
+      
         return $this->redirectToRoute('login_adherent');
         }
         return $this->render('motdepasseoublier/creermotdepasse.html.twig', [

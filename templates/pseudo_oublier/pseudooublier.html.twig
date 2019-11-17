@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Réinitialisez votre mot de passe{% endblock %}
+
 {% block body %}
+
 
 
 	<div class="container">
@@ -9,26 +12,28 @@
                 <div class="card mb-4">
                 <div class="card-body">
 
-                <h3 class="card-title text-center"> Crée un nouveau mot de passe </h3>
+                <h3 class="card-title text-center"> Recuperation de pseudo </h3>
+                <p> Saisissez l'email associé à votre compte et nous vous enverrons votre pseudo. </p> 
 
                     {{ form_start(form) }}
 
                     {{ form_row(form.email) }}
-                    
-                     {% for message in app.flashes('error') %}
+
+                    {% for message in app.flashes('error') %}
                      <div class="flash-notice">
                     {{ message }}
                     </div>
                     {% endfor %}
-
-                    {{ form_row(form.password.first,  { 'attr': {'placeholder': 'Au moins 8 caracteres'}}) }}
-                    {{ form_row(form.password.second) }}
+                 
                     {{ form_row(form.submit) }}
 
                     {{ form_end(form) }}
+
+                    
     </div>
         </div>
             </div>
                 </div>
                 </div>
+
 {% endblock %}
