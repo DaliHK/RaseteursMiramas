@@ -31,24 +31,24 @@ class SourcePhoto
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom()
     {
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom($nom)
     {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getCategorie(): ?string
+    public function getCategorie()
     {
         return $this->categorie;
     }
 
-    public function setCategorie(string $categorie): self
+    public function setCategorie($categorie)
     {
         $this->categorie = $categorie;
 

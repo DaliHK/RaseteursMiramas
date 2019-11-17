@@ -1,10 +1,100 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseAdmin.html.twig' %}
 
 {% block title %}AdminCarousel{% endblock %}
 
 {% block body %}
 
+    <div class="container">
 
+        <div class="row"> 
+              {% for pictures in picture %}
+                {% if pictures.categorie == "carousel" %}
+                
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+              
+                <div class="carousel-inner">
+            
+                    {# Pour Afficher les photos du carousel #} 
+                        {% if pictures.categorie == "carousel"  %}
+                            <div class="carousel-item active">
+                                <img class="d-block w-50" src="{{ asset('carousel/' ~ pictures.nom) }}" alt="First slide"> 
+
+                            {# Pour compter le nombre d'image qui a pour le carousel #}
+                            {% set count = count + 1  %}
+                            
+                            {# J'affecte les variables avec le nom de l'image par rapport à sont emplacement dans la bdd  #}
+                            {% if count == 1 %}
+                                {% set picture1 = pictures.nom %}
+                            {% endif %}
+                            {% if count == 2 %}
+                                {% set picture2 = pictures.nom %}
+                            {% endif %}
+                            {% if count == 3 %}
+                                {% set picture3 = pictures.nom %}
+                            {% endif %}
+                            {% if count == 4 %}
+                                {% set picture4 = pictures.nom %}
+                            {% endif %}
+                            
+                        {% endif %}
+
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    
+               {#  {{dump(picture1)}}
+                {{dump(picture3)}}
+                {{dump(picture2)}}
+                {{dump(picture4)}} #}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+           
+        </div>
+
+            {#  Si il y a le nombre de photo pour le carousel est au  maximum (4) il peux juste les modifiers  #}
+        <div class= "row"> 
+        
+            {% if  count ==  4 %}
+                <h6> Le nombre de photo dans le carousel est au maximum cliquer pour modifier </h6> 
+
+            <div class="row justify-content-center">
+                <a class="btn" href="{{path('delete_picture_carousel')}}" type="button">Modifier</a>
+            </div>
+        </div>
+
+            {% else %}
+
+                <div class="row">
+                    
+                    {{ form_start(carousel) }}
+                    
+                    {{ form_row(carousel.nom,{'attr':{'placeholder':"image"}})}}
+                    {{ form_row(carousel.categorie,{'attr':{'placeholder':"carousel"}})}}
+                    
+                    <div class=" row justify-content-center">
+                        <button type="submit" class='btn btn-success'>Modifier</button>
+                    </div>
+                    {{ form_end(carousel) }}
+                </div>
+        
+
+            {% endif %}
+        
+    </div>
 
 
 {% endblock %}
