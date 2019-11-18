@@ -23,7 +23,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * )
  * @UniqueEntity(
  * fields={"email"},
- * message="Email est déjà utilisé."
+ * message="Email Inconnu !"
  * )
  */
 
@@ -38,6 +38,7 @@ class Adherent implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $username;
 
@@ -50,26 +51,32 @@ class Adherent implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $prenom;
 
     /**
      * @ORM\Column(name="dateNaissance", type="datetime")
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $dateNaissance;
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $dateInscription;
 
@@ -77,6 +84,7 @@ class Adherent implements UserInterface
     * @var string
     *
     * @ORM\Column(type="string", length=180, nullable=false, unique=true)
+    * @Assert\NotBlank(message="Ce champ doit être rempli")
     */
     private $email;
 
@@ -91,16 +99,19 @@ class Adherent implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $cp;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $ville;
 

@@ -5,6 +5,7 @@
 {% block body %}
 
 
+
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-md-7">
@@ -17,6 +18,12 @@
                     {{ form_start(form) }}
 
                     {{ form_row(form.email) }}
+
+                    {% for message in app.flashes('error') %}
+                     <div class="flash-notice">
+                    {{ message }}
+                    </div>
+                    {% endfor %}
                  
                     {{ form_row(form.submit) }}
 
@@ -28,6 +35,5 @@
             </div>
                 </div>
                 </div>
-
 
 {% endblock %}
