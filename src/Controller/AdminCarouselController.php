@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\SourcePhoto;
+use App\Entity\Carousel;
 use App\Form\AdminCarouselType;
-use App\Repository\SourcePhotoRepository;
+use App\Repository\CarouselRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,13 +29,13 @@ class AdminCarouselController extends AbstractController
      * @Route("/admin/carousel", name="admin_carousel")
      * @param Request $request
      * @param Filesystem $filesystem
-     * @param SourcePhotoRepository $sourcePhoto
+     * @param CarouselRepository $carousel
      */
     
-    public function adminCarousel(Request $request,Filesystem $filesystem,SourcePhotoRepository $sourcePhoto){
+    public function adminCarousel(Request $request,Filesystem $filesystem, CarouselRepository $carousel){
 
         //Instencie la variable NewPicture pour utiliser c'est prop  et affecte la variable carouselForm pour crée le form.
-        $newPicture = new SourcePhoto();
+        $newPicture = new Carousel();
         $carouselForm = $this->createForm(AdminCarouselType::class, $newPicture);
         $carouselForm->handleRequest($request);
        
@@ -82,7 +82,7 @@ class AdminCarouselController extends AbstractController
             $entityManager->persist($newPicture);
             $entityManager->flush();
 
-            
+
             return $this->redirect($this->generateUrl('admin_carousel'));
 
         }
@@ -90,7 +90,7 @@ class AdminCarouselController extends AbstractController
         return $this->render('admin_carousel/carousel.html.twig',[
 
             'carousel'=>$carouselForm->createView(),
-            'picture'=>$sourcePhoto->findAll(),
+            'picture'=>$carousel->findAll(),
             
         ]);
     }
@@ -109,7 +109,7 @@ class AdminCarouselController extends AbstractController
         $fs->remove($path); 
         
         //Supprimer les photos dans la BDD
-        $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->find($id);
+        $folderCarousel = $this->getDoctrine()->getRepository(Carousel::class)->find($id);
         $em = $this->getDoctrine()->getManager();
         $em->remove($folderCarousel);
         $em->flush();

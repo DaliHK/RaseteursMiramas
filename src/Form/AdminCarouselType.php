@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\SourcePhoto;
+use App\Entity\Carousel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,7 +23,7 @@ class AdminCarouselType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => SourcePhoto::class,
+            'data_class' => Carousel::class,
         ]);
     }
 }

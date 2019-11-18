@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\SourcePhotoRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CarouselRepository")
  */
-class SourcePhoto
+class Carousel
 {
     /**
      * @ORM\Id()
@@ -17,22 +17,22 @@ class SourcePhoto
     private $id;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $photo1;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $photo2;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $photo3;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $photo4;
 
