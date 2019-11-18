@@ -19,55 +19,55 @@ class SourcePhoto
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $vieEcole;
+    private $titre;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $courseCamarguaise;
+    private $categorie;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $illustrationAgenda;
+    private $date;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getVieEcole(): ?string
+    public function getTitre(): ?string
     {
-        return $this->vieEcole;
+        return $this->titre;
     }
 
-    public function setVieEcole(string $vieEcole): self
+    public function setTitre(string $titre): self
     {
-        $this->vieEcole = $vieEcole;
+        $this->titre = $titre;
 
         return $this;
     }
 
-    public function getCourseCamarguaise(): ?string
+    public function getCategorie(): ?string
     {
-        return $this->courseCamarguaise;
+        return $this->categorie;
     }
 
-    public function setCourseCamarguaise(string $courseCamarguaise): self
+    public function setCategorie(string $categorie): self
     {
-        $this->courseCamarguaise = $courseCamarguaise;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getIllustrationAgenda(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->illustrationAgenda;
+        return $this->date;
     }
 
-    public function setIllustrationAgenda(string $illustrationAgenda): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->illustrationAgenda = $illustrationAgenda;
+        $this->date = $date;
 
         return $this;
     }

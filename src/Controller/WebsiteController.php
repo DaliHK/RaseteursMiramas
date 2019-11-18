@@ -43,12 +43,14 @@ class WebsiteController extends AbstractController
             
         ]);
     }
-/**
+    
+    /**
      * Permet d'afficher un seul événement
      * @Route("/visiteur/evenements/{id}", name="detailevenementvisiteur")
      * 
      * @return Response
      */
+
     public function detailEvenements($id, EvenementRepository $repo)
     {
         $evenement = $repo->findAll();
