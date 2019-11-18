@@ -1,4 +1,6 @@
--> Afficher les evenements a venir
+-> Afficher les evenements a venir - OK
 -> Créer la pagination
 -> Traduire le calendrier en français
 -> Récupérer les participants aux événements dans l'admin
+-> Faire le CMS texte
+-> empêcher les multi inscriptions

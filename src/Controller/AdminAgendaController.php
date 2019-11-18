@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,7 +40,6 @@ class AdminAgendaController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($evenement);
             $entityManager->flush();
-
             return $this->redirectToRoute('evenement_index');
         }
 
@@ -63,12 +63,11 @@ class AdminAgendaController extends AbstractController
      * @Route("/participants{id}", name="participants", methods={"GET"})
      * 
      */
-    public function voirParticipants(ParticipationEvenementRepository $repoParticipants, $id)
+    public function voirParticipants(ParticipationEvenementRepository $repoParticipants, $id, AdherentRepository $adherentListe)
     {
-        $participants = $repoParticipants->findBy($id);
-        dump($participants);die;
+        $inscriptions = $repoParticipants->findByEvenement($id);
         return $this->render('evenement/participants.html.twig',[
-            'participants' => $participants,
+            'inscriptions' => $inscriptions
         ]);
     }
 
