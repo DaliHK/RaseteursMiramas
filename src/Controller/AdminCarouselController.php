@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\SourcePhoto;
 use App\Form\AdminCarouselType;
+use App\Repository\SourcePhotoRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +29,7 @@ class AdminCarouselController extends AbstractController
      * @Route("/admin/carousel", name="admin_carousel")
      */
     
-    public function adminCarousel(Request $request,Filesystem $filesystem){
+    public function adminCarousel(Request $request,Filesystem $filesystem,SourcePhotoRepository $sourcePhoto){
 
         /* $pictureEdit = $sourcePhoto->findBy(['categorie' => 'carousel']); */
         /* $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->findBy(["categorie"=>"carousel"]);
@@ -94,16 +95,11 @@ class AdminCarouselController extends AbstractController
         return $this->render('admin_carousel/carousel.html.twig',[
 
             'carousel'=>$carouselForm->createView(),
-            /* 'picture'=>$SourcePhoto->findAll(),
+            'picture'=>$sourcePhoto->findAll(),
             'count'=> $count = 0,
-            'picture1'=>$picture1 = 0,
-            'picture2'=>$picture2 = 0,
-            'picture3'=>$picture3 = 0,
-            'picture4'=>$picture4 = 0 */
-        
+
         ]);
     }
-
 
     /**
      * Supprimer une image d'un carousel
