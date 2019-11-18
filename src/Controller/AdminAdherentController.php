@@ -22,6 +22,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AdminAdherentController extends AbstractController
 {
+/**
+     * @Route("/accueil", name="admin_index")
+     */
+    public function indexAdmin(){
+        return $this->render('Adminadherent/accueil.html.twig');
+    }
+
 
     /**
      * @Route("/adherent", name="adherent_index", methods={"GET","POST"})

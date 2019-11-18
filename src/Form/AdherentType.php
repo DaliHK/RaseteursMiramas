@@ -36,7 +36,7 @@ class AdherentType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('email')
-            ->add('telephone',PhoneNumberType::class, array('default_region' => 'GB', 'format' => PhoneNumberFormat::NATIONAL))
+            ->add('telephone')
             ->add('adresse')
             ->add('cp')
             ->add('ville')

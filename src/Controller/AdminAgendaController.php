@@ -5,10 +5,11 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ParticipationEvenementRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin")
@@ -58,6 +59,19 @@ class AdminAgendaController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/participants{id}", name="participants", methods={"GET"})
+     * 
+     */
+    public function voirParticipants(ParticipationEvenementRepository $repoParticipants, $id)
+    {
+        $participants = $repoParticipants->findBy($id);
+        dump($participants);die;
+        return $this->render('evenement/participants.html.twig',[
+            'participants' => $participants,
+        ]);
+    }
+
     /**
      * @Route("/{id}/edit", name="evenement_edit", methods={"GET","POST"})
      */
@@ -76,7 +90,7 @@ class AdminAgendaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="evenement_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="evenement_delete", methods={"DELETE"})
      * 
      */
     public function delete(Request $request, Evenement $evenement): Response

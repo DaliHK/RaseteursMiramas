@@ -193,7 +193,7 @@ class AdherentUtilisateurController extends AbstractController
                 $arrayFileName[] = $this->generateUniqueFileName().'.'.$arrayFile[$i]->guessExtension();
             }
 
-            // Envoie les fichiés dans le dossier crée pour l'adherent qui à sont id comme nom
+            // Envoie les fichiers dans le dossier crée pour l'adherent qui à son id comme nom
             for ($i=0; $i < count($arrayFile) ; $i++) 
             { 
                 $arrayFile[$i]->move($path.$userProfile->getId(), 
@@ -201,7 +201,7 @@ class AdherentUtilisateurController extends AbstractController
                 );
             }
             
-            //Envoie les noms relié au fichier dans la BDD
+            //Envoie les noms reliés au fichier dans la BDD
             $newFileRegistration->setphotoIdentite($arrayFileName['0']);
             $newFileRegistration->setCertificatMedical($arrayFileName['1']);
             $newFileRegistration->setDroitImage($arrayFileName['2']);
@@ -226,7 +226,6 @@ class AdherentUtilisateurController extends AbstractController
             'participation'=>$participations
 
             ]);
-    
     }
 
     /**
@@ -241,7 +240,7 @@ class AdherentUtilisateurController extends AbstractController
     public function adherentEditProfile(Request $request, UserInterface $userProfile, UserPasswordEncoderInterface $encoder)
     {
         //Affiche le formulaire deja enregistré de l'user pour qu'il puisse le consulter ou modifier
-        $form = $this->createForm(EditAdherentType::class,$userProfile); //On utiliser le userProfile pour générer le formulaire prés remplis
+        $form = $this->createForm(EditAdherentType::class,$userProfile); //On utiliser le userProfile pour générer le formulaire pré-rempli
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

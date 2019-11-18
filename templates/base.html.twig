@@ -70,23 +70,16 @@
 			</div>
 		</nav>
 		<!-- Navbar end -->
-	</body>
 
+	{% block body %}
 
-	{% block body %}{% endblock %}
+	{% endblock %}
 
 	<!-- footer -->
 	<footer class="container-fluid bg-4 text-center pt-4 pl-4">
 
-		​
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success">
-				{{ message }}
-			</div>
-		{% endfor %}
 
 		<div class="row">
-			​
 			<!-- Grid column -->
 			<div class="col text-justify">
 				​

@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Evenement;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Evenement|null find($id, $lockMode = null, $lockVersion = null)
@@ -43,6 +44,17 @@ class EvenementRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findUpcomingEvents()
+    {
+        $now = new DateTime();
+
+        return $this->createQueryBuilder('m')
+                    ->where("m.dateDebut >= ?1")
+                    ->setParameter(1, $now)
+                    ->getQuery()
+                    ->getResult();
     }
     
 }

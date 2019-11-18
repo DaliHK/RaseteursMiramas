@@ -6,16 +6,23 @@
 		<div class="row">
 
 			<div class="col">
-
 				<h4 class="card-title">{{ evenement.titre }}</h4>
 
 				<p class="card-text">{{ evenement.Description }}</p>
 
+	 				{% for message in app.flashes('success') %}
+            			<div class="alert alert-success">
+                			{{ message }}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+            			</div>
+        			{% endfor %}
+
 				{{form_start(form)}}
 				{{form_widget(form)}}
 				{{form_end(form)}}
-
-
+				
 			</div>
 
 			<div class="col-sm-3 sidenav">

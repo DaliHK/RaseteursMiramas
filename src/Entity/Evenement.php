@@ -29,12 +29,12 @@ class Evenement
     private $dateFin;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nombreParticipantMax;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $niveauRequis;
 
@@ -54,9 +54,10 @@ class Evenement
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvenement", mappedBy="evenement")
+     * @ORM\OneToMany(targetEntity="App\Entity\ParticipationEvenement", mappedBy="evenement", orphanRemoval=true)
      */
     private $participationEvenements;
+
 
     public function __construct()
     {

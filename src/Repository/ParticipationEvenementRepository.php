@@ -35,7 +35,6 @@ class ParticipationEvenementRepository extends ServiceEntityRepository
         ;
     }
     
-    
     public function findOneBySomeField($value): ?ParticipationEvenement
     {
         return $this->createQueryBuilder('p')

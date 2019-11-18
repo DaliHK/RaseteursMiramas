@@ -38,11 +38,7 @@ class AdminEditAdherentType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('email',EmailType::class)
-            // ->add('telephone', NumberType::class, [
-            //     'attr'=> [
-            //         ''
-            //     ]
-            // ])
+            ->add('telephone')
             ->add('adresse')
             ->add('cp')
             ->add('ville')
@@ -54,10 +50,8 @@ class AdminEditAdherentType extends AbstractType
                     'Pré-inscrit' => false
                 ]])
             ->add('nomUrgence')
-            
             ->add('niveau',ChoiceType::class, [
                 'choices'  => [
-                   
                     'cycle 2' => true,
                     'cycle 1' => false
                 ]])

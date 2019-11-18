@@ -24,11 +24,13 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    
+
+
     public function index(EvenementRepository $repo)
     {
-        $evenements = $repo->findAll();
         
+        $evenements = $repo->findUpcomingEvents();
+
         return $this->render('home/home.html.twig', [
             'evenements' => $evenements
         ]);
