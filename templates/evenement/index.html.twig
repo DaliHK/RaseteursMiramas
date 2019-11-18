@@ -33,6 +33,7 @@
 					<td>{{ evenement.description }}</td>
 					<td>{{ evenement.categorie }}</td>
 					<td>
+					
 						<a class="btn btn-primary" href="{{ path('evenement_edit', {'id': evenement.id}) }}">Editer</a>
 						<a class="btn btn-primary" href="{{ path('participants', {'id': evenement.id}) }}">Voir participants</a>
 
@@ -52,7 +53,7 @@
 				</tr>
 
 			{% endfor %}
-			
+
 		</tbody>
 	</table>
 

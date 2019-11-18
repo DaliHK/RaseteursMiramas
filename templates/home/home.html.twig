@@ -31,26 +31,32 @@
 		</div>
 		​
 		<div class="jumbotron mt-3">
-			​
-			<p class="lead">Nous mettons en relations les visiteurs et les propriétaires qui veulent profiter des
-			opportunités et gagner de l'argent en proposant leur bien à la location.</p>
-			<hr class="my-4">
-			<p>Vous êtes voyageur et vous voulez voir où vous pourrez loger pour votre prochain déplacement ?</p>
+		<!-- section -->
+			<div class="container-fluid bg-2 text-center">
+			<h3>Premiere section</h3>
+			{# contenu ici #}
+			</div>
+		<!--end-->
 		</div>
 		​
 		<!-- section -->
 		<div class="container-fluid bg-2 text-center">
-			<h3>Another section
-			</h3>
-			<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam quia voluptatum tempora libero dicta!  Reiciendis voluptatem laboriosam eos nam distinctio laudantium nihil, eius nobis nisi! Doloribus se eius nemo consequuntur.Eveniet architecto ut, molestias ipsa maiores nihil vitae blanditiis a exercitationem mollitia eos porro est. Excepturi quaerat, alias facilis assumenda officiis qui repellat erferendis expedita ratione aut quisquam voluptate neque?</p>
+			<h3>Deuxieme section</h3>
+			{# contenu ici #}
+		</div>
+		<!--end-->
+
+		<!-- section -->
+		<div class="container-fluid bg-2 text-center">
+			<h3>Troisième section</h3>
+			{# contenu ici #}
 		</div>
 		<!--end-->
 		​
 		<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
-
 			<div class="row">
 
-				​	{% for evenement in evenements %}
+				​{% for evenement in evenements %}
 				
 				<div class="col-md-4">
 					<div class="card bg-light mb-3">
@@ -59,9 +65,7 @@
 						</div>
 						​
 						<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
-						​
 						<div class="card-body">
-
 							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, optio
 							temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>

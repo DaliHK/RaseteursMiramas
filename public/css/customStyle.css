@@ -2,13 +2,3 @@ body {
     padding-top:200px;
 }
 
-/*--CSS PANEL ADMIN--*/
-
-/*--Images éditer/supprimer panel admin--*/
-
-.action-icons {
-    position: relative;
-    left: -5px;
-    height: 31px; 
-    width:auto; 
-}

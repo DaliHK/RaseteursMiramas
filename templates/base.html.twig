@@ -26,11 +26,12 @@
 			​
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
-					​
-					<!--<a href="{{ path('home') }}"><img src="" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>-->
-					                                                        ​
-					<li class="nav-item active">
+					<!--<a href="">Accueil</a>-->
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('home') }}">Accueil</a>
+					</li>
 
+					<li class="nav-item active">
 						<a class="nav-link" href="{{ path('ecole') }}">
 							L'école
 							<span class="sr-only">(current)</span>
@@ -65,6 +66,16 @@
 
 					{% endif %}
 
+					{% if is_granted('ROLE_ADMIN') %}
+
+						<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
+							<a class="nav-link" href="{{ path('admin_index') }}">Panel administrateur</a>
+						</li>
+					
+					{% else %}
+
+					{% endif %}
+
 				</ul>
 				​
 			</div>
@@ -72,12 +83,10 @@
 		<!-- Navbar end -->
 
 	{% block body %}
-
 	{% endblock %}
 
 	<!-- footer -->
 	<footer class="container-fluid bg-4 text-center pt-4 pl-4">
-
 
 		<div class="row">
 			<!-- Grid column -->
@@ -85,7 +94,7 @@
 				​
 				<h5 class="text-uppercase">Nous contacter</h5>
 				<p>1005 che Vieux Château
-					<br>13140 MIRAMAS expedita,</p>
+				<br>13140 MIRAMAS expedita,</p>
 				​
 			</div>
 
@@ -107,8 +116,23 @@
 		<hr class="footerhr">
 		​
 		<div class="col-xs-1 text-center pb-4">
-
 			Copyright 2019
 		</div>
 	</footer>
-</html></body></html></body>{% block javascripts %}<!--scripts--><script src="js/to-top.js"></script><!-- JQuery --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- Bootstrap tooltips --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script><!-- Bootstrap core JavaScript --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>{% endblock %}</html></body></html>
+	</body>
+
+</html>
+
+{% block javascripts %}
+<!--scripts-->
+<script src="js/to-top.js"></script>
+<!-- JQuery --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+</script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+
+{% endblock %}
