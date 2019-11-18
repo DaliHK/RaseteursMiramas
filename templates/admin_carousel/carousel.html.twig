@@ -24,15 +24,16 @@
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
+                        <span class="sr-only">Précedent</span>
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
+                        <span class="sr-only">Suivant</span>
                     </a>
                 </div> 
              </div>
         {% else %}
+             <!-- Carousel d'exemple quand il y a pas de photo -->
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -47,17 +48,18 @@
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
+                    <span class="sr-only">Précedent</span>
                 </a>
                 <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
+                    <span class="sr-only">Suivant</span>
                 </a>
             </div>
         {% endif %}
+            <!-- Le boutton supprimer apparait si il y a un carousel déja existant -->
             <div class="row">
                 {% if picture %}
-
+                    <!-- Supprimer le carousel -->
                     <a href="{{ path('delete_picture_carousel',{'id' : picture.0.id })}}" class="btn btn-primary">Supprimer</a>
 
                 {% else %}
