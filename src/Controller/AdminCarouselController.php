@@ -29,22 +29,19 @@ class AdminCarouselController extends AbstractController
      * @Route("/admin/carousel", name="admin_carousel")
      */
     
-    public function adminCarousel(Request $request,SourcePhotoRepository $SourcePhoto){
+    public function adminCarousel(Request $request,SourcePhotoRepository $SourcePhoto,Filesystem $filesystem){
 
-        /* dump($Photo);
-        die;  */
-        
         /* $pictureEdit = $sourcePhoto->findBy(['categorie' => 'carousel']); */
-
+        /* $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->findBy(["categorie"=>"carousel"]);
+        dump($folderCarousel);
+        die; */
         //Instencie la variable NewPicture pour utiliser c'est prop  et affecte la variable registration pour crée la vue.
-
         $newPicture = new SourcePhoto();
         $carouselForm = $this->createForm(AdminCarouselType::class, $newPicture);
         $carouselForm->handleRequest($request);
         /* dump($newPicture);
         die; */
 
-        $carouselForm->handleRequest($request);
         if ($carouselForm->isSubmitted() && $carouselForm->isValid()) {
 
 
@@ -54,18 +51,18 @@ class AdminCarouselController extends AbstractController
 
             $path = $this->getParameter('carousel_directory');
 
-            /* if (!$path.'carousel') {
+             if (!$path) {
 
                 //Crée un dossier avec l'id de l'adherent connecté à l'amplacement du $path
-                $folderCarousel = $filesystem->mkdir($path.'carousel',0700);
-            } */
+                $path= $filesystem->mkdir($path.'carousel',0700);
+            } 
            
             // Géneration de nom unique pour les fichiers pour éviter les doublons et sécuriser 
            $fileName1 = $this->generateUniqueFileName().'.'.$file1->guessExtension();
           
 
             // Envoie les fichiés dans le dossier carousel
-             $file1->move($path, 
+             $file1->move($path , 
                     $fileName1);
 
             //Envoie les noms relié au fichier dans la BDD
@@ -87,30 +84,35 @@ class AdminCarouselController extends AbstractController
             'carousel'=>$carouselForm->createView(),
             'picture'=>$SourcePhoto->findAll(),
             'count'=> $count = 0,
+            'picture1'=>$picture1 = 0,
+            'picture2'=>$picture2 = 0,
+            'picture3'=>$picture3 = 0,
+            'picture4'=>$picture4 = 0
         
         ]);
     }
 
+
     /**
      * Supprimer une image d'un carousel
-     * @Route("admin/carousel/delete/", name="delete_picture_carousel")
+     * @Route("admin/carousel/delete/{id}", name="delete_picture_carousel")
      */
     
-     public function deleteFolderRegistration($id,Filesystem $fileSystem )
+     public function deleteFolderRegistration()
     {   
        
          //Supprimer le fichier dans le dossier qui a l'id du user connecté
         $path = $this->getParameter('carousel_directory');
         $fs = new Filesystem(); 
-        $fs->remove($path.'carousel'); 
+        $fs->remove($path); 
         
         //Supprimer les nom des fichiés dans la BDD
-        $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->findBy(["catagorie"=>"carousel"]);
+        $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->findBy([$id]);
         $em = $this->getDoctrine()->getManager();
         $em->remove($folderCarousel);
         $em->flush();
 
         return $this->redirectToRoute('admin_carousel');
-        
+
     }
 }

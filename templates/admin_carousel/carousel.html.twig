@@ -23,23 +23,23 @@
                     {# Pour Afficher les photos du carousel #} 
                         {% if pictures.categorie == "carousel"  %}
                             <div class="carousel-item active">
-                                <img class="d-block w-50" src="{{ asset('carousel/' ~ pictures.nom) }}" alt="First slide"> 
+                                <img class="d-block w-50" src="{{ asset('uploads/carousel/' ~ pictures.nom) }}" alt="First slide"> 
 
                             {# Pour compter le nombre d'image qui a pour le carousel #}
                             {% set count = count + 1  %}
                             
                             {# J'affecte les variables avec le nom de l'image par rapport à sont emplacement dans la bdd  #}
                             {% if count == 1 %}
-                                {% set picture1 = pictures.nom %}
+                                {% set picture1 = pictures.id %}
                             {% endif %}
                             {% if count == 2 %}
-                                {% set picture2 = pictures.nom %}
+                                {% set picture2 = pictures.id %}
                             {% endif %}
                             {% if count == 3 %}
-                                {% set picture3 = pictures.nom %}
+                                {% set picture3 = pictures.id %}
                             {% endif %}
                             {% if count == 4 %}
-                                {% set picture4 = pictures.nom %}
+                                {% set picture4 = pictures.id %}
                             {% endif %}
                             
                         {% endif %}
@@ -47,11 +47,9 @@
                     </div>
                     {% endif %}
                     {% endfor %}
+
                     
-               {#  {{dump(picture1)}}
-                {{dump(picture3)}}
-                {{dump(picture2)}}
-                {{dump(picture4)}} #}
+                    
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -71,9 +69,11 @@
             {% if  count ==  4 %}
                 <h6> Le nombre de photo dans le carousel est au maximum cliquer pour modifier </h6> 
 
-            <div class="row justify-content-center">
-                <a class="btn" href="{{path('delete_picture_carousel')}}" type="button">Modifier</a>
-            </div>
+                 <div class="row justify-content-center">
+                    <a class="btn" href="{{path('delete_picture_carousel',{'id' :picture1 ,'id':picture2,'id':picture3 ,'id':picture4})}}" type="button">Modifier</a>
+                </div>
+           
+           
         </div>
 
             {% else %}
@@ -86,7 +86,7 @@
                     {{ form_row(carousel.categorie,{'attr':{'placeholder':"carousel"}})}}
                     
                     <div class=" row justify-content-center">
-                        <button type="submit" class='btn btn-success'>Modifier</button>
+                        <button type="submit" class='btn btn-success'>Envoyer</button>
                     </div>
                     {{ form_end(carousel) }}
                 </div>
