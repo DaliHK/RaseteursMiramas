@@ -7,15 +7,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class AdminCarouselType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom',FileType::class)
-            ->add('categorie',TextType::class)
+            ->add('photo1',FileType::class)
+            ->add('photo2',FileType::class)
+            ->add('photo3',FileType::class)
+            ->add('photo4',FileType::class)
         ;
     }
 

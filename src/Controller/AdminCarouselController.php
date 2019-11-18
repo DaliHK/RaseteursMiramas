@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\SourcePhoto;
 use App\Form\AdminCarouselType;
-use App\Repository\SourcePhotoRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +28,7 @@ class AdminCarouselController extends AbstractController
      * @Route("/admin/carousel", name="admin_carousel")
      */
     
-    public function adminCarousel(Request $request,SourcePhotoRepository $SourcePhoto,Filesystem $filesystem){
+    public function adminCarousel(Request $request,Filesystem $filesystem){
 
         /* $pictureEdit = $sourcePhoto->findBy(['categorie' => 'carousel']); */
         /* $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->findBy(["categorie"=>"carousel"]);
@@ -46,30 +45,43 @@ class AdminCarouselController extends AbstractController
 
 
             // Stock les fichiés  uploader dans une variable
-            $file1 = $newPicture->getNom();
-            $file2 = $newPicture->getCategorie();
+            $photo1 = $newPicture->getPhoto1();
+            $photo2 = $newPicture->getPhoto2();
+            $photo3 = $newPicture->getPhoto3();
+            $photo4 = $newPicture->getPhoto4();
 
             $path = $this->getParameter('carousel_directory');
 
              if (!$path) {
 
                 //Crée un dossier avec l'id de l'adherent connecté à l'amplacement du $path
-                $path= $filesystem->mkdir($path.'carousel',0700);
-            } 
-           
+                $path = $filesystem->mkdir($path.'carousel',0700);
+            }
+
             // Géneration de nom unique pour les fichiers pour éviter les doublons et sécuriser 
-           $fileName1 = $this->generateUniqueFileName().'.'.$file1->guessExtension();
+           $fileName1 = $this->generateUniqueFileName().'.'.$photo1->guessExtension();
+           $fileName2 = $this->generateUniqueFileName().'.'.$photo2->guessExtension();
+           $fileName3 = $this->generateUniqueFileName().'.'.$photo3->guessExtension();
+           $fileName4 = $this->generateUniqueFileName().'.'.$photo4->guessExtension();
           
 
             // Envoie les fichiés dans le dossier carousel
-             $file1->move($path , 
+             $photo1->move($path , 
                     $fileName1);
+             $photo2->move($path , 
+                    $fileName2);
+             $photo3->move($path , 
+                    $fileName3);
+             $photo4->move($path , 
+                    $fileName4);
 
             //Envoie les noms relié au fichier dans la BDD
-            $newPicture->setNom($fileName1);
+            $newPicture->setphoto1($fileName1);
+            $newPicture->setphoto2($fileName2);
+            $newPicture->setphoto3($fileName3);
+            $newPicture->setphoto4($fileName4);
             
             
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newPicture);
             $entityManager->flush();
@@ -82,12 +94,12 @@ class AdminCarouselController extends AbstractController
         return $this->render('admin_carousel/carousel.html.twig',[
 
             'carousel'=>$carouselForm->createView(),
-            'picture'=>$SourcePhoto->findAll(),
+            /* 'picture'=>$SourcePhoto->findAll(),
             'count'=> $count = 0,
             'picture1'=>$picture1 = 0,
             'picture2'=>$picture2 = 0,
             'picture3'=>$picture3 = 0,
-            'picture4'=>$picture4 = 0
+            'picture4'=>$picture4 = 0 */
         
         ]);
     }
@@ -98,7 +110,7 @@ class AdminCarouselController extends AbstractController
      * @Route("admin/carousel/delete/{id}", name="delete_picture_carousel")
      */
     
-     public function deleteFolderRegistration()
+     public function deleteFolderRegistration($id)
     {   
        
          //Supprimer le fichier dans le dossier qui a l'id du user connecté
@@ -107,7 +119,7 @@ class AdminCarouselController extends AbstractController
         $fs->remove($path); 
         
         //Supprimer les nom des fichiés dans la BDD
-        $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->findBy([$id]);
+        $folderCarousel = $this->getDoctrine()->getRepository(SourcePhoto::class)->find($id);
         $em = $this->getDoctrine()->getManager();
         $em->remove($folderCarousel);
         $em->flush();
