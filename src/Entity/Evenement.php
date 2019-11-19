@@ -24,11 +24,6 @@ class Evenement
     private $dateDebut;
 
     /**
-     * @ORM\Column(type="date", length=255)
-     */
-    private $dateFin;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nombreParticipantMax;
@@ -58,6 +53,11 @@ class Evenement
      */
     private $participationEvenements;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $lieu;
+
 
     public function __construct()
     {
@@ -78,18 +78,6 @@ class Evenement
     public function setDateDebut(\DateTimeInterface $dateDebut): self
     {
         $this->dateDebut = $dateDebut;
-
-        return $this;
-    }
-
-    public function getDateFin(): ?\DateTimeInterface
-    {
-        return $this->dateFin;
-    }
-
-    public function setDateFin(\DateTimeInterface $dateFin): self
-    {
-        $this->dateFin = $dateFin;
 
         return $this;
     }
@@ -181,6 +169,18 @@ class Evenement
                 $participationEvenement->setEvenement(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(string $lieu): self
+    {
+        $this->lieu = $lieu;
 
         return $this;
     }

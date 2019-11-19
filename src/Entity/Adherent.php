@@ -70,7 +70,7 @@ class Adherent implements UserInterface
 
     /**
      * @ORM\Column(name="dateNaissance", type="datetime")
-     * @Assert\NotBlank(message="Ce champ doit être rempli")
+     * 
      */
     private $dateNaissance;
 
@@ -116,7 +116,7 @@ class Adherent implements UserInterface
     private $ville;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $numeroUrgence;
 
@@ -379,12 +379,12 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getNumeroUrgence(): ?int
+    public function getNumeroUrgence(): ?string
     {
         return $this->numeroUrgence;
     }
 
-    public function setNumeroUrgence(?int $numeroUrgence): self
+    public function setNumeroUrgence(string $numeroUrgence): self
     {
         $this->numeroUrgence = $numeroUrgence;
 

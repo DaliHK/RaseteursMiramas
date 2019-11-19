@@ -10,6 +10,7 @@ use App\Form\DossierInscriptionType;
 use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ParticipationEvenementRepository;
@@ -25,29 +26,33 @@ class WebsiteController extends AbstractController
      * @Route("/", name="home")
      */
 
-
     public function index(EvenementRepository $repo)
     {
-        
         $evenements = $repo->findUpcomingEvents();
-
         return $this->render('home/home.html.twig', [
             'evenements' => $evenements
         ]);
-
     }
 
     /**
      * @Route("/visiteur/evenements", name="evenements")
      */
-    public function listeEvenements(EvenementRepository $repo)
+    public function listeEvenements(PaginatorInterface $paginator)
     {
-       
+        $repo = $this->getDoctrine()->getRepository(Evenement::class);
+
         $evenements = $repo->findAll();
+        $request = Request::createFromGlobals();
+
+        $agenda = $paginator->paginate(
+            $evenements, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
 
         return $this->render('event/events.html.twig', [
-            'evenements' => $evenements
-            
+            'evenements' => $evenements,
+            'agenda' => $agenda
         ]);
     }
 
@@ -63,7 +68,6 @@ class WebsiteController extends AbstractController
         $evenement = $repo->findAll();
         $evenement = $repo->find($id);
         $manager = $this->getDoctrine()->getManager();
-
             return $this->render('visiteur/visiteur_detailEvenements.html.twig', [
                 'evenement' => $evenement,
                 'id' => $id
@@ -97,6 +101,5 @@ class WebsiteController extends AbstractController
             return $this->render('website/ecole.html.twig');
 
     }
-     
      
 }

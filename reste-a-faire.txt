@@ -1,6 +1,8 @@
 -> Afficher les evenements a venir - OK
--> Créer la pagination
+-> Créer la pagination - En cours
 -> Traduire le calendrier en français
--> Récupérer les participants aux événements dans l'admin
--> Faire le CMS texte
--> empêcher les multi inscriptions
+-> Récupérer les participants aux événements dans l'admin - OK
+-> Faire le CMS texte - En cours
+-> empêcher les multi inscriptions - OK
+-> Personnaliser le message d'erreur des multi inscriptions
+-> Faire le formulaire de contact

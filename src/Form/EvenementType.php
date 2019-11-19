@@ -18,14 +18,11 @@ class EvenementType extends AbstractType
             ->add('titre', TextType::class, [
                 'label' => 'Titre de l\'événement',
             ])
+            ->add('lieu')
             ->add('dateDebut', DateType::class, [
                 'label' => 'Date de début',
                 'format' => 'ddMMyyyy'
             ])
-            ->add('dateFin', DateType::class, [
-            'label' => 'Date de fin (optionnel)',
-            'format' => 'ddMMyyyy'
-        ])
             ->add('nombreParticipantMax')
             ->add('niveauRequis' ,ChoiceType::class, [
                 'choices'  => [

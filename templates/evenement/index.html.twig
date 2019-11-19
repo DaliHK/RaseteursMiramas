@@ -12,6 +12,7 @@
 			<tr>
 				<th>Id</th>
 				<th>Titre</th>
+				<th>Lieu</th>
 				<th>Date</th>
 				<th>Nombre de participants max</th>
 				<th>Niveau requis</th>
@@ -27,6 +28,7 @@
 
 					<td>{{ evenement.id }}</td>
 					<td>{{ evenement.titre }}</td>
+					<td>{{ evenement.lieu }}</td>
 					<td>{{ evenement.dateDebut ? evenement.dateDebut|date('d-m-Y') : '' }}</td>
 					<td>{{ evenement.nombreParticipantMax }}</td>
 					<td>{{ evenement.niveauRequis }}</td>

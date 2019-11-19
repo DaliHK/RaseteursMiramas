@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipationEvenementRepository")
  * @ORM\Table(name="participation_evenement", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C7", columns={"adherent_id", "evenement_id"})})
- * 
+ *
  */
 
 class ParticipationEvenement
