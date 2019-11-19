@@ -6,12 +6,19 @@
             <h4> Gestion des photos</h4>
         </div>
 
-        <div class ="row" > 
-                
-
-
-
-
+        <div class="row justify-content-center mt-4">
+        
+            {{ form_start(sourcePictureForm) }}
+        
+            {{ form_row(sourcePictureForm.titre,{'attr':{'placeholder':"Titre de la photo"}})}}
+            {{ form_row(sourcePictureForm.categorie,{'attr':{'placeholder':"Categorie"}})}}
+           {#  {{ form_row(sourcePictureForm.date,{'attr':{'placeholder':""}})}} #}
+            
+        
+            <div class=" row justify-content-center">
+                <button type="submit" class='btn btn-success'>Envoyer</button>
+            </div>
+            {{ form_end(sourcePictureForm) }}
         </div>
 
 
