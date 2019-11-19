@@ -1,9 +1,7 @@
 <?php
-
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ModeleDocumentRepository")
  */
@@ -15,162 +13,125 @@ class ModeleDocument
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $certificatMedical;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $droitImage;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $droitTransport;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255 , nullable=true)
      */
     private $droitPratique;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $droitEntrainement;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $renseignementsMedicaux;
-
+    private $RenseignementsMedicaux;
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $renseignementsGeneraux;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reglement;
-
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $statuts;
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getCertificatMedical(): ?string
+    public function getCertificatMedical()
     {
         return $this->certificatMedical;
     }
-
-    public function setCertificatMedical(string $certificatMedical): self
+    public function setCertificatMedical(UploadedFile $certificatMedical)
     {
         $this->certificatMedical = $certificatMedical;
-
         return $this;
     }
-
-    public function getDroitImage(): ?string
+    public function getDroitImage()
     {
         return $this->droitImage;
     }
-
-    public function setDroitImage(string $droitImage): self
+    public function setDroitImage($droitImage)
     {
         $this->droitImage = $droitImage;
-
         return $this;
     }
-
-    public function getDroitTransport(): ?string
+    public function getDroitTransport()
     {
         return $this->droitTransport;
     }
-
-    public function setDroitTransport(string $droitTransport): self
+    public function setDroitTransport($droitTransport)
     {
         $this->droitTransport = $droitTransport;
-
         return $this;
     }
-
-    public function getDroitPratique(): ?string
+    public function getDroitPratique()
     {
         return $this->droitPratique;
     }
-
-    public function setDroitPratique(string $droitPratique): self
+    public function setDroitPratique($droitPratique)
     {
         $this->droitPratique = $droitPratique;
-
         return $this;
     }
-
-    public function getDroitEntrainement(): ?string
+    public function getDroitEntrainement()
     {
         return $this->droitEntrainement;
     }
-
-    public function setDroitEntrainement(string $droitEntrainement): self
+    public function setDroitEntrainement($droitEntrainement)
     {
         $this->droitEntrainement = $droitEntrainement;
-
         return $this;
     }
-
-    public function getRenseignementsMedicaux(): ?string
+    public function getRenseignementsMedicaux()
     {
         return $this->RenseignementsMedicaux;
     }
-
-    public function setRenseignementsMedicaux(string $RenseignementsMedicaux): self
+    public function setRenseignementsMedicaux($RenseignementsMedicaux)
     {
         $this->RenseignementsMedicaux = $RenseignementsMedicaux;
-
         return $this;
     }
-
-    public function getRenseignementsGeneraux(): ?string
+    public function getRenseignementsGeneraux()
     {
         return $this->renseignementsGeneraux;
     }
-
-    public function setRenseignementsGeneraux(string $renseignementsGeneraux): self
+    public function setRenseignementsGeneraux($renseignementsGeneraux)
     {
         $this->renseignementsGeneraux = $renseignementsGeneraux;
-
         return $this;
     }
-
-    public function getReglement(): ?string
+    public function getReglement()
     {
         return $this->reglement;
     }
-
-    public function setReglement(string $reglement): self
+    public function setReglement($reglement)
     {
         $this->reglement = $reglement;
-
         return $this;
     }
-
-    public function getStatuts(): ?string
+    public function getStatuts()
     {
         return $this->statuts;
     }
-
-    public function setStatuts(string $statuts): self
+    public function setStatuts($statuts)
     {
         $this->statuts = $statuts;
-
         return $this;
     }
 }

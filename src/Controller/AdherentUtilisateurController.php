@@ -170,7 +170,7 @@ class AdherentUtilisateurController extends AbstractController
             $file4 = $newFileRegistration->getDroitTransport();
             $file5 = $newFileRegistration->getDroitPratique();
             $file6 = $newFileRegistration->getRenseignementsMedicaux();
-            $file7 = $newFileRegistration->getrenseignementsgeneraux();
+            $file7 = $newFileRegistration->getRenseignementsGeneraux();
             $file8 = $newFileRegistration->getDroitEntrainement();
 
             // Géneration de nom pour les fichiers pour éviter les doublons et sécuriser 
@@ -233,7 +233,7 @@ class AdherentUtilisateurController extends AbstractController
             $newFileRegistration->setDroitTransport($fileName4);
             $newFileRegistration->setDroitPratique($fileName5);
             $newFileRegistration->setRenseignementsMedicaux($fileName6);
-            $newFileRegistration->setrenseignementsgeneraux($fileName7);
+            $newFileRegistration->setRenseignementsGeneraux($fileName7);
             $newFileRegistration->setDroitEntrainement($fileName8);
 
             $newFileRegistration->setAdherent($userProfile);

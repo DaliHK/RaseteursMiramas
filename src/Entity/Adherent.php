@@ -82,7 +82,7 @@ class Adherent implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank()   
      * @Assert\Regex(
      * pattern="/[0-9]{10}/"
      * )
@@ -321,12 +321,12 @@ class Adherent implements UserInterface
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(int $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 

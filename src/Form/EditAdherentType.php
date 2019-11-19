@@ -35,10 +35,10 @@ class EditAdherentType extends AbstractType
                'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance', DateType::class, [
-                'required' => false,
-                'empty_data' => null
-                ])
+            //->add('dateNaissance', DateType::class, [
+             //   'required' => false,
+             //   'empty_data' => null
+             //   ])
             //->add('dateInscription', DateType::class, [
              //'required' => false,
             //'empty_data' => null
@@ -55,7 +55,7 @@ class EditAdherentType extends AbstractType
             //->add('cotisationLicence')
             //->add('numLicence')
             //->add('dossierInscription')
-            ->add('submit', SubmitType::class, ['label' => 'Envoyez'])
+            //->add('submit', SubmitType::class, ['label' => 'Envoyez'])
         ;
     }
 

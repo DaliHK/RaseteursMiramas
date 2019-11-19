@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     registration_directory: '%kernel.project_dir%/public/uploads/inscriptions'
+    document_directory: '%kernel.project_dir%/public/uploads/documentsModele'
 
 services:
     Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider: ~

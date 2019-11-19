@@ -37,11 +37,7 @@ class AdminEditAdherentType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('email',EmailType::class)
-            // ->add('telephone', NumberType::class, [
-            //     'attr'=> [
-            //         ''
-            //     ]
-            // ])
+            ->add('telephone')
             ->add('adresse')
             ->add('cp')
             ->add('ville')

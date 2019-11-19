@@ -23,7 +23,7 @@ class AdherentRepository extends ServiceEntityRepository
      * @return Adherent[] Returns an array of Adherent objects
      *
      */
-    public function findByExampleField($value)
+    public function findByNameField($value)
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.nom LIKE :val')
@@ -32,10 +32,10 @@ class AdherentRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-            ->findOneBy()
-            ->findBy()
-            ->find()
-            ->findOneByEmail()
+            // ->findOneBy()
+            // ->findBy()
+            // ->find()
+            // ->findOneByEmail()
         ;
     }  
 

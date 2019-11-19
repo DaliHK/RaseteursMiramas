@@ -31,7 +31,7 @@ class AdminAdherentController extends AbstractController
         $form=$this->createFormBuilder()
         ->add('nom', SearchType::class,[
            'required'=> false,
-           'label'=> false,
+           'label'=> 'Recherche par Nom de famille',
             'attr'=>[
                 'placeholder'=> 'Nom'
            ]
@@ -85,7 +85,7 @@ class AdminAdherentController extends AbstractController
      */
     public function show(Adherent $adherent, DossierInscriptionRepository $adherentId,DossierInscriptionRepository $repo): Response
 
-    {//ici gestion doosier inscription
+    {//ici récupere le dossier inscrption de l'adrent pour l'afficher dans le dossier admin adherent
         $dossierInscription=$repo->findAll();
         return $this->render('Adminadherent/show.html.twig', [
             'adherent' => $adherent,
