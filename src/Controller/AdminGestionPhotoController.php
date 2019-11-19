@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\SourcePhoto;
 use App\Form\SourcePhotoType;
 use App\Repository\SourcePhotoRepository;
 use Symfony\Component\Filesystem\Filesystem;
@@ -52,8 +53,8 @@ class AdminGestionPhotoController extends AbstractController
                $fileNames[] = $this->generateUniqueFileName().'.'.$arrayPicture[$i]->guessExtension();
             }
             */
-            $originalFilename = pathinfo($title->getClientOriginalName(), PATHINFO_FILENAME);
-            $fileNames = $this->generateUniqueFileName().'/'.$originalFilename.'.'.$title->guessExtension();
+          
+            $fileNames = $this->generateUniqueFileName().'.'.$title->guessExtension();
  
             // Envoie les fichiés dans le dossier carousel
            /*  for ($a=0; $a <count($fileNames) ; $a++) { 
@@ -79,7 +80,7 @@ class AdminGestionPhotoController extends AbstractController
         return $this->render('admin_gestion_photo/gestionPhoto.html.twig', [
 
              'sourcePictureForm' => $sourcePictureForm->createView(),
-             'sourcePhoto' => $sourcePhoto->findAll()
+             /* 'sourcePhoto' => $sourcePhoto->findAll() */
 
         ]);
     }
