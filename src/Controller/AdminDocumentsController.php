@@ -51,7 +51,7 @@ class AdminDocumentsController extends AbstractController
             $file5 = $newDocuments->getRenseignementsMedicaux();
             $file6 = $newDocuments->getRenseignementsGeneraux();
             $file7 = $newDocuments->getDroitEntrainement();
-            dump($newDocuments->getRenseignementsMedicaux());
+            //dump($newDocuments->getRenseignementsMedicaux());
             // Géneration de nom pour les fichiers pour éviter les doublons et sécuriser 
             $fileName1 = $this->generateUniqueFileName().'.'.$file1->guessExtension();
             $fileName2 = $this->generateUniqueFileName().'.'.$file2->guessExtension();
