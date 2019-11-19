@@ -4,19 +4,21 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\ParticipationEvenementRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/evenement")
+ * @Route("/admin")
  */
 class AdminAgendaController extends AbstractController
 {
     /**
-     * @Route("/", name="evenement_index", methods={"GET"})
+     * @Route("/evenements/voir", name="evenement_index", methods={"GET"})
      */
     public function index(EvenementRepository $evenementRepository): Response
     {
@@ -26,7 +28,7 @@ class AdminAgendaController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="evenement_new", methods={"GET","POST"})
+     * @Route("/nouvel_evenement", name="evenement_nouveau", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -38,7 +40,6 @@ class AdminAgendaController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($evenement);
             $entityManager->flush();
-
             return $this->redirectToRoute('evenement_index');
         }
 
@@ -49,12 +50,24 @@ class AdminAgendaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="evenement_show", methods={"GET"})
+     * @Route("evenement/{id}", name="evenement_show", methods={"GET"})
      */
     public function show(Evenement $evenement): Response
     {
         return $this->render('evenement/show.html.twig', [
             'evenement' => $evenement,
+        ]);
+    }
+
+     /**
+     * @Route("/participants{id}", name="participants", methods={"GET"})
+     * 
+     */
+    public function voirParticipants(ParticipationEvenementRepository $repoParticipants, $id, AdherentRepository $adherentListe)
+    {
+        $inscriptions = $repoParticipants->findByEvenement($id);
+        return $this->render('evenement/participants.html.twig',[
+            'inscriptions' => $inscriptions
         ]);
     }
 
@@ -65,13 +78,10 @@ class AdminAgendaController extends AbstractController
     {
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('evenement_index');
         }
-
         return $this->render('evenement/edit.html.twig', [
             'evenement' => $evenement,
             'form' => $form->createView(),
@@ -79,7 +89,8 @@ class AdminAgendaController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="evenement_delete", methods={"DELETE"})
+     * @Route("/{id}/delete", name="evenement_delete", methods={"DELETE"})
+     * 
      */
     public function delete(Request $request, Evenement $evenement): Response
     {
@@ -88,7 +99,16 @@ class AdminAgendaController extends AbstractController
             $entityManager->remove($evenement);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('evenement_index');
     }
+
+    /**
+     * @Route("/calendrier", name="admincalendrier", methods={"GET"})
+     * 
+     */
+    public function calendar(): Response
+    {
+        return $this->render('admin/calendrier.html.twig');
+    }
 }
+

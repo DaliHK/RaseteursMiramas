@@ -3,8 +3,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Ecole des raseteurs de la Porte de la Crau
-			{% endblock %}
+            Ecole de raseteurs porte de la Crau -
+            {% block title %}{% endblock %}
+        </title>
+
 		</title>
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
 		<link
@@ -24,21 +26,23 @@
 			​
 			<div class="collapse navbar-collapse" id="navbarColor01">
 				<ul class="navbar-nav mr-auto">
-					​
-					<a href="{{ path('home') }}"><img src="img/logo.png" style="max-width:200px; height:auto;" alt="Logo de l'école"></a>
-					​
-																																																																																					                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ​
+					<!--<a href="">Accueil</a>-->
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('home') }}">Accueil</a>
+					</li>
+
 					<li class="nav-item active">
-						<a class="nav-link" href="#">
+						<a class="nav-link" href="{{ path('ecole') }}">
 							L'école
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
+
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('evenements') }}">Evenements</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Contact</a>
+						<a class="nav-link" href="{{ path('contact') }}">Contact</a>
 					</li>
 					<li class="nav-item">
 						<!--S'il est loggé en tant qu'adherent, apparition de espace adherent -->
@@ -49,7 +53,7 @@
 					{% if is_granted('ROLE_USER') %}
 
 						<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-							<a class="nav-link" href="#">Espace adhérent</a>
+							<a class="nav-link" href="{{ path('adherent_profile') }}">Espace adhérent</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{{ path('logout')}}">Se déconnecter</a>
@@ -62,34 +66,35 @@
 
 					{% endif %}
 
+					{% if is_granted('ROLE_ADMIN') %}
+
+						<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
+							<a class="nav-link" href="{{ path('admin_index') }}">Panel administrateur</a>
+						</li>
+					
+					{% else %}
+
+					{% endif %}
+
 				</ul>
 				​
 			</div>
 		</nav>
 		<!-- Navbar end -->
-	</body>
 
-
-	{% block body %}{% endblock %}
+	{% block body %}
+	{% endblock %}
 
 	<!-- footer -->
 	<footer class="container-fluid bg-4 text-center pt-4 pl-4">
 
-		​
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success">
-				{{ message }}
-			</div>
-		{% endfor %}
-
 		<div class="row">
-			​
 			<!-- Grid column -->
 			<div class="col text-justify">
 				​
 				<h5 class="text-uppercase">Nous contacter</h5>
 				<p>1005 che Vieux Château
-					<br>13140 MIRAMAS expedita,</p>
+				<br>13140 MIRAMAS expedita,</p>
 				​
 			</div>
 
@@ -111,8 +116,23 @@
 		<hr class="footerhr">
 		​
 		<div class="col-xs-1 text-center pb-4">
-
 			Copyright 2019
 		</div>
 	</footer>
-</html></body></html></body>{% block javascripts %}<!--scripts--><script src="js/to-top.js"></script><!-- JQuery --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- Bootstrap tooltips --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script><!-- Bootstrap core JavaScript --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>{% endblock %}</html></body></html>
+	</body>
+
+</html>
+
+{% block javascripts %}
+<!--scripts-->
+<script src="js/to-top.js"></script>
+<!-- JQuery --><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+</script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+</script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
+</script>
+
+{% endblock %}

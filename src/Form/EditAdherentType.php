@@ -10,6 +10,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -44,11 +45,11 @@ class EditAdherentType extends AbstractType
             //'empty_data' => null
               //])
             ->add('email',EmailType::class)
-            ->add('telephone',NumberType::class)
+            ->add('telephone',TelType::class)
             ->add('adresse')
             ->add('cp')
             ->add('ville')
-            ->add('numeroUrgence',NumberType::class)
+            ->add('numeroUrgence',TelType::class)
             ->add('nomUrgence',TextType::class)
             //->add('statut')
             //->add('cotisationAsso')

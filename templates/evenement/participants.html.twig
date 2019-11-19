@@ -1,0 +1,42 @@
+{% extends 'baseAdmin.html.twig' %}
+
+    {% block title %}Participants{% endblock %}
+
+        {% block body %}
+
+        <h3>Voir les participants pour l'événement sélectionné</h3>
+
+        <br>
+
+      {% if not inscriptions %}
+
+        <p> Aucun élève ne s'est inscrit à cet événement</p>
+
+      {% else %}
+
+      {% for inscription in inscriptions %}
+
+<table class="table">
+
+		<thead>
+			<tr>
+				<th>Nom</th>
+                <th>Prénom</th>
+			
+			</tr>
+		</thead>
+		<tbody>
+      <tr>
+			    <td>
+			    {{ inscription.adherent.nom }}  
+                </td>
+                
+                <td>
+                {{ inscription.adherent.prenom }}
+                </td>
+				</tr>
+
+        {% endfor %}
+        {% endif %}
+
+        {% endblock %}

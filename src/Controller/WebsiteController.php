@@ -24,11 +24,13 @@ class WebsiteController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    
+
+
     public function index(EvenementRepository $repo)
     {
-        $evenements = $repo->findAll();
         
+        $evenements = $repo->findUpcomingEvents();
+
         return $this->render('home/home.html.twig', [
             'evenements' => $evenements
         ]);
@@ -67,5 +69,34 @@ class WebsiteController extends AbstractController
                 'id' => $id
             ]);
     }
+
+    /**
+     * Permet d'afficher un seul événement
+     * @Route("/contact", name="contact")
+     * 
+     * @return Response
+     */
+
+    public function pageContact()
+    {
+
+            return $this->render('website/contact.html.twig');
+
+    }
+
+    /**
+     * Permet d'afficher un seul événement
+     * @Route("/ecole", name="ecole")
+     * 
+     * @return Response
+     */
+
+    public function pageEcole()
+    {
+
+            return $this->render('website/ecole.html.twig');
+
+    }
+     
      
 }

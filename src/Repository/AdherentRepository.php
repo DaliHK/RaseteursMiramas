@@ -32,10 +32,12 @@ class AdherentRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
-            // ->findOneBy()
-            // ->findBy()
-            // ->find()
-            // ->findOneByEmail()
+            /*
+            ->findOneBy()
+            ->findBy()
+            ->find()
+            ->findOneByEmail()
+            */
         ;
     }  
 
@@ -48,4 +50,5 @@ class AdherentRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+    
 }

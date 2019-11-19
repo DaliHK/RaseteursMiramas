@@ -22,6 +22,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 class AdminAdherentController extends AbstractController
 {
+/**
+     * @Route("/accueil", name="admin_index")
+     */
+    public function indexAdmin(){
+        return $this->render('Adminadherent/accueil.html.twig');
+    }
+
 
     /**
      * @Route("/adherent", name="adherent_index", methods={"GET","POST"})
@@ -83,7 +90,7 @@ class AdminAdherentController extends AbstractController
     /**
      * @Route("/dossier{id}", name="adherent_show", methods={"GET"})
      */
-    public function show(Adherent $adherent, DossierInscriptionRepository $adherentId,DossierInscriptionRepository $repo): Response
+    public function show(Adherent $adherent, DossierInscriptionRepository $repo): Response
 
     {//ici récupere le dossier inscrption de l'adrent pour l'afficher dans le dossier admin adherent
         $dossierInscription=$repo->findAll();
@@ -101,7 +108,6 @@ class AdminAdherentController extends AbstractController
         $form = $this->createForm(AdminEditAdherentType::class, $adherent);
         $form->handleRequest($request);
         $adherentPassword = $adherent->getPassword();
-       
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -110,7 +116,6 @@ class AdminAdherentController extends AbstractController
             $this->addFlash('success', 'le dossier a bien été modifié');
             return $this->redirectToRoute('adherent_index');
         }
-        
 
         return $this->render('Adminadherent/edit.html.twig', [
             'adherent' => $adherent,

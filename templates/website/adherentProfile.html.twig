@@ -1,28 +1,23 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Hello WebsiteController!{% endblock %}
-
 {% block body %}
-
 {% if user.statut == true %}
-
     {# Photo du user #}
     <div class="container">
         <div class="row">
             <div class="col">
-                {% if user.dossierInscription.photoIdentite == ""  %}
+                {% if user.dossierInscription == ""  %}
                 <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
                 {% else %}
-                <img src="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
-        {% endif %}
+                <img src="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
+                {% endif %}
                 <div class=" mt-1">
                     <h6>Nom:{{user.nom}}</h6>
                     <h6>Prenom: {{user.prenom}}</h6>
-                    <h6>Statut: Adherent </h6>
+                    <h6>Statut: Inscrit </h6>
                 </div>
             </div>
         </div>
-
         {# Information personnelle #}
         <div class="row justify-content-center">
             <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
@@ -76,7 +71,6 @@
             <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
         </div>
         <hr>
-
         <!--Evénement Inscrit-->
         <div class="row justify-content-center">
             <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
@@ -121,32 +115,31 @@
             </div>
         </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}">
-                    Photo D'identité (PDF)</a></h5>
+                <h5><a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}">
+                        Photo D'identité (PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
             </div>
-
+            
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
             </div>
             <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.renseignementsgeneraux) }}</"> RenseignementsGeneraux(PDF)</a></h5>
+                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"> RenseignementsGeneraux(PDF)</a></h5>
             </div>
-        </div>
 {% else %}
         {# Photo du user #}
         <div class="container">
@@ -155,7 +148,7 @@
                     {% if user.dossierInscription == ""  %}
                     <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
                     {% else %}
-                    <img src="{{ asset('uploads/inscriptions/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
+                    <img src="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
                     {% endif %}
                     <div class=" mt-1">
                         <h6>Nom:{{user.nom}}</h6>
@@ -164,7 +157,6 @@
                     </div>
                 </div>
             </div>
-        
             {# Information personnelle #}
             <div class="row justify-content-center">
                 <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
@@ -175,18 +167,18 @@
             </div>
             <div class="row offset-2">
                 <div class="col">
-                    <h6>Telephon:{{user.telephone}}</h6>
+                    <h6>Mot de passe: ***************</h6>
                 </div>
                 <div class="col">
-                    <h6>Age:</h6>
+                    <h6>E-mail: {{user.email}}</h6>
                 </div>
             </div>
             <div class="row offset-2">
                 <div class="col">
-                    <h6>Mot de passe: votre mot de passe</h6>
+                    <h6>Telephone: {{user.telephone}}</h6>
                 </div>
                 <div class="col">
-                    <h6>E-mail: {{user.email}}</h6>
+                    <h6>Date de naissance: {{user.DateNaissance | date("m/d/Y")}}</h6>
                 </div>
             </div>
             <div class="row offset-2">
@@ -201,24 +193,69 @@
                 <div class="col">
                     <h6>Code Postal: {{user.cp}}</h6>
                 </div>
-               
+                <div class="col">
+                    <h6>Tel d'urgence: {% if user.numeroUrgence == "" %}Champ à compléter{% endif %}
+                        {{user.numeroUrgence}}</h6>
+                </div>
             </div>
-        
+            <div class="row offset-2">
+                <div class="col">
+                    <h6>Responsable legal :{% if user.nomUrgence == ""  %} Champ à compléter {% else %}
+                        {{user.nomUrgence}}{% endif %}
+                    </h6>
+                </div>
+            </div>
             <!--Button pour modifier les informations -->
             <div class="row justify-content-center">
                 <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
             </div>
             <hr>
-            <div class="row justify-content-center">
-                <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
-                    <div>
-                        <h5>Mes documents</h5>
+            <!--Upload de document ou affichage de cdes documents si il a deja uploader -->
+            {% if user.dossierInscription  %} {#  si  le dossier adherent existe  #}
+           
+                <h5> Votre dossier d'inscription a été bien envoyé </h6>
+                <h6> Les fichiers envoyé : </h6>
+                {# Concatenation du chemin pour afficher les documents telechargers   #}
+                <div class=" row justify-content-center">
+                     <h5><a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}">
+                            Photo D'identité (PDF)</a></h5>
+                </div>
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
+                </div>
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
+                </div>
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
+                </div>
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
+                </div>
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
+                </div>
+                
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
+                </div>
+                <div class=" row justify-content-center">
+                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"> RenseignementsGeneraux(PDF)</a></h5>
+                </div>
+                
+                <a href="{{ path('delete_folder_inscription',{'id' : user.dossierInscription.id })}}" class="btn btn-primary">Supprimer</a>
+                
+                {% else %}
+                <div class="row justify-content-center">
+                    <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
+                        <div>
+                            <h5>Mes documents</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="row justify-content-center">
                 {{ form_start(form) }}
-
+            
                 {{ form_row(form.photoIdentite,{'attr':{'placeholder':"image"}})}}
                 {{ form_row(form.CertificatMedical)}}
                 {{ form_row(form.DroitImage)}}
@@ -227,12 +264,15 @@
                 {{ form_row(form.droitEntrainement)}}
                 {{ form_row(form.renseignementsMedicaux)}}
                 {{ form_row(form.renseignementsgeneraux)}}
-
+            
                 <div class=" row justify-content-center">
                     <button type="submit" class='btn btn-success'>Envoyer</button>
                 </div>
                 {{ form_end(form) }}
             </div>
+            {% endif %}
+            
+           
         </div>
     
 {% endif %}
