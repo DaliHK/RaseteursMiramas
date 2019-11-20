@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class SourcePhotoType extends AbstractType
 {
@@ -19,13 +20,16 @@ class SourcePhotoType extends AbstractType
             ->add('categorie',ChoiceType::class,[
                 'choices' => [
 
-                'vie_ecole' => 'vie ecole',
-                'course_camarguaise' => 'course_camaguaise',
-                '$ilustration_agenda' => 'ilustration_agenda',
+                'Vie à l\'école' => 'vie_ecole',
+                'Course camargaise' => 'course_camarguaise',
+                'Autre' => 'Autre',
             
                 ],
             ] )
-            ->add('date')
+            ->add('date',HiddenType::class,[
+                
+            ] )
+
             ->add('image',FileType::class)
         ;
     }

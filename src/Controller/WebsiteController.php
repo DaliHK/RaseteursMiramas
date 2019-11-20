@@ -29,38 +29,5 @@ class WebsiteController extends AbstractController
 
     }
 
-    /**
-     * @Route("/visiteur/evenements", name="evenements")
-     */
-    
-    public function listeEvenements(EvenementRepository $repo)
-    {
-       
-        $evenements = $repo->findAll();
-
-        return $this->render('event/events.html.twig', [
-            'evenements' => $evenements
-            
-        ]);
-    }
-    
-    /**
-     * Permet d'afficher un seul événement
-     * @Route("/visiteur/evenements/{id}", name="detailevenementvisiteur")
-     * 
-     * @return Response
-     */
-
-    public function detailEvenements($id, EvenementRepository $repo)
-    {
-        $evenement = $repo->findAll();
-        $evenement = $repo->find($id);
-        $manager = $this->getDoctrine()->getManager();
-
-            return $this->render('visiteur/visiteur_detailEvenements.html.twig', [
-                'evenement' => $evenement,
-                'id' => $id
-            ]);
-    }
      
 }
