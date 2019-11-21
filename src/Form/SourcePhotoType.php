@@ -22,7 +22,7 @@ class SourcePhotoType extends AbstractType
 
                 'Vie à l\'école' => 'vie_ecole',
                 'Course camargaise' => 'course_camarguaise',
-                'Autre' => 'Autre',
+                'Partenaire' => 'partenaire',
             
                 ],
             ] )
@@ -30,7 +30,10 @@ class SourcePhotoType extends AbstractType
                 
             ] )
 
-            ->add('image',FileType::class)
+            ->add('image',FileType::class,[
+
+                'multiple' => true,
+            ])
         ;
     }
 

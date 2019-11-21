@@ -20,6 +20,57 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminGestionPhotoController extends AbstractController
 {
 
+
+    public function searchBar(){
+
+        //Création du form pour le searchBar
+        $request = new Request();
+        $searchBar=$this->createFormBuilder()
+        ->add('titre',SearchType::class)
+        ->add('rechercher', SubmitType::class)
+        ->getForm();
+        return $searchBar;
+    }
+
+    public function searchFilter(){
+
+        $request = new Request();
+        $searchFilter=$this->createFormBuilder()
+        ->add('categorie',ChoiceType::class,[
+                'choices' => [
+
+                'Vie à l\'école' => 'vie_ecole',
+                'Course camargaise' => 'course_camarguaise',
+                'Partenaire' => 'partenaire',
+            
+                ],
+            ] )
+         ->add('rechercher', SubmitType::class)
+         ->getForm();
+        return $searchFilter;
+    }
+
+    public function reset(){
+
+        //Création du form pour reset le filtre par defaut
+        $request = new Request();
+        $reset = $this->createFormBuilder()
+         ->add('reset', SubmitType::class)
+         ->getForm();
+         return $reset;
+
+    }
+
+    public function uploadFile(){
+
+        //Creation du form pour uploader des photos 
+        $request = new Request();
+        $newPicture = new SourcePhoto();
+        $sourcePictureForm = $this->createForm(SourcePhotoType::class, $newPicture);
+         return $sourcePictureForm;
+
+    }
+
     /**
      * Function qui est utiliser pour upload dans la function adherentProfile
      * @return string
@@ -40,39 +91,24 @@ class AdminGestionPhotoController extends AbstractController
 
     public function gestionPhoto(Request $request,Filesystem $filesystem, SourcePhotoRepository $sourcePicture)
     {   
-    
-        //Création du form pour le filtrer les photos par categorie
-        $searchFilter=$this->createFormBuilder()
-        ->add('categorie',ChoiceType::class,[
-                'choices' => [
-
-                'Vie à l\'école' => 'vie_ecole',
-                'Course camargaise' => 'course_camarguaise',
-                'Autre' => 'autre',
-            
-                ],
-            ] )
-         ->add('rechercher', SubmitType::class)
-         ->getForm();
-        $searchFilter->handleRequest($request);
-
         
-        //Création du form pour reset le filtre par defaut
-        $reset=$this->createFormBuilder()
-         ->add('reset', SubmitType::class)
-         ->getForm();
+        //On appelle les functions qui contient les forms  
+        $searchBar = $this->searchBar();
+        $searchFilter = $this->searchFilter();
+        $reset = $this->reset();
+        $sourcePictureForm = $this->uploadFile();
+        
+        
         $reset->handleRequest($request);
-         
-
-       //Creation du form pour uploader des photos 
-        $newPicture = new SourcePhoto();
-        $sourcePictureForm = $this->createForm(SourcePhotoType::class, $newPicture);
+        $searchFilter->handleRequest($request);
         $sourcePictureForm->handleRequest($request);
+        $searchBar->handleRequest($request);
 
-       
+
+        //If upload
         if ($sourcePictureForm->isSubmitted() && $sourcePictureForm->isValid()) {
 
-            // Stock les fichiés  uploader dans une variable
+            // Stock les données envoyer par le formulaire des variablesc
             $category = $newPicture->getCategorie();
             $title = $newPicture->getTitre();
             $date = $newPicture->getDate();
@@ -82,32 +118,36 @@ class AdminGestionPhotoController extends AbstractController
 
             //Crée un dossier avec l'id de l'adherent connecté à l'amplacement du $path
              if (!$path) {
+                $path = $filesystem->mkdir($path.'source_photo',0700); 
+            }
 
-                $path = $filesystem->mkdir($path.'source_photo',0700);
+            //Pour upload plusieur photo en même temps 
+            foreach ($picture as $pictures) {
+
+                // Géneration de nom unique pour les fichiers pour éviter les doublons et sécuriser
+                $fileNames = $this->generateUniqueFileName().'.'.$pictures->guessExtension();
+    
+                // Envoie les fichiés dans le dossier carousel
+                $pictures->move($path , 
+                        $fileNames);
+                
+                //On est obligé d'instancier plusieur fois la classe pour envoyer dans la bdd 
+                $newPictures = new SourcePhoto();
+                $newPictures->setImage($fileNames);
+                $newPictures->setDate(new\DateTime('now'));
+                $newPictures->setTitre($title);
+                $newPictures->setCategorie($category);
+            
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($newPictures);
                 
             }
 
-            // Géneration de nom unique pour les fichiers pour éviter les doublons et sécuriser
-            $fileNames = $this->generateUniqueFileName().'.'.$picture->guessExtension();
- 
-            // Envoie les fichiés dans le dossier carousel
-            $picture->move($path , 
-                    $fileNames);
-            
-            //Envoie les noms relié au fichier dans la BDD
-            $newPicture->setImage($fileNames);
-            $newPicture->setDate(new\DateTime('now'));
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($newPicture);
             $entityManager->flush();
-
-
             return $this->redirect($this->generateUrl('admin_gestion_photo'));
-
         }
 
-    
+        //If filtre par categorie
         if($searchFilter->isSubmitted() && $searchFilter->isValid()){
 
 
@@ -118,17 +158,38 @@ class AdminGestionPhotoController extends AbstractController
                 'sourcePictureForm' => $sourcePictureForm->createView(),
                 'sourcePicture' => $filterPicture,
                 'searchFilter'=> $searchFilter->createView(),
+                'reset' => $reset->createView(),
+                'searchBar' => $searchBar->createView()
+             
+            ]);
+            
+        }
+        
+        //If barre de recherche
+         if($searchBar->isSubmitted() && $searchBar->isValid()){
+
+
+             $filterPicture = $this->getDoctrine()->getRepository(SourcePhoto::class)->findByTitle($searchBar->getData()['titre']);
+
+             return $this->render('admin_gestion_photo/gestionPhoto.html.twig', [
+
+                'sourcePictureForm' => $sourcePictureForm->createView(),
+                'sourcePicture' => $filterPicture,
+                'searchFilter'=> $searchFilter->createView(),
+                'searchBar' => $searchBar->createView(),
                 'reset' => $reset->createView()
              
             ]);
             
         }
 
+        //if reset
         if($reset->isSubmitted() && $reset->isValid()){
 
              return $this->redirect($this->generateUrl('admin_gestion_photo'));
             
         }
+
 
         //Render par defaut quand il y à pas de filtre
         return $this->render('admin_gestion_photo/gestionPhoto.html.twig', [
@@ -136,13 +197,13 @@ class AdminGestionPhotoController extends AbstractController
              'sourcePictureForm' => $sourcePictureForm->createView(),
              'sourcePicture' => $sourcePicture->findAll(),
              'searchFilter'=> $searchFilter->createView(),
+             'searchBar' => $searchBar->createView(),
              'reset' => $reset->createView()
         ]);
 }  
 
-
     /**
-     * Supprimer une image
+     * Supprimer une photo
      * @Route("admin/gestion/photo{id}", name="delete_picture")
      * @param $id
      */
@@ -153,12 +214,12 @@ class AdminGestionPhotoController extends AbstractController
         
         $folderRegister = $this->getDoctrine()->getRepository(SourcePhoto::class)->find($id);
        
-         //Supprimer le fichier dans le dossier qui a l'id du user connecté
+         //Supprimer la photo dans le dossier
         $path = $this->getParameter('sourcePhoto_directory');
         $fs = new Filesystem(); 
         $fs->remove($path.$folderRegister->getImage()); 
         
-        //Supprimer les nom des fichiés dans la BDD
+        //Supprimer la ligne dans la BDD
         $em = $this->getDoctrine()->getManager();
         $em->remove($folderRegister);
         $em->flush();
