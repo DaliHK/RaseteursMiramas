@@ -62,7 +62,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="#">Gestion Documents</a>
+                                    <a href="{{ path('admin_documents')}}">Gestion Documents</a>
                                 </li>
                                 <li>
                                     <a href="#">Gestion textes</a>
@@ -95,6 +95,10 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 			<!-- Bootstrap JS -->
 			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+            <script>
+                    $(document).ready(function () {bsCustomFileInput.init()})
+            </script>
 
 			<script src="/js/sidebar.js"></script>
 		{% endblock %}

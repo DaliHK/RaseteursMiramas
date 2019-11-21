@@ -101,7 +101,7 @@ class AdminDocumentsController extends AbstractController
             }
            
             //Envoie les noms relié au fichier dans la BDD
-            $newDocuments->setCertificatMedical($fileName1);
+             $newDocuments->setCertificatMedical($fileName1);
              $newDocuments->setDroitImage($fileName2);
              $newDocuments->setDroitTransport($fileName3);
              $newDocuments->setDroitPratique($fileName4);

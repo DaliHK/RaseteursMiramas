@@ -5,7 +5,7 @@
 
 
 {% block body %}
-    {% block content %}
+{% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
      <div class="container">
         <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -15,12 +15,12 @@
            <h3 class="ml-5">Depôts des documents vierges pour inscription</h3>
     </div>
 </nav>
-    {% endblock %}
+{% endblock %}
 
 {% if documentModele  %}
 
 <div class="container justify-content-center mt-5">
-        {{  dump(documentModele)}}
+    {# {{  dump(documentModele)}} #}
         <div class="row justify-content-center">
             <h5><a class="doc" href="{{ asset('uploads/documentsModele/' ~ documentModele.0.CertificatMedical) }}">CertificatMedical(PDF)</a></h5>
         </div>
@@ -43,11 +43,13 @@
             <h5><a class="doc" href="{{ asset('uploads/documentsModele/' ~ documentModele.0.renseignementsgeneraux) }}">renseignementsgeneraux(PDF)</a></h5>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-3 justify-content-center">
              <!-- bouton supprimer pour vider toute la bdd et mettre de news documents vierge-->
-                <p>vous allez supprimé tous les documents vierge nécessaire à l'inscription. <br/>
-                Suite à cette suppression, vous pourrez télécharger les nouveaux documents vierge.</p>
-                <a href="{{ path('delete_gestion_documents',{'id' : docu.0.id })}}" class="btn btn-primary">Supprimer</a> 
+                <p class="text-center">Vous allez supprimer tous les documents vierges nécessaires à l'inscription.<br/> 
+                Suite à cette suppression, vous pourrez télécharger les nouveaux documents vierges.</p>
+        </div>   
+        <div class="row justify-content-center">    
+                <a href="{{ path('delete_gestion_documents',{'id' : documentModele.0.id })}}" class="btn btn-primary">Supprimer</a> 
         </div>
 
 
@@ -57,30 +59,25 @@
 {% else %}
 
 <div class="row justify-content-center">
-               
-
-             <div class="col-sm-4">
-              {{ form_start(form) }}
-                {{ form_widget(form)}}
-                {{ form_row(form.CertificatMedical)}}
-                
-                  {{ form_row(form.DroitImage)}}  
-                  {{ form_row(form.droitTransport)}}  
-                  {{ form_row(form.droitPratique)}}
-                </div>
-              <div class="col-sm-4 mt-5">
-                    {{ form_row(form.droitEntrainement)}} 
-                     {{ form_row(form.renseignementsMedicaux)}}  
-                     {{ form_row(form.renseignementsgeneraux)}}
-                 </div>   
+    <div class="col-sm-4 form-group ">
+        {{ form_start(form) }}             
+        {{ form_row(form.CertificatMedical)}}
+        {{ form_row(form.DroitImage)}}  
+        {{ form_row(form.droitTransport)}}  
+        {{ form_row(form.droitPratique)}}
+    </div>
+    <div class="col-sm-4 mt-5 form-group">
+        {{ form_row(form.droitEntrainement)}} 
+        {{ form_row(form.renseignementsMedicaux)}}  
+        {{ form_row(form.renseignementsgeneraux)}}
+    </div>   
 </div>
 
 <div class=" row justify-content-center">
-                    <button type="submit" class='btn btn-success'>Envoyer</button>
-                     {{ form_end(form) }}
+    <button type="submit" class='btn btn-success'>Envoyer</button>
+    {{ form_end(form) }}
 </div>                     
    
 {% endif %}
-
 
 {% endblock %}

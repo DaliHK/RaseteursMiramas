@@ -57,7 +57,7 @@ class ModeleDocument
     {
         return $this->certificatMedical;
     }
-    public function setCertificatMedical(UploadedFile $certificatMedical)
+    public function setCertificatMedical( $certificatMedical)
     {
         $this->certificatMedical = $certificatMedical;
         return $this;

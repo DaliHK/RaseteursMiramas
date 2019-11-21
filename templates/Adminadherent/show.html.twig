@@ -84,7 +84,7 @@
                 {% if adherent.dossierInscription == ""  %}
                 <img src="http://placehold.it/250" class="mb-3" alt="avatar" width="250" height="300">
                     {% else %}
-                    <img src="{{ asset('uploads/inscriptions/' ~ adherent.dossierInscription.photoIdentite) }}" class="mb-3" alt="avatar" width="250" height="230">
+                    <img src="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~  adherent.dossierInscription.photoIdentite) }}" class="mb-3" alt="avatar" width="250" height="230">
                 {% endif %}
            
         </div>   
@@ -120,17 +120,24 @@
     <hr>
     <h3  class="text-center">Liste des documents pour inscription</h3>
    
-{% for dossierInscription in dossierInscriptions %}
  
     <div class="container">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-6">                    
+
+            <div class="row mt-3 justify-content-center">     
+            {% if adherent.dossierInscription == ""  %}
+            <h5>Photo d'identié à venir</a></h5>
+                {% else %}
+                    <h5><a class="doc" href="{{asset('uploads/inscriptions/' ~ adherent.id ~ '/' ~ adherent.dossierInscription.photoIdentite) }}">Photo D'identité</a></h5>
+                {% endif %}
+            </div>
       
             <div class="row mt-3 justify-content-center">     
             {% if adherent.dossierInscription == ""  %}
             <h5>Renseignements Generaux à venir</a></h5>
                  {% else %}
-                 <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~ dossierInscription.Renseignementsgeneraux) }}">Renseignementsgeneraux(PDF)</a></h5>
+                 <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~ adherent.dossierInscription.Renseignementsgeneraux) }}">Renseignementsgeneraux(PDF)</a></h5>
             {% endif %}
             </div>
                
@@ -138,14 +145,14 @@
             {% if adherent.dossierInscription == ""  %}  
             <h5>Renseignement Médicaux à venir</a></h5>
                 {% else %}
-            <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~ adherent.id ~ '/' ~ dossierInscription.RenseignementsMedicaux) }}">RenseignementsMedicaux(PDF)</a></h5>
+            <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~ adherent.id ~ '/' ~ adherent.dossierInscription.RenseignementsMedicaux) }}">RenseignementsMedicaux(PDF)</a></h5>
             {% endif %}
             </div>
             <div class="row mt-3 justify-content-center">
             {% if adherent.dossierInscription == ""  %}
             <h5>CertificatMedical à venir</a></h5>
                 {% else %}
-            <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~ dossierInscription.certificatMedical) }}">Certificat Médical(PDF)</a></h5>
+            <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~ adherent.dossierInscription.certificatMedical) }}">Certificat Médical(PDF)</a></h5>
             {% endif %}
             </div>
         </div>
@@ -154,21 +161,21 @@
             {% if adherent.dossierInscription == ""  %}
             <h5>Droit Image à completer</a></h5>
               {% else %}
-              <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~ dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
+              <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~  adherent.id  ~ '/' ~ adherent.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
             {% endif %}
             </div>
             <div class="row mt-3 justify-content-center">
             {% if adherent.dossierInscription == ""  %}
             <h5>DroitTransport à completer</a></h5>
                 {% else %}
-                <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~ adherent.id  ~ '/' ~ dossierInscription.DroitTransport) }}">DroitTransport(PDF)</a></h5>
+                <h5><a class = "doc" href="{{ asset('uploads/inscriptions/' ~ adherent.id  ~ '/' ~ adherent.dossierInscription.DroitTransport) }}">DroitTransport(PDF)</a></h5>
             {% endif %}
             </div>
             <div class="row mt-3 justify-content-center">
             {% if adherent.dossierInscription == ""  %}
             <h5>Droit Pratique à completer</a></h5>
             {% else %}
-            <h5><a class = "doc" href="{{ asset('uploads/inscriptions/'  ~ adherent.id  ~ '/' ~ dossierInscription.DroitPratique) }}">DroitPratique(PDF)</a></h5>
+            <h5><a class = "doc" href="{{ asset('uploads/inscriptions/'  ~ adherent.id  ~ '/' ~ adherent.dossierInscription.DroitPratique) }}">DroitPratique(PDF)</a></h5>
 
             {% endif %}
             </div>
@@ -177,7 +184,7 @@
             <h5>DroitEntrainement à completer</a></h5>
 
                 {% else %}
-                <h5><a class = "doc" href="{{ asset('uploads/inscriptions/'  ~ adherent.id  ~ '/' ~ dossierInscription.DroitEntrainement) }}">DroitEntrainement(PDF)</a></h5>
+                <h5><a class = "doc" href="{{ asset('uploads/inscriptions/'  ~ adherent.id  ~ '/' ~ adherent.dossierInscription.DroitEntrainement) }}">DroitEntrainement(PDF)</a></h5>
 
             {% endif %}
             </div>
@@ -185,18 +192,24 @@
     </div>   
     </div>
      
-{% endfor %} 
+ 
     <hr>
-    <div class="row"> 
+
+    <div class="row justify-content-center"> 
+
+    <div class="col-sm-4 mb-2">
         <a href="{{ path('adherent_edit', {'id': adherent.id}) }}" class="btn btn-primary">Modifier</a>
     </div>
-    <div class="row mb-2"> 
+    <div class="col-sm-4 mb-2">
+   
         {{ include('Adminadherent/_delete_form.html.twig') }}
     </div>
-    <div class="row mb-2"> 
+
+    <div class="col-sm-4 mb-2">
+    
         <a href="{{ path('adherent_index') }}" class="btn btn-primary">Retour liste Adhérents</a>
     </div>
-
+ 
 
     
 </div>        
