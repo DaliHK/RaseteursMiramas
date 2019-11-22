@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Carousel;
+use App\Entity\CarouselPicture;
 use App\Form\AdminCarouselType;
-use App\Repository\CarouselRepository;
+use App\Repository\CarouselPictureRepository;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,13 +29,13 @@ class AdminCarouselController extends AbstractController
      * @Route("/admin/carousel", name="admin_carousel")
      * @param Request $request
      * @param Filesystem $filesystem
-     * @param CarouselRepository $carousel
+     * @param CarouselPictureRepository $carousel
      */
     
-    public function adminCarousel(Request $request,Filesystem $filesystem, CarouselRepository $carousel){
+    public function adminCarousel(Request $request,Filesystem $filesystem, CarouselPictureRepository $carousel){
 
         //Instencie la variable NewPicture pour utiliser c'est prop  et affecte la variable carouselForm pour crée le form.
-        $newPicture = new Carousel();
+        $newPicture = new CarouselPicture();
         $carouselForm = $this->createForm(AdminCarouselType::class, $newPicture);
         $carouselForm->handleRequest($request);
        
@@ -47,6 +47,8 @@ class AdminCarouselController extends AbstractController
             $picture2 = $newPicture->getPhoto2();
             $picture3 = $newPicture->getPhoto3();
             $picture4 = $newPicture->getPhoto4();
+            $picture5 = $newPicture->getPhoto5();
+            $picture6 = $newPicture->getPhoto6();
 
             $path = $this->getParameter('carousel_directory');
 
@@ -57,7 +59,7 @@ class AdminCarouselController extends AbstractController
             }
 
             // Géneration de nom unique pour les fichiers pour éviter les doublons et sécuriser
-            $arrayPicture=[$picture1,$picture2,$picture3,$picture4];
+            $arrayPicture=[$picture1,$picture2,$picture3,$picture4,$picture5,$picture6];
             $fileNames = [];
 
             for ($i=0; $i <count($arrayPicture) ; $i++) { 
@@ -71,12 +73,13 @@ class AdminCarouselController extends AbstractController
                     $fileNames[$a]);
             }
 
-            
             //Envoie les noms relié au fichier dans la BDD
             $newPicture->setphoto1($fileNames[0]);
             $newPicture->setphoto2($fileNames[1]);
             $newPicture->setphoto3($fileNames[2]);
             $newPicture->setphoto4($fileNames[3]);
+            $newPicture->setphoto5($fileNames[4]);
+            $newPicture->setphoto6($fileNames[5]);
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($newPicture);
@@ -109,7 +112,7 @@ class AdminCarouselController extends AbstractController
         $fs->remove($path); 
         
         //Supprimer les photos dans la BDD
-        $folderCarousel = $this->getDoctrine()->getRepository(Carousel::class)->find($id);
+        $folderCarousel = $this->getDoctrine()->getRepository(CarouselPicture::class)->find($id);
         $em = $this->getDoctrine()->getManager();
         $em->remove($folderCarousel);
         $em->flush();

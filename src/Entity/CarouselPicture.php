@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CarouselRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CarouselPictureRepository")
  */
-class Carousel
+class CarouselPicture
 {
     /**
      * @ORM\Id()
@@ -36,6 +36,16 @@ class Carousel
      */
     private $photo4;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo5;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $photo6;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -46,7 +56,7 @@ class Carousel
         return $this->photo1;
     }
 
-    public function setPhoto1($photo1)
+    public function setPhoto1( $photo1)
     {
         $this->photo1 = $photo1;
 
@@ -85,6 +95,30 @@ class Carousel
     public function setPhoto4($photo4)
     {
         $this->photo4 = $photo4;
+
+        return $this;
+    }
+
+    public function getPhoto5()
+    {
+        return $this->photo5;
+    }
+
+    public function setPhoto5($photo5)
+    {
+        $this->photo5 = $photo5;
+
+        return $this;
+    }
+
+    public function getPhoto6()
+    {
+        return $this->photo6;
+    }
+
+    public function setPhoto6($photo6)
+    {
+        $this->photo6 = $photo6;
 
         return $this;
     }
