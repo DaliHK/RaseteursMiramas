@@ -1,0 +1,88 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}AdminCarousel{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% if picture %}
+        <div class="row"> 
+                <div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="img-fluid" alt="1 slide"></div>
+                                <div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="img-fluid" alt="2 slide"></div>
+                                <div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="img-fluid" alt="3 slide"></div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo4) }}" class="img-fluid" alt="1 slide"></div>
+                                <div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo5) }}" class="img-fluid" alt="2 slide"></div>
+                                <div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo6) }}" class="img-fluid" alt="3 slide"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        {% else %}
+             <!-- Carousel d'exemple quand il y a pas de photo -->
+            <div class="row">
+                <h3> </h3>
+                <div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="1 slide"></div>
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="2 slide"></div>
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="3 slide"></div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="1 slide"></div>
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="2 slide"></div>
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="3 slide"></div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="1 slide"></div>
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="2 slide"></div>
+                                <div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="img-fluid" alt="3 slide"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+            <!-- Le boutton supprimer apparait si il y a un carousel déja existant -->
+            <div class="row">
+                {% if picture %}
+                    <!-- Supprimer le carousel -->
+                    <a href="{{ path('delete_picture_carousel',{'id' : picture.0.id })}}" class="btn btn-primary">Supprimer</a>
+
+                {% else %}
+
+                    <div class="row mb-4"> Ajouter vos photos</div>
+                    <div class="row justify-content-center mt-4">
+                                
+                        {{ form_start(carousel) }}
+                                
+                        {{ form_row(carousel.photo1,{'attr':{'placeholder':"image1"}})}}
+                        {{ form_row(carousel.photo2,{'attr':{'placeholder':"image2"}})}}
+                        {{ form_row(carousel.photo3,{'attr':{'placeholder':"image3"}})}}
+                        {{ form_row(carousel.photo4,{'attr':{'placeholder':"image4"}})}}
+                        {{ form_row(carousel.photo5,{'attr':{'placeholder':"image5"}})}}
+                        {{ form_row(carousel.photo6,{'attr':{'placeholder':"image6"}})}}
+                                
+                            <div class=" row justify-content-center"> 
+                                <button type="submit" class='btn btn-success'>Envoyer</button>
+                            </div>
+                        {{ form_end(carousel) }}
+                    </div>
+                {% endif %}
+            </div>  
+        </div>
+{% endblock %}

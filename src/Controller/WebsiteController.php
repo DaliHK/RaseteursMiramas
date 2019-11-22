@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Form\ContactType;
 use App\Entity\Participation;
 use App\Form\EditAdherentType;
 use App\Entity\DossierInscription;
@@ -70,14 +71,31 @@ class WebsiteController extends AbstractController
      * Permet d'afficher un seul événement
      * @Route("/contact", name="contact")
      * 
-     * @return Response
      */
-
-    public function pageContact()
+    public function pageContact(Request $request, \Swift_Mailer $mailer)
     {
+        $form = $this->createForm(ContactType::class);
 
-            return $this->render('website/contact.html.twig');
+            $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+            $message = (new \Swift_Message('Nouveau message du site'))
+                ->setFrom($contactFormData['from'])
+                ->setTo('raseteur.test@gmail.com')
+                ->setBody(
+                    $contactFormData['message'],
+                    'text/plain'
+                );
+
+                $mailer->send($message);
+            $this->addFlash('success', 'Merci, votre message a bien été envoyé');
+            return $this->redirectToRoute('home');
+        }
+        
+            return $this->render('website/contact.html.twig', [
+            'form' => $form->createView()
+            ]);
     }
 
     /**
@@ -93,5 +111,6 @@ class WebsiteController extends AbstractController
             return $this->render('website/ecole.html.twig');
 
     }
+ 
      
 }

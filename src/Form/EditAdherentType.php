@@ -24,7 +24,6 @@ class EditAdherentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
             /* ->add('username') */
             /* ->add('roles') */
            ->add('password', RepeatedType::class, [
