@@ -26,6 +26,11 @@ class SourcePhoto
      */
     private $categorie;
 
+       /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
     /**
      * @ORM\Column(type="datetime")
      */
