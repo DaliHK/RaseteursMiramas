@@ -13,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AdminCarouselController extends AbstractController
 {
 
-
     /**
      * Function qui est utilisé pour génerer des noms fichiers aléatoire et unique
      * @return string

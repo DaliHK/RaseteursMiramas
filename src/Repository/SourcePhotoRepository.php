@@ -19,22 +19,24 @@ class SourcePhotoRepository extends ServiceEntityRepository
         parent::__construct($registry, SourcePhoto::class);
     }
 
-    // /**
-    //  * @return SourcePhoto[] Returns an array of SourcePhoto objects
-    //  */
+    /**
+    * @return SourcePhoto[] Returns an array of SourcePhoto objects
+    */
     
-    public function findByExampleField($value)
+    public function findByTitle($titre)
     {
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('s.titre LIKE :titre')
+            ->setParameter('titre', "%".$titre."%")
+            ->orderBy('s.titre')
+            ->setMaxResults(500)
             ->getQuery()
             ->getResult()
         ;
     }
     
+
+    /*
     public function findOneBySomeField($value): ?SourcePhoto
     {
         return $this->createQueryBuilder('s')
@@ -44,5 +46,5 @@ class SourcePhotoRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    
+    */
 }

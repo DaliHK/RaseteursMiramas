@@ -1,6 +1,73 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    
+    <div class="contenair">
+        <div class="row justify-content-center">
+            <h4 class="shadow">Gestion des photos</h4>
+        </div>
+        <hr>
+        <div class="row justify-content-center">
+            <h4 class="">Ajouter vos photos</h4>
+        </div>
+        
+        <!-- Upload -->
+        <div class="row justify-content-center mt-4">
+        
+            {{ form_start(sourcePictureForm) }}
+        
+            {{ form_row(sourcePictureForm.titre,{'attr':{'placeholder':"Titre de la photo"}})}}
+            {{ form_row(sourcePictureForm.image,{'attr':{'placeholder':"image"}})}}
+            {{ form_row(sourcePictureForm.categorie,{'attr':{'placeholder':""}})}} 
+            {{ form_row(sourcePictureForm.date,{'attr':{'placeholder':""}})}} 
+        
+            <div class=" row justify-content-center">
+                <button type="submit" class='btn btn-success'>Envoyer</button>
+            </div>
+            {{ form_end(sourcePictureForm) }}
+        </div>
+
+        <hr>
+        <div class="row justify-content-center mt-3 mb-5">
+            <h4>Vos Photos</h4>
+        </div>
+
+        <!-- Filtre -->
+        <h5>Filter</h5>
+        <div class="row justify-content-center mt-4">
+            <div class="col">
+            {{ form_start(searchFilter)}}
+            {{ form_end(searchFilter)}}
+            </div>
+            <div class="col">
+                {{ form_start(reset)}}
+                {{form_label(reset,'Reset')}}
+                {{ form_end(reset)}}
+            </div>
+            <div class="col">
+                {{ form_start(searchBar) }}
+
+                {{ form_end(searchBar) }}
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Photos -->
+        <div class="row mt-2 mb-1" >
+            {% for sourcePictures in sourcePicture %}
+            <div class="col mt-3">
+                    <div class="col" >
+                        <h6> Titre :{{ sourcePictures.titre }}</h6>
+                        <h6> Date :{{ sourcePictures.date | date() }}</h6>
+                    </div>
+                    <a class="btn btn-premary" href="{{asset('uploads/source_photo/' ~ sourcePictures.image)}}"> <img width="200em" height=" 200em" src="{{asset('uploads/source_photo/' ~ sourcePictures.image)}}" alt="{{ sourcePictures.titre }}"></a>
+
+                    <div class="col mt-1"> 
+                        <a class="btn" type="button" href="{{ path('delete_picture',{'id' : sourcePictures.id })}}"> Supprimer </a>
+                    </div>
+                </div>
+            {% endfor %}
+           </div> 
+        </div>
 
 {% endblock %}
