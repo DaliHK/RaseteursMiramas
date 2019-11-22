@@ -11,7 +11,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
  * Adherent
  * 
@@ -76,7 +75,6 @@ class Adherent implements UserInterface
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Assert\NotBlank(message="Ce champ doit être rempli")
      */
     private $dateInscription;
 

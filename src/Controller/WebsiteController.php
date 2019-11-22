@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use App\Entity\Participation;
 use App\Form\EditAdherentType;
 use App\Entity\DossierInscription;
+use App\Service\PaginationService;
 use App\Form\DossierInscriptionType;
 use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
@@ -35,24 +36,15 @@ class WebsiteController extends AbstractController
     }
 
     /**
-     * @Route("/visiteur/evenements", name="evenements")
+     * @Route("/visiteur/evenements/{page<\d+>?1}", name="evenements")
      */
-    public function listeEvenements(PaginatorInterface $paginator)
+    public function listeEvenements($page, PaginationService $pagination, EvenementRepository $repo)
     {
-        $repo = $this->getDoctrine()->getRepository(Evenement::class);
-
-        $evenements = $repo->findAll();
-        $request = Request::createFromGlobals();
-
-        $agenda = $paginator->paginate(
-            $evenements, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            6 // Nombre de résultats par page
-        );
+        $pagination->setEntityClass(Evenement::class)
+                   ->setPage($page);
 
         return $this->render('event/events.html.twig', [
-            'evenements' => $evenements,
-            'agenda' => $agenda
+            'pagination' => $pagination
         ]);
     }
 

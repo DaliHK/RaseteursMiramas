@@ -8,8 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EvenementRepository")
+ * @ORM\Table(name="Evenement")
  */
-class Evenement
+class Evenement 
 {
     /**
      * @ORM\Id()

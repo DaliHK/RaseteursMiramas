@@ -43,10 +43,8 @@ class AdherentUtilisateurController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){ 
             $hash = $encoder->encodePassword($adherent, $adherent->getPassword()); 
-
             $adherent->setPassword($hash);   
             //$adherent->addRole("ROLE_ADMIN");
-            
             $manager->persist($adherent);
             $manager->flush();
 
@@ -239,6 +237,7 @@ class AdherentUtilisateurController extends AbstractController
 
     public function adherentEditProfile(Request $request, UserInterface $userProfile, UserPasswordEncoderInterface $encoder)
     {
+
         //Affiche le formulaire deja enregistré de l'user pour qu'il puisse le consulter ou modifier
         $form = $this->createForm(EditAdherentType::class,$userProfile); //On utiliser le userProfile pour générer le formulaire pré-rempli
         $form->handleRequest($request);

@@ -6,6 +6,7 @@ use App\Entity\Adherent;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -30,15 +31,9 @@ class RegistrationType extends AbstractType
         'required' => true,
         'first_options'  => ['label' => 'Mot de passe'],
         'second_options' => ['label' => 'Confirmez votre mot de passe']])
-        ->add('dateNaissance', DateType::class, [
-            'widget' => 'single_text',
-            // prevents rendering it as type="date", to avoid HTML5 date pickers
-            'html5' => false,
-            // adds a class that can be selected in JavaScript
-            'attr' => ['class' => 'js-datepicker'],
-        ])      
+        ->add('dateNaissance', DateType::class, ['label' => 'Date de naissance'])  
         ->add('email', EmailType::class)
-        ->add('telephone', TextType::class, ['label' => 'Téléphone'])
+        ->add('telephone', TelType::class, ['label' => 'Téléphone'])
         ->add('adresse')
         ->add('cp', TextType::class, ['label' => 'Code Postal'])
         ->add('ville');
