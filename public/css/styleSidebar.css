@@ -2,13 +2,18 @@
     DEMO STYLE
 */
 
+  
+
 span{
     font-weight: bold;
 }
-  
+ /* couleur bleu des liens des documents uploadés dans adminDocuments et admin dossier adherent */  
 .doc{
     color:  #00a2e7;
 }
+
+
+
 
 a,
 a:hover,

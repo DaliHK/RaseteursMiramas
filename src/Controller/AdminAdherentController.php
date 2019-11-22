@@ -58,9 +58,8 @@ class AdminAdherentController extends AbstractController
     
     return $this->render('Adminadherent/index.html.twig', [
         'adherents' => $adherentRepository->findAll(),
-        
         'form'=> $form->createView()
-    ]);
+        ]);
     }
 
     /**

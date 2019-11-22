@@ -40,14 +40,13 @@ class AdminEditAdherentType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('email',EmailType::class)
-            ->add('telephone')
+            ->add('telephone',['attr' => ['maxlength' => 10]])
             ->add('adresse')
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence')
             ->add('statut',ChoiceType::class, [
                 'choices'  => [
-                   
                     'Inscrit' => true,
                     'Pré-inscrit' => false
                 ]])

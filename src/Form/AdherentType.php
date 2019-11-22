@@ -37,7 +37,7 @@ class AdherentType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('email')
-            ->add('telephone')
+            ->add('telephone',['attr' => ['maxlength' => 10]])
             ->add('adresse')
             ->add('cp')
             ->add('ville')

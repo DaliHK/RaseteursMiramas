@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\TexteFooter;
+use App\Entity\TexteFooterContact;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method TexteFooter|null find($id, $lockMode = null, $lockVersion = null)
- * @method TexteFooter|null findOneBy(array $criteria, array $orderBy = null)
- * @method TexteFooter[]    findAll()
- * @method TexteFooter[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method TexteFooterContact|null find($id, $lockMode = null, $lockVersion = null)
+ * @method TexteFooterContact|null findOneBy(array $criteria, array $orderBy = null)
+ * @method TexteFooterContact[]    findAll()
+ * @method TexteFooterContact[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TexteFooterRepository extends ServiceEntityRepository
+class TexteFooterContactRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, TexteFooter::class);
+        parent::__construct($registry, TexteFooterContact::class);
     }
 
     // /**
-    //  * @return TexteFooter[] Returns an array of TexteFooter objects
+    //  * @return TexteFooterContact[] Returns an array of TexteFooterContact objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class TexteFooterRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?TexteFooter
+    public function findOneBySomeField($value): ?TexteFooterContact
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.exampleField = :val')

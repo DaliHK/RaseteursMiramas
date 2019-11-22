@@ -134,17 +134,12 @@ class AdminDocumentsController extends AbstractController
     
     public function deleteDocumentsModele($id)
     {   
-       
-        
-        
         //Supprimer les photos dans la BDD
         $documentPoste = $this->getDoctrine()->getRepository(ModeleDocument::class)->find($id);
         $em = $this->getDoctrine()->getManager();
         $em->remove($documentPoste);
         $em->flush();
-
         return $this->redirectToRoute('admin_documents');
-
     }
 
 
