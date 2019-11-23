@@ -15,6 +15,7 @@ use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\TexteFooterContactRepository;
 use App\Repository\ParticipationEvenementRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,11 +29,14 @@ class WebsiteController extends AbstractController
      * @Route("/", name="home")
      */
 
-    public function index(EvenementRepository $repo)
+    public function index(EvenementRepository $repo, TexteFooterContactRepository $footer)
     {
         $evenements = $repo->findUpcomingEvents();
+        /*$adresse = $footer->findOneBy(array('id' => 1))->getAdresse();*/
+
         return $this->render('home/home.html.twig', [
             'evenements' => $evenements
+            /*'val' => $adresse*/
         ]);
     }
 
@@ -111,6 +115,17 @@ class WebsiteController extends AbstractController
             return $this->render('website/ecole.html.twig');
 
     }
- 
+
+    /**
+     * @Route("/footer", name="footer")
+     */
+    public function footer(TexteFooterContactRepository $repo)
+    {
+        $adresse = $repo->findOneBy(array('id' => 1))->getAdresse();
+        
+        return $this->render('footer/index.html.twig', [
+            'adresse' => $adresse
+        ]);
+    }
      
 }

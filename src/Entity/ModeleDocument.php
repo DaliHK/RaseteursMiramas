@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ModeleDocumentRepository")
  */
@@ -44,7 +45,7 @@ class ModeleDocument
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $renseignementsMedicaux;
+    private $RenseignementsMedicaux;
 
     /**
      * @ORM\Column(type="string", length=255)

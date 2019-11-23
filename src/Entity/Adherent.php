@@ -88,7 +88,7 @@ class Adherent implements UserInterface
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank()   
      * @Assert\Regex(
      * pattern="/[0-9]{10}/"
      * )

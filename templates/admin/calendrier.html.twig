@@ -5,7 +5,19 @@
 {% endblock %}
 
 {% block body %}
-	
+	{% block content %}
+
+                    <!-- We'll fill this with dummy content -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+                            <div class="container">
+            
+                                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                                    <i class="fas fa-align-left"></i>
+                                    <span>Menu</span> 
+                                </button>
+                            </div>
+                    </nav>
+                    {% endblock %}
 	<div id="calendar-holder"></div>
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fullcalendar/core@4.1.0/main.min.css">

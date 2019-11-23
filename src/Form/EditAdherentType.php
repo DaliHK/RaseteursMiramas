@@ -39,16 +39,20 @@ class EditAdherentType extends AbstractType
                 'required' => false,
                 'empty_data' => null
                 ]) */
+            //->add('dateNaissance', DateType::class, [
+             //   'required' => false,
+             //   'empty_data' => null
+             //   ])
             //->add('dateInscription', DateType::class, [
              //'required' => false,
             //'empty_data' => null
               //])
-            ->add('email')
-            ->add('telephone',  TelType::class)
+            ->add('email',EmailType::class)
+            ->add('telephone',TelType::class)
             ->add('adresse')
             ->add('cp')
             ->add('ville')
-            ->add('numeroUrgence', TelType::class)
+            ->add('numeroUrgence',TelType::class)
             ->add('nomUrgence',TextType::class)
             //->add('statut')
             //->add('cotisationAsso')
@@ -56,6 +60,7 @@ class EditAdherentType extends AbstractType
             //->add('numLicence')
             //->add('dossierInscription')
             /* ->add('submit', SubmitType::class, ['label' => 'Envoyez']) */
+            //->add('submit', SubmitType::class, ['label' => 'Envoyez'])
         ;
     }
 

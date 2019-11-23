@@ -38,7 +38,7 @@ class AdminAdherentController extends AbstractController
         $form=$this->createFormBuilder()
         ->add('nom', SearchType::class,[
            'required'=> false,
-           'label'=> false,
+           'label'=> 'Recherche par Nom de famille',
             'attr'=>[
                 'placeholder'=> 'Nom'
            ]
@@ -58,9 +58,8 @@ class AdminAdherentController extends AbstractController
     
     return $this->render('Adminadherent/index.html.twig', [
         'adherents' => $adherentRepository->findAll(),
-        
         'form'=> $form->createView()
-    ]);
+        ]);
     }
 
     /**
@@ -90,9 +89,9 @@ class AdminAdherentController extends AbstractController
     /**
      * @Route("/dossier{id}", name="adherent_show", methods={"GET"})
      */
-    public function show(Adherent $adherent, DossierInscriptionRepository $adherentId,DossierInscriptionRepository $repo): Response
+    public function show(Adherent $adherent, DossierInscriptionRepository $repo): Response
 
-    {//ici gestion doosier inscription
+    {//ici récupere le dossier inscrption de l'adrent pour l'afficher dans le dossier admin adherent
         $dossierInscription=$repo->findAll();
         return $this->render('Adminadherent/show.html.twig', [
             'adherent' => $adherent,

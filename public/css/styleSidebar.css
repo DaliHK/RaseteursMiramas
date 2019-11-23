@@ -5,9 +5,7 @@
 span{
     font-weight: bold;
 }
-.doc {
-    color : #00a2e7;
-    }
+
 a,
 a:hover,
 a:focus {
@@ -159,4 +157,3 @@ a.article:hover {
         display: none;
     }
 }
-

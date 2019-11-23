@@ -1,0 +1,64 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion contacts{% endblock %}
+
+{% block body %}
+{% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+     <div class="container">
+        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            <i class="fas fa-align-left"></i>
+                <span>Menu</span> 
+        </button>
+           <h3 class="ml-5">Gestion Contact</h3>
+    </div>
+</nav>
+{% endblock %}
+
+{% if contacts %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+           
+						<h5 class="text-uppercase">données de contacts</h5>
+					    <p>{{contacts.0.nom}}</P>
+						<p>{{contacts.0.adresse}}</P>
+						<p>{{contacts.0.cp}}</P>
+						<p>{{contacts.0.ville}}</P>
+						<p>{{contacts.0.telephone1}}</P>
+					    <p>{{contacts.0.email}}</P>
+				<div class="row justify-content-center">  
+                <h5>Vos données sont affichées dans la page contact et en bas de page<br/>
+                Supprimer pour modifier les données</h5>
+  
+                <a href="{{ path('delete_admin_contact',{'id' : contacts.0.id })}}" class="btn btn-primary">Supprimer</a> 
+        </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <h5>Veuillez remplir ce formulaire: vos données seront affichées dans la page contact et en bas de page</h5>
+            <div class="col-sm-6">
+                {{ form_start(form) }}             
+                {{ form_row(form.nom)}}
+                {{ form_row(form.adresse)}}
+                {{ form_row(form.cp)}}
+                {{ form_row(form.ville)}}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.telephone1)}}
+                {{ form_row(form.telephone2)}}
+                {{ form_row(form.email)}}
+                {{form_row(form.submit)}}
+                {{ form_end(form) }}
+            </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock %}

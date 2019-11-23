@@ -18,7 +18,7 @@
 
 						{{ form_row(form.nom) }}
 						{{ form_row(form.prenom) }}
-						{{ form_row(form.dateNaissance, { 'attr': {'placeholder': 'Jour-Mois-Année'}}) }}
+						{{ form_row(form.dateNaissance) }}
 						{{ form_row(form.adresse) }}
 						{{ form_row(form.cp) }}
 						{{ form_row(form.ville) }}
@@ -35,18 +35,4 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
-
-{% block javascripts %}
-
-	<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
-	<script type="text/javascript" 
-  src="/Resources/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-
-	<script>
-		$(document).ready(function () { // you may need to change this code if you are not using Bootstrap Datepicker
-$('.js-datepicker').datepicker({format: 'dd-mm-yyyy', language: 'fr'});
-});
-	</script>
-
 {% endblock %}

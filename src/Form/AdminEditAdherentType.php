@@ -9,17 +9,18 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class AdminEditAdherentType extends AbstractType
 {
@@ -29,23 +30,23 @@ class AdminEditAdherentType extends AbstractType
            
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance', DateType::class,[
+            ->add('dateNaissance', BirthdayType::class, [
                 'format' => 'ddMMyyyy',
-            ])
+                'placeholder' => '',
+            ])  
             ->add('dateInscription', DateType::class, [
                 'format' => 'ddMMyyyy',
                 'required' => false,
                 'empty_data' => null
                 ])
             ->add('email',EmailType::class)
-            ->add('telephone')
+            ->add('telephone',['attr' => ['maxlength' => 10]])
             ->add('adresse')
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence')
             ->add('statut',ChoiceType::class, [
                 'choices'  => [
-                   
                     'Inscrit' => true,
                     'Pré-inscrit' => false
                 ]])

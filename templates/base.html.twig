@@ -7,121 +7,88 @@
             {% block title %}{% endblock %}
         </title>
 
-		</title>
 		<link rel="stylesheet" href="/css/bootstrap.min.css">
-		<link
-		rel="stylesheet" href="/css/customStyle.css">
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> {% block stylesheets %}{% endblock %}
+ 		<link rel="stylesheet" href="/css/customStyle.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"> 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta-3/js/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	</head>
-	<body id="top">
-		​
-		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			​
-			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav mr-auto">
-					<!--<a href="">Accueil</a>-->
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('home') }}">Accueil</a>
-					</li>
 
+	<body>
+		​<!-- Carousel -->
+		<div class="container col-lg-12" id="fond">
+
+			<nav class="navbar fixed-top navbar-expand-md sticky-top mb-3">
+			
+			<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+					<span class="sr-only"></span>
+					<span class="icon-bar"></span>
+			</button>
+
+				​<img class="logo" src="{{ asset('img/logotraitc.png') }}">
+				<div class="nomecole">
+				<p class="logotitre"> Ecole de Raseteurs</p>
+				<p> Porte de la Crau</p>
+				</div>
+
+				<div class="collapse navbar-collapse justify-content-between" id="navbarColor01" style="padding-top: 40px;">
+				<ul class="navbar-nav ml-auto">
+		<a href="{{ path('home') }}"></a>
 					<li class="nav-item active">
-						<a class="nav-link" href="{{ path('ecole') }}">
-							L'école
+		<a class="nav-link" href="{{ path('ecole') }}"> L'ECOLE
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('evenements') }}">EVENEMENTS</a>
+					</li>
+					<li class="nav-item">
+			<a class="nav-link" href="{{ path('contact') }}">CONTACT</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('inscription') }}"> S'INSCRIRE</a>
+					</li>
 
-					<li class="nav-item">
-						<a class="nav-link" href="">Evenements</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{ path('contact') }}">Contact</a>
-					</li>
-					<li class="nav-item">
-						<!--S'il est loggé en tant qu'adherent, apparition de espace adherent -->
-						<!--S'il est loggé en tant qu'admin, apparition de espace admin -->
-							<a class="nav-link" href="{{ path('inscription') }}"> S'inscrire</a>
-					</li>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="{{ path('home') }}" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> 
+					<i class="fas fa-user"></i></a>
+
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink"> 
+						<a class="dropdown-item" href="{{ path('logout')}}">Se déconnecter</a>
+						<a class="dropdown-item" href="{{ path('login_adherent') }}">Se connecter</a>
 
 					{% if is_granted('ROLE_USER') %}
-
-						<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-							<a class="nav-link" href="{{ path('adherent_profile') }}">Espace adhérent</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('logout')}}">Se déconnecter</a>
-						</li>
+						<a class="dropdown-item" href="{{ path('adherent_profile') }}">Espace adhérent</a>
+						<a class="dropdown-item" href="{{ path('logout')}}">Se déconnecter</a>
 					{% else %}
-
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('login_adherent') }}">Se connecter</a>
-						</li>
-
+						<a class="dropdown-item" href="{{ path('login_adherent') }}">Se connecter</a>
 					{% endif %}
-
 					{% if is_granted('ROLE_ADMIN') %}
-
-						<li class="nav-item {% if mainNavLogin is defined %}active{% endif %}">
-							<a class="nav-link" href="{{ path('admin_index') }}">Panel administrateur</a>
-						</li>
-					
+						<a class="dropdown-item" href="{{ path('admin_index') }}">Panel administrateur</a>
 					{% else %}
 
 					{% endif %}
 
+					   </div>
+					</li>   
 				</ul>
-				​
-			</div>
-		</nav>
-		<!-- Navbar end -->
+			</nav>
+		</div>
+
+		<img src="{{ asset('img/vague-02.png') }}" id="vague">
+		<!-- Navbar end -->		
 
 	{% block body %}
 	{% endblock %}
 
-	<!-- footer -->
-	<footer class="container-fluid bg-4 text-center pt-4 pl-4">
+	 {{ render(controller('App\\Controller\\WebsiteController::footer')) }}
 
-		<div class="row">
-			<!-- Grid column -->
-			<div class="col text-justify">
-				​
-				<h5 class="text-uppercase">Nous contacter</h5>
-
-				{{ evenement.titre }}
-				​
-			</div>
-
-			<div class="col text-justify">
-				​
-				<h5 class="text-uppercase">Partenariats</h5>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, ab veritatis ullam eaque quaerat expedita,</p>
-			</div>
-			​
-			<div class="col text-justify pt-4">
-
-				<h5 class="text-uppercase">Notre page facebook</h5>
-
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, ab veritatis ullam eaque quaerat expedita,</p>
-			</div>
-			​
-		</div>
-		​
-		<hr class="footerhr">
-		​
-		<div class="col-xs-1 text-center pb-4">
-			Copyright 2019
-		</div>
-	</footer>
-	</body>
-
-</html>
 
 {% block javascripts %}
 <!--scripts-->
@@ -134,5 +101,13 @@
 <!-- Bootstrap core JavaScript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js">
 </script>
-
+<!-- Js pour que le nom du fichier uploadé s'affiche dans l'input -->
+<script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+<script>
+	$(document).ready(function () {bsCustomFileInput.init()})
+</script>
 {% endblock %}
+
+</body>
+</html>
+

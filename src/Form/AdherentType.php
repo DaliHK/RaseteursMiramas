@@ -27,16 +27,17 @@ class AdherentType extends AbstractType
                'second_options' => ['label' => 'Repeat Password']])
             ->add('nom')
             ->add('prenom')
-            ->add('dateNaissance', DateType::class,[
+            ->add('dateNaissance', BirthdayType::class, [
                 'format' => 'ddMMyyyy',
-            ])
+                'placeholder' => '',
+            ])  
             ->add('dateInscription', DateType::class, [
                 'format' => 'ddMMyyyy',
                 'required' => false,
                 'empty_data' => null
                 ])
             ->add('email')
-            ->add('telephone')
+            ->add('telephone',['attr' => ['maxlength' => 10]])
             ->add('adresse')
             ->add('cp')
             ->add('ville')
