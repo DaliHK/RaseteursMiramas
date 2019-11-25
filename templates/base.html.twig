@@ -77,19 +77,29 @@
 
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-										<a class="dropdown-item" href="{{ path('login_adherent') }}">Se connecter</a>
+										{% if not app.user %}
 
-										{% if is_granted('ROLE_USER') %}
+											<a class="dropdown-item" href="{{ path('login_adherent') }}">Se connecter</a>
 
-											<a class="dropdown-item" href="{{ path('adherent_profile') }}">Espace adhérent</a>
-											<a class="dropdown-item" href="{{ path('logout')}}">Se déconnecter</a>
+										{% else %}
+											{% if is_granted('ROLE_USER') %}
 
-										{% elseif is_granted('ROLE_ADMIN') %}
+												<a class="dropdown-item" href="{{ path('adherent_profile') }}">Espace adhérent</a>
+												<a class="dropdown-item" href="{{ path('logout')}}">Se déconnecter</a>
 
-											<a class="dropdown-item" href="{{ path('admin_index') }}">Panel administrateur</a>
-											{% else %}
+												{% else %}
+
+											{% endif %}
+
+											{% if is_granted('ROLE_ADMIN') %}
+
+												<a class="dropdown-item" href="{{ path('admin_index') }}">Panel administrateur</a>
+												{% else %}
+
+											{% endif %}
 
 										{% endif %}
+
 
 									</div>
 								</li>
