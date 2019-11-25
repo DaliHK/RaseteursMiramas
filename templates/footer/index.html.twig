@@ -1,26 +1,42 @@
-
-
 {% block footer %}
-
-<div class="container">
-	<!-- footer -->
-		<div class="row">
+	<div
+		class="footer">
+		<!-- footer -->
+		<div
+			class="row">
 			<!-- Grid column -->
-			<div class="col text-justify">
+			<div class="col text-center">
 				​
-				<h5 class="text-uppercase">Nous contacter</h5>
-{{ adresse }}
+				<h5 class="text-uppercase footer-title">Nous contacter</h5>
+
+				{% for contact in contacts %}
+
+					{{ contact.adresse }}
+					{{ contact.cp }}
+					{{ contact.ville }}
+
+				{% endfor %}
 
 			</div>
 
 			<div class="col text-justify">
 				​
-				<h5 class="text-uppercase">Partenariats</h5>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, ab veritatis ullam eaque quaerat expedita,</p>
+				<h5 class="text-uppercase footer-title">Partenariats</h5>
+
 			</div>
 			​
-			<div class="col text-justify pt-4">
+			<div class="col text-center pt-4">
 
-				<h5 class="text-uppercase">Notre page facebook</h5>
-</div>
+				<h5 class="text-uppercase footer-title">Notre page facebook</h5>
+
+				<div class="fb-page" data-href="https://www.facebook.com/Ecole-De-Rasteurs-Porte-De-La-Crau-262208414485512/" data-tabs="timeline" data-width="" data-height="70" data-small-header="true" data-adapt-container-width="false" data-hide-cover="false" data-show-facepile="false">
+					<blockquote cite="https://www.facebook.com/Ecole-De-Rasteurs-Porte-De-La-Crau-262208414485512/" class="fb-xfbml-parse-ignore">
+						<a href="https://www.facebook.com/Ecole-De-Rasteurs-Porte-De-La-Crau-262208414485512/">Ecole De Rasteurs - Porte De La Crau</a>
+					</blockquote>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
 {% endblock %}

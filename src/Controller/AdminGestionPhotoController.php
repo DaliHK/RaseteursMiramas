@@ -58,6 +58,7 @@ class AdminGestionPhotoController extends AbstractController
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+    
     /**
      * @Route("/admin/gestion/photo", name="admin_gestion_photo")
      * @param Request $request

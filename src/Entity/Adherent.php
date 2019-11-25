@@ -119,19 +119,21 @@ class Adherent implements UserInterface
     private $numeroUrgence;
 
     /**
-     * @ORM\Column(type="boolean", length=255, nullable=true)
+     * @ORM\Column(type="boolean", length=255, options ={"default":"0"})
+     * 
+     *
      */
-    private $statut;
+    private $statut = false;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options ={"default":"0"})
      */
-    private $cotisationAsso;
+    private $cotisationAsso = false;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean", options ={"default":"0"})
      */
-    private $cotisationLicence;
+    private $cotisationLicence = false;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

@@ -13,6 +13,7 @@ use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\CarouselPictureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\TexteFooterContactRepository;
@@ -29,14 +30,13 @@ class WebsiteController extends AbstractController
      * @Route("/", name="home")
      */
 
-    public function index(EvenementRepository $repo, TexteFooterContactRepository $footer)
+    public function index(EvenementRepository $repo, TexteFooterContactRepository $footer, CarouselPictureRepository $carousel)
     {
         $evenements = $repo->findUpcomingEvents();
-        /*$adresse = $footer->findOneBy(array('id' => 1))->getAdresse();*/
 
         return $this->render('home/home.html.twig', [
-            'evenements' => $evenements
-            /*'val' => $adresse*/
+            'evenements' => $evenements,
+            'picture'=>$carousel->findAll()
         ]);
     }
 
@@ -122,9 +122,11 @@ class WebsiteController extends AbstractController
     public function footer(TexteFooterContactRepository $repo)
     {
         $adresse = $repo->findOneBy(array('id' => 1))->getAdresse();
+        $contacts = $repo->findAll();
         
         return $this->render('footer/index.html.twig', [
-            'adresse' => $adresse
+            'adresse' => $adresse,
+            'contacts' => $contacts
         ]);
     }
      

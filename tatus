@@ -1,0 +1,534 @@
+[33mcommit 1dde420ee0794fce6542dff6516be6ed10f84e67[m[33m ([m[1;36mHEAD -> [m[1;32mbrancheFourreTout[m[33m, [m[1;32mbrancheMerge[m[33m)[m
+Merge: 2d635a4 1bda56c
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Sat Nov 23 18:24:39 2019 +0100
+
+    footer modulable
+
+[33mcommit 2d635a4f8eed2c1925ce913804b8e74d7636f8bd[m
+Merge: 54bcd49 e53cfa7
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 22 16:41:36 2019 +0100
+
+    commit avant pull admin
+
+[33mcommit 1bda56ca332dd6815cd6deb84ab0c3b48c010a9c[m[33m ([m[1;31morigin/Admin2[m[33m)[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Fri Nov 22 16:39:56 2019 +0100
+
+    page gestion contact en admin form+delete ok mais probleme render
+
+[33mcommit e53cfa7d01ff0dddd795ed452d2b0dff46157984[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Fri Nov 22 15:54:42 2019 +0100
+
+    erreur git
+
+[33mcommit 54bcd4935681b102e946d79169fa0d5f0ec0013a[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 22 15:49:44 2019 +0100
+
+    ajout admin photos + nettoyage
+
+[33mcommit f34d992c6065e513cee8680c9017826e8a3d0126[m
+Merge: a9a96b7 314b0fe
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 22 15:44:48 2019 +0100
+
+    ajout admin photos
+
+[33mcommit a9a96b72b2d320116bff5f1a736b4d3114b0e3b2[m
+Merge: 6cd1187 b2ae203
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 22 15:29:39 2019 +0100
+
+    merge admin carousel
+
+[33mcommit b2ae203ee3622bc37e7d0a04ed516976314f2a1e[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Fri Nov 22 11:22:56 2019 +0100
+
+    Modification en l'entity carousel en carouselPicture avec l'ajout de champ photo
+
+[33mcommit 6cd11873b728dc7fe0da5722a84d68c2ca926e5c[m[33m ([m[1;31morigin/brancheFourreTout[m[33m)[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 22 09:35:47 2019 +0100
+
+    ajout de la pagination
+
+[33mcommit 314b0fe7e30fcad673619771b378896108c415e5[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Thu Nov 21 16:41:37 2019 +0100
+
+    page fonctionnelle
+
+[33mcommit 2bf8a39bf7ffebe5707b5d89147a9c307a5dceaf[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Thu Nov 21 11:06:00 2019 +0100
+
+    Pas de modification
+
+[33mcommit 17e040b5c02443749bfbc6c61d6bf309c1736567[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Thu Nov 21 10:29:08 2019 +0100
+
+    outil admin adherent de gestion doc ok mise en place du nom des fichiers uploadé en front et back ok mise en place de la touche menu dansgestion events ok
+
+[33mcommit 9de19216372360d1dbb72a7b0940074a12dffc76[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Wed Nov 20 17:07:00 2019 +0100
+
+    Ajout de filtre pour les photos
+
+[33mcommit 87c8fa6187213091eff511f010bbcb9dcd845e49[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Tue Nov 19 16:45:56 2019 +0100
+
+    probleme route affichage photo et doc dans adherentprofil regle
+
+[33mcommit 6b5ea38763017aecbb2a5f31b0af20510f972852[m
+Merge: 0c151bd 4c0e24b
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Tue Nov 19 16:27:59 2019 +0100
+
+    probleme avec le format des dates de naissance ok fait
+
+[33mcommit bf5e70cfff872caa15534265f0e218f8dcabc2ff[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Tue Nov 19 14:33:10 2019 +0100
+
+    Ajout Source photo
+
+[33mcommit c668d9ca4abc7c21b0b82698198c6572839a77c9[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Tue Nov 19 14:03:54 2019 +0100
+
+    correction bug adherent profil
+
+[33mcommit 7044ca2799f3b72f103137bc1c94364e67580ea6[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Tue Nov 19 12:42:50 2019 +0100
+
+    Supression entity SourcePhoto
+
+[33mcommit 0c151bdf3f580607bcf21c39e6960b17cf822d13[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Tue Nov 19 11:20:39 2019 +0100
+
+    commit avant pull
+
+[33mcommit 6854c7c9402336193ad29e6ba150f72b4eebc573[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Tue Nov 19 10:30:09 2019 +0100
+
+    la gestion des documents, chargement, supression possible ok
+
+[33mcommit de809b413f8a2de907f84295a2022265ab715679[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 22:36:52 2019 +0100
+
+    ajout entity carousel
+
+[33mcommit 10976c857db535970fa18beb18dc5e160282c5b9[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 17:31:21 2019 +0100
+
+    erreur de manipulation
+
+[33mcommit 390167963bbbbfd14ce713e675480f6b5c5cac41[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 17:24:45 2019 +0100
+
+    Ajout de l'entity SourcePhoto
+
+[33mcommit a08f5b325308f73b9551983ed2c577360fe7bbda[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 17:08:11 2019 +0100
+
+    Modification entity SourcePhoto
+
+[33mcommit 111ac6820b17183faabe1f7b111dc5da0afedd23[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 15:50:13 2019 +0100
+
+    pas de modification erreur de manipulation
+
+[33mcommit b51b0a096cf47ceb8e31c9139ff30d69185b4b7f[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 15:43:58 2019 +0100
+
+    suppression entity sourcePhoto , ajout entity Carousel
+
+[33mcommit db5dc29457ff1f85075517024b521467a5801ad5[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 14:47:57 2019 +0100
+
+    Ajout des commentaires
+
+[33mcommit 4c0e24bd8bef912afce2bc4e07d457520e4d8b81[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Mon Nov 18 14:47:04 2019 +0100
+
+    ajout de la contrainte d'unicité en bdd
+
+[33mcommit 0d8ee72a95f3c14cefc33afd523d3b0372221c63[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 14:21:13 2019 +0100
+
+    Fonctionnel
+
+[33mcommit 8d8a714f9b4d9fc88768541662fc1f63e82d8f72[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 11:20:58 2019 +0100
+
+    Modification entity SourcePhoto
+
+[33mcommit 449b815fdbad2c30505f18cdfced22dafc68a626[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Mon Nov 18 11:11:05 2019 +0100
+
+    ajout lien panel admin
+
+[33mcommit b48988e4f4ec0ba897cd711919d743f3e6578056[m
+Merge: c4f929c cb068f3
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Mon Nov 18 10:05:15 2019 +0100
+
+    ajout travail authentification
+
+[33mcommit c4f929c1d4b295c0ec35212264f5bd162dd305b6[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Mon Nov 18 09:48:26 2019 +0100
+
+    correction bugs
+
+[33mcommit 8224f00576470322bb93d720d5da557d6874aba2[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 18 09:10:23 2019 +0100
+
+    Bug sur le remove du carousel dans la bdd
+
+[33mcommit cb068f351c43056b7669a1058a9d04028750dcf7[m[33m ([m[1;31morigin/authentification[m[33m)[m
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Sun Nov 17 22:26:09 2019 +0100
+
+    mdp oublié finalisé
+
+[33mcommit 352ed0f0e45d6e016a8a14158640a30ca188c4e1[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Sun Nov 17 20:51:39 2019 +0100
+
+    bug sur upload de l'image
+
+[33mcommit 3feae64aac5cfd3d9caeab195b2bd42a7817d8f9[m
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Sun Nov 17 18:17:01 2019 +0100
+
+    ajout pseudo oublier
+
+[33mcommit cff610f1418cf4a8bd9746e5b9098c462b223468[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 15 14:30:33 2019 +0100
+
+    ajout des titles aux pages
+
+[33mcommit 2032a8ebcf18df79022c78ce6e4b9df1e2bc01cb[m
+Merge: 57157b0 51309b0
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 15 12:28:34 2019 +0100
+
+    merge avec Admin2
+
+[33mcommit 57157b0b7153161a868c8ddb75d0266dd181a5f6[m
+Merge: 42fd4f3 612b00b
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 15 11:40:02 2019 +0100
+
+    resolution de conflits
+
+[33mcommit 51309b0e52f9cfc3421f7b31491120a6caef4e8e[m
+Merge: 0660161 0e36cdb
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Fri Nov 15 11:08:27 2019 +0100
+
+    dossier adherent photos et documents inscritpion s'affiche
+
+[33mcommit 42fd4f3d809164067ce6c61f0827595a6b98df50[m
+Merge: 837e893 0660161
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 15 10:58:12 2019 +0100
+
+    merge Admin2
+
+[33mcommit 837e8935561e764688040c4b8f0ea5f11d787f16[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 15 10:12:51 2019 +0100
+
+    calendrier admin fonctionnel
+
+[33mcommit 612b00b052779251aecc07334aa934e0b8307d1b[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Thu Nov 14 16:21:21 2019 +0100
+
+    page adherent fonctionelle manque le disigne
+
+[33mcommit 1658bec886c57d5033902a03c3dfbb3720fe5a31[m
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Thu Nov 14 15:48:25 2019 +0100
+
+    update mdp avec url qui functionne
+
+[33mcommit 9e99aec7cf1fc55e739b069cd7dd4f97f1808beb[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Thu Nov 14 14:47:36 2019 +0100
+
+    Suppression du dossier d'inscription fonctionnelle
+
+[33mcommit 4c0e3959c7d26409b6c8c70f234b4152e02096bc[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Thu Nov 14 10:34:32 2019 +0100
+
+    Supression dossier dans la bdd fonctionne mais pas dans le dossier public
+
+[33mcommit af83aa79ebaa3519b7c81440ee9cd5d222a439f4[m
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Thu Nov 14 09:36:10 2019 +0100
+
+    update mdp oublier
+
+[33mcommit f3744d4c61989efe4781acd399ddc12f1888f6bd[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Wed Nov 13 16:24:29 2019 +0100
+
+    Modification entity sourcePhoto
+
+[33mcommit 066016113b0cf81617d0b12e55a738d8a74aad51[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Wed Nov 13 15:38:34 2019 +0100
+
+    modif design
+
+[33mcommit 0e36cdbb4ba580d18bb0037928db8a6a856d7660[m
+Merge: e4b07cd efda9a7
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Wed Nov 13 15:38:13 2019 +0100
+
+    mise a jour
+
+[33mcommit e4b07cd9d64e833b10f19739362a4a68c77d7412[m
+Merge: 0d17dd8 0f9a1e0
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Wed Nov 13 15:28:03 2019 +0100
+
+    update
+
+[33mcommit a280a9c6172740b201f0ad589e372c6e06ab8ea2[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Wed Nov 13 15:17:44 2019 +0100
+
+    création adminCarousel
+
+[33mcommit efda9a79c95dd02bb8748a7fd9e1e22614d32b03[m
+Merge: 0f9a1e0 bf2d02a
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Wed Nov 13 15:14:00 2019 +0100
+
+    recuperation de mdp qui functionne
+
+[33mcommit 0d17dd8746162be13b4d0dea0a4c178e9f4e3d40[m
+Merge: bf2d02a 465e78e
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Wed Nov 13 14:48:53 2019 +0100
+
+    commit avant pull authentification
+
+[33mcommit 772d70b54f50755c7085a1949ef588276aae1da2[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Wed Nov 13 14:37:15 2019 +0100
+
+    modification nom editAdherenttype en adminEditAdherentType + la class
+
+[33mcommit c7ab1aea9a79ef973a3bd8959be6744294f55a11[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Wed Nov 13 14:21:58 2019 +0100
+
+    création de la branch
+
+[33mcommit a3b679adca82dfda7a4cd5622763e592e5827568[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Wed Nov 13 14:20:00 2019 +0100
+
+    création de la branch
+
+[33mcommit 6af428ba01241c8cb4189b01d6f3e4067bc43db0[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Wed Nov 13 14:11:01 2019 +0100
+
+    probleme date inscrption a à l'edition du dossier adherent regle
+
+[33mcommit 0f9a1e04fc2d64e4fc3928c8c0483768902e9846[m
+Merge: 8c3f650 36b90e2
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Wed Nov 13 12:58:14 2019 +0100
+
+    ajout de mdp oublier apres enlever confirm mdp
+
+[33mcommit 8c3f650db4fe095caf4f0d9fde0c6e4965bca68a[m
+Merge: 8edc807 2815a75
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Wed Nov 13 12:20:28 2019 +0100
+
+    recup de version mdp
+
+[33mcommit 6c84fc9b0778cb4c51c530e713523bd3e1c04d0f[m
+Merge: ce8f1ec 5cb6d53
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Wed Nov 13 11:17:05 2019 +0100
+
+    edition du dossier adherent dans l'admin ok, reste à regler la date d'inscription
+
+[33mcommit 465e78efe9d9cd5c981a288bc09ff57f1bbd5e84[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Wed Nov 13 11:10:30 2019 +0100
+
+    Page adherent functionnelle
+
+[33mcommit bf2d02a339423e279106e3e5353d915273bbc9e0[m[33m ([m[1;31morigin/calendrier[m[33m)[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Wed Nov 13 10:58:11 2019 +0100
+
+    resolution probleme edition mot de passe profil user panel admin
+
+[33mcommit ce8f1ec24ce832db5dedb50e7d6ae3e0e7f98e8f[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Tue Nov 12 19:53:56 2019 +0100
+
+    travail sur l'edit du dossier adherent
+
+[33mcommit 5cb6d531f13641d0f7ce60305acf252230a75a6b[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Tue Nov 12 18:32:36 2019 +0100
+
+    ajout admin + bdd
+
+[33mcommit 5c614938ce56cbcc14e342a6b87ba8354b60cd15[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Tue Nov 12 17:22:19 2019 +0100
+
+    ajout des filtre dans form type dossier inscription
+
+[33mcommit 36b90e238eb91462107a06fbf8eb7679ad696f14[m
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Tue Nov 12 12:44:39 2019 +0100
+
+    aujout mdp oublier qui fonctionne
+
+[33mcommit e7ec7450d6197624f838c5697a2d8e3d58d81cc3[m
+Merge: 8edc807 2815a75
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Tue Nov 12 12:32:57 2019 +0100
+
+    ajout mdp oublier
+
+[33mcommit 116b762698457cb33eb5868712c63f6d12c7ee42[m
+Merge: 45c22fc 881ec30
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Tue Nov 12 11:47:57 2019 +0100
+
+    nettoyage répertoire
+
+[33mcommit 7c8ab7b255e9762dcaf9589c2a9a2ee9155e16da[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Tue Nov 12 09:48:39 2019 +0100
+
+    changement de controller
+
+[33mcommit 881ec30cf4f6e20b90aee9ad974f4540ce8f379f[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Mon Nov 11 19:26:00 2019 +0100
+
+    search bar ok
+
+[33mcommit 391cd345e8fb39dc4dd8afe7f3ad69abe00f2efd[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 11 19:25:42 2019 +0100
+
+    modification du visuel page adherent
+
+[33mcommit 4b292e563201e197cd8a49828e217f0a7ccdf923[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Mon Nov 11 18:49:31 2019 +0100
+
+    search bar ok
+
+[33mcommit 17a580a4ec756aecc9545d3cdfed0c84f1f45d66[m
+Author: zahia_mammasse <zahia.mammasse@gmail.com>
+Date:   Mon Nov 11 18:27:01 2019 +0100
+
+    crud liste et dossier adherent ok
+
+[33mcommit 206407c9d4fb3c80a7ba05a385d80df51a9cca95[m
+Merge: 45867d6 2815a75
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Mon Nov 11 16:39:18 2019 +0100
+
+    upload et affichage des fichiers uploader est fonctionnel
+
+[33mcommit 45c22fc1afb3851bb6968b34df2bb938240d6c04[m
+Merge: 57be5d3 eb6b384
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Mon Nov 11 15:53:21 2019 +0100
+
+    Merge branch 'brancheFourreTout' of https://gitlab.com/fabrique-beweb/mtp01_raseteurs into calendrier
+
+[33mcommit eb6b384dfc60778543d8d5e4efad9cd9e95553b2[m[33m ([m[1;32mmaster[m[33m)[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Mon Nov 11 15:03:52 2019 +0100
+
+    mise a jour routes et navbar
+
+[33mcommit 45867d61120757855821b967157b717bbaf12f4f[m
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Sun Nov 10 19:00:02 2019 +0100
+
+    Upload de fichier implementé
+
+[33mcommit 4b1d10bce57e79bbcadcb59fff0c4de409c319ba[m
+Merge: 2d72077 2815a75
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Sun Nov 10 14:50:55 2019 +0100
+
+    commit inutile
+
+[33mcommit 2d720770345229d7877dabf7bec3768daa1acfa2[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 8 15:37:28 2019 +0100
+
+    migration added
+
+[33mcommit 57be5d3163307869b59d5d1ab6983392661777e4[m
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 8 15:33:43 2019 +0100
+
+    commit avant nettoyage master
+
+[33mcommit 8edc807c94f09390312da201efb507e69209256d[m
+Merge: 4268e5c c8c184d
+Author: Frayel <frazier.yeliz@protonmail.com>
+Date:   Fri Nov 8 15:31:20 2019 +0100
+
+    recuperation de nouveau bdd
+
+[33mcommit 2815a757d9f8655c8cd96a7146e1391a49d5380b[m
+Merge: 6a7b61d 4268e5c
+Author: dalilaHENNI <dal.henni@gmail.com>
+Date:   Fri Nov 8 15:26:33 2019 +0100
+
+    correction bdd + MAJ
+
+[33mcommit 1118f7257e64df91f7528f25e5367fa59320ae52[m
+Merge: c9af405 c8c184d
+Author: bryan_nativel <bryan.nativel@hotmail.fr>
+Date:   Thu Nov 7 16:49:06 2019 +0100
+
+    pull du master pour rajouter la table participa

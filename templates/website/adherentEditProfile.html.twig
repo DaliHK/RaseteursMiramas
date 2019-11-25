@@ -1,34 +1,42 @@
 {% extends "base.html.twig" %}
-
 {% block body %}
-
-	<H1 class="text-center">Modification du profil</H1>
-
-	<div class="container-fluid">
-
-		<div class="row mb-4 justify-content-center">
-			<div class="col-6">
-			
-				<h5>Informations personnelles</h5>
-
-				{{form_start(adherent)}}
-				{{form_row(adherent.nom,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.prenom,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.telephone,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.adresse,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.cp,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.ville,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.numeroUrgence,{'attr':{'placeholder':""}})}}
-				{{form_row(adherent.nomUrgence,{'attr':{'placeholder':""}})}}
-
-				<h5>Securité</h5>
-				{{form_row(adherent.email,{'attr':{'placeholder':""}})}}
-				{{ form_row(adherent.password.first) }}
-				{{ form_row(adherent.password.second) }}
-
-				<button type="submit" class='btn btn-success mb-5'>Sauvegarder les changements</button>
-				{{form_end(adherent)}}
+	<div class="content ">
+		<div class="row justify-content-center">
+			<div>
+				<h3 class="text-center">MODIFIER VOS INFORMATIONS PERSONNELLES</h3>
+				<hr>
 			</div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="card text-white shadow-lg bg-primary col-3">
+
+				<div class="card-body ">
+					<div class="card-content">
+
+						{{form_start(adherent)}}
+						<h5 class="text-center">Informations personnelles</h5>
+						{{form_row(adherent.nom,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.prenom,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.telephone,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.adresse,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.cp,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.ville,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.numeroUrgence,{'attr':{'placeholder':""}})}}
+						{{form_row(adherent.nomUrgence,{'attr':{'placeholder':""}})}}
+						<h5 class="text-center">Securité</h5>
+						{{form_row(adherent.email,{'attr':{'placeholder':""}})}}
+						{{ form_row(adherent.password.first,{'attr':{'class':"hidden-row"}})}}
+						{{ form_row(adherent.password.second)}}
+						<div class="text-center pt-3">
+							<button type="submit" class='btn btn-success mb-1'>Modification</button>
+							{{form_end(adherent)}}
+						</div>
+
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 {% endblock %}

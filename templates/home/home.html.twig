@@ -1,48 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} - Accueil
+{% block title %}
+	- Accueil
 {% endblock %}
 
 {% block body %}
+	<!-- Carousel -->
+	<div class="container-fluid pt-1">
+
+		<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<div class="row">
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
+
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
+
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
 
 
-			<!-- Carousel -->
-<div class="container">
-  <h3> </h3>
- 
-<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel" >
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-           <div class="row">
-               <div class="col"><img src="{{ asset('img/img3.jpg') }}" class="img-fluid" alt="1 slide"></div>
-               <div class="col"><img src="{{ asset('img/img2.jpg') }}" class="img-fluid" alt="2 slide"></div>
-               <div class="col"><img src="{{ asset('img/img1.jpg') }}" class="img-fluid" alt="3 slide"></div>
-           </div>
-    </div>
-    <div class="carousel-item">
-           <div class="row">
-               <div class="col"><img src="img/img3.jpg" class="img-fluid" alt="1 slide"></div>
-               <div class="col"><img src="img/img2.jpg" class="img-fluid" alt="2 slide"></div>
-               <div class="col"><img src="img/img1.jpg" class="img-fluid" alt="3 slide"></div>
-           </div>
-    </div>
-    <div class="carousel-item">
-           <div class="row">
-               <div class="col"><img src="img/img1.jpg" class="img-fluid" alt="1 slide"></div>
-               <div class="col"><img src="img/img2.jpg" class="img-fluid" alt="2 slide"></div>
-               <div class="col"><img src="img/img3.jpg" class="img-fluid" alt="3 slide"></div>
-           </div>
-    </div>
-  </div>
-</div>
-		​
-		<div class="jumbotron mt-3">
-		<!-- section -->
-			<div class="container-fluid bg-2 text-center">
-			<h3>Premiere section</h3>
-			{# contenu ici #}
+					</div>
+				</div>
+				<div class="carousel-item">
+					<div class="row">
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
+
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
+
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
+					</div>
+				</div>
 			</div>
-		<!--end-->
+		</div>
+		​
+		<div
+			class="jumbotron mt-3">
+			<!-- section -->
+			<div class="container-fluid bg-2 text-center">
+				<h3>Premiere section</h3>
+				{# contenu ici #}
+			</div>
+			<!--end-->
 		</div>
 		​
 		<!-- section -->
@@ -60,10 +59,11 @@
 		<!--end-->
 		​
 		<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
-			<div class="row">
+		<div class="row">
 
-				​{% for evenement in evenements %}
-				
+			​
+			{% for evenement in evenements %}
+
 				<div class="col-md-4">
 					<div class="card bg-light mb-3">
 						<div class="card-header text-center">
@@ -73,7 +73,7 @@
 						<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
 						<div class="card-body">
 							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, optio
-							temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
+																																																																																																																															temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
 						</div>
 					</div>

@@ -1,280 +1,484 @@
 {% extends 'base.html.twig' %}
-{% block title %}Hello WebsiteController!{% endblock %}
-{% block body %}
-{% if user.statut == true %}
-    {# Photo du user #}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                {% if user.dossierInscription == ""  %}
-                <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
-                {% else %}
-                <img src="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
-                {% endif %}
-                <div class=" mt-1">
-                    <h6>Nom:{{user.nom}}</h6>
-                    <h6>Prenom: {{user.prenom}}</h6>
-                    <h6>Statut: Inscrit </h6>
-                </div>
-            </div>
-        </div>
-        {# Information personnelle #}
-        <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
-                <div>
-                    <h4>Informations Personnelles</h4>
-                </div>
-            </div>
-        </div>
-        <div class="row offset-2">
-            <div class="col">
-                <h6>Mot de passe: ***************</h6>
-            </div>
-            <div class="col">
-                <h6>E-mail: {{user.email}}</h6>
-            </div>
-        </div>
-        <div class="row offset-2">
-            <div class="col">
-                <h6>Telephone: {{user.telephone}}</h6>
-            </div>
-            <div class="col">
-                <h6>Date de naissance: {{user.DateNaissance | date("m/d/Y")}}</h6>
-            </div>
-        </div>
-        <div class="row offset-2">
-            <div class="col">
-                <h6>Adresse: {{user.adresse}}</h6>
-            </div>
-            <div class="col">
-                <h6>Ville: {{user.ville}}</h6>
-            </div>
-        </div>
-        <div class="row offset-2">
-            <div class="col">
-                <h6>Code Postal: {{user.cp}}</h6>
-            </div>
-            <div class="col">
-                <h6>Tel d'urgence: {% if user.numeroUrgence == "" %}Champ à compléter{% endif %}
-                {{user.numeroUrgence}}</h6>
-            </div>
-        </div>
-        <div class="row offset-2">
-            <div class="col">
-                <h6>Responsable legal :{% if user.nomUrgence == ""  %} Champ à compléter {% else %}
-                    {{user.nomUrgence}}{% endif %}
-                </h6>
-            </div>
-        </div>
-      <!--Button pour modifier les informations -->
-        <div class="row justify-content-center">
-            <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
-        </div>
-        <hr>
-        <!--Evénement Inscrit-->
-        <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
-                <div>
-                    <h5>Evenement Inscrit</h5>
-                </div>
-            </div>
-        </div>
-        <div class="row offset-2">
-            {% for participations in participation %}
-            {% if participations.adherent.id == user.id %}
-            <div class="col">
-                <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-                    <div class="card-header text-center">Evenement</div>
-                        <div class="card-body">
-                            <div class="col">
-                                <h6>Nom: {{ participations.evenement.titre }}</h6>
-                            </div>
-                            <div class="col">
-                                <h6>Description: {{ participations.evenement.description }}</h6>
-                            </div>
-                            <div class="col">
-                                date()
-                                <h6>Date: {{ participations.evenement.dateDebut | date("m/d/Y") }}</h6>
-                            </div>
-                            <div class="col">
-                                <a href="{{ path('delete_evenement',{'id' : participations.id  })}}" class="btn btn-primary">Supprimer</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
-            </div> 
-            
-        <hr>
-        <div class="row justify-content-center">
-            <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
-                <div>
-                    <h5>Mes documents</h5>
-                </div>
-            </div>
-        </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}">
-                        Photo D'identité (PDF)</a></h5>
-            </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
-            </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
-            </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
-            </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
-            </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
-            </div>
-            
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
-            </div>
-            <div class=" row justify-content-center">
-                <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"> RenseignementsGeneraux(PDF)</a></h5>
-            </div>
-{% else %}
-        {# Photo du user #}
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    {% if user.dossierInscription == ""  %}
-                    <img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
-                    {% else %}
-                    <img src="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
-                    {% endif %}
-                    <div class=" mt-1">
-                        <h6>Nom:{{user.nom}}</h6>
-                        <h6>Prenom: {{user.prenom}}</h6>
-                        <h6>Statut: Pre-inscription </h6>
-                    </div>
-                </div>
-            </div>
-            {# Information personnelle #}
-            <div class="row justify-content-center">
-                <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
-                    <div>
-                        <h4>Information Personnelle</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="row offset-2">
-                <div class="col">
-                    <h6>Mot de passe: ***************</h6>
-                </div>
-                <div class="col">
-                    <h6>E-mail: {{user.email}}</h6>
-                </div>
-            </div>
-            <div class="row offset-2">
-                <div class="col">
-                    <h6>Telephone: {{user.telephone}}</h6>
-                </div>
-                <div class="col">
-                    <h6>Date de naissance: {{user.DateNaissance | date("m/d/Y")}}</h6>
-                </div>
-            </div>
-            <div class="row offset-2">
-                <div class="col">
-                    <h6>Adresse: {{user.adresse}}</h6>
-                </div>
-                <div class="col">
-                    <h6>Ville: {{user.ville}}</h6>
-                </div>
-            </div>
-            <div class="row offset-2">
-                <div class="col">
-                    <h6>Code Postal: {{user.cp}}</h6>
-                </div>
-                <div class="col">
-                    <h6>Tel d'urgence: {% if user.numeroUrgence == "" %}Champ à compléter{% endif %}
-                        {{user.numeroUrgence}}</h6>
-                </div>
-            </div>
-            <div class="row offset-2">
-                <div class="col">
-                    <h6>Responsable legal :{% if user.nomUrgence == ""  %} Champ à compléter {% else %}
-                        {{user.nomUrgence}}{% endif %}
-                    </h6>
-                </div>
-            </div>
-            <!--Button pour modifier les informations -->
-            <div class="row justify-content-center">
-                <a class="btn" href="{{path('adherent_edit_profile')}}" type="button">Modifier</a>
-            </div>
-            <hr>
-            <!--Upload de document ou affichage de cdes documents si il a deja uploader -->
-            {% if user.dossierInscription  %} {#  si  le dossier adherent existe  #}
-           
-                <h5> Votre dossier d'inscription a été bien envoyé </h6>
-                <h6> Les fichiers envoyé : </h6>
-                {# Concatenation du chemin pour afficher les documents telechargers   #}
-                <div class=" row justify-content-center">
-                     <h5><a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}">
-                            Photo D'identité (PDF)</a></h5>
-                </div>
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}"> CertificatMedical (PDF)</a></h5>
-                </div>
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}">DroitImage(PDF)</a></h5>
-                </div>
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}"> DroitTransport(PDF)</a></h5>
-                </div>
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}"> DroitPratique (PDF)</a></h5>
-                </div>
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}"> DroitPratique (PDF)</a></h5>
-                </div>
-                
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"> RenseignementsMedicaux (PDF)</a></h5>
-                </div>
-                <div class=" row justify-content-center">
-                    <h5><a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"> RenseignementsGeneraux(PDF)</a></h5>
-                </div>
-                
-                <a href="{{ path('delete_folder_inscription',{'id' : user.dossierInscription.id })}}" class="btn btn-primary">Supprimer</a>
-                
-                {% else %}
-                <div class="row justify-content-center">
-                    <div class="shadow mt-1 p-3 mb-5 bg-white rounded p-center">
-                        <div>
-                            <h5>Mes documents</h5>
-                        </div>
-                    </div>
-                </div>
-            <div class="row justify-content-center form-group">
-            
-                {{ form_start(form) }}
-            
-                {{ form_row(form.photoIdentite,{'attr':{'placeholder':"image"}})}}
-                {{ form_row(form.CertificatMedical)}}
-                {{ form_row(form.DroitImage)}}
-                {{ form_row(form.droitTransport)}}
-                {{ form_row(form.droitPratique)}}
-                {{ form_row(form.droitEntrainement)}}
-                {{ form_row(form.renseignementsMedicaux)}}
-                {{ form_row(form.renseignementsgeneraux)}}
-            
-                <div class=" row justify-content-center">
-                    <button type="submit" class='btn btn-success'>Envoyer</button>
-                </div>
-                {{ form_end(form) }}
-            </div>
-            {% endif %}
-            
-           
-        </div>
-    
-{% endif %}
+
+{% block title %}Profile Adherent
 {% endblock %}
+
+{% block body %}
+
+	{% if user.statut == true %}
+
+		{# Photo du user #}
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					{% if not user.dossierInscription %}
+						<img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
+					{% else %}
+						<img src="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
+					{% endif %}
+					<div class=" mt-1">
+						<h5>{{user.nom}}
+							{{user.prenom}}</h5>
+						<h6>Statut: Pre-inscription
+						</h6>
+					</div>
+				</div>
+			</div>
+
+			{# Information personnelle #}
+			<div class="row offset-2 ">
+				<div class="col">
+					<div class="row ">
+						<div class="col mb-1">
+							<h5>
+								<strong>
+									Mot de passe :</strong>
+							</h5>
+							**************************
+						</div>
+						<div class="col mb-1">
+							<h5>
+								<strong>E-mail :</strong>
+							</h5>
+							{{user.email}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col mb-3  ">
+							<h5>
+								<strong>
+									Télèphone :</strong>
+							</h5>
+							{{user.telephone}}
+						</div>
+
+						<div class="col mb-3 ">
+							<h5>
+								<strong>Date de naissance :</strong>
+							</h5>
+							{{user.DateNaissance | date("m/d/Y")}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col mb-3 ">
+							<h5>
+								<strong>Adresse :</strong>
+							</h5>
+							{{user.adresse}}
+						</div>
+						<div class="col mb-3 ">
+							<h5>
+								<strong>Ville :</strong>
+							</h5>
+							{{user.ville}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col mb-3 ">
+							<h5>
+								<strong>Code postal :</strong>
+							</h5>
+							{{user.cp}}
+						</div>
+						<div class="col mb-3 ">
+							<h5>
+								<strong>Numero d'urgence :</strong>
+							</h5>
+							{% if user.numeroUrgence == "" %}Champ à compléter
+							{% endif %}
+							{{user.numeroUrgence}}
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<h5>
+								<strong>Responsable legal :</strong>
+							</h5>
+							{% if user.nomUrgence == ""  %}
+								Champ à compléter
+							{% else %}
+								{{user.nomUrgence}}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row justify-content-center mt-3">
+				<div class=" mt-3 p-3 mb-2 bg-white rounded p-center">
+					<div>
+						<h3>EVENEMENT INSCRIT</h3>
+					</div>
+					<hr>
+				</div>
+			</div>
+
+			<!--Evénement Inscrit-->
+			<div class="row offset-2">
+				{% for participations in participation %}
+					{% if participations.adherent.id == user.id %}
+						<div class="col">
+							<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+								<div class="card-header text-center">
+									<h4>Evénement</h4>
+								</div>
+								<div class="card-body">
+									<div class="col">
+										<h6>Nom :
+											{{ participations.evenement.titre }}</h6>
+									</div>
+									<div class="col">
+										<h6>Description :
+											{{ participations.evenement.description }}</h6>
+									</div>
+									<div class="col">
+										<h6>Date :
+											{{ participations.evenement.dateDebut | date("d/m/Y") }}</h6>
+									</div>
+									<div class="col">
+										<a href="{{ path('delete_evenement',{'id' : participations.id })}}" class="btn btn-danger">Supprimer</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+
+			<div class="row justify-content-center mt-3">
+				<div class=" mt-3 p-3 mb-2 bg-white rounded p-center">
+					<div>
+						<h3>DOSSIER D'INSCRIPTION</h3>
+					</div>
+					<hr>
+				</div>
+			</div>
+			<div class="row offset-2">
+				<div class="col">
+					<h6>
+						<a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}"><img src="https://img.icons8.com/office/80/000000/picture.png">
+						</a>Photo D'identité</h6>
+				</div>
+
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}">
+							<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Certificat medical (PDF)</h6>
+				</div>
+			</div>
+
+			<div class="row offset-2">
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit d'image(PDF)</h6>
+				</div>
+
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}">
+							<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit transport(PDF)</h6>
+				</div>
+			</div>
+
+			<div class="row offset-2">
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}">
+							<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit pratique (PDF)</h6>
+				</div>
+
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}">
+							<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit d'entrainement (PDF)</h6>
+				</div>
+			</div>
+			<div class="row offset-2">
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png">
+						</a>Renseignements medicaux (PDF)</h6>
+				</div>
+
+				<div class="col">
+					<h6>
+						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png">
+						</a>Renseignements generaux(PDF)</h6>
+				</div>
+			</div>
+		{% else %}
+
+			{# Photo du user #}
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						{% if not user.dossierInscription %}
+							<img src="//placehold.it/150" class="m-x-auto img-fluid img-circle" alt="avatar">
+						{% else %}
+							<img src="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}" class="m-x-auto img-fluid img-circle" alt="avatar" width="200" height="300">
+						{% endif %}
+						<div class=" mt-1">
+							<h5>{{user.nom}}
+								{{user.prenom}}</h5>
+							<h6>Statut: Pre-inscription
+							</h6>
+						</div>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class=" mt-1 p-3 mb-5 bg-white rounded p-center">
+						<div
+							class="col">
+							<!--Button pour modifier les informations -->
+							<h3>INFORMATION PERSONELLE
+								<a class="btn" href="{{path('adherent_edit_profile')}}"><img src="https://img.icons8.com/officel/40/000000/edit.png"></a>
+							</h3>
+						</div>
+						<hr>
+					</div>
+				</div>
+
+				{# Information personnelle #}
+				<div class="row offset-2 ">
+					<div class="col">
+						<div class="row ">
+							<div class="col mb-1">
+								<h5>
+									<strong>
+										Mot de passe :</strong>
+								</h5>
+								**************************
+							</div>
+							<div class="col mb-1">
+								<h5>
+									<strong>E-mail :</strong>
+								</h5>
+								{{user.email}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3  ">
+								<h5>
+									<strong>
+										Télèphone :</strong>
+								</h5>
+								{{user.telephone}}
+							</div>
+
+							<div class="col mb-3 ">
+								<h5>
+									<strong>Date de naissance :</strong>
+								</h5>
+								{{user.DateNaissance | date("d/m/Y")}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3 ">
+								<h5>
+									<strong>Adresse :</strong>
+								</h5>
+								{{user.adresse}}
+							</div>
+							<div class="col mb-3 ">
+								<h5>
+									<strong>Ville :</strong>
+								</h5>
+								{{user.ville}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col mb-3 ">
+								<h5>
+									<strong>Code postal :</strong>
+								</h5>
+								{{user.cp}}
+							</div>
+							<div class="col mb-3 ">
+								<h5>
+									<strong>Numero d'urgence :</strong>
+								</h5>
+								{% if user.numeroUrgence == "" %}Champ à compléter
+								{% endif %}
+								{{user.numeroUrgence}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<h5>
+									<strong>Responsable legal :</strong>
+								</h5>
+								{% if user.nomUrgence == ""  %}
+									Champ à compléter
+								{% else %}
+									{{user.nomUrgence}}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--Upload de document ou affichage de cdes documents si il a deja uploader -->
+				{% if user.dossierInscription  %}
+					{#  si  le dossier adherent existe  #}
+
+					<div class="row justify-content-center mt-3">
+						<div class=" mt-3 p-3 mb-2 bg-white rounded p-center">
+							<div>
+								<h3>DOSSIER D'INSCRIPTION</h3>
+							</div>
+							<hr>
+						</div>
+					</div>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<h4 class="alert-heading">Votre dossier d'inscription à été envoyé !</h4>
+						<p>
+							Vous pouvez le supprimier en cas d'erreur mais ça augmentera le temps de traitement
+						</p>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					{# Concatenation du chemin pour afficher les documents telechargers #}
+					<div class="row offset-2">
+						<div class="col">
+							<h6>
+								<a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}"><img src="https://img.icons8.com/office/80/000000/picture.png">
+								</a>Photo D'identité</h6>
+						</div>
+
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.CertificatMedical) }}">
+									<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Certificat medical (PDF)</h6>
+						</div>
+					</div>
+
+					<div class="row offset-2">
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitImage) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit d'image(PDF)</h6>
+						</div>
+
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitTransport) }}">
+									<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit transport(PDF)</h6>
+						</div>
+					</div>
+
+					<div class="row offset-2">
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitPratique) }}">
+									<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit pratique (PDF)</h6>
+						</div>
+
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.DroitEntrainement) }}">
+									<img src="https://img.icons8.com/office/80/000000/folder-invoices.png"></a>Droit d'entrainement (PDF)</h6>
+						</div>
+					</div>
+					<div class="row offset-2">
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png">
+								</a>Renseignements medicaux (PDF)</h6>
+						</div>
+
+						<div class="col">
+							<h6>
+								<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.renseignementsgeneraux) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png">
+								</a>Renseignements generaux(PDF)</h6>
+						</div>
+					</div>
+
+					<!-- Button trigger modal -->
+					<div class="row justify-content-center mt-5">
+						<div>
+							<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+								Supprimer votre dossier
+							</button>
+						</div>
+					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLongTitle">Voulez-vous vraiment supprimer ?
+									</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									Une fois supprimé les donnés ne pourront pas étre récupéré.
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+									<a href="{{ path('delete_folder_inscription',{'id' : user.dossierInscription.id })}}" class="btn btn-danger">Supprimer</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="row justify-content-center mt-3">
+						<div class=" mt-3 p-3 mb-4 bg-white rounded p-center">
+							<div>
+								<h3>DOSSIER D'INSCRIPTION</h3>
+							</div>
+							<hr>
+						</div>
+					</div>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<h4 class="alert-heading">Vous êtes actuelement pre-inscrit !</h4>
+						<p>
+							Avant d'envoyer vos documents, il faut participer au cours d'essaie , un email vous serra envoyé</p>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="row justify-content-center">
+						<div class="card text-white shadow-lg bg-primary mb-3 pr-5 pl-5">
+							<div class="card-header">
+								<h4 class="text-center">Inscription</h4>
+							</div>
+							<div class="card-body">
+								<div class="card-content">
+									<p>
+										* champ obligatoire</p>
+									<div class="row  mb-1 justify-content-center">
+
+
+										{{ form_start(form)}}
+										{{ form_row(form.photoIdentite)}}
+										{{ form_row(form.CertificatMedical)}}
+										{{ form_row(form.DroitImage)}}
+										{{ form_row(form.droitTransport)}}
+										{{ form_row(form.droitPratique)}}
+										{{ form_row(form.droitEntrainement)}}
+										{{ form_row(form.renseignementsMedicaux)}}
+										{{ form_row(form.renseignementsgeneraux)}}
+
+
+									</div>
+								</div>
+								<div class="text-center">
+									<div class=" mt-3 col ">
+										<button type="submit" class='btn btn-success'>Envoyer</button>
+										{{ form_end(form) }}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+
+	{% endif %}
+</div>{% endblock %}

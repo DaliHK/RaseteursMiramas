@@ -40,21 +40,21 @@ class AdminEditAdherentType extends AbstractType
                 'empty_data' => null
                 ])
             ->add('email',EmailType::class)
-            ->add('telephone',['attr' => ['maxlength' => 10]])
+            ->add('telephone')
             ->add('adresse')
             ->add('cp')
             ->add('ville')
             ->add('numeroUrgence')
             ->add('statut',ChoiceType::class, [
                 'choices'  => [
+                    'Pré-inscrit' => false, 
                     'Inscrit' => true,
-                    'Pré-inscrit' => false
                 ]])
             ->add('nomUrgence')
             ->add('niveau',ChoiceType::class, [
                 'choices'  => [
+                    'cycle 1' => false,
                     'cycle 2' => true,
-                    'cycle 1' => false
                 ]])
             ->add('cotisationAsso')
             ->add('cotisationLicence')

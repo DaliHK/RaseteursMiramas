@@ -15,12 +15,40 @@ body{ font-family: 'Montserrat', sans-serif;
    padding-top: 3%;
    position:relative;
 }
+
+.container-fluid {
+   padding-top: 70px;
+   padding-bottom: 70px;
+}
+
+.bg-1
+{
+   background-color:#08a0e3;
+   padding-top:0px;
+   padding-bottom:0px;
+   -webkit-box-shadow: 0 4px 6px -6px #222;
+   -moz-box-shadow: 0 4px 6px -6px #222;
+   box-shadow: 0 4px 6px -6px #222;
+}
+
+.footer {
+    background-color: orange;
+    position:relative;
+    width:100%;
+    bottom: -50px;
+}
+
+.footer-title {
+color:white;
+font-weight:bold;
+}
+
 .navbar{
    background: #06a0e2;
    opacity: 0.9;
-   border-radius : 15px 50px 30px 0px;
    width : 95%;
 } 
+
 a.nav-link{
    color:white;
    font-family: "Roboto-Medium", sans-serif !important;
@@ -38,17 +66,9 @@ a.nav-link{
    font-size: 45px;
 }
 .navbar-toggler{
-   background-color: white !important;
+   background-color: #1F2635 !important;
 }
 #fond{
-   left : 2em;
    background: transparent;
-   padding-left: 0px;
-   padding-right: 0px;
-}
-#vague{
-   margin-top: -6.45em;
-   margin-left : 1.2em;
-   transform: scale(0.98,0.2);
-   opacity : 0.865;
+
 }

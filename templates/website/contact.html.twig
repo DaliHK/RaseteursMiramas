@@ -3,31 +3,38 @@
 {% block title %}Contactez-nous
 {% endblock %}
 
-	{% block body %}
+{% block body %}
 
-<div class="container">
+	<div class="container-fluid">
 
-    <div class="row">
-	
-		<div class="col-6">
-		<h3> Formulaire de contact </h3>
+		<div class="container">
+			<div class="row">
 
-			{{form_start(form)}}
-			{{form_widget(form)}}
-			{{form_end(form)}}
+				<div class="col-6">
+					<h3>
+						Formulaire de contact
+					</h3>
 
+					{{form_start(form)}}
+					{{form_widget(form)}}
+					{{form_end(form)}}
+
+				</div>
+
+				<div class="col-6 justify-text-center">
+
+					<h3>
+						Nos coordonnées
+					</h3>
+
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus impedit vero explicabo architecto dolores molestias omnis officiis eaque debitis voluptates, ab recusandae totam nam quo dolorum modi fuga ipsam. Ipsam?
+							Impedit et facere, ea accusamus porro ratione ipsum veritatis! Facere maxime vero, praesentium doloribus minus veritatis accusantium eius eum. Nulla esse delectus ipsa sequi voluptatem omnis distinctio, dignissimos soluta eveniet!
+							Suscipit non officiis quibusdam ipsa! Laudantium eligendi assumenda ab soluta minus quibusdam dolorem corporis commodi voluptas repudiandae deserunt sint, at quo quis, eum, odio odit libero illo distinctio itaque quae!
+							Itaque, aspernatur porro impedit aliquam accusamus eum voluptatem quibusdam, illo doloribus ad eos consectetur maiores ipsum suscipit voluptates. Possimus dolore repudiandae odio at consequatur, et necessitatibus tempora amet vitae eligendi!Sed corrupti placeat minus laborum modi veritatis repellat hic facere cum iure aperiam nihil asperiores soluta vel blanditiis beatae facilis, magni, vitae
+				</div>
+
+			</div>
 		</div>
-
- 	<div class="col-6 justify-text-center">
-	 
-		<h3> Nos coordonnées </h3>
-
-		Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus impedit vero explicabo architecto dolores molestias omnis officiis eaque debitis voluptates, ab recusandae totam nam quo dolorum modi fuga ipsam. Ipsam?
-		Impedit et facere, ea accusamus porro ratione ipsum veritatis! Facere maxime vero, praesentium doloribus minus veritatis accusantium eius eum. Nulla esse delectus ipsa sequi voluptatem omnis distinctio, dignissimos soluta eveniet!
-		Suscipit non officiis quibusdam ipsa! Laudantium eligendi assumenda ab soluta minus quibusdam dolorem corporis commodi voluptas repudiandae deserunt sint, at quo quis, eum, odio odit libero illo distinctio itaque quae!
-		Itaque, aspernatur porro impedit aliquam accusamus eum voluptatem quibusdam, illo doloribus ad eos consectetur maiores ipsum suscipit voluptates. Possimus dolore repudiandae odio at consequatur, et necessitatibus tempora amet vitae eligendi!Sed corrupti placeat minus laborum modi veritatis repellat hic facere cum iure aperiam nihil asperiores soluta vel blanditiis beatae facilis, magni, vitae
-
 	</div>
-</div>
-	
-	{% endblock %}
+
+{% endblock %}
