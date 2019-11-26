@@ -8,8 +8,13 @@
 
 	<div class="container">
 
-		Laudantium esse temporibus voluptatibus aliquam maxime molestiae et a rerum. Exercitationem tenetur, quibusdam beatae eaque repudiandae, amet numquam nam, odio voluptate labore vero consequuntur eos atque quas saepe mollitia cupiditate.
-						        Eius, similique. Impedit inventore aliquid officiis qui laboriosam ipsum natus vitae quidem fugiat saepe vel temporibus necessitatibus, autem est omnis exercitationem in corrupti accusantium, odio quisquam, magni voluptatum vero ex?ratione doloribus corrupti autem earum quos deleniti, iusto, quo maiores molestias inventore!Modi pariatur officia alias dignissimos quia eos labore distinctio, porro obcaecati expedita itaque tempore in quas qui totam, est minus nostrum corrupti deleniti repellat reprehenderit earum placeat debitis. Optio, tenetur?
+		{% for element in contenuEcole %}
+
+			<h4>{{ element.titre }}</h4>
+
+			{{ element.section }}
+		{% endfor %}
+
 	</div>
 
 {% endblock %}

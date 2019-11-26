@@ -19,7 +19,7 @@
 					<div class=" mt-1">
 						<h5>{{user.nom}}
 							{{user.prenom}}</h5>
-						<h6>Statut: Pre-inscription
+						<h6>Statut: Inscrit
 						</h6>
 					</div>
 				</div>
@@ -115,8 +115,11 @@
 
 			<!--Evénement Inscrit-->
 			<div class="row offset-2">
+
 				{% for participations in participation %}
+
 					{% if participations.adherent.id == user.id %}
+						{{ dump(participations) }}
 						<div class="col">
 							<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
 								<div class="card-header text-center">
@@ -158,6 +161,7 @@
 					<h6>
 						<a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}"><img src="https://img.icons8.com/office/80/000000/picture.png">
 						</a>Photo D'identité</h6>
+
 				</div>
 
 				<div class="col">
@@ -479,6 +483,5 @@
 				{% endif %}
 			</div>
 		</div>
-
 	{% endif %}
 </div>{% endblock %}

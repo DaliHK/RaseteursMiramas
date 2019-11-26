@@ -23,14 +23,31 @@
 
 				<div class="col-6 justify-text-center">
 
-					<h3>
+					<h3 class="mt-1">
 						Nos coordonnées
 					</h3>
 
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus impedit vero explicabo architecto dolores molestias omnis officiis eaque debitis voluptates, ab recusandae totam nam quo dolorum modi fuga ipsam. Ipsam?
-							Impedit et facere, ea accusamus porro ratione ipsum veritatis! Facere maxime vero, praesentium doloribus minus veritatis accusantium eius eum. Nulla esse delectus ipsa sequi voluptatem omnis distinctio, dignissimos soluta eveniet!
-							Suscipit non officiis quibusdam ipsa! Laudantium eligendi assumenda ab soluta minus quibusdam dolorem corporis commodi voluptas repudiandae deserunt sint, at quo quis, eum, odio odit libero illo distinctio itaque quae!
-							Itaque, aspernatur porro impedit aliquam accusamus eum voluptatem quibusdam, illo doloribus ad eos consectetur maiores ipsum suscipit voluptates. Possimus dolore repudiandae odio at consequatur, et necessitatibus tempora amet vitae eligendi!Sed corrupti placeat minus laborum modi veritatis repellat hic facere cum iure aperiam nihil asperiores soluta vel blanditiis beatae facilis, magni, vitae
+					{% for contact in contacts %}
+
+						<h4 class="titlecontact">{{ contact.nom }}</h4><br>
+
+						<p>Pour tout renseignement, vous pouvez nous contacter via la page Facebook, ou par téléphone. Notre formulaire de contact reste à votre disposition, nous vous répondrons dans les plus brefs délais.</p>
+
+						<i class="fas fa-map-marker-alt"></i>
+						{{ contact.adresse }}
+						-
+						{{ contact.cp }}
+						-
+						{{ contact.ville }}<br>
+						<i class="fas fa-phone-alt"></i>
+						{{ contact.telephone1 }}<br>
+						<br>
+						<h4 class="titlecontact">Lieux d'entraînement</h4><br>
+
+
+					{% endfor %}
+
+
 				</div>
 
 			</div>

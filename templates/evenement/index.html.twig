@@ -4,19 +4,19 @@
 {% endblock %}
 
 {% block body %}
-{% block content %}
+	{% block content %}
 
-                    <!-- We'll fill this with dummy content -->
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
-                            <div class="container">
-            
-                                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                                    <i class="fas fa-align-left"></i>
-                                    <span>Menu</span> 
-                                </button>
-                            </div>
-                    </nav>
-                    {% endblock %}
+		<!-- We'll fill this with dummy content -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+			<div class="container">
+
+				<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<i class="fas fa-align-left"></i>
+					<span>Menu</span>
+				</button>
+			</div>
+		</nav>
+	{% endblock %}
 
 
 	<h3>Liste des événements enregistrés</h3>
@@ -49,14 +49,25 @@
 					<td>{{ evenement.description }}</td>
 					<td>{{ evenement.categorie }}</td>
 					<td>
-					
-						<a class="btn btn-primary" href="{{ path('evenement_edit', {'id': evenement.id}) }}">Editer</a>
-						<a class="btn btn-primary" href="{{ path('participants', {'id': evenement.id}) }}">Voir participants</a>
+
+						<a class="btn btn-primary mb-1" href="{{ path('evenement_edit', {'id': evenement.id}) }}">
+							<i class="far fa-edit"></i>
+						</a>
+
+						<a class="btn btn-primary mb-1" href="{{ path('participants', {'id': evenement.id}) }}">
+
+							<i class="far fa-folder-open"></i>
+						</a>
+
 
 						<form method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Etes-vous sûr(e) de vouloir supprimer cet événement ?');">
-    					<input type="hidden" name="_method" value="DELETE">
-    					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
-    					<button class="btn btn-primary">supprimer</button>
+							<input type="hidden" name="_method" value="DELETE">
+							<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ evenement.id) }}">
+							<button class="btn btn-primary mb-1">
+								<i class="far fa-trash-alt"></i>
+
+							</button>
+
 						</form>
 
 					</td>

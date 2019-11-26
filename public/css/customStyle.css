@@ -9,8 +9,12 @@
 .bg-1{
    background-color: #00A2E7;
 }
-button.navbar-toggler 
 
+.titlecontact {
+color: black;
+}
+
+button.navbar-toggler 
 {
    color: white!important;
    border-color: white!important;
@@ -19,6 +23,7 @@ button.navbar-toggler
 span.navbar-toggler-icon {
   border-color: white!important;
 }
+
 .navbar-toggler .line{
     width: 100%;
     float: left;

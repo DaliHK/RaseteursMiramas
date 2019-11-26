@@ -26,7 +26,7 @@
 				{{ form_start(form) }}
 				{{ form_row(form.nom) }}
 				{{ form_end(form) }}
-				<a href="{{ path('adherent_new') }}" class="btn btn-primary">Créer un Adhérent</a>
+				{# <a href="{{ path('adherent_new') }}" class="btn btn-primary">Créer un Adhérent</a> #}
 			</div>
 		</div>
 	</div>
@@ -41,12 +41,12 @@
 				<th>Email</th>
 				<th>Telephone</th>
 				<th>Nom Urgence</th>
-				<th>Numero Urgence</th>
+				<th>N° Urgence</th>
 
 				<th>Statut</th>
 				<th>Cotisation Asso</th>
 				<th>Cotisation Licence</th>
-				<th>NumLicence</th>
+				<th>N° Licence</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -69,15 +69,21 @@
 					<td>{{ adherent.cotisationLicence ? 'Payée' : 'Non payé' }}</td>
 					<td>{{ adherent.numLicence }}</td>
 					<td>
-						<a href="{{ path('adherent_show', {'id': adherent.id}) }}" class="btn btn-primary mt-2">Voir</a>
-						<a href="{{ path('adherent_edit', {'id': adherent.id}) }}" class="btn btn-primary mt-2">Modifier</a>
+						<a href="{{ path('adherent_show', {'id': adherent.id}) }}" class="btn btn-primary mt-2">
+							<i class="far fa-folder-open"></i>
+						</a>
+
+						<a href="{{ path('adherent_edit', {'id': adherent.id}) }}" class="btn btn-primary mt-2">
+							<i class="far fa-edit"></i>
+						</a>
+
 					</td>
 				</tr>
 
 			{% else %}
 
 				<tr>
-					<td colspan="19">no records found</td>
+					<td colspan="19">Aucune données</td>
 				</tr>
 
 			{% endfor %}

@@ -12,10 +12,11 @@
 
 				{% for contact in contacts %}
 
-					{{ contact.telephone1 }}<br>
+					{{ contact.nom }}<br>
 					{{ contact.adresse }}<br>
 					{{ contact.cp }}<br>
 					{{ contact.ville }}
+					{{ contact.telephone1 }}<br>
 
 				{% endfor %}
 
@@ -26,7 +27,6 @@
 				<h5 class="text-uppercase footer-title">Partenariats</h5>
 				<img class="partenaires" src="/img/partenaires/credit_agricole.png">
 				<img class="partenaires" src="/img/partenaires/vincent.jpg">
-
 				<img class="partenaires" src="/img/partenaires/logo_altea.png">
 
 
@@ -41,9 +41,8 @@
 						<a href="https://www.facebook.com/Ecole-De-Rasteurs-Porte-De-La-Crau-262208414485512/">Ecole De Rasteurs - Porte De La Crau</a>
 					</blockquote>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
+
 {% endblock %}

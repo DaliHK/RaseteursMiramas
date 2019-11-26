@@ -107,11 +107,11 @@
 
 			<div class="col-sm-4 text-center">
 
-
 				{% if adherent.dossierInscription == ""  %}
-					<img src="http://placehold.it/250" class="mb-3" alt="avatar" width="250" height="300">
+					<img src="http://placehold.it/250x250" class="mb-3" alt="avatar" width="250" height="300">
 				{% else %}
 					<img src="{{ asset('uploads/inscriptions/' ~ adherent.id ~ '/' ~ adherent.dossierInscription.photoIdentite) }}" class="mb-3" alt="avatar" width="250" height="230">
+
 				{% endif %}
 
 			</div>

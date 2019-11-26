@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\TexteFooterContactRepository;
 use App\Repository\ParticipationEvenementRepository;
+use App\Repository\TextePresentationEcoleRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -76,9 +77,10 @@ class WebsiteController extends AbstractController
      * @Route("/contact", name="contact")
      * 
      */
-    public function pageContact(Request $request, \Swift_Mailer $mailer)
+    public function pageContact(Request $request, \Swift_Mailer $mailer, TexteFooterContactRepository $repo)
     {
         $form = $this->createForm(ContactType::class);
+        $contacts = $repo->findAll();
 
             $form->handleRequest($request);
 
@@ -98,7 +100,8 @@ class WebsiteController extends AbstractController
         }
         
             return $this->render('website/contact.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'contacts' => $contacts
             ]);
     }
 
@@ -108,12 +111,13 @@ class WebsiteController extends AbstractController
      * 
      * @return Response
      */
-
-    public function pageEcole()
+    public function pageEcole(TextePresentationEcoleRepository $repositorypresentation)
     {
+        $contenuEcole = $repositorypresentation->findAll();
 
-            return $this->render('website/ecole.html.twig');
-
+            return $this->render('website/ecole.html.twig', [
+            'contenuEcole' => $contenuEcole
+            ]);
     }
 
     /**

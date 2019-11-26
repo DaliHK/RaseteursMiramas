@@ -19,39 +19,41 @@ class TextePresentationEcole
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $section1;
+    private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=65535, nullable=true)
      */
-    private $section3;
+    private $section;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSection1(): ?string
+    public function getTitre()
     {
-        return $this->section1;
+        return $this->titre;
     }
 
-    public function setSection1(?string $section1): self
+    public function setTitre($titre)
     {
-        $this->section1 = $section1;
+        $this->titre = $titre;
 
         return $this;
     }
 
-    public function getSection3(): ?string
+    public function getSection()
     {
-        return $this->section3;
+        return $this->section;
     }
 
-    public function setSection3(?string $section3): self
+    public function setSection($section)
     {
-        $this->section3 = $section3;
+        $this->section = $section;
 
         return $this;
     }
+
+
 }

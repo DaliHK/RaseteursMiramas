@@ -85,7 +85,9 @@ class AdherentUtilisateurController extends AbstractController
         $form = $this->createForm(InscriptionType::class, $participation);
       
         $evenement = $repo->find($id);
+
         $manager = $this->getDoctrine()->getManager();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -270,6 +272,9 @@ class AdherentUtilisateurController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $em->remove($participation);
         $em->flush();
+
+        return $this->redirectToRoute('adherent_profile');
+
     }
 
     /**
