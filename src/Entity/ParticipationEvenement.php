@@ -8,7 +8,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ParticipationEvenementRepository")
- * @ORM\Table(name="participation_evenement", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_8D93D649E7927C7", columns={"adherent_id", "evenement_id"})})
+ * @ORM\Table(name="participation_evenement", uniqueConstraints={@ORM\UniqueConstraint(columns={"adherent_id", "evenement_id"})})
+ *  @UniqueEntity(
+ *      fields={"adherent","evenement"},
+ *      message="Vous êtes déjà inscrit à cet événement"
+ * )
  *
  */
 

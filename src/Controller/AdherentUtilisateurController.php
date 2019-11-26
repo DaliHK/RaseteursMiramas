@@ -77,16 +77,16 @@ class AdherentUtilisateurController extends AbstractController
      * 
      * @return Response
      */
-    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user, AdherentRepository $adherent)
+    public function detailEvenements($id, EvenementRepository $repo, Request $request, UserInterface $user, AdherentRepository $adherent, ParticipationEvenementRepository $participations)
     {
 
         $participation = new ParticipationEvenement();
         $evenement = $repo->findAll();
-
         $form = $this->createForm(InscriptionType::class, $participation);
-        $form->handleRequest($request);
+      
         $evenement = $repo->find($id);
         $manager = $this->getDoctrine()->getManager();
+        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $participation->setAdherent($user);
@@ -94,12 +94,22 @@ class AdherentUtilisateurController extends AbstractController
             $manager->persist($participation);
             $manager->flush();
         }
-        
-         $this->addFlash('success','Votre inscription à l\'événement a bien été prise en compte');
+
+     // Cette variable sort toutes les lignes de participations evenement ou l'utilisateur est l'utilisateur actuellement connecté
+      $inscriptions_candidat = $participations->findBy(["adherent" => $user]);
+
+     // Cette variable sort toutes les lignes de participation evenement ou l'evenement est celui que l'on regarde actuellement
+      $evenements_enreg = $participations->findBy(["evenement" => $id]);
+    
+      // Ces variables servent à faire la comparaison dans le twig pour vérfier qu'un utilisateur n'est pas déjà inscrit à un évenement
             return $this->render('event/detailEvenements.html.twig', [
+
                 'form' => $form->createView(),
                 'evenement' => $evenement,
-                'id' => $id
+                'id' => $id,
+                'inscriptions_candidat' => $inscriptions_candidat,
+                'evenements_enreg' => $evenements_enreg,
+                'user' => $user
             ]);
     }
 

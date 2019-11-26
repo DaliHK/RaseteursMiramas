@@ -2,32 +2,41 @@
 
 {% block body %}
 
-	<div class="container-fluid">
-		<div class="row">
+	{% if not evenements_enreg %}
 
-			<div class="col">
-				<h4 class="card-title">{{ evenement.titre }}</h4>
+		<div class="container-fluid">
 
-				<p class="card-text">{{ evenement.Description }}</p>
+			<div class="row">
 
-	 				{% for message in app.flashes('success') %}
-            			<div class="alert alert-success">
-                			{{ message }}
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-            			</div>
-        			{% endfor %}
+				<div class="col">
 
-				{{form_start(form)}}
-				{{form_widget(form)}}
-				{{form_end(form)}}
-				
-			</div>
+					<h4 class="card-title">{{ evenement.titre }}</h4>
+					<p class="card-text">{{ evenement.Description }}</p>
 
-			<div class="col-sm-3 sidenav">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cumque, recusandae quibusdam non quasi voluptatum libero dicta ducimus tempore excepturi voluptas animi cupiditate obcaecati similique aliquam. Dolor ratione repudiandae ut!Facilis aperiam modi labore reiciendis iusto at ad, asperiores, nam corporis autem accusamus esse! Et harum rerum eveniet delectus dignissimos libero vitae fugiat nesciunt consequuntur atque, voluptatum odit obcaecati perferendis?
+					{{form_start(form)}}
+					{{form_widget(form)}}
+					{{form_end(form)}}
+
+				{% else %}
+
+
+					{% if evenements_enreg.0.adherent.id == user.id %}
+
+						<h4 class="card-title">{{ evenement.titre }}</h4>
+						<p class="card-text">{{ evenement.Description }}</p>
+
+						Vous êtes inscrit à cet événement
+
+						<a href="{{ path('evenements')}}">
+							Revenir à la liste</a>
+
+					{% endif %}
+
+
+				</div>
+
 			</div>
 		</div>
-	</div>
+	{% endif %}
+
 {% endblock %}

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
  body{
-   margin-top: -25px!important;}
+   margin-top: auto;}
 .collapse.navbar-collapse{color: white!important;
   text-align:center!important;
   justify-content: center!important;
@@ -9,9 +9,22 @@
 .bg-1{
    background-color: #00A2E7;
 }
-button.navbar-toggler
-span.navbar-toggler-icon{
+button.navbar-toggler 
+
+{
    color: white!important;
+   border-color: white!important;
+}
+
+span.navbar-toggler-icon {
+  border-color: white!important;
+}
+.navbar-toggler .line{
+    width: 100%;
+    float: left;
+    height: 2px;
+    background-color: #fff;
+    margin-bottom: 5px;
 }
 .collapse{
    color: white!important;
@@ -44,6 +57,11 @@ padding-left: -0px !important;
    width:100%;
    bottom: -50px;
 }
+.partenaires {
+height:64px;
+width:64px;
+}
+
 .footer-title {
 color:white;
 font-weight:bold;
