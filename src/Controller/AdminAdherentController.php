@@ -3,16 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\Adherent;
-use App\Entity\DossierInscription;
 use App\Form\AdherentType;
+use App\Entity\DossierInscription;
 
+use App\Service\PaginationService;
 use App\Form\AdminEditAdherentType;
 use App\Repository\AdherentRepository;
-use App\Repository\DossierInscriptionRepository;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\DossierInscriptionRepository;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,11 +30,11 @@ class AdminAdherentController extends AbstractController
         return $this->render('Adminadherent/accueil.html.twig');
     }
 
-
     /**
-     * @Route("/adherent", name="adherent_index", methods={"GET","POST"})
+     * @Route("/adherent/{page<\d+>?1}", name="adherent_index", methods={"GET","POST"})
+     * 
      */
-    public function index(AdherentRepository $adherentRepository, AdherentRepository $repo, Request $request): Response
+    public function index($page, AdherentRepository $adherentRepository, AdherentRepository $repo, Request $request, PaginationService $pagination): Response
     {    
         $form=$this->createFormBuilder()
         ->add('nom', SearchType::class,[
@@ -52,13 +53,18 @@ class AdminAdherentController extends AbstractController
             //dump($adherentRepository);die;
             return $this->render('Adminadherent/index.html.twig', [
                 'adherents' => $adherentRepository,
-                'form'=> $form->createView()
+                'form'=> $form->createView(),
+                'pagination' => $pagination
             ]);
     }
+
+    $pagination->setEntityClass(Adherent::class)
+               ->setPage($page);
     
     return $this->render('Adminadherent/index.html.twig', [
         'adherents' => $adherentRepository->findAll(),
-        'form'=> $form->createView()
+        'form'=> $form->createView(),
+        'pagination' => $pagination
         ]);
     }
 
@@ -69,14 +75,12 @@ class AdminAdherentController extends AbstractController
     {
         $adherent = new Adherent();
         $form = $this->createForm(AdherentType::class, $adherent);
-        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adherent);
             $entityManager->flush();
-
             return $this->redirectToRoute('adherent_index');
         }
 

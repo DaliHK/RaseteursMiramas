@@ -1,4 +1,5 @@
 {% block footer %}
+
 	<div
 		class="footer">
 		<!-- footer -->
@@ -11,8 +12,9 @@
 
 				{% for contact in contacts %}
 
-					{{ contact.adresse }}
-					{{ contact.cp }}
+					{{ contact.telephone1 }}<br>
+					{{ contact.adresse }}<br>
+					{{ contact.cp }}<br>
 					{{ contact.ville }}
 
 				{% endfor %}

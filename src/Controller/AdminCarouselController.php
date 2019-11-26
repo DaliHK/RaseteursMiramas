@@ -14,7 +14,7 @@ class AdminCarouselController extends AbstractController
 {
 
     /**
-     * Function qui est utilisé pour génerer des noms fichiers aléatoire et unique
+     * Fonction qui est utilisée pour génerer des noms fichiers aléatoire et unique
      * @return string
      */
     private function generateUniqueFileName()

@@ -6,29 +6,56 @@
 
 {% block body %}
 	<!-- Carousel -->
-	<div class="container-fluid pt-1">
+	<div class="container pt-1">
 
 		<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
 
 			<div class="carousel-inner">
 				<div class="carousel-item active">
 					<div class="row">
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
 
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
+						{% if picture %}
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
 
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
 
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
 
+						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
-					<div class="row">
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
 
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
 
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
+
+						{% else %}
+
+							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="1" slide></div>
+
+
+							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="2" slide></div>
+
+
+							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="3" slide></div>
+
+						</div>
+					</div>
+					<div class="carousel-item">
+						<div class="row">
+							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="1" slide></div>
+
+
+							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="2" slide></div>
+
+
+							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="3" slide></div>
+
+
+						{% endif %}
+
 					</div>
 				</div>
 			</div>
@@ -37,7 +64,7 @@
 		<div
 			class="jumbotron mt-3">
 			<!-- section -->
-			<div class="container-fluid bg-2 text-center">
+			<div class="container bg-2 text-center">
 				<h3>Premiere section</h3>
 				{# contenu ici #}
 			</div>
@@ -45,14 +72,14 @@
 		</div>
 		​
 		<!-- section -->
-		<div class="container-fluid bg-2 text-center">
+		<div class="container bg-2 text-center">
 			<h3>Deuxieme section</h3>
 			{# contenu ici #}
 		</div>
 		<!--end-->
 
 		<!-- section -->
-		<div class="container-fluid bg-2 text-center">
+		<div class="container bg-2 text-center">
 			<h3>Troisième section</h3>
 			{# contenu ici #}
 		</div>
@@ -73,7 +100,7 @@
 						<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
 						<div class="card-body">
 							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, optio
-																																																																																																																															temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
+																																																																																																																																																																																																															temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
 						</div>
 					</div>

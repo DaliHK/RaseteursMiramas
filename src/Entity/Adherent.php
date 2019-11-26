@@ -126,7 +126,7 @@ class Adherent implements UserInterface
     private $statut = false;
 
     /**
-     * @ORM\Column(type="boolean", options ={"default":"0"})
+     * @ORM\Column(type="boolean", options={"default":"0"})
      */
     private $cotisationAsso = false;
 
