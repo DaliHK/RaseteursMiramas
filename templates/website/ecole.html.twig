@@ -8,12 +8,29 @@
 
 	<div class="container">
 
-		{% for element in contenuEcole %}
+	
+		{% for texte in textes %}
+		<div
+			class="jumbotron">
+			<!-- section -->
+			<div class="container bg-2 text-center">
 
-			<h4>{{ element.titre }}</h4>
+			
+				<h3>{{ texte.titre }}</h3>
+		
 
-			{{ element.section }}
-		{% endfor %}
+				{% if texte.photo %}
+
+				<img src="{{ asset('uploads/photoSection/' ~ texte.photo ) }} " width="300em" height="300em">
+
+				{% else %}
+				{% endif %}
+
+				{{ texte.section }}
+			</div>
+		</div>
+		​
+		​{% endfor %}
 
 	</div>
 

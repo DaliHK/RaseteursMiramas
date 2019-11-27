@@ -17,58 +17,61 @@ class TexteAccueil
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=65535, nullable=true)
      */
-    private $section1;
+    private $section;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $section2;
+    private $titre;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $section3;
+    private $photo;
+    
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getSection1(): ?string
+    public function getSection()
     {
-        return $this->section1;
+        return $this->section;
     }
 
-    public function setSection1(?string $section1): self
+    public function setSection($section)
     {
-        $this->section1 = $section1;
+        $this->section = $section;
 
         return $this;
     }
 
-    public function getSection2(): ?string
+    public function getTitre(): ?string
     {
-        return $this->section2;
+        return $this->titre;
     }
 
-    public function setSection2(?string $section2): self
+    public function setTitre(string $titre): self
     {
-        $this->section2 = $section2;
+        $this->titre = $titre;
 
         return $this;
     }
 
-    public function getSection3(): ?string
+    public function getPhoto()
     {
-        return $this->section3;
+        return $this->photo;
     }
 
-    public function setSection3(?string $section3): self
+    public function setPhoto($photo)
     {
-        $this->section3 = $section3;
+        $this->photo = $photo;
 
         return $this;
     }
+
+
 }

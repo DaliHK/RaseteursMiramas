@@ -26,6 +26,11 @@ class TextePresentationEcole
      */
     private $section;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class TextePresentationEcole
     public function setSection($section)
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
 
         return $this;
     }

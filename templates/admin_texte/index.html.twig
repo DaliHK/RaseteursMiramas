@@ -1,0 +1,23 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Gestion du texte{% endblock %}
+
+{% block body %}
+<h4>Gestion du texte</h4>
+
+<div class="container">
+
+
+<h3>Gestion du texte de la page d'accueil</h3>
+{{ form_start(formAccueil) }}
+{{ form_widget(formAccueil) }}
+{{ form_end(formAccueil) }}
+
+<h3>Gestion du texte de la page Ecole</h3>
+{{ form_start(formEcole) }}
+{{ form_widget(formEcole) }}
+{{ form_end(formEcole) }}
+
+</div>
+
+{% endblock %}

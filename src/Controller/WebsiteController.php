@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\ContactType;
+use App\Entity\TexteAccueil;
 use App\Entity\Participation;
 use App\Form\EditAdherentType;
 use App\Entity\DossierInscription;
@@ -12,6 +13,7 @@ use App\Form\DossierInscriptionType;
 use App\Entity\ParticipationEvenement;
 use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
+use App\Repository\TexteAccueilRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use App\Repository\CarouselPictureRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,14 +33,17 @@ class WebsiteController extends AbstractController
      * @Route("/", name="home")
      */
 
-    public function index(EvenementRepository $repo, TexteFooterContactRepository $footer, CarouselPictureRepository $carousel)
+    public function index(EvenementRepository $repo, TexteFooterContactRepository $footer, CarouselPictureRepository $carousel, TexteAccueilRepository $repotexte)
     {
         $evenements = $repo->findUpcomingEvents();
+        $texte = $repotexte->findAll();
 
         return $this->render('home/home.html.twig', [
             'evenements' => $evenements,
-            'picture'=>$carousel->findAll()
+            'picture'=>$carousel->findAll(),
+            'textes' => $texte
         ]);
+
     }
 
     /**
@@ -116,9 +121,10 @@ class WebsiteController extends AbstractController
         $contenuEcole = $repositorypresentation->findAll();
 
             return $this->render('website/ecole.html.twig', [
-            'contenuEcole' => $contenuEcole
+            'textes' => $contenuEcole
             ]);
     }
+    
 
     /**
      * @Route("/footer", name="footer")

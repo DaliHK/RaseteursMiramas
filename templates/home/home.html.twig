@@ -5,85 +5,75 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Carousel -->
-	<div class="container pt-1">
+	
 
+<!-- Carousel -->
+		<div class="container-fluid pt-1">
+
+		{% if picture %}
 		<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
-
 			<div class="carousel-inner">
-				<div class="carousel-item active">
-					<div class="row">
-
-						{% if picture %}
-							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
-
-							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
-
-							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
-
-						</div>
+				<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
+					<div class="row" style="max-height: 30em ; min-height: 30em">
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide ></div>
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide ></div>
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide ></div>
 					</div>
-					<div class="carousel-item">
-						<div class="row">
-							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
-
-							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
-
-							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
-
-						{% else %}
-
-							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="1" slide></div>
-
-
-							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="2" slide></div>
-
-
-							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="3" slide></div>
-
-						</div>
-					</div>
-					<div class="carousel-item">
-						<div class="row">
-							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="1" slide></div>
-
-
-							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="2" slide></div>
-
-
-							<div class="col"><img src="https://ipsumimage.appspot.com/640x360" class="d-block w-100 h-100" alt="3" slide></div>
-
-						{% endif %}
-
+				</div>
+				<div class="carousel-item" style="max-height: 30em ; min-height: 30em">
+					<div class="row" style="max-height: 30em ; min-height: 30em">
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo4) }}" class="d-block w-100 h-100" alt="4" slide ></div>
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo5) }}" class="d-block w-100 h-100" alt="5" slide ></div>
+						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo6) }}" class="d-block w-100 h-100" alt="6" slide ></div>
 					</div>
 				</div>
 			</div>
-		</div>
-		​
+		​{% else %}
+<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
+					<div class="row" style="max-height: 30em ; min-height: 30em">
+						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="1" slide ></div>
+						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="2" slide ></div>
+						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="3" slide ></div>
+					</div>
+				</div>
+				<div class="carousel-item" style="max-height: 30em ; min-height: 30em">
+					<div class="row" style="max-height: 30em ; min-height: 30em">
+						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="4" slide ></div>
+						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="5" slide ></div>
+						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="6" slide ></div>
+					</div>
+				</div>
+			</div>
+
+			{% endif %}
+
+<div class="container">
+
+{% for texte in textes %}
 		<div
-			class="jumbotron mt-3">
+			class="jumbotron">
 			<!-- section -->
 			<div class="container bg-2 text-center">
-				<h3>Premiere section</h3>
-				{# contenu ici #}
-			</div>
-			<!--end-->
-		</div>
-		​
-		<!-- section -->
-		<div class="container bg-2 text-center">
-			<h3>Deuxieme section</h3>
-			{# contenu ici #}
-		</div>
-		<!--end-->
 
-		<!-- section -->
-		<div class="container bg-2 text-center">
-			<h3>Troisième section</h3>
-			{# contenu ici #}
+			
+				<h3>{{ texte.titre }}</h3>
+		
+
+				{% if texte.photo %}
+
+				<img src="{{ asset('uploads/photoSection/' ~ texte.photo ) }} " width="300em" height="300em">
+
+				{% else %}
+				{% endif %}
+
+				{{ texte.section }}
+			</div>
 		</div>
-		<!--end-->
 		​
+		​{% endfor %}
+
 		<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
 		<div class="row">
 
@@ -97,8 +87,7 @@
 						​
 						<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
 						<div class="card-body">
-							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, optio
-																																																																																																																																																																																																																															temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
+							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicin																																																																							temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
 						</div>
 					</div>
