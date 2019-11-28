@@ -26,6 +26,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class WebsiteController extends AbstractController
 
@@ -44,19 +45,21 @@ class WebsiteController extends AbstractController
             'picture'=>$carousel->findAll(),
             'textes' => $texte
         ]);
-
     }
 
     /**
      * @Route("/evenements/{page<\d+>?1}", name="evenements")
      */
-    public function listeEvenements($page, PaginationService $pagination, EvenementRepository $repo)
+    public function listeEvenements($page, PaginationService $pagination, EvenementRepository $repo, TokenStorageInterface $tokenStorage)
     {
         $pagination->setEntityClass(Evenement::class)
                    ->setPage($page);
 
+        $user=$tokenStorage->getToken()->getUser();
+
         return $this->render('event/events.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'user' => $user
         ]);
     }
 

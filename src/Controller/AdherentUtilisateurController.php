@@ -100,19 +100,16 @@ class AdherentUtilisateurController extends AbstractController
      // Cette variable sort toutes les lignes de participations evenement ou l'utilisateur est l'utilisateur actuellement connecté
       $inscriptions_candidat = $participations->findBy(["adherent" => $user]);
 
-     // Cette variable sort toutes les lignes de participation evenement ou l'evenement est celui que l'on regarde actuellement
-      $evenements_enreg = $participations->findBy(["evenement" => $id]);
-    
       // Ces variables servent à faire la comparaison dans le twig pour vérfier qu'un utilisateur n'est pas déjà inscrit à un évenement
             return $this->render('event/detailEvenements.html.twig', [
 
                 'form' => $form->createView(),
                 'evenement' => $evenement,
-                'id' => $id,
+                'id_evenement' => $id,
                 'inscriptions_candidat' => $inscriptions_candidat,
-                'evenements_enreg' => $evenements_enreg,
                 'user' => $user
             ]);
+
     }
 
     /**

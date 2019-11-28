@@ -1,42 +1,45 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-	{% if user.statut == false %}
 
-		<h4 class="card-title">{{ evenement.titre }}</h4>
-		<p class="card-text">{{ evenement.Description }}</p>
-		<p>Il faut que votre inscription soit validée afin que vous puissiez participer aux événements</p>
+	{% set flag = 0 %}
+
+	{% for inscription_candidat in inscriptions_candidat  %}
+
+		{% if inscription_candidat.adherent.id == user.id and inscription_candidat.evenement.id == id_evenement %}
+
+			{% set flag = flag + 1 %}
+
+		{% endif %}
+
+	{% endfor %}
 
 
-		{% for evenements_enregs in evenements_enreg %}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
 
-			{% if (evenements_enreg and evenements_enregs.adherent.id == user.id)  %}
+				{% if flag == 0 %}
 
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col">
+					<h4 class="card-title">{{ evenement.titre }}</h4>
+					<p class="card-text">{{ evenement.Description }}</p>
+					{{form_start(form)}}
+					{{form_widget(form)}}
+					{{form_end(form)}}
 
-							<h4 class="card-title">{{ evenement.titre }}</h4>
-							<p class="card-text">{{ evenement.Description }}</p>
-							Vous êtes inscrit à cet événement
-							<a href="{{ path('evenements')}}">
-								Revenir à la liste</a>
+				{% else %}
 
-						{% else %}
+					<h4 class="card-title">{{ evenement.titre }}</h4>
+					<p class="card-text">{{ evenement.Description }}</p>
+					Vous êtes inscrit à cet événement
+					<a href="{{ path('evenements')}}">
+						Revenir à la liste</a>
 
-							<h4 class="card-title">{{ evenement.titre }}</h4>
-							<p class="card-text">{{ evenement.Description }}</p>
-							{{form_start(form)}}
-							{{form_widget(form)}}
-							{{form_end(form)}}
 
-						{% endif %}
-
-					{% endif %}
 				{% endif %}
-			{% endfor %}
 
 
+			</div>
 		</div>
 	</div>
-</div>{% endblock %}
+{% endblock %}
