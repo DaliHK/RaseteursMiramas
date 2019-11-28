@@ -36,14 +36,20 @@
 
 							{{ evenement.Description }}
 
+							{% if is_granted('ROLE_USER') %}
 
-							{% if user.statut == true %}
+								{% if user.statut == true %}
 
-								<a href="{{ path('detailevenement', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
+									<a href="{{ path('detailevenement', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
 
+								{% else %}
+
+									<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
+
+								{% endif %}
 							{% else %}
-
 								<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id }) }}" class="btn btn-primary">En savoir plus</a>
+
 
 							{% endif %}
 

@@ -5,104 +5,106 @@
 {% endblock %}
 
 {% block body %}
-	
 
-<!-- Carousel -->
-		<div class="container-fluid pt-1">
+
+	<!-- Carousel -->
+	<div class="container-fluid pt-1">
 
 		{% if picture %}
-		<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
-					<div class="row" style="max-height: 30em ; min-height: 30em">
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide ></div>
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide ></div>
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide ></div>
+			<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
+						<div class="row" style="max-height: 30em ; min-height: 30em">
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo1) }}" class="d-block w-100 h-100" alt="1" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo2) }}" class="d-block w-100 h-100" alt="2" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo3) }}" class="d-block w-100 h-100" alt="3" slide></div>
+						</div>
+					</div>
+					<div class="carousel-item" style="max-height: 30em ; min-height: 30em">
+						<div class="row" style="max-height: 30em ; min-height: 30em">
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo4) }}" class="d-block w-100 h-100" alt="4" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo5) }}" class="d-block w-100 h-100" alt="5" slide></div>
+							<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo6) }}" class="d-block w-100 h-100" alt="6" slide></div>
+						</div>
 					</div>
 				</div>
-				<div class="carousel-item" style="max-height: 30em ; min-height: 30em">
-					<div class="row" style="max-height: 30em ; min-height: 30em">
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo4) }}" class="d-block w-100 h-100" alt="4" slide ></div>
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo5) }}" class="d-block w-100 h-100" alt="5" slide ></div>
-						<div class="col"><img src="{{ asset('uploads/carousel/' ~ picture.0.photo6) }}" class="d-block w-100 h-100" alt="6" slide ></div>
+				​
+			{% else %}
+				<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+					<div class="carousel-inner">
+						<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
+							<div class="row" style="max-height: 30em ; min-height: 30em">
+								<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="1" slide></div>
+								<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="2" slide></div>
+								<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="3" slide></div>
+							</div>
+						</div>
+						<div class="carousel-item" style="max-height: 30em ; min-height: 30em">
+							<div class="row" style="max-height: 30em ; min-height: 30em">
+								<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="4" slide></div>
+								<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="5" slide></div>
+								<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="6" slide></div>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		​{% else %}
-<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
-					<div class="row" style="max-height: 30em ; min-height: 30em">
-						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="1" slide ></div>
-						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="2" slide ></div>
-						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="3" slide ></div>
-					</div>
-				</div>
-				<div class="carousel-item" style="max-height: 30em ; min-height: 30em">
-					<div class="row" style="max-height: 30em ; min-height: 30em">
-						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="4" slide ></div>
-						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="5" slide ></div>
-						<div class="col"><img src="http://placehold.it/600x400" class="d-block w-100 h-100" alt="6" slide ></div>
-					</div>
-				</div>
-			</div>
 
-			{% endif %}
-
-<div class="container">
-
-{% for texte in textes %}
-		<div
-			class="jumbotron">
-			<!-- section -->
-			<div class="container bg-2 text-center">
-
-				<h3>{{ texte.titre }}</h3>
-		
-
-				{% if texte.photo %}
-
-				<img src="{{ asset('uploads/photoSection/' ~ texte.photo ) }} " width="300em" height="300em">
-
-				{% else %}
 				{% endif %}
 
-				{{ texte.section }}
-			</div>
-		</div>
-		​
-		​{% endfor %}
+				<div class="container">
 
-		<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
-		<div class="row">
+					{% for texte in textes %}
+						<div
+							class="jumbotron">
+							<!-- section -->
+							<div class="container bg-2 text-center">
 
-			{% for evenement in evenements %}
+								<h3>{{ texte.titre }}</h3>
 
-				<div class="col-md-4">
-					<div class="card bg-light mb-3">
-						<div class="card-header text-center">
-							<h4 class="card-title">{{ evenement.titre }}</h4>
+
+								{% if texte.photo %}
+
+									<img src="{{ asset('uploads/photoSection/' ~ texte.photo ) }} " width="300em" height="300em">
+
+									{% else %}
+								{% endif %}
+
+								{{ texte.section }}
+							</div>
 						</div>
 						​
-						<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
-						<div class="card-body">
-							<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
+								​
+					{% endfor %}
 
-							{% if app.user %}
+					<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
+					<div class="row">
 
-							<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
-							{% else %}
-							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>	
+						{% for evenement in evenements %}
 
-							{% endif %}
-							
-						</div>
+							<div class="col-md-4">
+								<div class="card bg-light mb-3">
+									<div class="card-header text-center">
+										<h4 class="card-title">{{ evenement.titre }}</h4>
+									</div>
+									​
+									<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
+									<div class="card-body">
+										<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
+
+										{% if app.user %}
+
+											<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+										{% else %}
+											<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+
+										{% endif %}
+
+									</div>
+								</div>
+							</div>
+
+						{% endfor %}
+
 					</div>
-				</div>
+					​</div>
 
-			{% endfor %}
-
-		</div>
-		​</div>
-
-{% endblock %}
+			{% endblock %}
