@@ -8,9 +8,11 @@
 	<div class="container-fluid">
 
 		<div class="container">
+
 			<div class="row">
 
 				<div class="col-6">
+
 					<h3>
 						Formulaire de contact
 					</h3>
@@ -34,6 +36,7 @@
 						<p>Pour tout renseignement, vous pouvez nous contacter via la page Facebook, ou par téléphone. Notre formulaire de contact reste à votre disposition, nous vous répondrons dans les plus brefs délais.</p>
 
 						<i class="fas fa-map-marker-alt"></i>
+
 						{{ contact.adresse }}
 						-
 						{{ contact.cp }}
@@ -42,9 +45,28 @@
 						<i class="fas fa-phone-alt"></i>
 						{{ contact.telephone1 }}<br>
 						<br>
+
+
 						<h4 class="titlecontact">Lieux d'entraînement</h4><br>
 
+						<div class="row">
 
+							<div class="col-6">
+
+
+								<img src="/img/entressens.png" width=" 300" height=" 300">
+
+							</div>
+
+							<div class="col-6">
+
+
+								<img class="pl-4" src="/img/miramas.png" width="300" height="300">
+
+							</div>
+
+
+						</div>
 					{% endfor %}
 
 

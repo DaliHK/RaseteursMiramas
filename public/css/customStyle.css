@@ -1,7 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
- body{
-   margin-top: auto;}
+ 
+
+body{
+   min-height: 150vh;
+   position: relative;
+   margin: 0;
+   padding-bottom: 16rem;
+}
+
+.footer {
+   background-color: orange;
+   position:absolute;
+   bottom: 0;
+   width:100%;
+}
+
 .collapse.navbar-collapse{color: white!important;
   text-align:center!important;
   justify-content: center!important;
@@ -56,12 +70,9 @@ margin:0px;
 padding-right: 0px !important;
 padding-left: -0px !important;
 }
-.footer {
-   background-color: orange;
-   position:relative;
-   width:100%;
-   bottom: -50px;
-}
+
+
+
 
 .partenaires {
 height:64px;

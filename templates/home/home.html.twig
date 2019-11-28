@@ -7,10 +7,12 @@
 {% block body %}
 
 
-	<!-- Carousel -->
-	<div class="container-fluid pt-1">
+	<div
+		class="container-fluid pt-1">
 
+		<!-- Carousel -->
 		{% if picture %}
+
 			<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
@@ -30,6 +32,7 @@
 				</div>
 				​
 			{% else %}
+
 				<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
@@ -72,14 +75,12 @@
 							</div>
 						</div>
 						​
-																																																																																​
 					{% endfor %}
 
 					{% if evenements %}
 
 						<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
 						<div class="row">
-
 
 							{% for evenement in evenements %}
 
@@ -100,8 +101,9 @@
 										{% endif %}
 
 										<div class="card-body">
-											<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 
+											{{ evenement.description }}
+											<br>
 											{% if app.user %}
 
 												<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
@@ -118,7 +120,10 @@
 
 						</div>
 						​</div>
-					{% else %}
 
-				{% endif %}
-			{% endblock %}
+				</div>
+			</div>
+			{% else %}
+
+		{% endif %}
+	{% endblock %}
