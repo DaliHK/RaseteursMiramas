@@ -10,6 +10,15 @@
 
 				<h4>{{ evenement.titre }}</h4>
 
+				{% if evenement.photo %}
+					<img src="{{ asset('uploads/photoSectionEvenements/' ~ evenement.photo ) }}" alt="Image de l'événement" style="height:200px;  width:100%; display:block;">
+
+				{% else %}
+
+					<img src="/img/logo.png" alt="Image de l'événement" style="height:200px;  width:50%; display:block;">
+				{% endif %}
+
+
 				<p class="card-text">{{ evenement.description }}</p>
 				<br>
 				Il faut être inscrit pour pouvoir participer aux événements

@@ -72,7 +72,7 @@
 							</div>
 						</div>
 						​
-																										​
+																																																																																​
 					{% endfor %}
 
 					{% if evenements %}
@@ -89,7 +89,16 @@
 											<h4 class="card-title">{{ evenement.titre }}</h4>
 										</div>
 										​
-										<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
+										{% if evenement.photo %}
+
+											<img src="{{ asset('uploads/photoSectionEvenements/' ~ evenement.photo ) }}" alt="Image de l'événement" style="height:200px;  width:100%; display:block;">
+
+										{% else %}
+
+											<img src="img/logo.png" alt="Image de l'événement" style="height:200px;  width:100%; display:block;">
+
+										{% endif %}
+
 										<div class="card-body">
 											<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 

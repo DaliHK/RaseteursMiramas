@@ -9,6 +9,7 @@ parameters:
     sourcePhoto_directory : '%kernel.project_dir%/public/uploads/source_photo/' 
     document_directory: '%kernel.project_dir%/public/uploads/documentsModele'
     photoSection_directory: '%kernel.project_dir%/public/uploads/photoSection/'
+    photoSectionEvenements_directory: '%kernel.project_dir%/public/uploads/photoSectionEvenements/'
 
 services:
     Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider: ~

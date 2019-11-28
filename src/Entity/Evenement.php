@@ -59,6 +59,11 @@ class Evenement
      */
     private $lieu;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
 
     public function __construct()
     {
@@ -182,6 +187,18 @@ class Evenement
     public function setLieu(string $lieu): self
     {
         $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
 
         return $this;
     }
