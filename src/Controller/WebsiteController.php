@@ -15,6 +15,7 @@ use App\Repository\AdherentRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\TexteAccueilRepository;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Repository\ModeleDocumentRepository;
 use App\Repository\CarouselPictureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,7 +48,7 @@ class WebsiteController extends AbstractController
     }
 
     /**
-     * @Route("/visiteur/evenements/{page<\d+>?1}", name="evenements")
+     * @Route("/evenements/{page<\d+>?1}", name="evenements")
      */
     public function listeEvenements($page, PaginationService $pagination, EvenementRepository $repo)
     {
@@ -110,6 +111,19 @@ class WebsiteController extends AbstractController
             ]);
     }
 
+    /**
+      * Afficher les documents viérges pour l'inscription
+     * @Route("/dossier/vierge", name="dossier_inscription_vierge")
+     */
+    public function fileInsciption(ModeleDocumentRepository $modeleDocumentRepository)
+    {
+    
+        return $this->render('website/dossierInscriptionVierge.html.twig',[
+            'documentModele'=> $modeleDocumentRepository->findAll()
+        ]);
+         
+    }
+    
     /**
      * Permet d'afficher un seul événement
      * @Route("/ecole", name="ecole")

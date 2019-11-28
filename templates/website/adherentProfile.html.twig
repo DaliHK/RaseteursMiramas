@@ -25,6 +25,18 @@
 				</div>
 			</div>
 
+			<div class="row justify-content-center">
+				<div class=" mt-1 p-3 mb-3 bg-white rounded p-center">
+					<div
+						class="col">
+						<!--Button pour modifier les informations -->
+						<h3>INFORMATION PERSONELLE
+							<a class="btn" href="{{path('adherent_edit_profile')}}"><img src="https://img.icons8.com/officel/40/000000/edit.png"></a>
+						</h3>
+					</div>
+					<hr>
+				</div>
+			</div>
 			{# Information personnelle #}
 			<div class="row offset-2 ">
 				<div class="col">
@@ -104,6 +116,7 @@
 				</div>
 			</div>
 
+			<!--Evénement Inscrit-->
 			<div class="row justify-content-center mt-3">
 				<div class=" mt-3 p-3 mb-2 bg-white rounded p-center">
 					<div>
@@ -113,41 +126,39 @@
 				</div>
 			</div>
 
-			<!--Evénement Inscrit-->
-			<div class="row offset-2">
+			<div class="row">
 
 				{% for participations in participation %}
-
 					{% if participations.adherent.id == user.id %}
-						{{ dump(participations) }}
 						<div class="col">
-							<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+							<div class="card text-white bg-primary mb-3 h-100 w-100" style="max-width: 30em">
 								<div class="card-header text-center">
-									<h4>Evénement</h4>
+									<h4>Evènement</h4>
 								</div>
 								<div class="card-body">
 									<div class="col">
 										<h6>Nom :
-											{{ participations.evenement.titre }}</h6>
+											{{ participations.evenement.titre | lower }}</h6>
 									</div>
 									<div class="col">
 										<h6>Description :
-											{{ participations.evenement.description }}</h6>
+											{{ participations.evenement.description | lower }}</h6>
 									</div>
 									<div class="col">
 										<h6>Date :
 											{{ participations.evenement.dateDebut | date("d/m/Y") }}</h6>
 									</div>
-									<div class="col">
-										<a href="{{ path('delete_evenement',{'id' : participations.id })}}" class="btn btn-danger">Supprimer</a>
-									</div>
+								</div>
+								<div class="col pb-2 text-center">
+									<a href="{{ path('delete_evenement',{'id' : participations.id })}}"><img src="https://img.icons8.com/color/40/000000/cancel--v1.png"></a>
 								</div>
 							</div>
 						</div>
 					{% endif %}
 				{% endfor %}
-			</div>
 
+			</div>
+			{# Affiche le dossier d'inscription #}
 			<div class="row justify-content-center mt-3">
 				<div class=" mt-3 p-3 mb-2 bg-white rounded p-center">
 					<div>
@@ -161,7 +172,6 @@
 					<h6>
 						<a href="{{asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.photoIdentite) }}"><img src="https://img.icons8.com/office/80/000000/picture.png">
 						</a>Photo D'identité</h6>
-
 				</div>
 
 				<div class="col">
@@ -201,7 +211,8 @@
 				<div class="col">
 					<h6>
 						<a href="{{ asset('uploads/inscriptions/' ~ user.id ~ '/' ~ user.dossierInscription.RenseignementsMedicaux) }}"><img src="https://img.icons8.com/office/80/000000/folder-invoices.png">
-						</a>Renseignements medicaux (PDF)</h6>
+						</a>Renseignements medicaux (PDF)
+					</h6>
 				</div>
 
 				<div class="col">
@@ -231,7 +242,7 @@
 				</div>
 
 				<div class="row justify-content-center">
-					<div class=" mt-1 p-3 mb-5 bg-white rounded p-center">
+					<div class=" mt-1 p-3 mb-3 bg-white rounded p-center">
 						<div
 							class="col">
 							<!--Button pour modifier les informations -->
@@ -244,9 +255,9 @@
 				</div>
 
 				{# Information personnelle #}
-				<div class="row offset-2 ">
+				<div class="row justify-content-center offset-2 ">
 					<div class="col">
-						<div class="row ">
+						<div class="row  ">
 							<div class="col mb-1">
 								<h5>
 									<strong>
@@ -483,5 +494,6 @@
 				{% endif %}
 			</div>
 		</div>
+
 	{% endif %}
 </div>{% endblock %}

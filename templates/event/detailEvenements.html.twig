@@ -1,49 +1,42 @@
 {% extends 'base.html.twig' %}
-
 {% block body %}
 
-	{% if user.statut == true %}
+	{% if user.statut == false %}
 
-		{% if not evenements_enreg %}
+		<h4 class="card-title">{{ evenement.titre }}</h4>
+		<p class="card-text">{{ evenement.Description }}</p>
+		<p>Il faut que votre inscription soit validée afin que vous puissiez participer aux événements</p>
 
-			<div class="container-fluid">
 
-				<div class="row">
+		{% for evenements_enregs in evenements_enreg %}
 
-					<div class="col">
+			{% if (evenements_enreg and evenements_enregs.adherent.id == user.id)  %}
 
-						<h4 class="card-title">{{ evenement.titre }}</h4>
-						<p class="card-text">{{ evenement.Description }}</p>
-
-						{{form_start(form)}}
-						{{form_widget(form)}}
-						{{form_end(form)}}
-
-					{% else %}
-
-						{% if evenements_enreg.0.adherent.id == user.id %}
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
 
 							<h4 class="card-title">{{ evenement.titre }}</h4>
 							<p class="card-text">{{ evenement.Description }}</p>
-
 							Vous êtes inscrit à cet événement
-
 							<a href="{{ path('evenements')}}">
 								Revenir à la liste</a>
 
+						{% else %}
+
+							<h4 class="card-title">{{ evenement.titre }}</h4>
+							<p class="card-text">{{ evenement.Description }}</p>
+							{{form_start(form)}}
+							{{form_widget(form)}}
+							{{form_end(form)}}
+
 						{% endif %}
 
+					{% endif %}
+				{% endif %}
+			{% endfor %}
 
-					</div>
 
-				</div>
-			</div>
-		{% endif %}
-
-	{% else %}
-
-		L'inscription aux événements est réservée aux adhérents inscrits.
-
-	{% endif %}
-
-{% endblock %}
+		</div>
+	</div>
+</div>{% endblock %}

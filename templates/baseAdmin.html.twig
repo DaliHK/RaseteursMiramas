@@ -82,9 +82,22 @@
 						<li>
 							{# <a href="{{ path('admin_carousel')}} ">Gestion carousel de l'accueil</a> #}
 						</li>
+						
 						<li>
-							<a href="{{ path('admin_texte') }}">Gestion textes</a>
+							<a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Gestion du contenu</a>
+							<ul class="collapse list-unstyled" id="pageSubmenu4">
+								<li>
+									<a href="{{ path('admin_texte') }}">Ajouter une section</a>
+								</li>
+								<li>
+									<a href="{{ path('admin_texte_show_accueil') }}">Voir/supprimer les sections page accueil</a>
+								</li>
+								<li>
+									<a href="{{ path('admin_texte_show_ecole') }}">Voir/supprimer les sections page école</a>
+								</li>
+							</ul>
 						</li>
+
 						<li>
 							{# <a>Gestion photos</a> href="{{ path('admin_gestion_photos')}}"  #}
 						</li>

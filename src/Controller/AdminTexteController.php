@@ -6,12 +6,19 @@ use App\Entity\TexteAccueil;
 use App\Form\EcoleTexteType;
 use App\Form\GestionTexteType;
 use App\Entity\TextePresentationEcole;
+use App\Repository\TexteAccueilRepository;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\TextePresentationEcoleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-
+/**
+ * @Route("/admin/texte")
+ * 
+ */
+ 
 class AdminTexteController extends AbstractController
 {
      /**
@@ -25,7 +32,7 @@ class AdminTexteController extends AbstractController
     }
 
     /**
-     * @Route("/admin/texte", name="admin_texte")
+     * @Route("/texte", name="admin_texte")
      * 
      */
     public function indexGestionTexte(Request $request)
@@ -59,18 +66,13 @@ class AdminTexteController extends AbstractController
 
         $texteEcole = new TextePresentationEcole();
 
-     
-        $file2 = $texteEcole->getPhoto();
-           
-  
-        $formEcole = $this->createForm(EcoleTexteType::class);
+        $formEcole = $this->createForm(EcoleTexteType::class, $texteEcole);
         $formEcole->handleRequest($request);
 
         if ($formEcole->isSubmitted() && $formEcole->isValid()) {
-
+            $file2 = $texteEcole->getPhoto();
             $fileName2 = $this->generateUniqueFileName().'.'.$file2->guessExtension();
              
-
             try {
                 $file2->move($this->getParameter('photoSection_directory'),
                 $fileName2);
@@ -79,7 +81,6 @@ class AdminTexteController extends AbstractController
             catch (FileException $e) {
 
             }
-
             $texteEcole->setPhoto($fileName2);
             
             $entityManager = $this->getDoctrine()->getManager();
@@ -89,10 +90,80 @@ class AdminTexteController extends AbstractController
             return $this->redirectToRoute('admin_texte');
         }
 
-
-        return $this->render('admin_texte/index.html.twig', [
+        return $this->render('admin_texte/ajouter_section.html.twig', [
             'formAccueil' => $formAccueil->createView(),
             'formEcole' => $formEcole->createView()
         ]);
     }
+
+     /**
+     * @Route("/show/accueil", name="admin_texte_show_accueil")
+     * 
+     */
+    public function showTexteAccueil(Request $request, TexteAccueilRepository $texteAccueilRepo)
+    {
+
+      $sectionsAccueil = $texteAccueilRepo->findAll();
+
+      return $this->render('admin_texte/showAccueil.html.twig', [
+      'sectionsAccueil' => $sectionsAccueil
+        ]);
+
+    }
+    
+     /**
+     * @Route("ecole/show", name="admin_texte_show_ecole")
+     * 
+     */
+    public function showTexteEcole(Request $request, TextePresentationEcoleRepository $texteEcoleRepo)
+    {
+
+      $sectionsEcole = $texteEcoleRepo->findAll();
+
+      return $this->render('admin_texte/showEcole.html.twig', [
+      'sectionsEcole' => $sectionsEcole
+        ]);
+
+    }
+
+    /**
+     * @Route("ecole/delete/{id}", name="admin_texte_delete_ecole")
+     * 
+     */
+    public function deleteTexteEcole($id,Request $request)
+    {
+
+       $photoEcoleTexte = $this->getDoctrine()->getRepository(TextePresentationEcole::class)->find($id);
+         //Supprimer la photo dans le dossier
+        $path = $this->getParameter('photoSection_directory');
+        $fs = new Filesystem();
+        $fs->remove($path.$photoEcoleTexte->getPhoto());
+        //Supprimer la ligne dans la BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($photoEcoleTexte);
+        $em->flush();
+        return $this->redirectToRoute('admin_texte_show_ecole');
+
+    }
+
+      /**
+     * @Route("accueil/delete/{id}", name="admin_texte_delete_accueil")
+     * 
+     */
+    public function deleteTexteAccueil($id,Request $request)
+    {
+
+       $photoAccueilTexte = $this->getDoctrine()->getRepository(TexteAccueil::class)->find($id);
+         //Supprimer la photo dans le dossier
+        $path = $this->getParameter('photoSection_directory');
+        $fs = new Filesystem();
+        $fs->remove($path.$photoAccueilTexte->getPhoto());
+        //Supprimer la ligne dans la BDD
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($photoAccueilTexte);
+        $em->flush();
+        return $this->redirectToRoute('admin_texte_show_accueil');
+        
+    }
+
 }

@@ -57,7 +57,6 @@
 			<!-- section -->
 			<div class="container bg-2 text-center">
 
-			
 				<h3>{{ texte.titre }}</h3>
 		
 
@@ -87,8 +86,16 @@
 						​
 						<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
 						<div class="card-body">
-							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicin																																																																							temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
-							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+							<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
+
+							{% if app.user %}
+
+							<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+							{% else %}
+							<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>	
+
+							{% endif %}
+							
 						</div>
 					</div>
 				</div>

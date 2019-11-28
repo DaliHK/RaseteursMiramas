@@ -1,0 +1,31 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+
+<h4>Liste des sections de la page accueil</h4>
+
+<table class="table table-hover mt-5">
+ <thead>
+  <tr> 
+  <th>Titre de la section</th>
+  <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+{% for sectionaccueil in sectionsAccueil %}
+<tr>
+<td>
+{{ sectionaccueil.titre }}
+</td>
+
+<td> 
+<a class="btn btn-primary" href="{{ path('admin_texte_delete_accueil', {'id' : sectionaccueil.id }) }}">Supprimer</a>
+</td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}
