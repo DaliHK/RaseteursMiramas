@@ -72,39 +72,44 @@
 							</div>
 						</div>
 						​
-								​
+																										​
 					{% endfor %}
 
-					<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
-					<div class="row">
+					{% if evenements %}
 
-						{% for evenement in evenements %}
+						<h2 class="h1 mt-3 mb-4 titles">Evenements à venir</h2>
+						<div class="row">
 
-							<div class="col-md-4">
-								<div class="card bg-light mb-3">
-									<div class="card-header text-center">
-										<h4 class="card-title">{{ evenement.titre }}</h4>
-									</div>
-									​
-									<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
-									<div class="card-body">
-										<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 
-										{% if app.user %}
+							{% for evenement in evenements %}
 
-											<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
-										{% else %}
-											<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+								<div class="col-md-4">
+									<div class="card bg-light mb-3">
+										<div class="card-header text-center">
+											<h4 class="card-title">{{ evenement.titre }}</h4>
+										</div>
+										​
+										<img src="http://placehold.it/1000x400" alt="Image de l'appartement" style="height:200px;  width:100%; display:block;">
+										<div class="card-body">
+											<p class="card-text">Lorem ipsum dolor sit amet co																temporibus. Totam assumendexercitationem dolorem nostrum quia dignissimos dolor illo.</p>
 
-										{% endif %}
+											{% if app.user %}
 
+												<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+											{% else %}
+												<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+
+											{% endif %}
+
+										</div>
 									</div>
 								</div>
-							</div>
 
-						{% endfor %}
+							{% endfor %}
 
-					</div>
-					​</div>
+						</div>
+						​</div>
+					{% else %}
 
+				{% endif %}
 			{% endblock %}

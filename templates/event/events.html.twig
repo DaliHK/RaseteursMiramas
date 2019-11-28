@@ -17,12 +17,9 @@
 					<div class="card bg-light mb-3">
 						<div class="card-header text-center">
 							<h4 class="card-title">
-
 								{{ evenement.titre }}
-
 							</h4>
 							<small>
-
 								Le
 								{{ evenement.dateDebut |date("d/m/Y") }}</small>
 
@@ -35,7 +32,7 @@
 							<p class="card-text"></p>
 
 							{{ evenement.Description }}
-
+							<br>
 							{% if is_granted('ROLE_USER') %}
 
 								{% if user.statut == true %}

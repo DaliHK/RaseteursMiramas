@@ -1,22 +1,38 @@
 {% extends 'baseAdmin.html.twig' %}
 
-{% block title %}Gestion du texte{% endblock %}
+{% block title %}Gestion du texte
+{% endblock %}
 
 {% block body %}
-<h4>Gestion du texte</h4>
 
-<div class="container">
+	{% block content %}
 
-<h3>Gestion du texte de la page d'accueil</h3>
-{{ form_start(formAccueil) }}
-{{ form_widget(formAccueil) }}
-{{ form_end(formAccueil) }}
+		<!-- We'll fill this with dummy content -->
+		<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-text">
+			<div class="container">
 
-<h3>Gestion du texte de la page Ecole</h3>
-{{ form_start(formEcole) }}
-{{ form_widget(formEcole) }}
-{{ form_end(formEcole) }}
+				<button type="button" id="sidebarCollapse" class="btn btn-info">
+					<i class="fas fa-align-left"></i>
+					<span>Menu</span>
+				</button>
+			</div>
+		</nav>
+	{% endblock %}
 
-</div>
+	<h4>Gestion du texte</h4>
+
+	<div class="container">
+
+		<h3>Gestion du texte de la page d'accueil</h3>
+		{{ form_start(formAccueil) }}
+		{{ form_widget(formAccueil) }}
+		{{ form_end(formAccueil) }}
+
+		<h3>Gestion du texte de la page Ecole</h3>
+		{{ form_start(formEcole) }}
+		{{ form_widget(formEcole) }}
+		{{ form_end(formEcole) }}
+
+	</div>
 
 {% endblock %}
