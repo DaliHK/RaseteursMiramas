@@ -1,54 +1,110 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-
-
 	{% set flag = 0 %}
-
 	{% for inscription_candidat in inscriptions_candidat  %}
-
 		{% if inscription_candidat.adherent.id == user.id and inscription_candidat.evenement.id == id_evenement %}
-
 			{% set flag = flag + 1 %}
-
 		{% endif %}
-
 	{% endfor %}
-
 	<div class="container">
-		<div class="row ">
-			<div class="col justify-content-center">
-
-
-				{% if flag == 0 %}
-
-					<h4 class="card-title">{{ evenement.titre }}</h4>
-
-					{% if evenement.photo %}
-						<img src="{{ asset('uploads/photoSectionEvenements/' ~ evenement.photo ) }}" alt="Image de l'événement" style="height:200px;  width:100%; display:block;">
-
-					{% else %}
-
-						<img src="/img/logo.png" alt="Image de l'événement" style="height:200px;  width:50%; display:block;">
-					{% endif %}
-
-					<p class="card-text">{{ evenement.Description }}</p>
-					{{form_start(form)}}
-					{{form_widget(form)}}
-					{{form_end(form)}}
-
-				{% else %}
-
-					<h4 class="card-title">{{ evenement.titre }}</h4>
-					<p class="card-text">{{ evenement.Description }}</p>
-					Vous êtes inscrit à cet événement
-					<a href="{{ path('evenements')}}">
-						Revenir à la liste</a>
-
-
-				{% endif %}
-
-
+		{% if flag == 0 %}
+			<div class="row justify-content-center mt-3">
+				<div class=" mt-3 p-3 bg-white rounded p-center">
+					<div>
+						<h3>
+							TITRE :
+							{{ evenement.titre | upper }}</h3>
+					</div>
+					<hr>
+				</div>
 			</div>
-		</div>
-	</div>
-{% endblock %}
+			<div class="row justify-content-center">
+				<div class="card shadow" style="width: 40rem;">
+					<div class="card-body">
+						<div class="row justify-content-center">
+							{% if evenement.photo %}
+								<img src="{{ asset('uploads/photoSectionEvenements/' ~ evenement.photo ) }}" alt="Image de l'événement" style="height:200px;  width:100%; display:block;">
+							{% else %}
+								<img src="/img/logo.png" alt="Image de l'événement" style="height:15em;  width:15em; display:block;">
+							{% endif %}
+						</div>
+						<div class="row  mt-5 ">
+							<h5>
+								Date :
+								{{ evenement.dateDebut | date("d/m/y") }}</h5>
+							<br>
+						</div>
+						<div class="row  mt-5 ">
+							<h5>
+								Lieu :
+								{{ evenement.lieu }}</h5>
+							<br>
+						</div>
+						<div class=" row mt-5 ">
+							<h5>Description :
+							</h5>
+							{{ evenement.description }}
+							<br>
+						</div>
+						<div class="row justify-content-center mt-5">
+							{{form_start(form)}}
+							{{form_widget(form)}}
+							{{form_end(form)}}
+						</div>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="container">
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<h4 class="alert-heading">Vous êtes inscrit à cet événement</h4>
+					<a href="{{ path('evenements')}}" type="button" class="btn btn">
+						Revenir à la liste</a>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="row justify-content-center mt-3">
+					<div class=" mt-3 p-3 bg-white rounded p-center">
+						<div>
+							<h3>
+								TITRE :
+								{{ evenement.titre | upper }}</h3>
+						</div>
+						<hr>
+					</div>
+				</div>
+				<div class="row justify-content-center">
+					<div class="card shadow" style="width: 40rem;">
+						<div class="card-body">
+							<div class="row justify-content-center">
+								{% if evenement.photo %}
+									<img src="{{ asset('uploads/photoSectionEvenements/' ~ evenement.photo ) }}" alt="Image de l'événement" style="height:200px;  width:100%; display:block;">
+								{% else %}
+									<img src="/img/logo.png" alt="Image de l'événement" style="height:15em;  width:15em; display:block;">
+								{% endif %}
+							</div>
+							<div class="row  mt-5 ">
+								<h5>
+									Date :
+									{{ evenement.dateDebut | date("d/m/y") }}</h5>
+								<br>
+							</div>
+							<div class="row  mt-5 ">
+								<h5>
+									Lieu :
+									{{ evenement.lieu }}</h5>
+								<br>
+							</div>
+							<div class=" row mt-5 ">
+								<h5>Description :
+								</h5>
+								{{ evenement.description }}
+								<br>
+							</div>
+							<div class="row"></div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		{% endblock %}
