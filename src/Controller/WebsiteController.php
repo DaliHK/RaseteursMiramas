@@ -147,6 +147,7 @@ class WebsiteController extends AbstractController
      * @Route("/footer", name="footer")
      */
     public function footer(TexteFooterContactRepository $repo)
+
     {
         $adresse = $repo->findOneBy(array('id' => 1))->getAdresse();
         $contacts = $repo->findAll();
