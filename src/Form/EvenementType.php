@@ -24,7 +24,6 @@ class EvenementType extends AbstractType
                 'label' => 'Date de début',
                 'format' => 'ddMMyyyy'
             ])
-            ->add('nombreParticipantMax')
             ->add('niveauRequis' ,ChoiceType::class, [
                 'choices'  => [
                     'Cycle 1' => true,

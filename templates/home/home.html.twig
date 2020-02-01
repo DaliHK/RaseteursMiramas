@@ -6,14 +6,13 @@
 
 {% block body %}
 
-
 	<div
-		class="container-fluid pt-1">
+		class="container-fluid pt-1"> 
 
 		<!-- Carousel -->
 		{% if picture %}
 
-			<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
+		 	<div id="bs4-multi-slide-carousel" class="carousel slide" data-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active" style="max-height: 30em ; min-height: 30em">
 						<div class="row" style="max-height: 30em ; min-height: 30em">
@@ -50,6 +49,8 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>  
 
 				{% endif %}
 
@@ -58,20 +59,22 @@
 					{% for texte in textes %}
 						<div
 							class="jumbotron">
+
 							<!-- section -->
 							<div class="container bg-2 text-center">
 
 								<h3>{{ texte.titre }}</h3>
-
 
 								{% if texte.photo %}
 
 									<img src="{{ asset('uploads/photoSection/' ~ texte.photo ) }} " width="300em" height="300em">
 
 									{% else %}
+
 								{% endif %}
 
 								{{ texte.section }}
+
 							</div>
 						</div>
 						​
@@ -103,27 +106,31 @@
 										<div class="card-body">
 
 											{{ evenement.description }}
+
 											<br>
+
 											{% if app.user %}
 
 												<a href="{{ path('detailevenement', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
+
 											{% else %}
+
 												<a href="{{ path('detailevenementvisiteur', {'id' : evenement.id}) }}" class="btn btn-primary">En savoir plus</a>
 
 											{% endif %}
 
+											{% endfor %}
+
+ 										{% endif %} 
+
 										</div>
-									</div>
+									</div> 
 								</div>
 
-							{% endfor %}
-
-						</div>
+						 	</div>
 						​</div>
+					</div>
+		
+	 	
 
-				</div>
-			</div>
-			{% else %}
-
-		{% endif %}
 	{% endblock %}
