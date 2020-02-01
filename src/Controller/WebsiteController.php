@@ -149,11 +149,9 @@ class WebsiteController extends AbstractController
     public function footer(TexteFooterContactRepository $repo)
 
     {
-        $adresse = $repo->findOneBy(array('id' => 1))->getAdresse();
         $contacts = $repo->findAll();
         
         return $this->render('footer/index.html.twig', [
-            'adresse' => $adresse,
             'contacts' => $contacts
         ]);
     }

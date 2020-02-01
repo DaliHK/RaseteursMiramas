@@ -41,13 +41,14 @@ class AdherentUtilisateurController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){ 
             $hash = $encoder->encodePassword($adherent, $adherent->getPassword()); 
             $adherent->setPassword($hash);   
-            //$adherent->addRole("ROLE_ADMIN");
+            $adherent->addRole("ROLE_ADMIN");
             $manager->persist($adherent);
             $manager->flush();
 
             $this->addFlash('success', 'Votre compte à bien été enregistré.');
             return $this->redirectToRoute('login_adherent');
         }
+        
         return $this->render('adherentUtilisateur/adherentregistration.html.twig', [
             'form' => $form->createView(),
         ]);
